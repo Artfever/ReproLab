@@ -1,0 +1,1575 @@
+{
+  "schema_version": 1,
+  "generated_from": [
+    {
+      "path": "docs/engine-feasibility.md",
+      "sha256": "02855156d11a9c8e00d96cb554c14d17f2b0f1e3eaf3dca1ccafb6ff7c5c1f2c",
+      "bytes": 16239
+    },
+    {
+      "path": "docs/evidence/bad-syntax/log.txt",
+      "sha256": "fd9a74bbf497cff7a83d5d6b16f39335c0f352573725a7b1b79b328f2b4c9a5e",
+      "bytes": 582
+    },
+    {
+      "path": "docs/evidence/bad-syntax/manifest.json",
+      "sha256": "5f80c2f95414fcc0f978fd529295a837266188520baa1d94ddfac31d564fb748",
+      "bytes": 1764
+    },
+    {
+      "path": "docs/evidence/bad-undefined/log.txt",
+      "sha256": "63e4a4593127577ba291a45332b1bc56b0dbf66f8933f87b7c52015278ec7ed6",
+      "bytes": 555
+    },
+    {
+      "path": "docs/evidence/bad-undefined/manifest.json",
+      "sha256": "fedf1f0a539f4834ede7a7a4fb022cbaaa2780f07d9990dd69f6bf1a9fff316e",
+      "bytes": 1747
+    },
+    {
+      "path": "docs/evidence/comparisons.txt",
+      "sha256": "f2947aeaff39343c88d2182f9d4ab1e680da64a1b76c99849cdaffe73e5dc294",
+      "bytes": 8170
+    },
+    {
+      "path": "docs/evidence/input_hashes_upstream_examples.txt",
+      "sha256": "b47036e3c910175b615a4eaa4afb66ae9f1a214f566adb05efc6224f32e5d861",
+      "bytes": 1149
+    },
+    {
+      "path": "docs/evidence/seeds-a/log.txt",
+      "sha256": "c13dd271ddf94197d737775c0faf3cb925b4b85011847718a3d1588c45e9815f",
+      "bytes": 701
+    },
+    {
+      "path": "docs/evidence/seeds-a/manifest.json",
+      "sha256": "19edd2309dffa9d277f6ab28dbce81beb1f0f1608aa662f751f6c21b1515d82a",
+      "bytes": 2308
+    },
+    {
+      "path": "docs/evidence/seeds-b/log.txt",
+      "sha256": "c13dd271ddf94197d737775c0faf3cb925b4b85011847718a3d1588c45e9815f",
+      "bytes": 701
+    },
+    {
+      "path": "docs/evidence/seeds-b/manifest.json",
+      "sha256": "55c8c60d35f0bc0014b81e89d8e1ba27a9621a71fadeca287f486fd5de35049a",
+      "bytes": 2308
+    },
+    {
+      "path": "docs/evidence/seeds-c/log.txt",
+      "sha256": "e28712c685752d5e3fdad1763ed7e73955ae7d8df20346f3f39a80ecee5708be",
+      "bytes": 701
+    },
+    {
+      "path": "docs/evidence/seeds-c/manifest.json",
+      "sha256": "d6c1c694e5e3801267e19c0a987f92c078db0b95740777842d4401a77a3a784e",
+      "bytes": 2307
+    },
+    {
+      "path": "docs/evidence/seeds-longburn/log.txt",
+      "sha256": "b11f1dd2e7a5828d8ccfd9f17ff0ebf2065f26a61998f7fc937b70e8d3f2b0cf",
+      "bytes": 729
+    },
+    {
+      "path": "docs/evidence/seeds-longburn/manifest.json",
+      "sha256": "3378dc22f72e693b783661468a3c76f1db0322277d6198f736ff4b9fb8fe0084",
+      "bytes": 2317
+    },
+    {
+      "path": "docs/evidence/seeds-longburn/pooled_summary.json",
+      "sha256": "60e8d71e90d599118a4977fb93431aaf7d0620ef12d1872de168b517c42342f5",
+      "bytes": 864
+    },
+    {
+      "path": "docs/evidence/timeout-live/log.txt",
+      "sha256": "de36ab3febc382e73e388ead62c15b7b23fb04937f937e11a09a8ebf6736ded3",
+      "bytes": 205
+    },
+    {
+      "path": "docs/evidence/timeout-live/manifest.json",
+      "sha256": "c2d3bca1d9cd36b3e9a49808c399d33ffffd27099e55108180deb72439f16880",
+      "bytes": 1896
+    },
+    {
+      "path": "docs/licensing-review.md",
+      "sha256": "a7ce0c4f2109665faa9fb815081ddc8ee7903ad0006719019c3566b48bc82a95",
+      "bytes": 13798
+    },
+    {
+      "path": "docs/release-decision.md",
+      "sha256": "6fba6f7d53b3fc5a4d48c1efae594612d97d535ca2bacc2f0c2fa0c731ebf79b",
+      "bytes": 5292
+    },
+    {
+      "path": "docs/third-party-notices.md",
+      "sha256": "61750643fc791a0692e37f5a0749fd67644b10670fd87aa9358753c7acc8fdac",
+      "bytes": 7473
+    },
+    {
+      "path": "services/runner/reference/seeds_published.json",
+      "sha256": "f0197e8e59840de57d66988aea44d468eebc92c8611c38d591af57eebd372d55",
+      "bytes": 695
+    }
+  ],
+  "engine": {
+    "name": "OpenBUGS",
+    "version": "3.2.3 rev 1012",
+    "image_id": "sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f",
+    "image_pushed": false
+  },
+  "model_summary": "A random-effects logistic regression over 21 plates of seeds. Five quantities are monitored: alpha0, alpha1, alpha2, alpha12 and sigma.",
+  "published_baseline": {
+    "source": "OpenBUGS 3.2.3 Examples Vol I, Seeds page (doc/Examples/Seeds.html), results table image seeds3.bmp",
+    "settings": "burn-in 1000 updates, then 10000 updates; start=1001, sample=10000 (chain count not stated on the page)",
+    "transcribed_by": "manually read from the published image; columns mean, sd, MC_error",
+    "nodes": {
+      "alpha0": {
+        "mean": -0.5499,
+        "sd": 0.1965,
+        "mc_error": 0.004298
+      },
+      "alpha1": {
+        "mean": 0.08902,
+        "sd": 0.3124,
+        "mc_error": 0.005997
+      },
+      "alpha12": {
+        "mean": -0.841,
+        "sd": 0.4372,
+        "mc_error": 0.008725
+      },
+      "alpha2": {
+        "mean": 1.356,
+        "sd": 0.2772,
+        "mc_error": 0.006133
+      },
+      "sigma": {
+        "mean": 0.2922,
+        "sd": 0.1467,
+        "mc_error": 0.007297
+      }
+    }
+  },
+  "tolerance_rule": {
+    "mean": "The ReproLab mean must be within 4 times the published Monte Carlo error of the published mean.",
+    "sd": "The ReproLab standard deviation must be within 10% of the published standard deviation.",
+    "source": "Fixed in the project record before any results were seen.",
+    "fixed_before_results": true
+  },
+  "inputs": [
+    {
+      "name": "model.txt",
+      "upstream_name": "Seedsmodel.txt",
+      "bytes": 387,
+      "sha256": "eccd496ee854a5bf519bf70f486a5e3c7049be9d508d028c0456e3a610027816",
+      "rights_status": "Not published here: rights unknown"
+    },
+    {
+      "name": "data.txt",
+      "upstream_name": "Seedsdata.txt",
+      "bytes": 408,
+      "sha256": "2d12e0924474690865a9202cf3fdf67afccab97372d7dbaeb1bcb93c7b9e3e76",
+      "rights_status": "Not published here: rights unknown"
+    },
+    {
+      "name": "inits1.txt",
+      "upstream_name": "Seedsinits1.txt",
+      "bytes": 137,
+      "sha256": "96e24659d8af72398e29276ef9b3f155949b1c8e3a80cf867ffef4061d2a5980",
+      "rights_status": "Not published here: rights unknown"
+    },
+    {
+      "name": "inits2.txt",
+      "upstream_name": "Seedsinits2.txt",
+      "bytes": 202,
+      "sha256": "d3b5d8fb340253676048876597ec0e6db20391e5c6463ecf64cdfbbb7c57d702",
+      "rights_status": "Not published here: rights unknown"
+    }
+  ],
+  "runs": [
+    {
+      "name": "seeds-a",
+      "purpose": "Pre-declared setting: two chains, 1,000 burn-in updates, 10,000 kept updates, seed 1.",
+      "status": "succeeded",
+      "reason": "engine finished and all expected files exist",
+      "exit_code": 0,
+      "runtime_s": 1.921,
+      "engine_version": "3.2.3 rev 1012",
+      "image_id": "sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f",
+      "chains": 2,
+      "burn_in": 1000,
+      "samples": 10000,
+      "thin": 1,
+      "seed": 1,
+      "timeout_s": 300,
+      "monitors": [
+        "alpha0",
+        "alpha1",
+        "alpha2",
+        "alpha12",
+        "sigma"
+      ],
+      "outputs": [
+        {
+          "name": "coda_CODAchain1.txt",
+          "bytes": 664609,
+          "sha256": "c8c5db5473020129db4a301e45626fc7459c51c881dd6eaf53eabd11288b5660"
+        },
+        {
+          "name": "coda_CODAchain2.txt",
+          "bytes": 651203,
+          "sha256": "f18c7189121e39306cbb14ed933afd00f7f990f7de7a33400c9a3c05da618929"
+        },
+        {
+          "name": "coda_CODAindex.txt",
+          "bytes": 96,
+          "sha256": "a93fc634540d6d79020e7abdc1b88081350d464ba2281f1391a19188f1b67743"
+        },
+        {
+          "name": "log.txt",
+          "bytes": 701,
+          "sha256": "c13dd271ddf94197d737775c0faf3cb925b4b85011847718a3d1588c45e9815f"
+        },
+        {
+          "name": "script.txt",
+          "bytes": 362,
+          "sha256": "a34d9e5feda208fd2a3966849296cdb2ea8d2da33f913221f302837e9edcd151"
+        },
+        {
+          "name": "stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "model.txt",
+          "bytes": 387,
+          "sha256": "eccd496ee854a5bf519bf70f486a5e3c7049be9d508d028c0456e3a610027816"
+        },
+        {
+          "name": "data.txt",
+          "bytes": 408,
+          "sha256": "2d12e0924474690865a9202cf3fdf67afccab97372d7dbaeb1bcb93c7b9e3e76"
+        },
+        {
+          "name": "inits1.txt",
+          "bytes": 137,
+          "sha256": "96e24659d8af72398e29276ef9b3f155949b1c8e3a80cf867ffef4061d2a5980"
+        },
+        {
+          "name": "inits2.txt",
+          "bytes": 202,
+          "sha256": "d3b5d8fb340253676048876597ec0e6db20391e5c6463ecf64cdfbbb7c57d702"
+        }
+      ]
+    },
+    {
+      "name": "seeds-b",
+      "purpose": "Repeat of seeds-a with the same seed, to see whether the output is byte-identical.",
+      "status": "succeeded",
+      "reason": "engine finished and all expected files exist",
+      "exit_code": 0,
+      "runtime_s": 1.921,
+      "engine_version": "3.2.3 rev 1012",
+      "image_id": "sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f",
+      "chains": 2,
+      "burn_in": 1000,
+      "samples": 10000,
+      "thin": 1,
+      "seed": 1,
+      "timeout_s": 300,
+      "monitors": [
+        "alpha0",
+        "alpha1",
+        "alpha2",
+        "alpha12",
+        "sigma"
+      ],
+      "outputs": [
+        {
+          "name": "coda_CODAchain1.txt",
+          "bytes": 664609,
+          "sha256": "c8c5db5473020129db4a301e45626fc7459c51c881dd6eaf53eabd11288b5660"
+        },
+        {
+          "name": "coda_CODAchain2.txt",
+          "bytes": 651203,
+          "sha256": "f18c7189121e39306cbb14ed933afd00f7f990f7de7a33400c9a3c05da618929"
+        },
+        {
+          "name": "coda_CODAindex.txt",
+          "bytes": 96,
+          "sha256": "a93fc634540d6d79020e7abdc1b88081350d464ba2281f1391a19188f1b67743"
+        },
+        {
+          "name": "log.txt",
+          "bytes": 701,
+          "sha256": "c13dd271ddf94197d737775c0faf3cb925b4b85011847718a3d1588c45e9815f"
+        },
+        {
+          "name": "script.txt",
+          "bytes": 362,
+          "sha256": "575e22a0df77e88af4258cd42bbae6bbf09c321139e1fd591c17398eecdad16b"
+        },
+        {
+          "name": "stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "model.txt",
+          "bytes": 387,
+          "sha256": "eccd496ee854a5bf519bf70f486a5e3c7049be9d508d028c0456e3a610027816"
+        },
+        {
+          "name": "data.txt",
+          "bytes": 408,
+          "sha256": "2d12e0924474690865a9202cf3fdf67afccab97372d7dbaeb1bcb93c7b9e3e76"
+        },
+        {
+          "name": "inits1.txt",
+          "bytes": 137,
+          "sha256": "96e24659d8af72398e29276ef9b3f155949b1c8e3a80cf867ffef4061d2a5980"
+        },
+        {
+          "name": "inits2.txt",
+          "bytes": 202,
+          "sha256": "d3b5d8fb340253676048876597ec0e6db20391e5c6463ecf64cdfbbb7c57d702"
+        }
+      ]
+    },
+    {
+      "name": "seeds-c",
+      "purpose": "Same setting as seeds-a with seed 2, to see whether a different seed gives different output.",
+      "status": "succeeded",
+      "reason": "engine finished and all expected files exist",
+      "exit_code": 0,
+      "runtime_s": 1.92,
+      "engine_version": "3.2.3 rev 1012",
+      "image_id": "sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f",
+      "chains": 2,
+      "burn_in": 1000,
+      "samples": 10000,
+      "thin": 1,
+      "seed": 2,
+      "timeout_s": 300,
+      "monitors": [
+        "alpha0",
+        "alpha1",
+        "alpha2",
+        "alpha12",
+        "sigma"
+      ],
+      "outputs": [
+        {
+          "name": "coda_CODAchain1.txt",
+          "bytes": 664541,
+          "sha256": "d142dd1b1769d0e9cf4d35cd16d9e898a9b442b28dab9fce9ad020187c6d5273"
+        },
+        {
+          "name": "coda_CODAchain2.txt",
+          "bytes": 653341,
+          "sha256": "6d68833fd9f1400dceb3f1f551bdfdc5fec55b761f7ef20176aab45c9040259c"
+        },
+        {
+          "name": "coda_CODAindex.txt",
+          "bytes": 96,
+          "sha256": "a93fc634540d6d79020e7abdc1b88081350d464ba2281f1391a19188f1b67743"
+        },
+        {
+          "name": "log.txt",
+          "bytes": 701,
+          "sha256": "e28712c685752d5e3fdad1763ed7e73955ae7d8df20346f3f39a80ecee5708be"
+        },
+        {
+          "name": "script.txt",
+          "bytes": 362,
+          "sha256": "22ea97879e4dfca82c4092eb6ac6d26ae8fc42ad093c64e2ebcb3e9391d64aec"
+        },
+        {
+          "name": "stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "model.txt",
+          "bytes": 387,
+          "sha256": "eccd496ee854a5bf519bf70f486a5e3c7049be9d508d028c0456e3a610027816"
+        },
+        {
+          "name": "data.txt",
+          "bytes": 408,
+          "sha256": "2d12e0924474690865a9202cf3fdf67afccab97372d7dbaeb1bcb93c7b9e3e76"
+        },
+        {
+          "name": "inits1.txt",
+          "bytes": 137,
+          "sha256": "96e24659d8af72398e29276ef9b3f155949b1c8e3a80cf867ffef4061d2a5980"
+        },
+        {
+          "name": "inits2.txt",
+          "bytes": 202,
+          "sha256": "d3b5d8fb340253676048876597ec0e6db20391e5c6463ecf64cdfbbb7c57d702"
+        }
+      ]
+    },
+    {
+      "name": "seeds-longburn",
+      "purpose": "Same model and data with 20,000 burn-in updates, chosen after the 1,000 burn-in comparison failed.",
+      "status": "succeeded",
+      "reason": "engine finished and all expected files exist",
+      "exit_code": 0,
+      "runtime_s": 5.132,
+      "engine_version": "3.2.3 rev 1012",
+      "image_id": "sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f",
+      "chains": 2,
+      "burn_in": 20000,
+      "samples": 10000,
+      "thin": 1,
+      "seed": 1,
+      "timeout_s": 300,
+      "monitors": [
+        "alpha0",
+        "alpha1",
+        "alpha2",
+        "alpha12",
+        "sigma"
+      ],
+      "outputs": [
+        {
+          "name": "coda_CODAchain1.txt",
+          "bytes": 709525,
+          "sha256": "a938dff4df1cf2a48e19195ac06fe8504852bcd58fc032ab0af155f60faa7f0c"
+        },
+        {
+          "name": "coda_CODAchain2.txt",
+          "bytes": 709622,
+          "sha256": "829fe05ab28fc42e2974c621ccc10d979aa489641ffd48c5bc23c55ebc3b3cee"
+        },
+        {
+          "name": "coda_CODAindex.txt",
+          "bytes": 96,
+          "sha256": "a93fc634540d6d79020e7abdc1b88081350d464ba2281f1391a19188f1b67743"
+        },
+        {
+          "name": "log.txt",
+          "bytes": 729,
+          "sha256": "b11f1dd2e7a5828d8ccfd9f17ff0ebf2065f26a61998f7fc937b70e8d3f2b0cf"
+        },
+        {
+          "name": "script.txt",
+          "bytes": 370,
+          "sha256": "7380d510865455e45560ea33e815a8fb3f33cf776c55aa9f4b225fd2acf215c8"
+        },
+        {
+          "name": "stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "model.txt",
+          "bytes": 387,
+          "sha256": "eccd496ee854a5bf519bf70f486a5e3c7049be9d508d028c0456e3a610027816"
+        },
+        {
+          "name": "data.txt",
+          "bytes": 408,
+          "sha256": "2d12e0924474690865a9202cf3fdf67afccab97372d7dbaeb1bcb93c7b9e3e76"
+        },
+        {
+          "name": "inits1.txt",
+          "bytes": 137,
+          "sha256": "96e24659d8af72398e29276ef9b3f155949b1c8e3a80cf867ffef4061d2a5980"
+        },
+        {
+          "name": "inits2.txt",
+          "bytes": 202,
+          "sha256": "d3b5d8fb340253676048876597ec0e6db20391e5c6463ecf64cdfbbb7c57d702"
+        }
+      ]
+    },
+    {
+      "name": "bad-syntax",
+      "purpose": "Deliberately invalid model (a syntax error) to check that the failure is captured.",
+      "status": "failed",
+      "reason": "engine reported a problem: expected right parenthesis error pos 58 (error on line 4)",
+      "exit_code": 0,
+      "runtime_s": 0.008,
+      "engine_version": "3.2.3 rev 1012",
+      "image_id": "sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f",
+      "chains": 2,
+      "burn_in": 10,
+      "samples": 10,
+      "thin": 1,
+      "seed": 1,
+      "timeout_s": 60,
+      "monitors": [
+        "alpha0"
+      ],
+      "outputs": [
+        {
+          "name": "log.txt",
+          "bytes": 582,
+          "sha256": "fd9a74bbf497cff7a83d5d6b16f39335c0f352573725a7b1b79b328f2b4c9a5e"
+        },
+        {
+          "name": "script.txt",
+          "bytes": 276,
+          "sha256": "6643d924b4a928976fcf733b10488e825b1e90e894e55f804b560af4db0b298e"
+        },
+        {
+          "name": "stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "model.txt",
+          "bytes": 111,
+          "sha256": "d02b1661bef878c7af36b6e0ddc1704ebf17f4b12af62ba9942a3004b3dc2e71"
+        },
+        {
+          "name": "data.txt",
+          "bytes": 408,
+          "sha256": "2d12e0924474690865a9202cf3fdf67afccab97372d7dbaeb1bcb93c7b9e3e76"
+        },
+        {
+          "name": "inits1.txt",
+          "bytes": 137,
+          "sha256": "96e24659d8af72398e29276ef9b3f155949b1c8e3a80cf867ffef4061d2a5980"
+        },
+        {
+          "name": "inits2.txt",
+          "bytes": 202,
+          "sha256": "d3b5d8fb340253676048876597ec0e6db20391e5c6463ecf64cdfbbb7c57d702"
+        }
+      ]
+    },
+    {
+      "name": "bad-undefined",
+      "purpose": "Deliberately invalid model (an undefined variable) to check that the failure is captured.",
+      "status": "failed",
+      "reason": "engine reported a problem: variable gamma_missing is not defined",
+      "exit_code": 0,
+      "runtime_s": 0.016,
+      "engine_version": "3.2.3 rev 1012",
+      "image_id": "sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f",
+      "chains": 2,
+      "burn_in": 10,
+      "samples": 10,
+      "thin": 1,
+      "seed": 1,
+      "timeout_s": 60,
+      "monitors": [
+        "alpha0"
+      ],
+      "outputs": [
+        {
+          "name": "log.txt",
+          "bytes": 555,
+          "sha256": "63e4a4593127577ba291a45332b1bc56b0dbf66f8933f87b7c52015278ec7ed6"
+        },
+        {
+          "name": "script.txt",
+          "bytes": 279,
+          "sha256": "d381fbe9a7c4632dadb352056ff6d5c2efdbae63a9d554b29238ad9477aecb35"
+        },
+        {
+          "name": "stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "model.txt",
+          "bytes": 138,
+          "sha256": "0f7f9f43b5807d0aa08da2c94f4f43d81a56cf303aeaec59fb3fce0ed6ab58b8"
+        },
+        {
+          "name": "data.txt",
+          "bytes": 408,
+          "sha256": "2d12e0924474690865a9202cf3fdf67afccab97372d7dbaeb1bcb93c7b9e3e76"
+        },
+        {
+          "name": "inits1.txt",
+          "bytes": 137,
+          "sha256": "96e24659d8af72398e29276ef9b3f155949b1c8e3a80cf867ffef4061d2a5980"
+        },
+        {
+          "name": "inits2.txt",
+          "bytes": 202,
+          "sha256": "d3b5d8fb340253676048876597ec0e6db20391e5c6463ecf64cdfbbb7c57d702"
+        }
+      ]
+    },
+    {
+      "name": "timeout-live",
+      "purpose": "Valid model with a very long update count and a 3 second limit, to check that the time limit stops the engine.",
+      "status": "timed_out",
+      "reason": "engine exceeded the time limit and was killed",
+      "exit_code": null,
+      "runtime_s": 3.001,
+      "engine_version": "3.2.3 rev 1012",
+      "image_id": "sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f",
+      "chains": 2,
+      "burn_in": 40000,
+      "samples": 50000,
+      "thin": 1,
+      "seed": 1,
+      "timeout_s": 3,
+      "monitors": [
+        "alpha0",
+        "alpha1",
+        "alpha2",
+        "alpha12",
+        "sigma"
+      ],
+      "outputs": [
+        {
+          "name": "log.txt",
+          "bytes": 205,
+          "sha256": "de36ab3febc382e73e388ead62c15b7b23fb04937f937e11a09a8ebf6736ded3"
+        },
+        {
+          "name": "script.txt",
+          "bytes": 368,
+          "sha256": "321b78235c67da613266d9b632d92a88f62cbb0ff84c6430c58c36c28a8e5e9c"
+        },
+        {
+          "name": "stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "model.txt",
+          "bytes": 387,
+          "sha256": "eccd496ee854a5bf519bf70f486a5e3c7049be9d508d028c0456e3a610027816"
+        },
+        {
+          "name": "data.txt",
+          "bytes": 408,
+          "sha256": "2d12e0924474690865a9202cf3fdf67afccab97372d7dbaeb1bcb93c7b9e3e76"
+        },
+        {
+          "name": "inits1.txt",
+          "bytes": 137,
+          "sha256": "96e24659d8af72398e29276ef9b3f155949b1c8e3a80cf867ffef4061d2a5980"
+        },
+        {
+          "name": "inits2.txt",
+          "bytes": 202,
+          "sha256": "d3b5d8fb340253676048876597ec0e6db20391e5c6463ecf64cdfbbb7c57d702"
+        }
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "seeds-a-pooled-1000",
+      "label": "seeds-a pooled burn-in 1000 (pre-declared test, expected FAIL)",
+      "kind": "pre_declared",
+      "run": "seeds-a",
+      "setting": "2 chains pooled, burn-in 1000",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "rows": [
+        {
+          "node": "alpha0",
+          "ref_mean": -0.5499,
+          "mean": 0.028391275985,
+          "d_mean": 0.5782912759850001,
+          "mean_tol": 0.017192,
+          "mean_ok": false,
+          "ref_sd": 0.1965,
+          "sd": 1.77563746021684,
+          "d_sd": 1.57913746021684,
+          "sd_tol": 0.01965,
+          "sd_ok": false,
+          "ok": false
+        },
+        {
+          "node": "alpha1",
+          "ref_mean": 0.08902,
+          "mean": 0.9554097863434001,
+          "d_mean": 0.8663897863434001,
+          "mean_tol": 0.023988,
+          "mean_ok": false,
+          "ref_sd": 0.3124,
+          "sd": 4.226483020282648,
+          "d_sd": 3.914083020282648,
+          "sd_tol": 0.031240000000000004,
+          "sd_ok": false,
+          "ok": false
+        },
+        {
+          "node": "alpha12",
+          "ref_mean": -0.841,
+          "mean": -0.9128815998350001,
+          "d_mean": -0.07188159983500009,
+          "mean_tol": 0.0349,
+          "mean_ok": false,
+          "ref_sd": 0.4372,
+          "sd": 2.258921747388806,
+          "d_sd": 1.8217217473888059,
+          "sd_tol": 0.04372,
+          "sd_ok": false,
+          "ok": false
+        },
+        {
+          "node": "alpha2",
+          "ref_mean": 1.356,
+          "mean": 2.6575278445,
+          "d_mean": 1.3015278445,
+          "mean_tol": 0.024532,
+          "mean_ok": false,
+          "ref_sd": 0.2772,
+          "sd": 3.8715730449359986,
+          "d_sd": 3.5943730449359985,
+          "sd_tol": 0.02772,
+          "sd_ok": false,
+          "ok": false
+        },
+        {
+          "node": "sigma",
+          "ref_mean": 0.2922,
+          "mean": 2.315673719,
+          "d_mean": 2.023473719,
+          "mean_tol": 0.029188,
+          "mean_ok": false,
+          "ref_sd": 0.1467,
+          "sd": 5.992425393305615,
+          "d_sd": 5.845725393305615,
+          "sd_tol": 0.01467,
+          "sd_ok": false,
+          "ok": false
+        }
+      ],
+      "overall": {
+        "result": "fail",
+        "nodes_failed": 5,
+        "nodes_total": 5
+      },
+      "note": "The pre-declared comparison."
+    },
+    {
+      "id": "seeds-c-pooled-1000",
+      "label": "seeds-c pooled burn-in 1000 (expected FAIL)",
+      "kind": "pre_declared",
+      "run": "seeds-c",
+      "setting": "2 chains pooled, burn-in 1000, seed 2",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "rows": [
+        {
+          "node": "alpha0",
+          "ref_mean": -0.5499,
+          "mean": -0.874725266335,
+          "d_mean": -0.324825266335,
+          "mean_tol": 0.017192,
+          "mean_ok": false,
+          "ref_sd": 0.1965,
+          "sd": 1.46277900457213,
+          "d_sd": 1.2662790045721302,
+          "sd_tol": 0.01965,
+          "sd_ok": false,
+          "ok": false
+        },
+        {
+          "node": "alpha1",
+          "ref_mean": 0.08902,
+          "mean": 1.5168784562782,
+          "d_mean": 1.4278584562782,
+          "mean_tol": 0.023988,
+          "mean_ok": false,
+          "ref_sd": 0.3124,
+          "sd": 4.609458444081508,
+          "d_sd": 4.297058444081507,
+          "sd_tol": 0.031240000000000004,
+          "sd_ok": false,
+          "ok": false
+        },
+        {
+          "node": "alpha12",
+          "ref_mean": -0.841,
+          "mean": -0.804554736125,
+          "d_mean": 0.03644526387500002,
+          "mean_tol": 0.0349,
+          "mean_ok": false,
+          "ref_sd": 0.4372,
+          "sd": 2.5975181763755533,
+          "d_sd": 2.1603181763755535,
+          "sd_tol": 0.04372,
+          "sd_ok": false,
+          "ok": false
+        },
+        {
+          "node": "alpha2",
+          "ref_mean": 1.356,
+          "mean": 3.346447125,
+          "d_mean": 1.990447125,
+          "mean_tol": 0.024532,
+          "mean_ok": false,
+          "ref_sd": 0.2772,
+          "sd": 5.6939683132991155,
+          "d_sd": 5.416768313299116,
+          "sd_tol": 0.02772,
+          "sd_ok": false,
+          "ok": false
+        },
+        {
+          "node": "sigma",
+          "ref_mean": 0.2922,
+          "mean": 2.321475002,
+          "d_mean": 2.0292750020000003,
+          "mean_tol": 0.029188,
+          "mean_ok": false,
+          "ref_sd": 0.1467,
+          "sd": 6.161300561951153,
+          "d_sd": 6.014600561951153,
+          "sd_tol": 0.01467,
+          "sd_ok": false,
+          "ok": false
+        }
+      ],
+      "overall": {
+        "result": "fail",
+        "nodes_failed": 5,
+        "nodes_total": 5
+      },
+      "note": "Same setting as the pre-declared comparison with a different seed. A second failed comparison, not the pre-declared comparison itself."
+    },
+    {
+      "id": "seeds-a-chain1",
+      "label": "seeds-a chain 1 only (post hoc)",
+      "kind": "post_hoc",
+      "run": "seeds-a",
+      "setting": "chain 1 only, burn-in 1000",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "rows": [
+        {
+          "node": "alpha0",
+          "ref_mean": -0.5499,
+          "mean": -0.54664997293,
+          "d_mean": 0.0032500270700001055,
+          "mean_tol": 0.017192,
+          "mean_ok": true,
+          "ref_sd": 0.1965,
+          "sd": 0.18666787903269935,
+          "d_sd": -0.009832120967300656,
+          "sd_tol": 0.01965,
+          "sd_ok": true,
+          "ok": true
+        },
+        {
+          "node": "alpha1",
+          "ref_mean": 0.08902,
+          "mean": 0.0750378955454,
+          "d_mean": -0.013982104454600006,
+          "mean_tol": 0.023988,
+          "mean_ok": true,
+          "ref_sd": 0.3124,
+          "sd": 0.3072657335730225,
+          "d_sd": -0.005134266426977507,
+          "sd_tol": 0.031240000000000004,
+          "sd_ok": true,
+          "ok": true
+        },
+        {
+          "node": "alpha12",
+          "ref_mean": -0.841,
+          "mean": -0.8143304798500001,
+          "d_mean": 0.026669520149999904,
+          "mean_tol": 0.0349,
+          "mean_ok": true,
+          "ref_sd": 0.4372,
+          "sd": 0.4254412386109644,
+          "d_sd": -0.011758761389035588,
+          "sd_tol": 0.04372,
+          "sd_ok": true,
+          "ok": true
+        },
+        {
+          "node": "alpha2",
+          "ref_mean": 1.356,
+          "mean": 1.34748525,
+          "d_mean": -0.008514750000000015,
+          "mean_tol": 0.024532,
+          "mean_ok": true,
+          "ref_sd": 0.2772,
+          "sd": 0.2645891137393004,
+          "d_sd": -0.012610886260699616,
+          "sd_tol": 0.02772,
+          "sd_ok": true,
+          "ok": true
+        },
+        {
+          "node": "sigma",
+          "ref_mean": 0.2922,
+          "mean": 0.285437284,
+          "d_mean": -0.006762716000000002,
+          "mean_tol": 0.029188,
+          "mean_ok": true,
+          "ref_sd": 0.1467,
+          "sd": 0.13841014122246487,
+          "d_sd": -0.00828985877753513,
+          "sd_tol": 0.01467,
+          "sd_ok": true,
+          "ok": true
+        }
+      ],
+      "overall": {
+        "result": "pass",
+        "nodes_failed": 0,
+        "nodes_total": 5
+      },
+      "note": "Chosen after the pooled comparison failed."
+    },
+    {
+      "id": "seeds-a-chain2",
+      "label": "seeds-a chain 2 only (post hoc, expected FAIL)",
+      "kind": "post_hoc",
+      "run": "seeds-a",
+      "setting": "chain 2 only, burn-in 1000",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "rows": [
+        {
+          "node": "alpha0",
+          "ref_mean": -0.5499,
+          "mean": 0.6034325249,
+          "d_mean": 1.1533325249000002,
+          "mean_tol": 0.017192,
+          "mean_ok": false,
+          "ref_sd": 0.1965,
+          "sd": 2.368509275166546,
+          "d_sd": 2.172009275166546,
+          "sd_tol": 0.01965,
+          "sd_ok": false,
+          "ok": false
+        },
+        {
+          "node": "alpha1",
+          "ref_mean": 0.08902,
+          "mean": 1.8357816771414,
+          "d_mean": 1.7467616771413998,
+          "mean_tol": 0.023988,
+          "mean_ok": false,
+          "ref_sd": 0.3124,
+          "sd": 5.838101347725824,
+          "d_sd": 5.525701347725824,
+          "sd_tol": 0.031240000000000004,
+          "sd_ok": false,
+          "ok": false
+        },
+        {
+          "node": "alpha12",
+          "ref_mean": -0.841,
+          "mean": -1.0114327198200002,
+          "d_mean": -0.1704327198200002,
+          "mean_tol": 0.0349,
+          "mean_ok": false,
+          "ref_sd": 0.4372,
+          "sd": 3.1631532382672063,
+          "d_sd": 2.7259532382672065,
+          "sd_tol": 0.04372,
+          "sd_ok": false,
+          "ok": false
+        },
+        {
+          "node": "alpha2",
+          "ref_mean": 1.356,
+          "mean": 3.9675704389999997,
+          "d_mean": 2.6115704389999994,
+          "mean_tol": 0.024532,
+          "mean_ok": false,
+          "ref_sd": 0.2772,
+          "sd": 5.145569051880902,
+          "d_sd": 4.868369051880903,
+          "sd_tol": 0.02772,
+          "sd_ok": false,
+          "ok": false
+        },
+        {
+          "node": "sigma",
+          "ref_mean": 0.2922,
+          "mean": 4.345910154,
+          "d_mean": 4.053710154,
+          "mean_tol": 0.029188,
+          "mean_ok": false,
+          "ref_sd": 0.1467,
+          "sd": 7.972340539538359,
+          "d_sd": 7.825640539538359,
+          "sd_tol": 0.01467,
+          "sd_ok": false,
+          "ok": false
+        }
+      ],
+      "overall": {
+        "result": "fail",
+        "nodes_failed": 5,
+        "nodes_total": 5
+      },
+      "note": "Chosen after the pooled comparison failed."
+    },
+    {
+      "id": "seeds-longburn-pooled-20000",
+      "label": "seeds-longburn pooled burn-in 20000 (post hoc setting, expected PASS)",
+      "kind": "post_hoc",
+      "run": "seeds-longburn",
+      "setting": "2 chains pooled, burn-in 20000",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "rows": [
+        {
+          "node": "alpha0",
+          "ref_mean": -0.5499,
+          "mean": -0.5537816644000001,
+          "d_mean": -0.00388166440000004,
+          "mean_tol": 0.017192,
+          "mean_ok": true,
+          "ref_sd": 0.1965,
+          "sd": 0.19624497822025283,
+          "d_sd": -0.00025502177974717766,
+          "sd_tol": 0.01965,
+          "sd_ok": true,
+          "ok": true
+        },
+        {
+          "node": "alpha1",
+          "ref_mean": 0.08902,
+          "mean": 0.081305077862,
+          "d_mean": -0.007714922137999999,
+          "mean_tol": 0.023988,
+          "mean_ok": true,
+          "ref_sd": 0.3124,
+          "sd": 0.31929706843735617,
+          "d_sd": 0.0068970684373561575,
+          "sd_tol": 0.031240000000000004,
+          "sd_ok": true,
+          "ok": true
+        },
+        {
+          "node": "alpha12",
+          "ref_mean": -0.841,
+          "mean": -0.811352699925,
+          "d_mean": 0.029647300074999938,
+          "mean_tol": 0.0349,
+          "mean_ok": true,
+          "ref_sd": 0.4372,
+          "sd": 0.43653540531119794,
+          "d_sd": -0.0006645946888020338,
+          "sd_tol": 0.04372,
+          "sd_ok": true,
+          "ok": true
+        },
+        {
+          "node": "alpha2",
+          "ref_mean": 1.356,
+          "mean": 1.3478162725,
+          "d_mean": -0.008183727500000071,
+          "mean_tol": 0.024532,
+          "mean_ok": true,
+          "ref_sd": 0.2772,
+          "sd": 0.2749064737858445,
+          "d_sd": -0.002293526214155517,
+          "sd_tol": 0.02772,
+          "sd_ok": true,
+          "ok": true
+        },
+        {
+          "node": "sigma",
+          "ref_mean": 0.2922,
+          "mean": 0.28605198099999996,
+          "d_mean": -0.00614801900000006,
+          "mean_tol": 0.029188,
+          "mean_ok": true,
+          "ref_sd": 0.1467,
+          "sd": 0.14498690217366442,
+          "d_sd": -0.00171309782633558,
+          "sd_tol": 0.01467,
+          "sd_ok": true,
+          "ok": true
+        }
+      ],
+      "overall": {
+        "result": "pass",
+        "nodes_failed": 0,
+        "nodes_total": 5
+      },
+      "note": "The burn-in was chosen after the 1,000 burn-in comparison failed. This is not an independent confirmation."
+    }
+  ],
+  "output_summary": {
+    "run": "seeds-longburn",
+    "label": "Computed by ReproLab from the exported samples, not copied from the engine's printed table",
+    "nodes": {
+      "alpha0": {
+        "mean": -0.5537816644000001,
+        "sd": 0.19624497822025283,
+        "median": -0.5527,
+        "q2_5": -0.9485125,
+        "q97_5": -0.17038250000000152,
+        "n": 20000
+      },
+      "alpha1": {
+        "mean": 0.081305077862,
+        "sd": 0.31929706843735617,
+        "median": 0.08997,
+        "q2_5": -0.573415,
+        "q97_5": 0.6960149999999986,
+        "n": 20000
+      },
+      "alpha12": {
+        "mean": -0.811352699925,
+        "sd": 0.43653540531119794,
+        "median": -0.8099,
+        "q2_5": -1.69,
+        "q97_5": 0.04564499999999956,
+        "n": 20000
+      },
+      "alpha2": {
+        "mean": 1.3478162725,
+        "sd": 0.2749064737858445,
+        "median": 1.345,
+        "q2_5": 0.8136,
+        "q97_5": 1.906,
+        "n": 20000
+      },
+      "sigma": {
+        "mean": 0.28605198099999996,
+        "sd": 0.14498690217366442,
+        "median": 0.27565,
+        "q2_5": 0.04608975,
+        "q97_5": 0.6083049999999995,
+        "n": 20000
+      }
+    }
+  },
+  "reproducibility": {
+    "seeds_a_vs_b": [
+      {
+        "file": "coda_CODAchain1.txt",
+        "identical": true
+      },
+      {
+        "file": "coda_CODAchain2.txt",
+        "identical": true
+      },
+      {
+        "file": "coda_CODAindex.txt",
+        "identical": true
+      },
+      {
+        "file": "log.txt",
+        "identical": true
+      }
+    ],
+    "seeds_c_vs_a": [
+      {
+        "file": "coda_CODAchain1.txt",
+        "identical": false
+      },
+      {
+        "file": "coda_CODAchain2.txt",
+        "identical": false
+      },
+      {
+        "file": "coda_CODAindex.txt",
+        "identical": true
+      },
+      {
+        "file": "log.txt",
+        "identical": false
+      }
+    ],
+    "scope": "one image, one machine"
+  },
+  "program_output": [
+    {
+      "run": "bad-syntax",
+      "line_no": 2,
+      "text": "expected right parenthesis error pos 58 (error on line 4)"
+    },
+    {
+      "run": "bad-undefined",
+      "line_no": 4,
+      "text": "variable gamma_missing is not defined"
+    },
+    {
+      "run": "timeout-live",
+      "line_no": 6,
+      "text": "model is initialized"
+    }
+  ],
+  "limitations": [
+    {
+      "id": "lim-licence",
+      "text": "The licence review is incomplete, so nothing here clears the engine or the examples for distribution.",
+      "claim_ids": [
+        "licence-incomplete"
+      ]
+    },
+    {
+      "id": "lim-image",
+      "text": "The engine image is not distributed and was never pushed to a registry.",
+      "claim_ids": [
+        "image-local",
+        "nogo"
+      ]
+    },
+    {
+      "id": "lim-public",
+      "text": "Public execution and public uploads are disabled. Nothing runs on this site.",
+      "claim_ids": [
+        "nogo"
+      ]
+    },
+    {
+      "id": "lim-isolation",
+      "text": "Isolation options were used on Docker Desktop only. A production host has not been tested.",
+      "claim_ids": [
+        "isolation-scope"
+      ]
+    },
+    {
+      "id": "lim-scope",
+      "text": "This is one example, run on one machine with one image.",
+      "claim_ids": [
+        "single-example"
+      ]
+    },
+    {
+      "id": "lim-tarball",
+      "text": "The engine tarball checksum has not been matched to a value from SourceForge or the maintainer.",
+      "claim_ids": [
+        "tarball-unchecked"
+      ]
+    },
+    {
+      "id": "lim-licence-repo",
+      "text": "No licence has been chosen yet for the ReproLab code in the repository.",
+      "claim_ids": [
+        "no-repo-licence"
+      ]
+    },
+    {
+      "id": "lim-baseline",
+      "text": "The published baseline was read by eye from an image, and its chain count is not stated.",
+      "claim_ids": [
+        "baseline-by-eye"
+      ]
+    },
+    {
+      "id": "lim-coda",
+      "text": "The website build copies recorded numbers. It does not recompute anything from the sample files.",
+      "claim_ids": []
+    }
+  ],
+  "status_facts": [
+    {
+      "id": "publish_image",
+      "label": "Publishing the engine image",
+      "value": "NO-GO",
+      "claim_ids": [
+        "nogo"
+      ]
+    },
+    {
+      "id": "public_runner",
+      "label": "A public web runner",
+      "value": "NO-GO",
+      "claim_ids": [
+        "nogo"
+      ]
+    },
+    {
+      "id": "gates",
+      "label": "Release gates G1 to G4",
+      "value": "UNMET",
+      "claim_ids": [
+        "gates-unmet"
+      ]
+    },
+    {
+      "id": "licence_review",
+      "label": "Licence review",
+      "value": "INCOMPLETE",
+      "claim_ids": [
+        "licence-incomplete"
+      ]
+    },
+    {
+      "id": "repository_licence",
+      "label": "Repository licence",
+      "value": "not chosen",
+      "claim_ids": [
+        "no-repo-licence"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "engine-version",
+      "page": "home",
+      "text": "The engine reported itself as OpenBUGS version 3.2.3 rev 1012.",
+      "evidence": [
+        "docs/evidence/seeds-a/log.txt"
+      ],
+      "asserted": [
+        {
+          "path": "docs/evidence/seeds-a/log.txt",
+          "kind": "line_equals",
+          "detail": "OpenBUGS version 3.2.3 rev 1012"
+        }
+      ]
+    },
+    {
+      "id": "predeclared-failed",
+      "page": "sample-run",
+      "text": "The pre-declared comparison failed on all five nodes.",
+      "evidence": [
+        "docs/evidence/comparisons.txt"
+      ],
+      "asserted": [
+        {
+          "path": "docs/evidence/comparisons.txt",
+          "kind": "contains",
+          "detail": "(pre-declared test, expected FAIL) (exit=2, expected 2)"
+        }
+      ]
+    },
+    {
+      "id": "posthoc-label",
+      "page": "sample-run",
+      "text": "The 20,000 burn-in comparison used a setting chosen after the first comparison failed.",
+      "evidence": [
+        "docs/evidence/comparisons.txt"
+      ],
+      "asserted": [
+        {
+          "path": "docs/evidence/comparisons.txt",
+          "kind": "contains",
+          "detail": "(post hoc setting, expected PASS)"
+        }
+      ]
+    },
+    {
+      "id": "bad-syntax-line",
+      "page": "sample-run",
+      "text": "The engine reported a syntax error for the invalid model.",
+      "evidence": [
+        "docs/evidence/bad-syntax/log.txt"
+      ],
+      "asserted": [
+        {
+          "path": "docs/evidence/bad-syntax/log.txt",
+          "kind": "line_equals",
+          "detail": "expected right parenthesis error pos 58 (error on line 4)"
+        }
+      ]
+    },
+    {
+      "id": "bad-syntax-exit0",
+      "page": "sample-run",
+      "text": "The engine exit code was 0 for the invalid syntax model.",
+      "evidence": [
+        "docs/evidence/bad-syntax/manifest.json"
+      ],
+      "asserted": [
+        {
+          "path": "docs/evidence/bad-syntax/manifest.json",
+          "kind": "json_eq",
+          "detail": "exit_code=0"
+        }
+      ]
+    },
+    {
+      "id": "bad-undefined-line",
+      "page": "sample-run",
+      "text": "The engine reported an undefined variable.",
+      "evidence": [
+        "docs/evidence/bad-undefined/log.txt"
+      ],
+      "asserted": [
+        {
+          "path": "docs/evidence/bad-undefined/log.txt",
+          "kind": "line_equals",
+          "detail": "variable gamma_missing is not defined"
+        }
+      ]
+    },
+    {
+      "id": "timeout-status",
+      "page": "sample-run",
+      "text": "The time-limit run was recorded as timed_out.",
+      "evidence": [
+        "docs/evidence/timeout-live/manifest.json"
+      ],
+      "asserted": [
+        {
+          "path": "docs/evidence/timeout-live/manifest.json",
+          "kind": "json_eq",
+          "detail": "status=timed_out"
+        }
+      ]
+    },
+    {
+      "id": "baseline-by-eye",
+      "page": "sample-run",
+      "text": "The published baseline numbers were read by eye from an image, and the source page does not state the number of chains.",
+      "evidence": [
+        "services/runner/reference/seeds_published.json"
+      ],
+      "asserted": [
+        {
+          "path": "services/runner/reference/seeds_published.json",
+          "kind": "contains",
+          "detail": "manually read from the published image"
+        },
+        {
+          "path": "services/runner/reference/seeds_published.json",
+          "kind": "contains",
+          "detail": "chain count not stated on the page"
+        }
+      ]
+    },
+    {
+      "id": "nogo",
+      "page": "home",
+      "text": "No release decision has been recorded and the project status is NO-GO for publishing the engine image and a public web runner.",
+      "evidence": [
+        "docs/release-decision.md"
+      ],
+      "asserted": [
+        {
+          "path": "docs/release-decision.md",
+          "kind": "contains",
+          "detail": "**NO-GO. No release decision has been recorded.**"
+        }
+      ]
+    },
+    {
+      "id": "gates-unmet",
+      "page": "home",
+      "text": "The four release gates G1 to G4 are unmet.",
+      "evidence": [
+        "docs/release-decision.md"
+      ],
+      "asserted": [
+        {
+          "path": "docs/release-decision.md",
+          "kind": "contains",
+          "detail": "| G4 Recorded decision |"
+        },
+        {
+          "path": "docs/release-decision.md",
+          "kind": "contains",
+          "detail": "**UNMET**"
+        }
+      ]
+    },
+    {
+      "id": "licence-incomplete",
+      "page": "home",
+      "text": "The licence review is incomplete.",
+      "evidence": [
+        "docs/licensing-review.md"
+      ],
+      "asserted": [
+        {
+          "path": "docs/licensing-review.md",
+          "kind": "contains",
+          "detail": "**Review status: INCOMPLETE.**"
+        }
+      ]
+    },
+    {
+      "id": "no-repo-licence",
+      "page": "home",
+      "text": "No repository licence has been chosen yet.",
+      "evidence": [
+        "docs/third-party-notices.md"
+      ],
+      "asserted": [
+        {
+          "path": "docs/third-party-notices.md",
+          "kind": "contains",
+          "detail": "No repository licence has been chosen"
+        }
+      ]
+    },
+    {
+      "id": "isolation-scope",
+      "page": "sample-run",
+      "text": "Isolation options were used on Docker Desktop only, not tested on a production host.",
+      "evidence": [
+        "docs/engine-feasibility.md"
+      ],
+      "asserted": [
+        {
+          "path": "docs/engine-feasibility.md",
+          "kind": "contains",
+          "detail": "This is not a per-job sandbox test on the intended production host"
+        }
+      ]
+    },
+    {
+      "id": "image-local",
+      "page": "sample-run",
+      "text": "The engine image was never pushed to a registry.",
+      "evidence": [
+        "docs/engine-feasibility.md"
+      ],
+      "asserted": [
+        {
+          "path": "docs/engine-feasibility.md",
+          "kind": "contains",
+          "detail": "the image is not pushed to a registry"
+        }
+      ]
+    },
+    {
+      "id": "tarball-unchecked",
+      "page": "sample-run",
+      "text": "The engine tarball checksum has not been matched to a value from SourceForge or the maintainer.",
+      "evidence": [
+        "docs/release-decision.md"
+      ],
+      "asserted": [
+        {
+          "path": "docs/release-decision.md",
+          "kind": "contains",
+          "detail": "The 3.2.3 tarball checksum matches a value from SourceForge"
+        }
+      ]
+    },
+    {
+      "id": "single-example",
+      "page": "sample-run",
+      "text": "Only one example was run, on one machine with one image.",
+      "evidence": [
+        "docs/engine-feasibility.md"
+      ],
+      "asserted": [
+        {
+          "path": "docs/engine-feasibility.md",
+          "kind": "contains",
+          "detail": "Docker Desktop 29.9.2"
+        }
+      ]
+    }
+  ]
+}

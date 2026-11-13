@@ -1,0 +1,30 @@
+{
+  "name": "reprolab-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ReproLab static web site (recorded OpenBUGS Seeds sample). Hosts no engine.",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "data": "node scripts/build-sample-data.mjs --write",
+    "build": "node scripts/validate-sample-data.mjs && next build",
+    "start-static": "node scripts/serve-static.mjs",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"tests/**/*.test.mjs\"",
+    "check": "npm run lint && npm run typecheck && npm run build && npm run test"
+  },
+  "dependencies": {
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.6",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "typescript": "5.9.3"
+  }
+}

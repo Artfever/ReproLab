@@ -1,0 +1,26 @@
+﻿ReproLab web: dependency record (2026-11-13)
+
+node: 
+v24.18.0
+Direct dependencies (exact pins, from npm ls --depth=0):
+reprolab-web@0.1.0 D:\University Work\SUMMER PROJECTS\Kiroween hackathon\ReproLab\apps\web
+Γö£ΓöÇΓöÇ @types/node@24.19.2
+Γö£ΓöÇΓöÇ @types/react-dom@19.3.0
+Γö£ΓöÇΓöÇ @types/react@19.3.0
+Γö£ΓöÇΓöÇ eslint-config-next@16.4.6
+Γö£ΓöÇΓöÇ eslint@9.39.5
+Γö£ΓöÇΓöÇ next@16.4.6
+Γö£ΓöÇΓöÇ react-dom@19.3.1
+Γö£ΓöÇΓöÇ react@19.3.1
+ΓööΓöÇΓöÇ typescript@5.9.3
+
+
+Notes:
+- typescript is pinned to 5.9.3, not the newest 7.x, because Next.js 16 and eslint-config-next have not been checked against TypeScript 7.
+- eslint is pinned to 9.x (npm warns that 9.39.5 is no longer supported); eslint-config-next 16.4.6 peer range is eslint >=9.0.0. Moving to eslint 10 was not tested.
+- @types/node is 24.x to match engines.node 24.x.
+- npm ci from a clean checkout has NOT been run yet.
+
+npm audit (full output in audit.txt): 7 moderate severity findings, all in the dev-only lint chain
+(minimatch denial of service via @typescript-eslint/* under eslint-config-next). None is in the shipped static output.
+npm audit fix was NOT applied. Fixing needs a newer eslint-config-next or an override, which is a separate decision.
