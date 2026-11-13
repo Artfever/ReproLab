@@ -1,0 +1,35 @@
+# Evidence for Requirement 10.6 (no public model upload feature enabled). Generated 2026-11-13 by listing the working tree and searching source files.
+# Excludes .git, .scratch (gitignored scratch) and runs (gitignored run output).
+
+== top-level entries
+dir  .kiro
+dir  .scratch
+dir  docs
+dir  examples
+dir  infra
+dir  runs
+dir  scripts
+dir  services
+file .dockerignore
+file .gitignore
+file ReproLab_Harnessed_Build_Plan.md
+
+== directories that would hold a web app or API (apps, packages, web, api, server, src, pages, app)
+apps       absent
+packages   absent
+web        absent
+api        absent
+server     absent
+src        absent
+pages      absent
+app        absent
+public     absent
+
+== package.json / next.config / requirements for web frameworks
+(none listed above = none found)
+
+== source matches for upload / multipart / http server in code and scripts (py, ps1, Dockerfile)
+(none listed above = none found)
+
+== Dockerfile EXPOSE / CMD / ENTRYPOINT lines
+(none listed above = image exposes no port and has no server entrypoint)

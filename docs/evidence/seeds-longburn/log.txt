@@ -1,0 +1,21 @@
+OpenBUGS version 3.2.3 rev 1012
+model is syntactically correct
+data loaded
+model compiled
+initial values loaded and chain initialized but another chain contain uninitialized variables
+model is initialized
+20000 updates took 3 s
+monitor set
+monitor set
+monitor set
+monitor set
+monitor set
+10000 updates took 1 s
+Node statistics
+		mean	sd	MC_error	val2.5pc	median	val97.5pc	start	sample
+	alpha0	-0.5538	0.1962	0.003224	-0.9485	-0.5527	-0.1697	20001	20000
+	alpha1	0.08131	0.3193	0.004886	-0.5734	0.08999	0.6966	20001	20000
+	alpha12	-0.8114	0.4365	0.006192	-1.69	-0.8099	0.04584	20001	20000
+	alpha2	1.348	0.2749	0.00451	0.8136	1.345	1.906	20001	20000
+	sigma	0.2861	0.145	0.004859	0.04609	0.2757	0.6085	20001	20000
+CODA files written

@@ -1,0 +1,83 @@
+a289c4da0c4ac371f8013226c85ebd0a9e1dec5de9b858950e4854cb814b4ed8  gh.tar.gz
+196253b34ba07886ac9db0c734e31fbf  gh.tar.gz
+AUTHORS
+COPYING
+ChangeLog
+INSTALL
+Makefile.am
+Makefile.in
+NEWS
+README
+aclocal.m4
+autom4te.cache
+bin
+configure
+configure.ac
+doc
+install-sh
+lib
+missing
+src
+---FILES
+OpenBUGS-3.2.3
+OpenBUGS-3.2.3/install-sh
+OpenBUGS-3.2.3/doc
+OpenBUGS-3.2.3/doc/GeoBUGS
+OpenBUGS-3.2.3/doc/Developer
+OpenBUGS-3.2.3/doc/Manuals
+OpenBUGS-3.2.3/doc/Reliability
+OpenBUGS-3.2.3/doc/Examples
+OpenBUGS-3.2.3/doc/OpenBUGS.1
+OpenBUGS-3.2.3/doc/testscript.txt
+OpenBUGS-3.2.3/COPYING
+OpenBUGS-3.2.3/Makefile.am
+OpenBUGS-3.2.3/configure
+OpenBUGS-3.2.3/configure.ac
+OpenBUGS-3.2.3/README
+OpenBUGS-3.2.3/Makefile.in
+OpenBUGS-3.2.3/NEWS
+OpenBUGS-3.2.3/AUTHORS
+OpenBUGS-3.2.3/autom4te.cache
+OpenBUGS-3.2.3/autom4te.cache/output.0
+OpenBUGS-3.2.3/autom4te.cache/traces.0
+OpenBUGS-3.2.3/autom4te.cache/requests
+OpenBUGS-3.2.3/autom4te.cache/traces.1
+OpenBUGS-3.2.3/autom4te.cache/output.1
+OpenBUGS-3.2.3/lib
+OpenBUGS-3.2.3/lib/libOpenBUGS.so
+OpenBUGS-3.2.3/ChangeLog
+OpenBUGS-3.2.3/INSTALL
+OpenBUGS-3.2.3/src
+OpenBUGS-3.2.3/src/Makefile.am
+OpenBUGS-3.2.3/src/OpenBUGS.h
+OpenBUGS-3.2.3/src/Makefile.in
+OpenBUGS-3.2.3/src/OpenBUGSCli.c
+OpenBUGS-3.2.3/missing
+OpenBUGS-3.2.3/bin
+OpenBUGS-3.2.3/bin/OpenBUGS
+OpenBUGS-3.2.3/aclocal.m4
+---COUNT
+1559
+---README
+[Body omitted from the repository: upstream documentation text. Its SHA-256 is in licensing/06_*.]
+---COPYING
+COPYRIGHT
+---------
+
+OpenBUGS is copyright 
+
+---INSTALL
+[Body omitted from the repository: generic GNU autotools text.]
+---ARCH
+OpenBUGS-3.2.3/libOpenBUGS.so: cannot open `OpenBUGS-3.2.3/libOpenBUGS.so' (No such file or directory)
+OpenBUGS-3.2.3/*.so*:          cannot open `OpenBUGS-3.2.3/*.so*' (No such file or directory)
+OpenBUGS-3.2.3/install-sh
+OpenBUGS-3.2.3/doc/GeoBUGS/Manuals/Manual.html
+OpenBUGS-3.2.3/doc/GeoBUGS/Manuals/manual1.bmp
+OpenBUGS-3.2.3/doc/GeoBUGS/Manuals/manual2.bmp
+OpenBUGS-3.2.3/doc/GeoBUGS/Manuals/manual0.bmp
+OpenBUGS-3.2.3/doc/GeoBUGS/Manuals/manual3.bmp
+OpenBUGS-3.2.3/doc/GeoBUGS/Manuals/manual4.bmp
+OpenBUGS-3.2.3/doc/GeoBUGS/Examples/ElevationDiscinits1.txt
+OpenBUGS-3.2.3/doc/GeoBUGS/Examples/Pollutioninits1.txt
+OpenBUGS-3.2.3/doc/GeoBUGS/Examples/Huddersfielddata.html

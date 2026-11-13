@@ -1,0 +1,55 @@
+{
+  "argv": [
+    "/opt/openbugs/bin/OpenBUGS",
+    "-t",
+    "script.txt"
+  ],
+  "engine_version": "3.2.3 rev 1012",
+  "exit_code": 0,
+  "files": {
+    "data.txt": {
+      "bytes": 408,
+      "sha256": "2d12e0924474690865a9202cf3fdf67afccab97372d7dbaeb1bcb93c7b9e3e76"
+    },
+    "inits1.txt": {
+      "bytes": 137,
+      "sha256": "96e24659d8af72398e29276ef9b3f155949b1c8e3a80cf867ffef4061d2a5980"
+    },
+    "inits2.txt": {
+      "bytes": 202,
+      "sha256": "d3b5d8fb340253676048876597ec0e6db20391e5c6463ecf64cdfbbb7c57d702"
+    },
+    "log.txt": {
+      "bytes": 555,
+      "sha256": "63e4a4593127577ba291a45332b1bc56b0dbf66f8933f87b7c52015278ec7ed6"
+    },
+    "model.txt": {
+      "bytes": 138,
+      "sha256": "0f7f9f43b5807d0aa08da2c94f4f43d81a56cf303aeaec59fb3fce0ed6ab58b8"
+    },
+    "script.txt": {
+      "bytes": 279,
+      "sha256": "d381fbe9a7c4632dadb352056ff6d5c2efdbae63a9d554b29238ad9477aecb35"
+    },
+    "stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "image_digest": "sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f",
+  "n_chains": 2,
+  "reason": "engine reported a problem: variable gamma_missing is not defined",
+  "runtime_s": 0.016,
+  "script": "modelSetWD('/work/bad-undefined')\nmodelCheck('model.txt')\nmodelData('data.txt')\nmodelCompile(2)\nmodelSetRN(1)\nmodelInits('inits1.txt',1)\nmodelInits('inits2.txt',2)\nmodelUpdate(10)\nsamplesSet('alpha0')\nmodelUpdate(10,1)\nsamplesStats('*')\nsamplesCoda('*','coda_')\nmodelQuit('yes')\n",
+  "settings": {
+    "burn_in": 10,
+    "monitors": [
+      "alpha0"
+    ],
+    "samples": 10,
+    "seed": 1,
+    "thin": 1,
+    "timeout_s": 60
+  },
+  "status": "failed"
+}

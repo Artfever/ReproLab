@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "reason": "engine reported a problem: variable gamma_missing is not defined",
+  "exit_code": 0,
+  "runtime_s": 0.016,
+  "engine_version": "3.2.3 rev 1012",
+  "out_dir": "/work/bad-undefined"
+}

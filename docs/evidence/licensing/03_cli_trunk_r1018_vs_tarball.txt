@@ -1,0 +1,59 @@
+upstream cli/trunk mirrored at: cli_trunk/trunk
+### upstream files
+./AUTHORS
+./COPYING
+./ChangeLog
+./Makefile.am
+./Makefile.in
+./NEWS
+./OpenBUGS-3.2.1.tar.gz
+./README
+./aclocal.m4
+./autom4te.cache/output.0
+./autom4te.cache/output.1
+./autom4te.cache/output.2
+./autom4te.cache/requests
+./autom4te.cache/traces.0
+./autom4te.cache/traces.1
+./autom4te.cache/traces.2
+./bin/OpenBUGS
+./configure
+./configure.ac
+./doc/OpenBUGS.1
+./doc/testscript.txt
+./package.sh
+./src/Makefile.am
+./src/OpenBUGS.h
+./src/OpenBUGSCli.c
+./src/OpenBUGSCli_dlopen.c
+### per-file compare: upstream cli/trunk HEAD(r1018) vs our tarball
+IDENTICAL  AUTHORS
+IDENTICAL  ChangeLog
+IDENTICAL  Makefile.am
+DIFFERENT  Makefile.in
+IDENTICAL  NEWS
+IDENTICAL  README
+DIFFERENT  aclocal.m4
+DIFFERENT  configure
+DIFFERENT  configure.ac
+IDENTICAL  bin/OpenBUGS
+IDENTICAL  src/Makefile.am
+NOT-IN-SVN src/Makefile.in
+IDENTICAL  src/OpenBUGS.h
+IDENTICAL  src/OpenBUGSCli.c
+### doc tree
+Only in /tmp/lic/OpenBUGS-3.2.3/doc: Developer
+Only in /tmp/lic/OpenBUGS-3.2.3/doc: Examples
+Only in /tmp/lic/OpenBUGS-3.2.3/doc: GeoBUGS
+Only in /tmp/lic/OpenBUGS-3.2.3/doc: Manuals
+Files cli_trunk/trunk/doc/OpenBUGS.1 and /tmp/lic/OpenBUGS-3.2.3/doc/OpenBUGS.1 differ
+Only in /tmp/lic/OpenBUGS-3.2.3/doc: Reliability
+svn doc files: 2 vs tarball doc files: 1535
+### lib in svn?
+ls: cannot access 'cli_trunk/trunk/lib': No such file or directory
+### package.sh (upstream cli/trunk)
+[Body omitted from the repository: upstream script text and the maintainer's personal paths and address.]
+Quoted line used as evidence: '## Linux C program is taken from cli/src, shell script from cli/bin, library built locally'
+### 3.2.1 tarball in svn
+-rwxrwxrwx 1 user user 3165790 Mar 23  2011 cli/trunk/OpenBUGS-3.2.1.tar.gz
+bfbc43e3cf520765be784e972a659dbd61e7761dd978dc67c87a9f9635009699  cli/trunk/OpenBUGS-3.2.1.tar.gz

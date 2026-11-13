@@ -1,0 +1,52 @@
+### dirs
+== Cpc/Mod : 2 entries; first: Beautifier.odc BeautifierOptions.odc 
+== Std/Mod : 1 entries; first: Cmds1.odc 
+== Dev/Mod : 4 entries; first: Browser.odc Debug.odc ElfLinker16.odc Search.odc 
+== System/Mod : 1 entries; first: Console.odc 
+== Bugs/Mod : 56 entries; first: BRugs.odc Batch.odc C.odc CLI.odc 
+== Math/Mod : 18 entries; first: AESolver.odc BGR.odc Diagmatrix.odc Func.odc 
+== Updater/Mod : 59 entries; first: AM.odc AMNLLS.odc AMblock.odc Actions.odc 
+-- Cpc_Mod_Beautifier.odc (42617 bytes)
+    InfoCmds.OpenDoc('Cpc/Docu/Beautifier-Quick-Start.odc'); StdLinks.ShowTarget('15.')
+    MODULE CpcBeautifier;
+    Component Pascal Source Code Beautifier
+    Zinn [contact address omitted]
+    CpcBeautifierOptions, StdFolds, StdLog, StdStamps, TextControllers, TextMappers, TextModels;
+    Beautifier-Quick-Start
+-- Cpc_Mod_BeautifierOptions.odc (5735 bytes)
+    MODULE CpcBeautifierOptions;
+    Options handling of the Component Pascal Source Code Beautifier 
+    Zinn [contact address omitted]
+    optName = "Beautifier.opt";
+    StdLog.String("Error loading CpcBeautifier options"); StdLog.Ln;
+    StdLog.String("Error saving CpcBeautifier options"); StdLog.Ln;
+-- Std_Mod_Cmds1.odc (16809 bytes)
+    StdCmds.OpenBrowser('Docu/OpenBUGS-License', 'OpenBUGS License')
+    GNU General Public Licence
+    Docu/OpenBUGS-License
+-- System_Mod_Console.odc (18392 bytes)
+    StdCmds.OpenBrowser('Docu/OpenBUGS-License', 'OpenBUGS License')
+    Docu/OpenBUGS-License
+-- Bugs_Mod_BRugs.odc (17284 bytes)
+    StdCmds.OpenBrowser('Docu/OpenBUGS-License', 'OpenBUGS License')
+    GNU General Public Licence
+    Docu/OpenBUGS-License
+-- Bugs_Mod_Batch.odc (16957 bytes)
+    StdCmds.OpenBrowser('Docu/OpenBUGS-License', 'OpenBUGS License')
+    Docu/OpenBUGS-License
+-- Bugs_Mod_C.odc (25096 bytes)
+    StdCmds.OpenBrowser('Docu/OpenBUGS-License', 'OpenBUGS License')
+    GNU General Public Licence
+    Docu/OpenBUGS-License
+-- Bugs_Mod_CLI.odc (17939 bytes)
+    StdCmds.OpenBrowser('Docu/OpenBUGS-License', 'OpenBUGS License')
+    GNU General Public Licence
+    Docu/OpenBUGS-License
+-- Math_Mod_AESolver.odc (18193 bytes)
+    StdCmds.OpenBrowser('Docu/OpenBUGS-License', 'OpenBUGS License')
+    GNU General Public Licence
+    Docu/OpenBUGS-License
+-- Math_Mod_BGR.odc (21493 bytes)
+    StdCmds.OpenBrowser('Docu/OpenBUGS-License', 'OpenBUGS License')
+    GNU General Public Licence
+    Docu/OpenBUGS-License

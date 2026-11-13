@@ -1,0 +1,452 @@
+##### compare seeds-a POOLED (pre-declared test)
+[
+  {
+    "node": "alpha0",
+    "ref_mean": -0.5499,
+    "mean": 0.028391275985,
+    "d_mean": 0.5782912759850001,
+    "mean_tol": 0.017192,
+    "mean_ok": false,
+    "ref_sd": 0.1965,
+    "sd": 1.77563746021684,
+    "d_sd": 1.57913746021684,
+    "sd_tol": 0.01965,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "alpha1",
+    "ref_mean": 0.08902,
+    "mean": 0.9554097863434001,
+    "d_mean": 0.8663897863434001,
+    "mean_tol": 0.023988,
+    "mean_ok": false,
+    "ref_sd": 0.3124,
+    "sd": 4.226483020282648,
+    "d_sd": 3.914083020282648,
+    "sd_tol": 0.031240000000000004,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "alpha12",
+    "ref_mean": -0.841,
+    "mean": -0.9128815998350001,
+    "d_mean": -0.07188159983500009,
+    "mean_tol": 0.0349,
+    "mean_ok": false,
+    "ref_sd": 0.4372,
+    "sd": 2.258921747388806,
+    "d_sd": 1.8217217473888059,
+    "sd_tol": 0.04372,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "alpha2",
+    "ref_mean": 1.356,
+    "mean": 2.6575278445,
+    "d_mean": 1.3015278445,
+    "mean_tol": 0.024532,
+    "mean_ok": false,
+    "ref_sd": 0.2772,
+    "sd": 3.8715730449359986,
+    "d_sd": 3.5943730449359985,
+    "sd_tol": 0.02772,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "sigma",
+    "ref_mean": 0.2922,
+    "mean": 2.315673719,
+    "d_mean": 2.023473719,
+    "mean_tol": 0.029188,
+    "mean_ok": false,
+    "ref_sd": 0.1467,
+    "sd": 5.992425393305615,
+    "d_sd": 5.845725393305615,
+    "sd_tol": 0.01467,
+    "sd_ok": false,
+    "ok": false
+  }
+]
+exit=2
+##### compare seeds-a CHAIN 1 ONLY (post hoc)
+[
+  {
+    "node": "alpha0",
+    "ref_mean": -0.5499,
+    "mean": -0.54664997293,
+    "d_mean": 0.0032500270700001055,
+    "mean_tol": 0.017192,
+    "mean_ok": true,
+    "ref_sd": 0.1965,
+    "sd": 0.18666787903269935,
+    "d_sd": -0.009832120967300656,
+    "sd_tol": 0.01965,
+    "sd_ok": true,
+    "ok": true
+  },
+  {
+    "node": "alpha1",
+    "ref_mean": 0.08902,
+    "mean": 0.0750378955454,
+    "d_mean": -0.013982104454600006,
+    "mean_tol": 0.023988,
+    "mean_ok": true,
+    "ref_sd": 0.3124,
+    "sd": 0.3072657335730225,
+    "d_sd": -0.005134266426977507,
+    "sd_tol": 0.031240000000000004,
+    "sd_ok": true,
+    "ok": true
+  },
+  {
+    "node": "alpha12",
+    "ref_mean": -0.841,
+    "mean": -0.8143304798500001,
+    "d_mean": 0.026669520149999904,
+    "mean_tol": 0.0349,
+    "mean_ok": true,
+    "ref_sd": 0.4372,
+    "sd": 0.4254412386109644,
+    "d_sd": -0.011758761389035588,
+    "sd_tol": 0.04372,
+    "sd_ok": true,
+    "ok": true
+  },
+  {
+    "node": "alpha2",
+    "ref_mean": 1.356,
+    "mean": 1.34748525,
+    "d_mean": -0.008514750000000015,
+    "mean_tol": 0.024532,
+    "mean_ok": true,
+    "ref_sd": 0.2772,
+    "sd": 0.2645891137393004,
+    "d_sd": -0.012610886260699616,
+    "sd_tol": 0.02772,
+    "sd_ok": true,
+    "ok": true
+  },
+  {
+    "node": "sigma",
+    "ref_mean": 0.2922,
+    "mean": 0.285437284,
+    "d_mean": -0.006762716000000002,
+    "mean_tol": 0.029188,
+    "mean_ok": true,
+    "ref_sd": 0.1467,
+    "sd": 0.13841014122246487,
+    "d_sd": -0.00828985877753513,
+    "sd_tol": 0.01467,
+    "sd_ok": true,
+    "ok": true
+  }
+]
+exit=0
+##### compare seeds-a CHAIN 2 ONLY (post hoc)
+[
+  {
+    "node": "alpha0",
+    "ref_mean": -0.5499,
+    "mean": 0.6034325249,
+    "d_mean": 1.1533325249000002,
+    "mean_tol": 0.017192,
+    "mean_ok": false,
+    "ref_sd": 0.1965,
+    "sd": 2.368509275166546,
+    "d_sd": 2.172009275166546,
+    "sd_tol": 0.01965,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "alpha1",
+    "ref_mean": 0.08902,
+    "mean": 1.8357816771414,
+    "d_mean": 1.7467616771413998,
+    "mean_tol": 0.023988,
+    "mean_ok": false,
+    "ref_sd": 0.3124,
+    "sd": 5.838101347725824,
+    "d_sd": 5.525701347725824,
+    "sd_tol": 0.031240000000000004,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "alpha12",
+    "ref_mean": -0.841,
+    "mean": -1.0114327198200002,
+    "d_mean": -0.1704327198200002,
+    "mean_tol": 0.0349,
+    "mean_ok": false,
+    "ref_sd": 0.4372,
+    "sd": 3.1631532382672063,
+    "d_sd": 2.7259532382672065,
+    "sd_tol": 0.04372,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "alpha2",
+    "ref_mean": 1.356,
+    "mean": 3.9675704389999997,
+    "d_mean": 2.6115704389999994,
+    "mean_tol": 0.024532,
+    "mean_ok": false,
+    "ref_sd": 0.2772,
+    "sd": 5.145569051880902,
+    "d_sd": 4.868369051880903,
+    "sd_tol": 0.02772,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "sigma",
+    "ref_mean": 0.2922,
+    "mean": 4.345910154,
+    "d_mean": 4.053710154,
+    "mean_tol": 0.029188,
+    "mean_ok": false,
+    "ref_sd": 0.1467,
+    "sd": 7.972340539538359,
+    "d_sd": 7.825640539538359,
+    "sd_tol": 0.01467,
+    "sd_ok": false,
+    "ok": false
+  }
+]
+exit=2
+##### compare seeds-c POOLED (pre-declared test)
+[
+  {
+    "node": "alpha0",
+    "ref_mean": -0.5499,
+    "mean": -0.874725266335,
+    "d_mean": -0.324825266335,
+    "mean_tol": 0.017192,
+    "mean_ok": false,
+    "ref_sd": 0.1965,
+    "sd": 1.46277900457213,
+    "d_sd": 1.2662790045721302,
+    "sd_tol": 0.01965,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "alpha1",
+    "ref_mean": 0.08902,
+    "mean": 1.5168784562782,
+    "d_mean": 1.4278584562782,
+    "mean_tol": 0.023988,
+    "mean_ok": false,
+    "ref_sd": 0.3124,
+    "sd": 4.609458444081508,
+    "d_sd": 4.297058444081507,
+    "sd_tol": 0.031240000000000004,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "alpha12",
+    "ref_mean": -0.841,
+    "mean": -0.804554736125,
+    "d_mean": 0.03644526387500002,
+    "mean_tol": 0.0349,
+    "mean_ok": false,
+    "ref_sd": 0.4372,
+    "sd": 2.5975181763755533,
+    "d_sd": 2.1603181763755535,
+    "sd_tol": 0.04372,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "alpha2",
+    "ref_mean": 1.356,
+    "mean": 3.346447125,
+    "d_mean": 1.990447125,
+    "mean_tol": 0.024532,
+    "mean_ok": false,
+    "ref_sd": 0.2772,
+    "sd": 5.6939683132991155,
+    "d_sd": 5.416768313299116,
+    "sd_tol": 0.02772,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "sigma",
+    "ref_mean": 0.2922,
+    "mean": 2.321475002,
+    "d_mean": 2.0292750020000003,
+    "mean_tol": 0.029188,
+    "mean_ok": false,
+    "ref_sd": 0.1467,
+    "sd": 6.161300561951153,
+    "d_sd": 6.014600561951153,
+    "sd_tol": 0.01467,
+    "sd_ok": false,
+    "ok": false
+  }
+]
+exit=2
+##### compare seeds-c CHAIN 1 ONLY (post hoc)
+[
+  {
+    "node": "alpha0",
+    "ref_mean": -0.5499,
+    "mean": -0.5463475815300001,
+    "d_mean": 0.003552418469999985,
+    "mean_tol": 0.017192,
+    "mean_ok": true,
+    "ref_sd": 0.1965,
+    "sd": 0.18924283093605337,
+    "d_sd": -0.0072571690639466335,
+    "sd_tol": 0.01965,
+    "sd_ok": true,
+    "ok": true
+  },
+  {
+    "node": "alpha1",
+    "ref_mean": 0.08902,
+    "mean": 0.0792122944844,
+    "d_mean": -0.009807705515600007,
+    "mean_tol": 0.023988,
+    "mean_ok": true,
+    "ref_sd": 0.3124,
+    "sd": 0.3098759541821334,
+    "d_sd": -0.002524045817866638,
+    "sd_tol": 0.031240000000000004,
+    "sd_ok": true,
+    "ok": true
+  },
+  {
+    "node": "alpha12",
+    "ref_mean": -0.841,
+    "mean": -0.8291621643799999,
+    "d_mean": 0.01183783562000007,
+    "mean_tol": 0.0349,
+    "mean_ok": true,
+    "ref_sd": 0.4372,
+    "sd": 0.4318527339767209,
+    "d_sd": -0.0053472660232790625,
+    "sd_tol": 0.04372,
+    "sd_ok": true,
+    "ok": true
+  },
+  {
+    "node": "alpha2",
+    "ref_mean": 1.356,
+    "mean": 1.34556063,
+    "d_mean": -0.010439370000000059,
+    "mean_tol": 0.024532,
+    "mean_ok": true,
+    "ref_sd": 0.2772,
+    "sd": 0.27166619355944055,
+    "d_sd": -0.005533806440559452,
+    "sd_tol": 0.02772,
+    "sd_ok": true,
+    "ok": true
+  },
+  {
+    "node": "sigma",
+    "ref_mean": 0.2922,
+    "mean": 0.29038559,
+    "d_mean": -0.0018144099999999885,
+    "mean_tol": 0.029188,
+    "mean_ok": true,
+    "ref_sd": 0.1467,
+    "sd": 0.13726142873602099,
+    "d_sd": -0.009438571263979012,
+    "sd_tol": 0.01467,
+    "sd_ok": true,
+    "ok": true
+  }
+]
+exit=0
+##### compare seeds-c CHAIN 2 ONLY (post hoc)
+[
+  {
+    "node": "alpha0",
+    "ref_mean": -0.5499,
+    "mean": -1.20310295114,
+    "d_mean": -0.6532029511399999,
+    "mean_tol": 0.017192,
+    "mean_ok": false,
+    "ref_sd": 0.1965,
+    "sd": 2.007027802677617,
+    "d_sd": 1.8105278026776173,
+    "sd_tol": 0.01965,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "alpha1",
+    "ref_mean": 0.08902,
+    "mean": 2.954544618072,
+    "d_mean": 2.865524618072,
+    "mean_tol": 0.023988,
+    "mean_ok": false,
+    "ref_sd": 0.3124,
+    "sd": 6.185962714726078,
+    "d_sd": 5.873562714726078,
+    "sd_tol": 0.031240000000000004,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "alpha12",
+    "ref_mean": -0.841,
+    "mean": -0.77994730787,
+    "d_mean": 0.061052692129999975,
+    "mean_tol": 0.0349,
+    "mean_ok": false,
+    "ref_sd": 0.4372,
+    "sd": 3.6478991453625937,
+    "d_sd": 3.210699145362594,
+    "sd_tol": 0.04372,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "alpha2",
+    "ref_mean": 1.356,
+    "mean": 5.34733362,
+    "d_mean": 3.99133362,
+    "mean_tol": 0.024532,
+    "mean_ok": false,
+    "ref_sd": 0.2772,
+    "sd": 7.5341951073467195,
+    "d_sd": 7.25699510734672,
+    "sd_tol": 0.02772,
+    "sd_ok": false,
+    "ok": false
+  },
+  {
+    "node": "sigma",
+    "ref_mean": 0.2922,
+    "mean": 4.352564414,
+    "d_mean": 4.0603644139999995,
+    "mean_tol": 0.029188,
+    "mean_ok": false,
+    "ref_sd": 0.1467,
+    "sd": 8.225371208964647,
+    "d_sd": 8.078671208964648,
+    "sd_tol": 0.01467,
+    "sd_ok": false,
+    "ok": false
+  }
+]
+exit=2
+##### seeds-a vs seeds-b byte identity
+IDENTICAL coda_CODAchain1.txt
+IDENTICAL coda_CODAchain2.txt
+IDENTICAL coda_CODAindex.txt
+IDENTICAL log.txt
+##### seeds-a vs seeds-c (different seed)
+DIFFERENT coda_CODAchain1.txt
+DIFFERENT coda_CODAchain2.txt

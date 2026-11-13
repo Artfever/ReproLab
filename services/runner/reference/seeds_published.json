@@ -1,0 +1,12 @@
+{
+  "source": "OpenBUGS 3.2.3 Examples Vol I, Seeds page (doc/Examples/Seeds.html), results table image seeds3.bmp",
+  "settings": "burn-in 1000 updates, then 10000 updates; start=1001, sample=10000 (chain count not stated on the page)",
+  "transcribed_by": "manually read from the published image; columns mean, sd, MC_error",
+  "nodes": {
+    "alpha0":  {"mean": -0.5499, "sd": 0.1965, "mc_error": 0.004298},
+    "alpha1":  {"mean": 0.08902, "sd": 0.3124, "mc_error": 0.005997},
+    "alpha12": {"mean": -0.841,  "sd": 0.4372, "mc_error": 0.008725},
+    "alpha2":  {"mean": 1.356,   "sd": 0.2772, "mc_error": 0.006133},
+    "sigma":   {"mean": 0.2922,  "sd": 0.1467, "mc_error": 0.007297}
+  }
+}

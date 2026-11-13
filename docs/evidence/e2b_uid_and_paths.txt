@@ -1,0 +1,30 @@
+# Archived 2026-11-13 from .scratch/e2b.txt. Output of `id; uname -m; find / -name Seedsmodel.txt; ls; ldd; echo modelQuit() | OpenBUGSCli` run inside the worker image.
+# Taken from an EARLIER build of the image (before the final rebuild, image ID sha256:f65e2244... used for the evidence runs). The Dockerfile USER line is unchanged: `USER 10001`.
+# The `/s/seeds/Seedsmodel.txt` line is a scratch mount used only for this probe.
+
+uid=10001(bugs) gid=999(bugs) groups=999(bugs)
+x86_64
+/opt/openbugs/share/doc/openbugs-3.2.3/Examples/Seedsmodel.txt
+/s/seeds/Seedsmodel.txt
+/opt/openbugs/bin:
+total 20
+-rwxr-xr-x 1 root root  3279 Nov 13 09:21 OpenBUGS
+-rwxr-xr-x 1 root root 15060 Nov 13 09:21 OpenBUGSCli
+
+/opt/openbugs/lib:
+total 3020
+-rwxr--r-- 1 root root 3090092 Nov 13 09:21 libOpenBUGS.so
+
+/opt/openbugs/licenses:
+total 12
+-rw-r--r-- 1 root root  332 Nov 13 09:21 AUTHORS
+-rw-r--r-- 1 root root 1471 Nov 13 09:21 COPYING
+-rw-r--r-- 1 root root  722 Nov 13 09:21 NEWS
+	linux-gate.so.1 (0xf7fae000)
+	libOpenBUGS.so => /opt/openbugs/bin/../lib/libOpenBUGS.so (0xf7c69000)
+	libc.so.6 => /lib/i386-linux-gnu/libc.so.6 (0xf7a3f000)
+	libdl.so.2 => /lib/i386-linux-gnu/libdl.so.2 (0xf7a3a000)
+	/lib/ld-linux.so.2 (0xf7fb0000)
+OpenBUGS version 3.2.3 rev 1012
+type 'modelQuit()' to quit
+OpenBUGS> cli_exit=0

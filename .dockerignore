@@ -1,0 +1,3 @@
+*
+!infra/openbugs/Dockerfile
+!services/runner/reprolab_runner/**

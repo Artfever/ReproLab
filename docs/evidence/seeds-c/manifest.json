@@ -1,0 +1,71 @@
+{
+  "argv": [
+    "/opt/openbugs/bin/OpenBUGS",
+    "-t",
+    "script.txt"
+  ],
+  "engine_version": "3.2.3 rev 1012",
+  "exit_code": 0,
+  "files": {
+    "coda_CODAchain1.txt": {
+      "bytes": 664541,
+      "sha256": "d142dd1b1769d0e9cf4d35cd16d9e898a9b442b28dab9fce9ad020187c6d5273"
+    },
+    "coda_CODAchain2.txt": {
+      "bytes": 653341,
+      "sha256": "6d68833fd9f1400dceb3f1f551bdfdc5fec55b761f7ef20176aab45c9040259c"
+    },
+    "coda_CODAindex.txt": {
+      "bytes": 96,
+      "sha256": "a93fc634540d6d79020e7abdc1b88081350d464ba2281f1391a19188f1b67743"
+    },
+    "data.txt": {
+      "bytes": 408,
+      "sha256": "2d12e0924474690865a9202cf3fdf67afccab97372d7dbaeb1bcb93c7b9e3e76"
+    },
+    "inits1.txt": {
+      "bytes": 137,
+      "sha256": "96e24659d8af72398e29276ef9b3f155949b1c8e3a80cf867ffef4061d2a5980"
+    },
+    "inits2.txt": {
+      "bytes": 202,
+      "sha256": "d3b5d8fb340253676048876597ec0e6db20391e5c6463ecf64cdfbbb7c57d702"
+    },
+    "log.txt": {
+      "bytes": 701,
+      "sha256": "e28712c685752d5e3fdad1763ed7e73955ae7d8df20346f3f39a80ecee5708be"
+    },
+    "model.txt": {
+      "bytes": 387,
+      "sha256": "eccd496ee854a5bf519bf70f486a5e3c7049be9d508d028c0456e3a610027816"
+    },
+    "script.txt": {
+      "bytes": 362,
+      "sha256": "22ea97879e4dfca82c4092eb6ac6d26ae8fc42ad093c64e2ebcb3e9391d64aec"
+    },
+    "stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "image_digest": "sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f",
+  "n_chains": 2,
+  "reason": "engine finished and all expected files exist",
+  "runtime_s": 1.92,
+  "script": "modelSetWD('/work/seeds-c')\nmodelCheck('model.txt')\nmodelData('data.txt')\nmodelCompile(2)\nmodelSetRN(2)\nmodelInits('inits1.txt',1)\nmodelInits('inits2.txt',2)\nmodelUpdate(1000)\nsamplesSet('alpha0')\nsamplesSet('alpha1')\nsamplesSet('alpha2')\nsamplesSet('alpha12')\nsamplesSet('sigma')\nmodelUpdate(10000,1)\nsamplesStats('*')\nsamplesCoda('*','coda_')\nmodelQuit('yes')\n",
+  "settings": {
+    "burn_in": 1000,
+    "monitors": [
+      "alpha0",
+      "alpha1",
+      "alpha2",
+      "alpha12",
+      "sigma"
+    ],
+    "samples": 10000,
+    "seed": 2,
+    "thin": 1,
+    "timeout_s": 300
+  },
+  "status": "succeeded"
+}

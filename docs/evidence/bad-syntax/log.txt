@@ -1,0 +1,12 @@
+OpenBUGS version 3.2.3 rev 1012
+expected right parenthesis error pos 58 (error on line 4)
+model must be checked before data is loaded
+model must be checked before compiling
+model must have been compiled but not updated to be able to change RN generator
+model must be compiled before initial values loaded
+model must be compiled before initial values loaded
+model must be initialized before updating
+model must be initialized before monitors used
+model must be initialized before updating
+model must be initialized before monitors used
+model must be initialized before monitors used

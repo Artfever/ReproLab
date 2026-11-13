@@ -1,0 +1,40 @@
+bad-syntax: status=failed engine_exit=0 runtime_s=0.008 version='3.2.3 rev 1012' reason='engine reported a problem: expected right parenthesis error pos 58 (error on line 4)'
+    host: cli_exit=1 wall_s=0.34 image=sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f
+    log.txt sha256=fd9a74bbf497cff7a83d5d6b16f39335c0f352573725a7b1b79b328f2b4c9a5e bytes=582
+    script.txt sha256=6643d924b4a928976fcf733b10488e825b1e90e894e55f804b560af4db0b298e bytes=276
+bad-undefined: status=failed engine_exit=0 runtime_s=0.016 version='3.2.3 rev 1012' reason='engine reported a problem: variable gamma_missing is not defined'
+    host: cli_exit=1 wall_s=0.35 image=sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f
+    log.txt sha256=63e4a4593127577ba291a45332b1bc56b0dbf66f8933f87b7c52015278ec7ed6 bytes=555
+    script.txt sha256=d381fbe9a7c4632dadb352056ff6d5c2efdbae63a9d554b29238ad9477aecb35 bytes=279
+seeds-a: status=succeeded engine_exit=0 runtime_s=1.921 version='3.2.3 rev 1012' reason='engine finished and all expected files exist'
+    host: cli_exit=0 wall_s=2.36 image=sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f
+    coda_CODAchain1.txt sha256=c8c5db5473020129db4a301e45626fc7459c51c881dd6eaf53eabd11288b5660 bytes=664609
+    coda_CODAchain2.txt sha256=f18c7189121e39306cbb14ed933afd00f7f990f7de7a33400c9a3c05da618929 bytes=651203
+    coda_CODAindex.txt sha256=a93fc634540d6d79020e7abdc1b88081350d464ba2281f1391a19188f1b67743 bytes=96
+    log.txt sha256=c13dd271ddf94197d737775c0faf3cb925b4b85011847718a3d1588c45e9815f bytes=701
+    script.txt sha256=a34d9e5feda208fd2a3966849296cdb2ea8d2da33f913221f302837e9edcd151 bytes=362
+seeds-b: status=succeeded engine_exit=0 runtime_s=1.921 version='3.2.3 rev 1012' reason='engine finished and all expected files exist'
+    host: cli_exit=0 wall_s=2.24 image=sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f
+    coda_CODAchain1.txt sha256=c8c5db5473020129db4a301e45626fc7459c51c881dd6eaf53eabd11288b5660 bytes=664609
+    coda_CODAchain2.txt sha256=f18c7189121e39306cbb14ed933afd00f7f990f7de7a33400c9a3c05da618929 bytes=651203
+    coda_CODAindex.txt sha256=a93fc634540d6d79020e7abdc1b88081350d464ba2281f1391a19188f1b67743 bytes=96
+    log.txt sha256=c13dd271ddf94197d737775c0faf3cb925b4b85011847718a3d1588c45e9815f bytes=701
+    script.txt sha256=575e22a0df77e88af4258cd42bbae6bbf09c321139e1fd591c17398eecdad16b bytes=362
+seeds-c: status=succeeded engine_exit=0 runtime_s=1.92 version='3.2.3 rev 1012' reason='engine finished and all expected files exist'
+    host: cli_exit=0 wall_s=2.27 image=sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f
+    coda_CODAchain1.txt sha256=d142dd1b1769d0e9cf4d35cd16d9e898a9b442b28dab9fce9ad020187c6d5273 bytes=664541
+    coda_CODAchain2.txt sha256=6d68833fd9f1400dceb3f1f551bdfdc5fec55b761f7ef20176aab45c9040259c bytes=653341
+    coda_CODAindex.txt sha256=a93fc634540d6d79020e7abdc1b88081350d464ba2281f1391a19188f1b67743 bytes=96
+    log.txt sha256=e28712c685752d5e3fdad1763ed7e73955ae7d8df20346f3f39a80ecee5708be bytes=701
+    script.txt sha256=22ea97879e4dfca82c4092eb6ac6d26ae8fc42ad093c64e2ebcb3e9391d64aec bytes=362
+seeds-longburn: status=succeeded engine_exit=0 runtime_s=5.132 version='3.2.3 rev 1012' reason='engine finished and all expected files exist'
+    host: cli_exit=0 wall_s=5.52 image=sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f
+    coda_CODAchain1.txt sha256=a938dff4df1cf2a48e19195ac06fe8504852bcd58fc032ab0af155f60faa7f0c bytes=709525
+    coda_CODAchain2.txt sha256=829fe05ab28fc42e2974c621ccc10d979aa489641ffd48c5bc23c55ebc3b3cee bytes=709622
+    coda_CODAindex.txt sha256=a93fc634540d6d79020e7abdc1b88081350d464ba2281f1391a19188f1b67743 bytes=96
+    log.txt sha256=b11f1dd2e7a5828d8ccfd9f17ff0ebf2065f26a61998f7fc937b70e8d3f2b0cf bytes=729
+    script.txt sha256=7380d510865455e45560ea33e815a8fb3f33cf776c55aa9f4b225fd2acf215c8 bytes=370
+timeout-live: status=timed_out engine_exit= runtime_s=3.001 version='3.2.3 rev 1012' reason='engine exceeded the time limit and was killed'
+    host: cli_exit=1 wall_s=3.34 image=sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f
+    log.txt sha256=de36ab3febc382e73e388ead62c15b7b23fb04937f937e11a09a8ebf6736ded3 bytes=205
+    script.txt sha256=321b78235c67da613266d9b632d92a88f62cbb0ff84c6430c58c36c28a8e5e9c bytes=368

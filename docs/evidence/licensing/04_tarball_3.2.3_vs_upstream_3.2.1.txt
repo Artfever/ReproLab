@@ -1,0 +1,49 @@
+### 3.2.1 (upstream SVN) vs 3.2.3 (GitHub copy): file counts
+3.2.1: 1191  3.2.3: 1559
+### identical / different / only-in counts
+differing-or-only-in lines: 329
+only in 3.2.1: 1  only in 3.2.3: 5  differ: 323
+### sample differences
+Files /tmp/o321/OpenBUGS-3.2.1/ChangeLog and /tmp/lic/OpenBUGS-3.2.3/ChangeLog differ
+Files /tmp/o321/OpenBUGS-3.2.1/INSTALL and /tmp/lic/OpenBUGS-3.2.3/INSTALL differ
+Files /tmp/o321/OpenBUGS-3.2.1/Makefile.in and /tmp/lic/OpenBUGS-3.2.3/Makefile.in differ
+Files /tmp/o321/OpenBUGS-3.2.1/NEWS and /tmp/lic/OpenBUGS-3.2.3/NEWS differ
+Files /tmp/o321/OpenBUGS-3.2.1/README and /tmp/lic/OpenBUGS-3.2.3/README differ
+Files /tmp/o321/OpenBUGS-3.2.1/aclocal.m4 and /tmp/lic/OpenBUGS-3.2.3/aclocal.m4 differ
+Files /tmp/o321/OpenBUGS-3.2.1/autom4te.cache/output.0 and /tmp/lic/OpenBUGS-3.2.3/autom4te.cache/output.0 differ
+Files /tmp/o321/OpenBUGS-3.2.1/autom4te.cache/output.1 and /tmp/lic/OpenBUGS-3.2.3/autom4te.cache/output.1 differ
+Files /tmp/o321/OpenBUGS-3.2.1/autom4te.cache/requests and /tmp/lic/OpenBUGS-3.2.3/autom4te.cache/requests differ
+Files /tmp/o321/OpenBUGS-3.2.1/autom4te.cache/traces.0 and /tmp/lic/OpenBUGS-3.2.3/autom4te.cache/traces.0 differ
+Files /tmp/o321/OpenBUGS-3.2.1/autom4te.cache/traces.1 and /tmp/lic/OpenBUGS-3.2.3/autom4te.cache/traces.1 differ
+Files /tmp/o321/OpenBUGS-3.2.1/bin/OpenBUGS and /tmp/lic/OpenBUGS-3.2.3/bin/OpenBUGS differ
+Files /tmp/o321/OpenBUGS-3.2.1/configure and /tmp/lic/OpenBUGS-3.2.3/configure differ
+Files /tmp/o321/OpenBUGS-3.2.1/configure.ac and /tmp/lic/OpenBUGS-3.2.3/configure.ac differ
+Only in /tmp/o321/OpenBUGS-3.2.1/doc/Developer: Diff.html
+Files /tmp/o321/OpenBUGS-3.2.1/doc/Developer/Linking.html and /tmp/lic/OpenBUGS-3.2.3/doc/Developer/Linking.html differ
+Files /tmp/o321/OpenBUGS-3.2.1/doc/Developer/Make.html and /tmp/lic/OpenBUGS-3.2.3/doc/Developer/Make.html differ
+Files /tmp/o321/OpenBUGS-3.2.1/doc/Developer/Manual.html and /tmp/lic/OpenBUGS-3.2.3/doc/Developer/Manual.html differ
+Files /tmp/o321/OpenBUGS-3.2.1/doc/Developer/Randnum.html and /tmp/lic/OpenBUGS-3.2.3/doc/Developer/Randnum.html differ
+Files /tmp/o321/OpenBUGS-3.2.1/doc/Developer/Tools.html and /tmp/lic/OpenBUGS-3.2.3/doc/Developer/Tools.html differ
+Files /tmp/o321/OpenBUGS-3.2.1/doc/Developer/cbugs1.bmp and /tmp/lic/OpenBUGS-3.2.3/doc/Developer/cbugs1.bmp differ
+Files /tmp/o321/OpenBUGS-3.2.1/doc/Developer/linking1.bmp and /tmp/lic/OpenBUGS-3.2.3/doc/Developer/linking1.bmp differ
+Files /tmp/o321/OpenBUGS-3.2.1/doc/Developer/linking11.bmp and /tmp/lic/OpenBUGS-3.2.3/doc/Developer/linking11.bmp differ
+Files /tmp/o321/OpenBUGS-3.2.1/doc/Developer/linking13.bmp and /tmp/lic/OpenBUGS-3.2.3/doc/Developer/linking13.bmp differ
+Files /tmp/o321/OpenBUGS-3.2.1/doc/Developer/linking15.bmp and /tmp/lic/OpenBUGS-3.2.3/doc/Developer/linking15.bmp differ
+### core files
+IDENTICAL COPYING
+DIFFERENT README
+IDENTICAL AUTHORS
+DIFFERENT src/OpenBUGSCli.c
+IDENTICAL src/OpenBUGS.h
+DIFFERENT bin/OpenBUGS
+DIFFERENT lib/libOpenBUGS.so
+### same-named doc files identical (Examples)
+Examples compared=400 identical=400
+### 3.2.1 tarball itself
+bfbc43e3cf520765be784e972a659dbd61e7761dd978dc67c87a9f9635009699  cli/trunk/OpenBUGS-3.2.1.tar.gz
+### upstream svn file revision/time headers (HTTP)
+Content-Length: 3165790
+last-modified: Wed, 23 Mar 2011 12:08:44 GMT
+etag: "38//cli/trunk/OpenBUGS-3.2.1.tar.gz"
+### our tarball dates
+   1574 2014-03-06

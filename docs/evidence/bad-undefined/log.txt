@@ -1,0 +1,12 @@
+OpenBUGS version 3.2.3 rev 1012
+model is syntactically correct
+data loaded (variables not in the model: x2)
+variable gamma_missing is not defined
+model must have been compiled but not updated to be able to change RN generator
+model must be compiled before initial values loaded
+model must be compiled before initial values loaded
+model must be initialized before updating
+model must be initialized before monitors used
+model must be initialized before updating
+model must be initialized before monitors used
+model must be initialized before monitors used

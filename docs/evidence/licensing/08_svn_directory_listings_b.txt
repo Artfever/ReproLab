@@ -1,0 +1,9 @@
+== compiled/taucs20080228/ http=200 :: btaucs.dll 
+== openbugs/trunk/Docu/ http=200 :: se.odc BB-Licensing-Policy.odc BB-Open-Source-License.odc OpenBUGS-License.odc copyright-link.odc other-software.odc 
+== openbugs/trunk/Cpc/ http=200 :: 
+== openbugs/trunk/Dev/ http=200 ::  
+== openbugs/trunk/Developer/ http=200 :: . BRugsH.odc BlueDiamonds.odc CBugs.odc Compiling.odc Distributing.odc Documenting.odc Guestbook.odc Initializing.odc LibOpenBUGS.odc Linking.odc Make.odc Manual.odc MultiBUGS.odc OpenBUGS.c OpenBUGS.h Randnum.odc SamplingAlgorithms.odc Test.odc Tools.odc WritingBUGSExtensions.odc 
+== openbugs/trunk/Lin/ http=200 ::  
+== openbugs/trunk/Lindev/ http=200 ::  
+== openbugs/trunk/Std/ http=200 :: 
+== openbugs/trunk/System/ http=200 ::  Rsrc/ 

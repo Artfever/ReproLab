@@ -1,0 +1,9 @@
+# Runtime check: user inside the FINAL local image, run by full image ID (not by tag).
+# Date: 2026-11-13. Image: sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f (the ID recorded in docs/evidence/summary.txt and used for the final evidence runs).
+# Local image only; never pushed. This replaces the earlier docs/evidence/e2b_uid_and_paths.txt, which came from an older build.
+# command 1: docker run --rm --platform linux/amd64 --network none --read-only <image id> id -u
+10001
+# exit=0
+# command 2: same image, id
+uid=10001(bugs) gid=999(bugs) groups=999(bugs)
+# image_id=sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f config_user=10001 arch=amd64 os=linux

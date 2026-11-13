@@ -1,0 +1,13 @@
+# Does Kiro enforce the custom blocked_until field in tasks.md? Checked 2026-11-13 against the locally installed Kiro.
+# Method: grep of the installed application files (WSL, from the Kiro install folder under the Windows user profile; path generalised below).
+
+1. blocked_until occurrences (js, json, md) anywhere under the Kiro install folder: NONE (grep returned no file).
+2. The task dependency graph parser lives in <Kiro>/resources/app/extensions/kiro.kiro-agent/dist/extension.js (about 18.4 MB, minified).
+   Functions seen: parseDependencyGraphSection, describeShapeError, validate (DAGValidator), repairGraph, appendMissingTasks, buildSequentialDAG.
+   Quoted behaviour (from the minified source):
+   - error text: 'Dependency graph must be a JSON object with a "waves" array'
+   - error text: 'Dependency graph is missing the "waves" key (found keys: ...)'  -> only the waves key is required; other keys are reported, not read
+   - it strips unknown task IDs from waves, rejects duplicate task IDs across waves, appends tasks missing from the graph, and falls back to a sequential order on a parse error
+3. Conclusion: Kiro uses waves for scheduling. It does not read blocked_until. The field is accepted (the format validator did not reject it) but nothing enforces it.
+   Therefore blocked_until in .kiro/specs/00-engine-feasibility/tasks.md is ADVISORY. Real enforcement of 'do not publish' is scripts/release-guard.ps1 plus scripts/check-publish-paths.ps1, and only where they are run.
+4. Not verified: whether a Kiro agent, when asked to run a task, reads the prose 'Release Gate (blocking rules)' section and obeys it. Treat that as best effort, not a control.

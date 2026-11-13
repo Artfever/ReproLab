@@ -1,0 +1,10 @@
+# SHA-256 and sizes of upstream licence documents fetched 2026-11-13 from https://svn.code.sf.net/p/openbugs/code/ (revision 1018). Contents are NOT copied into this repository.
+15916d9955ece1f6eda8c06fb90d3958e8026fe1d8952765d96e6b03905e5917  BB-Licensing-Policy.odc  6010 bytes
+faac8aeb776c8a82a14ce83ae0d4190585f1bb9bbe3625db75ad17ca49b744a3  BB-Open-Source-License.odc  3861 bytes
+507e7654dc2504a4fa94d2e2f8855c24d0774dd165c086740faf9181f9a27858  copyright-link.odc  1711 bytes
+8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903  gpl-3.0.txt  35147 bytes
+d1da0b0c5c443d2943248ea85abc072cdb12e30df755ac9f3eee77c52958a2fc  OpenBUGS-License.odc  36151 bytes
+92e83503cf71281b34c3ec8060c7ba4428748bb5cc083f206d7e0ce2d4313187  other-software.odc  1361 bytes
+d6d108baf21e9f7d23a7004b0a4452c6aac9a072aadca0f9c859b7758eb2589c  cli/trunk/COPYING.r1017  1471 bytes
+d44f03cd6db29408b994aba5ff3f79d35261d07549472f3be3a443a38ea83bb7  cli/trunk/COPYING.r1018  1624 bytes
+bfbc43e3cf520765be784e972a659dbd61e7761dd978dc67c87a9f9635009699  cli/trunk/OpenBUGS-3.2.1.tar.gz  3165790 bytes

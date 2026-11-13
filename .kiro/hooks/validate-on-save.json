@@ -1,0 +1,17 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "TypeScript check after save",
+      "description": "Enable after adding the web check script and testing this hook in the installed Kiro IDE.",
+      "trigger": "PostFileSave",
+      "matcher": "\\.(ts|tsx)$",
+      "action": {
+        "type": "command",
+        "command": "npm run check --workspace apps/web"
+      },
+      "timeout": 60,
+      "enabled": false
+    }
+  ]
+}

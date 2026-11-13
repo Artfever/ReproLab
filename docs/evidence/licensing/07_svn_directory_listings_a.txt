@@ -1,0 +1,16 @@
+== compiled/ http=200
+ p/openbugs/code - Revision 1018: /compiled p/openbugs/code - Revision 1018: /compiled .. taucs20080228/ 
+== external/ http=200
+ p/openbugs/code - Revision 1018: /external p/openbugs/code - Revision 1018: /external .. deleteme 
+== openbugs/ http=200
+ p/openbugs/code - Revision 1018: /openbugs p/openbugs/code - Revision 1018: /openbugs .. branches/ trunk/ 
+== validation/ http=200
+ p/openbugs/code - Revision 1018: /validation p/openbugs/code - Revision 1018: /validation .. CommonExamples/ OpenBugsExamples/ SAS/ batchBUGS/ cgr/ commonCode.R testresults/ 
+== cli/ http=200
+ p/openbugs/code - Revision 1018: /cli p/openbugs/code - Revision 1018: /cli .. branches/ tags/ trunk/ 
+== openbugs/trunk/ http=200
+ p/openbugs/code - Revision 1018: /openbugs/trunk p/openbugs/code - Revision 1018: /openbugs/trunk .. Bugs/ Compare/ Correl/ Cpc/ Dev/ Developer/ Deviance/ Diff/ Docu/ Doodle/ Examples/ GeoBUGS/ Graph/ Host/ Html/ Lin/ Lindev/ Manuals/ Maps/ Math/ Monitors/ OpenBUGS.exe.manifest OpenBUGSSetup.iss Output/ Plots/ Randnumseeds.odc Ranks/ Reliability/ Rsrc/ Samples/ Script.txt Sis/ Spatial/ Std/ Summary/ System/ Test/ UDev/ Updater/ Win/ gpl-3.0.txt 
+== compiled/trunk/ http=404
+ 404 Not Found Not Found The requested URL /p/openbugs/code/compiled/trunk/ was not found on this server. 
+== external/trunk/ http=404
+ 404 Not Found Not Found The requested URL /p/openbugs/code/external/trunk/ was not found on this server. 

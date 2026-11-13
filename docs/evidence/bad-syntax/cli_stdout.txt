@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "reason": "engine reported a problem: expected right parenthesis error pos 58 (error on line 4)",
+  "exit_code": 0,
+  "runtime_s": 0.008,
+  "engine_version": "3.2.3 rev 1012",
+  "out_dir": "/work/bad-syntax"
+}

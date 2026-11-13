@@ -1,0 +1,93 @@
+### readelf NEEDED
+ 0x0000000e (SONAME)                     Library soname: [libOpenBUGS.so]
+ 0x00000001 (NEEDED)                     Shared library: [libdl.so.2]
+ 0x00000001 (NEEDED)                     Shared library: [libc.so.6]
+### exported dynamic symbols
+.bss
+.dynamic
+.dynstr
+.dynsym
+.got
+.hash
+.rel.rodata
+.rel.text
+.rodata
+.text
+BugsCmd
+CLI
+CharArray
+CmdInterpreter
+Guard
+Integer
+IntegerArray
+Name
+Real
+RealArray
+SetTempDir
+SetWorkingDir
+UseBufferFile
+UseConsole
+_DYNAMIC
+_GLOBAL_OFFSET_TABLE_
+### third-party names inside the library (strings)
+taucs        0
+metis        0
+lapack       0
+blas         0
+atlas        0
+sleepycat    0
+berkeley     0
+zlib         0
+Dev          134
+Cpc          0
+Std          586
+Oberon       0
+oberon       1
+BlackBox     0
+Beautif      0
+GNU          0
+GPL          0
+Copyright    0
+`logNu
+hlogNu
+oberon
+plogNu
+|argNum
+### Std/Dev/Cpc style module names (sample)
+Deviance
+DevianceEmbed
+DevianceFactory
+DevianceFormatted
+DevianceIndex
+DevianceInterface
+DevianceMessages
+DevianceMonitors
+DeviancePlugin
+DevianceResources
+StdConnect
+StdFactory
+StdHook
+StdLLT
+StdMatrix
+StdMonitor
+StdNode
+StdUpdater
+Stores
+### doc: which pages link the GPL / licence pages
+doc/Manuals/GNU-Licence.html
+doc/Manuals/Manual.html
+doc/Manuals/GNU-Licence.html:GNU-Licence
+doc/Manuals/Manual.html:<a href="../Manuals/GNU-Licence.html">please&nbsp;click&nbsp;here&nbsp;to&nbsp;read&nbsp;th
+### Manual.html licence wording
+### Manuals contents of dir
+GNU-Licence.html
+### Examples with attributions (copyright/reference lines)
+### doc/Reliability + GeoBUGS: copyright
+### counts by type: html txt bmp
+Examples     html=313 txt=240 bmp=270
+GeoBUGS      html=50 txt=38 bmp=40
+Manuals      html=24 txt=0 bmp=125
+Reliability  html=108 txt=79 bmp=178
+Developer    html=18 txt=0 bmp=50
+### data files in Examples that are .txt: total
+240

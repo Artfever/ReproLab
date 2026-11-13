@@ -1,0 +1,8 @@
+{
+  "status": "timed_out",
+  "reason": "engine exceeded the time limit and was killed",
+  "exit_code": null,
+  "runtime_s": 3.001,
+  "engine_version": "3.2.3 rev 1012",
+  "out_dir": "/work/timeout-live"
+}

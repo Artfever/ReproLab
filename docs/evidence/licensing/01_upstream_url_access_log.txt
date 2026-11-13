@@ -1,0 +1,10 @@
+copying_r1018 => http=200 size=1624 type=text/plain; charset=UTF-8 final=https://svn.code.sf.net/p/openbugs/code/cli/trunk/COPYING?p=1018
+copying_r1017 => http=200 size=1471 type=text/plain; charset=UTF-8 final=https://svn.code.sf.net/p/openbugs/code/cli/trunk/COPYING?p=1017
+copying_head => http=200 size=1624 type=text/plain; charset=UTF-8 final=https://svn.code.sf.net/p/openbugs/code/cli/trunk/COPYING
+svn_root => http=200 size=367 type=text/html; charset=UTF-8 final=https://svn.code.sf.net/p/openbugs/code/
+svn_cli_trunk => http=200 size=918 type=text/html; charset=UTF-8 final=https://svn.code.sf.net/p/openbugs/code/cli/trunk/
+sf_files_root => http=403 size=2 type=text/plain final=https://sourceforge.net/projects/openbugs/files/
+sf_rss_all => http=403 size=2 type=text/plain final=https://sourceforge.net/projects/openbugs/rss?path=/&limit=200
+sf_raw_1018 => http=403 size=2 type=text/plain final=https://sourceforge.net/p/openbugs/code/1018/tree/cli/trunk/COPYING?format=raw
+openbugs_net => http=404 size=278 type=text/html; charset=iso-8859-1 final=https://www.openbugs.net/w/Downloads
+openbugs_info => http=200 size=114 type=text/html final=http://www.openbugs.info/w/Downloads

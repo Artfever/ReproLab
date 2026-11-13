@@ -1,0 +1,19 @@
+[PASS] image builds -- reprolab-openbugs:3.2.3
+[PASS] seeds-a succeeded -- status=succeeded runtime_s=1.921 version=3.2.3 rev 1012
+[PASS] seeds-b succeeded -- status=succeeded runtime_s=1.921 version=3.2.3 rev 1012
+[PASS] seeds-c succeeded -- status=succeeded runtime_s=1.92 version=3.2.3 rev 1012
+[PASS] seeds-longburn succeeded -- status=succeeded runtime_s=5.132 version=3.2.3 rev 1012
+[PASS] bad-syntax failed (engine exit 0) -- engine reported a problem: expected right parenthesis error pos 58 (error on line 4)
+[PASS] bad-undefined failed (engine exit 0) -- engine reported a problem: variable gamma_missing is not defined
+[PASS] timeout-live timed_out -- runtime_s=3.001
+[PASS] same seed identical coda_CODAchain1.txt -- C8C5DB5473020129DB4A301E45626FC7459C51C881DD6EAF53EABD11288B5660
+[PASS] different seed differs coda_CODAchain1.txt -- C8C5DB5473020129DB4A301E45626FC7459C51C881DD6EAF53EABD11288B5660 vs D142DD1B1769D0E9CF4D35CD16D9E898A9B442B28DAB9FCE9AD020187C6D5273
+[PASS] same seed identical coda_CODAchain2.txt -- F18C7189121E39306CBB14ED933AFD00F7F990F7DE7A33400C9A3C05DA618929
+[PASS] different seed differs coda_CODAchain2.txt -- F18C7189121E39306CBB14ED933AFD00F7F990F7DE7A33400C9A3C05DA618929 vs 6D68833FD9F1400DCEB3F1F551BDFDC5FEC55B761F7EF20176AAB45C9040259C
+[PASS] same seed identical coda_CODAindex.txt -- A93FC634540D6D79020E7ABDC1B88081350D464BA2281F1391A19188F1B67743
+[PASS] compare: seeds-a pooled burn-in 1000 (pre-declared test, expected FAIL) -- exit=2 expected=2
+[PASS] compare: seeds-a chain 1 only (post hoc) -- exit=0 expected=0
+[PASS] compare: seeds-a chain 2 only (post hoc, expected FAIL) -- exit=2 expected=2
+[PASS] compare: seeds-c pooled burn-in 1000 (expected FAIL) -- exit=2 expected=2
+[PASS] compare: seeds-longburn pooled burn-in 20000 (post hoc setting, expected PASS) -- exit=0 expected=0
+[PASS] no leftover rl-* containers -- 

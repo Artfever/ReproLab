@@ -1,0 +1,8 @@
+{
+  "status": "succeeded",
+  "reason": "engine finished and all expected files exist",
+  "exit_code": 0,
+  "runtime_s": 1.921,
+  "engine_version": "3.2.3 rev 1012",
+  "out_dir": "/work/seeds-a"
+}

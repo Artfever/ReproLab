@@ -1,0 +1,24 @@
+# Never ignore .kiro
+.scratch/
+runs/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+.env
+.env.*
+!.env.example
+# Never commit upstream binaries, archives or documents
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.so
+*.dll
+*.exe
+*.odc
+*.bmp
+*.pyc
+
+# Scratch output from local tools
+*.log

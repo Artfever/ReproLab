@@ -1,0 +1,21 @@
+# Trimmed for the repository (see docs/evidence/README.md). Original probe output contained upstream manual prose and third-party contact addresses, which are not kept.
+### doc/Manuals/Manual.html
+Contains a link with the text 'please click here to read the legal bit' whose target is doc/Manuals/GNU-Licence.html.
+### doc/Manuals/GNU-Licence.html (first words of its text)
+GNU GENERAL PUBLIC LICENSE  Version 2, June 1991
+### sha256 of key files in the 3.2.3 tarball
+d6d108baf21e9f7d23a7004b0a4452c6aac9a072aadca0f9c859b7758eb2589c  COPYING
+4f1a6c9b0c46e689776e37be6d137e8af1673fced543c551edadddba2ea6ac5c  README
+c98036a63cce0a045ef994d3f7cea28c91acbae983c5d7f91fefbf6b02cbb74b  AUTHORS
+3db42638da9c9c4b4eee9f7fe2e29aaf4255b9ca9c0e0ced80e5737bb3df9461  NEWS
+3fc1b64d775030ed370975dbab677f035aeaa3c177bb65c45a74c5b8b37a11cf  lib/libOpenBUGS.so
+59cdd2930b6572986cc966f1c1094296d0eb60caf0a1ae1303f7798a56e26267  src/OpenBUGSCli.c
+41caf51c5a02fc65a07999b681dd3f9b489b57dea677be16146eba7d683e0da5  src/OpenBUGS.h
+069b058f49b41e1c074f36aacc338677ed71524b7c284744adf320eb714fc041  bin/OpenBUGS
+cef2bc1cc970f85a2183a6b080a8b68ae901485f04fa9bf36231658239ba71ee  doc/Manuals/GNU-Licence.html
+79fc1de7d2965f6a8d9199711ce13afd3493d228f9c8d1defa8aea59d3964871  doc/testscript.txt
+8e3d17552b1d56be61b30b38924d6d68902d37604505f4454bae5ddd0f71bfa8  doc/OpenBUGS.1
+### counts (from the same probe)
+- Examples html pages matching a citation pattern ('et al' or '(year)'): 52
+- doc/Developer pages headed 'GNU General Public Licence': BRugsH.html, CBugs.html
+- Examples files carrying any licence/copyright marker: 0

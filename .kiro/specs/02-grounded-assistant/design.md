@@ -1,0 +1,3 @@
+# Design — grounded help
+
+Split approved manuals by headings/command entries. Store source ID, URL, version, title, section and content hash; index PostgreSQL full-text. Detect common error patterns deterministically, retrieve relevant passages and include a bounded log excerpt in the model prompt. Treat both as untrusted content. Verify returned citation IDs against retrieved IDs before rendering links. On retrieval or provider failure, display original log and relevant manual links; the core run experience remains available. Add embeddings only after an evaluation set shows clear improvement.
