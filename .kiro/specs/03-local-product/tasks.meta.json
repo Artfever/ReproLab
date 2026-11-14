@@ -96,6 +96,11 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794685718941
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685902416
       }
     ],
     "2.1 Scaffold `apps/local`": [
@@ -176,6 +181,11 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794685719005
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685902597
       }
     ],
     "3.2 Implement `docker.mjs` and the flag-list test": [
@@ -183,6 +193,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680156550
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685908441
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794686631472
       }
     ],
     "3.3 Implement run lifecycle, manifest and routes": [
@@ -190,6 +210,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680156600
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794686639565
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794687297362
       }
     ],
     "3.4 Real container smoke run (coin model)": [
@@ -197,6 +227,11 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680156667
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794687303489
       }
     ],
     "3.5 Runner change and Python test (conditional)": [
@@ -221,6 +256,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680156802
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685908579
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794686631680
       }
     ],
     "4.2 Write the Seeds extraction scripts": [
@@ -228,6 +273,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680156841
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794686639790
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794687297573
       }
     ],
     "4.3 Coin accuracy check against the analytic posterior": [
@@ -242,6 +297,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680156960
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685908933
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794686632416
       }
     ],
     "5.2 Run page with validation messages": [
@@ -249,6 +314,11 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680156998
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794687303685
       }
     ],
     "5.3 Results page": [
@@ -270,6 +340,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680157122
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685909518
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794686632746
       }
     ],
     "6.2 Corpus and retrieval": [
@@ -277,6 +357,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680157169
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794686641406
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794687297697
       }
     ],
     "6.3 Provider client, answer verification and ask route": [
@@ -284,6 +374,11 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680157212
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794687304580
       }
     ],
     "6.4 Assistant status and interface": [
@@ -312,6 +407,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680157441
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685910100
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794686632871
       }
     ],
     "9.1 Run all suites": [
@@ -424,6 +529,20 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794685711919
+      }
+    ],
+    "1. Milestone 1: reconcile and verify": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685902501
+      }
+    ],
+    "8. Public site pages": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794686632957
       }
     ]
   }
