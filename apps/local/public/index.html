@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home - ReproLab local</title>
+  <meta name="description" content="ReproLab local: run the OpenBUGS command-line workflow on your own machine.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="/">ReproLab local</a>
+    <p class="tag">Runs on your machine only. Not a hosted service.</p>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="/" aria-current="page">Home</a></li>
+        <li><a href="/run.html">Run</a></li>
+        <li><a href="/results.html">Results</a></li>
+        <li><a href="/how-it-works.html">How it works</a></li>
+        <li><a href="/docs.html">Documentation</a></li>
+        <li><a href="/limitations.html">Limitations</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main id="main" tabindex="-1">
+    <h1>ReproLab local</h1>
+    <p>ReproLab runs the OpenBUGS command-line workflow locally and does not translate the OpenBUGS language. You give it a model, data and initial values. It runs the original OpenBUGS engine inside a locked-down container on this computer and shows you the engine's real log and output files.</p>
+    <div class="notice warn">
+      <p><strong>A finished run is not a valid scientific finding and not a convergence claim.</strong> ReproLab shows what the engine produced. It does not judge whether a model is appropriate, whether chains converged, or what the numbers mean.</p>
+    </div>
+    <div class="card-row">
+      <section class="card" aria-labelledby="start-h">
+        <h2 id="start-h">Start a run</h2>
+        <p>Pick a small bundled demonstration or choose your own files.</p>
+        <p><a class="button" href="/run.html">Go to Run</a></p>
+      </section>
+      <section class="card" aria-labelledby="learn-h">
+        <h2 id="learn-h">Before you start</h2>
+        <p>Read what this tool does and does not do.</p>
+        <ul>
+          <li><a href="/how-it-works.html">How it works</a></li>
+          <li><a href="/limitations.html">Limitations</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+        </ul>
+      </section>
+    </div>
+    <h2>What this is not</h2>
+    <ul>
+      <li>It is not a hosted service. Nothing is uploaded to a ReproLab server because there is none.</li>
+      <li>It is not an OpenBUGS replacement or a translator for the OpenBUGS language.</li>
+      <li>It is not validated for clinical, regulatory or publication use.</li>
+    </ul>
+
+  </main>
+  <footer class="site-footer">
+    <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
+    <p>ReproLab code is MIT licensed. The licence covers ReproLab code only, not OpenBUGS.</p>
+  </footer>
+</body>
+</html>

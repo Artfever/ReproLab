@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy - ReproLab local</title>
+  <meta name="description" content="ReproLab local: run the OpenBUGS command-line workflow on your own machine.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="/">ReproLab local</a>
+    <p class="tag">Runs on your machine only. Not a hosted service.</p>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/run.html">Run</a></li>
+        <li><a href="/results.html">Results</a></li>
+        <li><a href="/how-it-works.html">How it works</a></li>
+        <li><a href="/docs.html">Documentation</a></li>
+        <li><a href="/limitations.html">Limitations</a></li>
+        <li><a href="/privacy.html" aria-current="page">Privacy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main id="main" tabindex="-1">
+    <h1>Privacy</h1>
+    <p>No data leaves this machine, except optional calls to the language-model endpoint that you configure yourself.</p>
+    <h2>What stays here</h2>
+    <p>Models, data, initial values, logs, output files and manifests are stored in a folder on this computer. ReproLab has no account system, no analytics and no telemetry. Pages load no script, style, font or image from another site.</p>
+    <h2>What an assistant call contains</h2>
+    <p>If you enable the assistant, each question sends to your configured endpoint:</p>
+    <ul>
+      <li>your question text, and</li>
+      <li>the text of the documentation passages retrieved for it.</li>
+    </ul>
+    <p>Your model, data and initial-value files are never sent, unless their content appears in the current run's log lines that you ask about. If you point the assistant at a remote service, that service receives the call. With a local endpoint, nothing leaves your machine.</p>
+    <h2>Deleting data</h2>
+    <p>Delete the run folders under the local data directory, or use the reset script described in the README.</p>
+
+  </main>
+  <footer class="site-footer">
+    <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
+    <p>ReproLab code is MIT licensed. The licence covers ReproLab code only, not OpenBUGS.</p>
+  </footer>
+</body>
+</html>
