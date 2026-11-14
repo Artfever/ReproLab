@@ -103,8 +103,8 @@
     },
     {
       "path": "docs/third-party-notices.md",
-      "sha256": "61750643fc791a0692e37f5a0749fd67644b10670fd87aa9358753c7acc8fdac",
-      "bytes": 7473
+      "sha256": "869b4828827279e1a7dbbfc63b10d38a516c69dcb2bd5ff90a0782ddb360950b",
+      "bytes": 12494
     },
     {
       "path": "services/runner/reference/seeds_published.json",
@@ -1260,7 +1260,7 @@
     },
     {
       "id": "lim-licence-repo",
-      "text": "No licence has been chosen yet for the ReproLab code in the repository.",
+      "text": "ReproLab-owned code is under the MIT licence. The licence grants no rights to OpenBUGS, BlackBox, the examples or the documentation, which are not redistributed here.",
       "claim_ids": [
         "no-repo-licence"
       ]
@@ -1314,7 +1314,7 @@
     {
       "id": "repository_licence",
       "label": "Repository licence",
-      "value": "not chosen",
+      "value": "MIT (ReproLab code only; no rights to OpenBUGS)",
       "claim_ids": [
         "no-repo-licence"
       ]
@@ -1499,7 +1499,7 @@
     {
       "id": "no-repo-licence",
       "page": "home",
-      "text": "No repository licence has been chosen yet.",
+      "text": "ReproLab-owned code is under the MIT licence. That licence grants no rights to OpenBUGS.",
       "evidence": [
         "docs/third-party-notices.md"
       ],
@@ -1507,7 +1507,12 @@
         {
           "path": "docs/third-party-notices.md",
           "kind": "contains",
-          "detail": "No repository licence has been chosen"
+          "detail": "ReproLab-owned code is licensed under the MIT licence"
+        },
+        {
+          "path": "docs/third-party-notices.md",
+          "kind": "contains",
+          "detail": "**grants no rights** to OpenBUGS"
         }
       ]
     },
