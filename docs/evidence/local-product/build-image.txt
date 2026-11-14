@@ -1,0 +1,99 @@
+SHA-256 of vendor/OpenBUGS-3.2.3.tar.gz : 
+a289c4da0c4ac371f8013226c85ebd0a9e1dec5de9b858950e4854cb814b4ed8
+SHA-256 of the copy we tested           : 
+a289c4da0c4ac371f8013226c85ebd0a9e1dec5de9b858950e4854cb814b4ed8
+Hash check: match (the file is byte-identical to the copy we tested).
+docker.exe : #0 building with "desktop-linux" instance using docker driver
+At <repo>\scripts\build-image.ps1:53 char:5
++     & docker build --platform linux/amd64 -f infra/openbugs/Dockerfil ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (#0 building wit...g docker driver:String 
+   ) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.83kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/debian:bookworm-slim@sha256:734a72b3
+d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 135B done
+#3 DONE 0.0s
+
+#4 [build 1/7] FROM docker.io/library/debian:bookworm-slim@sha256:734a72b3d6142a71993b
+4bc580ca01d8ca687f77a2c422d96a961d3376b179bc
+#4 resolve docker.io/library/debian:bookworm-slim@sha256:734a72b3d6142a71993b4bc580ca0
+1d8ca687f77a2c422d96a961d3376b179bc 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 495B done
+#5 DONE 0.0s
+
+#6 [build 5/7] RUN echo 
+"a289c4da0c4ac371f8013226c85ebd0a9e1dec5de9b858950e4854cb814b4ed8  openbugs.tar.gz" | 
+sha256sum -c -  && tar xzf openbugs.tar.gz
+#6 CACHED
+
+#7 [build 7/7] RUN ./configure --prefix=/opt/openbugs && make && make install  && 
+mkdir -p /opt/openbugs/licenses && cp COPYING AUTHORS NEWS /opt/openbugs/licenses/
+#7 CACHED
+
+#8 [runtime 3/6] COPY --from=build /opt/openbugs /opt/openbugs
+#8 CACHED
+
+#9 [build 2/7] RUN dpkg --add-architecture i386  && apt-get update  && apt-get 
+install -y --no-install-recommends build-essential gcc-multilib libc6:i386  && rm -rf 
+/var/lib/apt/lists/*
+#9 CACHED
+
+#10 [runtime 2/6] RUN dpkg --add-architecture i386  && apt-get update  && apt-get 
+install -y --no-install-recommends libc6:i386 python3-minimal libpython3.11-stdlib  
+&& rm -rf /var/lib/apt/lists/*  && useradd --system --uid 10001 --no-create-home 
+--shell /usr/sbin/nologin bugs
+#10 CACHED
+
+#11 [runtime 5/6] RUN mkdir -p /work && chown 10001:10001 /work
+#11 CACHED
+
+#12 [build 6/7] WORKDIR /src/OpenBUGS-3.2.3
+#12 CACHED
+
+#13 [runtime 4/6] COPY services/runner/reprolab_runner /opt/reprolab/reprolab_runner
+#13 CACHED
+
+#14 [build 4/7] COPY vendor/OpenBUGS-3.2.3.tar.gz /src/openbugs.tar.gz
+#14 CACHED
+
+#15 [build 3/7] WORKDIR /src
+#15 CACHED
+
+#16 [runtime 6/6] WORKDIR /work
+#16 CACHED
+
+#17 exporting to image
+#17 exporting layers done
+#17 exporting manifest 
+sha256:717fd0ba5ebeec2a0b93f400c9c4d2b4dfe0a0d40c5ad4ac4b0c9b097581e7a8 done
+#17 exporting config 
+sha256:c348b124fb10dfaf7f55138f4788dff3603cc8261e4086de30a32187fea1e1e5 done
+#17 exporting attestation manifest 
+sha256:b045813b1f15ce5617afe348a0377911eed5e5206291b1011e8564dc8d6eab4f
+#17 exporting attestation manifest 
+sha256:b045813b1f15ce5617afe348a0377911eed5e5206291b1011e8564dc8d6eab4f 0.0s done
+#17 exporting manifest list 
+sha256:4d9ebd5fd85cbe9bc2d2e847ef4bcdbb99d2c4b6b4128558282a53c43c992ac7 0.0s done
+#17 naming to docker.io/library/reprolab-openbugs:3.2.3-vendored done
+#17 unpacking to docker.io/library/reprolab-openbugs:3.2.3-vendored done
+#17 DONE 0.1s
+
+View build details: 
+docker-desktop://dashboard/build/desktop-linux/desktop-linux/nzkgqmqbojpuia0k5n2xs9se8
+Built image reprolab-openbugs:3.2.3-vendored (local only; nothing was pushed or 
+saved).
+EXIT=0
+

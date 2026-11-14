@@ -8,7 +8,7 @@ param(
   [Parameter(Mandatory)][ValidatePattern('^[A-Za-z0-9_-]{1,40}$')][string]$Name,
   [Parameter(Mandatory)][string]$RunnerArgs,  # runner CLI arguments joined with '|'
   [string]$InputsDir,
-  [string]$Image = 'reprolab-openbugs:3.2.3',
+  [string]$Image = 'reprolab-openbugs:3.2.3-vendored',
   [int]$MemoryMb = 1024
 )
 $ErrorActionPreference = 'Stop'

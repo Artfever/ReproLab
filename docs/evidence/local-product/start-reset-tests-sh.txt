@@ -1,0 +1,140 @@
+bash -n start.sh: ok
+bash -n reset-local.sh: ok
+CR count: scripts/start.sh:0
+CR count: scripts/reset-local.sh:0
+node: none  docker: /usr/bin/docker
+--- check-only (real environment)
+  ReproLab local start check
+  FAIL  Node.js: not found. Install Node 24.x from https://nodejs.org/ and open a new terminal.
+  OK    Docker: running
+  OK    Image: reprolab-openbugs:3.2.3 is present
+  Cannot start: fix the FAIL item above and run this script again.
+  exit=1
+--- node missing
+  ReproLab local start check
+  FAIL  Node.js: not found. Install Node 24.x from https://nodejs.org/ and open a new terminal.
+  OK    Docker: running
+  OK    Image: reprolab-openbugs:3.2.3 is present
+  Cannot start: fix the FAIL item above and run this script again.
+  exit=1
+--- node wrong version
+  ReproLab local start check
+  FAIL  Node.js: found 'v20.1.0' but ReproLab needs Node 24.x. Install Node 24 from https://nodejs.org/ and open a new terminal.
+  OK    Docker: running
+  OK    Image: reprolab-openbugs:3.2.3 is present
+  Cannot start: fix the FAIL item above and run this script again.
+  exit=1
+--- image missing
+  ReproLab local start check
+  FAIL  Node.js: not found. Install Node 24.x from https://nodejs.org/ and open a new terminal.
+  OK    Docker: running
+  WARN  Image: reprolab-openbugs:does-not-exist is not present. Build it with: scripts/build-image.sh (needs vendor/OpenBUGS-3.2.3.tar.gz, see the README). Runs will fail until it exists.
+  Cannot start: fix the FAIL item above and run this script again.
+  exit=1
+--- docker missing
+  ReproLab local start check
+  FAIL  Node.js: not found. Install Node 24.x from https://nodejs.org/ and open a new terminal.
+  WARN  Docker: not found. Install Docker Desktop (Windows, with WSL2) or Docker Engine (Linux). The pages open, but runs will report Docker as missing.
+  SKIP  Image: not checked because Docker is not available (needed: reprolab-openbugs:3.2.3)
+  Cannot start: fix the FAIL item above and run this script again.
+  exit=1
+--- node missing, no --check-only
+  ReproLab local start check
+  FAIL  Node.js: not found. Install Node 24.x from https://nodejs.org/ and open a new terminal.
+  OK    Docker: running
+  OK    Image: reprolab-openbugs:3.2.3 is present
+  Cannot start: fix the FAIL item above and run this script again.
+  exit=1
+--- unknown option
+  Unknown option: --bogus. Usage: scripts/start.sh [--check-only]
+  exit=2
+--- reset dry run
+  Would remove local-data/runs
+  Would remove local-data/tmp
+  No containers labelled reprolab.run.
+  exit=0
+after dry run: runs exists=yes
+--- reset
+  Removed local-data/runs
+  Removed local-data/tmp
+  No containers labelled reprolab.run.
+  exit=0
+runs=no tmp=no upstream/keep.txt=yes tracked.txt=yes
+fixture git status identical: yes
+--- reset second time
+  Nothing to remove: local-data/runs does not exist
+  Nothing to remove: local-data/tmp does not exist
+  No containers labelled reprolab.run.
+  exit=0
+--- reset with runs as symlink
+  SKIP  local-data/runs is a link or not a folder; remove it by hand if you want it gone.
+  Nothing to remove: local-data/tmp does not exist
+  No containers labelled reprolab.run.
+  exit=1
+outside target intact: yes
+--- start.sh server
+  health http code: 000
+  health body: 
+  server stdout: ReproLab local start check
+  server stdout: FAIL  Node.js: not found. Install Node 24.x from https://nodejs.org/ and open a new terminal.
+  server stdout: OK    Docker: running
+  server stdout: OK    Image: reprolab-openbugs:3.2.3 is present
+  server stdout: Cannot start: fix the FAIL item above and run this script again.
+done
+
+# start.sh happy path (Windows node.exe via wrapper, repo on the Windows mount)
+node.exe resolves to: /mnt/c/Program Files/nodejs/node.exe
+--- check-only
+  ReproLab local start check
+  OK    Node.js: v24.18.0
+  OK    Docker: running
+  OK    Image: reprolab-openbugs:3.2.3 is present
+  Check only: nothing started. The server would listen on http://127.0.0.1:8765/
+  exit=0
+--- server
+  health: {"ok":true,"docker":"ok","image":"present","imageId":"sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f"} HTTP=200
+  server stdout: ReproLab local start check
+  server stdout: OK    Node.js: v24.18.0
+  server stdout: OK    Docker: running
+  server stdout: OK    Image: reprolab-openbugs:3.2.3 is present
+  server stdout: Starting ReproLab on http://127.0.0.1:8779/ (press Ctrl+C to stop)
+  server stdout: ReproLab local server: http://127.0.0.1:8779/
+done
+
+# start.sh happy path (Windows node.exe via wrapper, repo on the Windows mount)
+node.exe resolves to: /mnt/c/Program Files/nodejs/node.exe
+--- check-only
+  ReproLab local start check
+  OK    Node.js: v24.18.0
+  OK    Docker: running
+  OK    Image: reprolab-openbugs:3.2.3 is present
+  Check only: nothing started. The server would listen on http://127.0.0.1:8765/
+  exit=0
+--- server
+  health: {"ok":true,"docker":"ok","image":"present","imageId":"sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f"} HTTP=200
+  server stdout: ReproLab local start check
+  server stdout: OK    Node.js: v24.18.0
+  server stdout: OK    Docker: running
+  server stdout: OK    Image: reprolab-openbugs:3.2.3 is present
+  server stdout: Starting ReproLab on http://127.0.0.1:8779/ (press Ctrl+C to stop)
+  server stdout: ReproLab local server: http://127.0.0.1:8779/
+done
+
+# start.sh happy path (Windows node.exe via wrapper, repo on the Windows mount)
+node.exe resolves to: /mnt/c/Program Files/nodejs/node.exe
+--- check-only
+  ReproLab local start check
+  OK    Node.js: v24.18.0
+  OK    Docker: running
+  OK    Image: reprolab-openbugs:3.2.3 is present
+  Check only: nothing started. The server would listen on http://127.0.0.1:8765/
+  exit=0
+--- server
+  health: {"ok":true,"docker":"ok","image":"present","imageId":"sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f"} HTTP=200
+  server stdout: ReproLab local start check
+  server stdout: OK    Node.js: v24.18.0
+  server stdout: OK    Docker: running
+  server stdout: OK    Image: reprolab-openbugs:3.2.3 is present
+  server stdout: Starting ReproLab on http://127.0.0.1:8779/ (press Ctrl+C to stop)
+  server stdout: ReproLab local server: http://127.0.0.1:8779/
+done

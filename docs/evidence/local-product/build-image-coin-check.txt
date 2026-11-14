@@ -1,0 +1,18 @@
+REPROLAB_IMAGE=reprolab-openbugs:3.2.3-vendored
+Coin accuracy check against the analytic posterior (task 4.3)
+run id: c7751a0744812dd087e6f340c2e2b0e8
+final state: succeeded
+engine: 3.2.3 rev 1012
+settings: chains=2 burnIn=1000 samples=10000 thin=1 seed=1
+expected mean 0.66667, expected sd 0.13074, tolerance 0.01 absolute (fixed in test source before first run)
+pooled sample count n: 20000
+sampled mean: 0.66862377
+sampled sd: 0.12977736881005048
+mean difference (sampled - expected): 0.001953769999999966  inside tolerance: true
+sd difference (sampled - expected): -0.0009626311899495199  inside tolerance: true
+verdict: PASS
+This compares a Monte Carlo summary with a closed-form value for a toy model. It is not a validity claim for any other model.
+
+----- node --test summary -----
+tests 1, pass 1, fail 0, skipped 0, exit=0 (test: 'coin model matches the analytic posterior within 0.01')
+

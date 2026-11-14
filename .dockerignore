@@ -1,3 +1,4 @@
 *
 !infra/openbugs/Dockerfile
+!vendor/OpenBUGS-3.2.3.tar.gz
 !services/runner/reprolab_runner/**

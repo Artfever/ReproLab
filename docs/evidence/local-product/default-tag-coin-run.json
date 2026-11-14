@@ -1,0 +1,104 @@
+{
+  "id": "8c95aa1364673dd0883a89e178f80540",
+  "state": "succeeded",
+  "reason": "engine finished and all expected files exist",
+  "settings": {
+    "burnIn": 1000,
+    "samples": 10000,
+    "thin": 1,
+    "seed": 1,
+    "timeoutS": 120,
+    "chains": 2,
+    "monitors": [
+      "p"
+    ]
+  },
+  "engineVersion": "3.2.3 rev 1012",
+  "runtimeS": 0.065,
+  "createdAt": "2026-11-14T22:15:51.825Z",
+  "files": [
+    {
+      "name": "coda_CODAchain1.txt",
+      "bytes": 129880,
+      "sha256": "61cf508305c691626bdda15f5a48502691c2491d8a1871b10464957886749220"
+    },
+    {
+      "name": "coda_CODAchain2.txt",
+      "bytes": 129897,
+      "sha256": "f7d470b24412c7b453ebcd6bf138b5993eaca73d2f4d4bfbb729130c1d1fc68d"
+    },
+    {
+      "name": "coda_CODAindex.txt",
+      "bytes": 11,
+      "sha256": "806af55bcc746aea8eedda9fe9efe87a03bc46b5f2a8b642d694bbfe99a37e8e"
+    },
+    {
+      "name": "data.txt",
+      "bytes": 20,
+      "sha256": "bb76f180aa2669847b9e0177ea04e3af9c21ecbba9eb1c780e6ae361b97b6780"
+    },
+    {
+      "name": "inits1.txt",
+      "bytes": 14,
+      "sha256": "c4e66d090f9712e3b0a5ad32797df14c01e8fe990fe57f04893e67074685c906"
+    },
+    {
+      "name": "inits2.txt",
+      "bytes": 14,
+      "sha256": "e5ec65a85438a273a4254338f5f6defbf50f0124f952e80deb3423ea6053530d"
+    },
+    {
+      "name": "log.txt",
+      "bytes": 413,
+      "sha256": "9bb2038eb2149a45e687104c7c848fd0ffe60504cfa5cb1157185ed9aa1a9b22"
+    },
+    {
+      "name": "model.txt",
+      "bytes": 45,
+      "sha256": "1777e2f32fcebe33ea45e877485d1579e44650938cca8418f9dc32d517ea600c"
+    },
+    {
+      "name": "script.txt",
+      "bytes": 269,
+      "sha256": "6836b70b68a35a51e96a55d1ee6036f93c08c1d3c15c9d5ca53030c647449c42"
+    },
+    {
+      "name": "stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "log": {
+    "lines": [
+      "OpenBUGS version 3.2.3 rev 1012",
+      "model is syntactically correct",
+      "data loaded",
+      "model compiled",
+      "initial values loaded and chain initialized but another chain contain uninitialized variables",
+      "model is initialized",
+      "1000 updates took 0 s",
+      "monitor set",
+      "10000 updates took 0 s",
+      "Node statistics",
+      "\t\tmean\tsd\tMC_error\tval2.5pc\tmedian\tval97.5pc\tstart\tsample",
+      "\tp\t0.6686\t0.1298\t9.654E-4\t0.3935\t0.6785\t0.8897\t1001\t20000",
+      "CODA files written"
+    ],
+    "truncated": false
+  },
+  "summary": {
+    "available": true,
+    "label": "Computed by ReproLab from the exported samples. Not a convergence or validity claim.",
+    "computedBy": "ReproLab services/runner coda.py",
+    "nodes": {
+      "p": {
+        "mean": 0.66862377,
+        "median": 0.6785,
+        "n": 20000,
+        "q2.5": 0.39348750000000005,
+        "q97.5": 0.8897,
+        "sd": 0.12977736881005048
+      }
+    }
+  }
+}

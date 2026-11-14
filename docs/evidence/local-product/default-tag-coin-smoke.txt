@@ -1,0 +1,4 @@
+submitted 8c95aa1364673dd0883a89e178f80540
+final state succeeded
+manifest HTTP 200; files: coda_CODAchain1.txt, coda_CODAchain2.txt, coda_CODAindex.txt, data.txt, inits1.txt, inits2.txt, log.txt, model.txt, script.txt, stderr.txt
+exit=0

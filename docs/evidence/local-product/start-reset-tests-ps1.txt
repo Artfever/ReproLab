@@ -1,0 +1,69 @@
+
+# start.ps1 failure and warning paths (injected)
+--- node missing (REPROLAB_NODE=no-such-node)
+  ReproLab local start check
+  FAIL  Node.js: not found. Install Node 24.x from https://nodejs.org/ and open a new terminal.
+  OK    Docker: running
+  OK    Image: reprolab-openbugs:3.2.3 is present
+  Cannot start: fix the FAIL item above and run this script again.
+  exit=1
+--- node wrong version (shim prints v20.1.0)
+  ReproLab local start check
+  FAIL  Node.js: found 'v20.1.0' but ReproLab needs Node 24.x. Install Node 24 from https://nodejs.org/ and open a new terminal.
+  OK    Docker: running
+  OK    Image: reprolab-openbugs:3.2.3 is present
+  Cannot start: fix the FAIL item above and run this script again.
+  exit=1
+--- image missing (REPROLAB_IMAGE=reprolab-openbugs:does-not-exist)
+  ReproLab local start check
+  OK    Node.js: v24.18.0
+  OK    Docker: running
+  WARN  Image: reprolab-openbugs:does-not-exist is not present. Build it with: scripts/build-image.ps1 (needs vendor/OpenBUGS-3.2.3.tar.gz, see the README). Runs will fail until it exists.
+  Check only: nothing started. The server would listen on http://127.0.0.1:8765/
+  exit=0
+--- docker missing (REPROLAB_DOCKER=no-such-docker)
+  ReproLab local start check
+  OK    Node.js: v24.18.0
+  WARN  Docker: not found. Install Docker Desktop (Windows, with WSL2) or Docker Engine (Linux). The pages open, but runs will report Docker as missing.
+  SKIP  Image: not checked because Docker is not available (needed: reprolab-openbugs:3.2.3)
+  Check only: nothing started. The server would listen on http://127.0.0.1:8765/
+  exit=0
+--- node missing without -CheckOnly must not start a server
+  ReproLab local start check
+  FAIL  Node.js: not found. Install Node 24.x from https://nodejs.org/ and open a new terminal.
+  OK    Docker: running
+  OK    Image: reprolab-openbugs:3.2.3 is present
+  Cannot start: fix the FAIL item above and run this script again.
+  exit=1
+
+# start.ps1 starts the server and /api/health answers
+health status=200
+listening addresses: 127.0.0.1
+  server stdout: ReproLab local start check
+  server stdout: OK    Node.js: v24.18.0
+  server stdout: OK    Docker: running
+  server stdout: OK    Image: reprolab-openbugs:3.2.3 is present
+  server stdout: Starting ReproLab on http://127.0.0.1:8777/ (press Ctrl+C to stop)
+  server stdout: ReproLab local server: http://127.0.0.1:8777/
+port 8777 still listening after stop: False
+
+# reset-local.ps1 on a throwaway repo fixture
+  create labelled: f36a2fd67f327af960603f137e7ec2b26030af730f13be337acf5c3d83303c72
+  create unlabelled: add27f414bbeb7c0ee44d678e34a1155541c025ee3c3f61a634c65f46972b6ea
+dry run exit=0
+  Would remove local-data/runs
+  Would remove local-data/tmp
+  Would remove 1 container(s) labelled reprolab.run
+after dry run: runs exists=True labelled container exists=True
+reset exit=0
+  Removed local-data/runs
+  Removed local-data/tmp
+  Removed 1 container(s) labelled reprolab.run
+runs exists=False  tmp exists=False  upstream/keep.txt exists=True  tracked.txt exists=True
+labelled container exists=False  unlabelled container exists=True
+fixture git status identical: True
+second reset (nothing to remove) exit=0
+  Nothing to remove: local-data/runs does not exist
+  Nothing to remove: local-data/tmp does not exist
+  No containers labelled reprolab.run.
+done

@@ -1,0 +1,100 @@
+# git status --short before reset-local.ps1
+ M .dockerignore
+ M .kiro/specs/03-local-product/tasks.md
+ M .kiro/specs/03-local-product/tasks.meta.json
+ M apps/local/src/docker.mjs
+ M apps/local/tests/docker.test.mjs
+ M apps/local/tests/runs.test.mjs
+ M apps/web/content/sample-run.json
+ M apps/web/scripts/authored.mjs
+ M docs/evidence/local-product/m2-final-guard.txt
+ M docs/third-party-notices.md
+ M infra/openbugs/Dockerfile
+ M scripts/run-container.ps1
+?? LICENSE
+?? README.md
+?? apps/local/tests/audit.test.mjs
+?? apps/local/tests/notices.test.mjs
+?? docs/evidence/local-product/audit-tracked.txt
+?? docs/evidence/local-product/build-image-coin-check.txt
+?? docs/evidence/local-product/build-image-id.txt
+?? docs/evidence/local-product/build-image-no-curl.txt
+?? docs/evidence/local-product/build-image-publish-paths.txt
+?? docs/evidence/local-product/build-image-runner-tests.txt
+?? docs/evidence/local-product/build-image.txt
+?? docs/evidence/local-product/licence-table.md
+?? docs/evidence/local-product/license-author.txt
+?? docs/evidence/local-product/license-check.txt
+?? docs/evidence/local-product/readme-checks.txt
+?? docs/evidence/local-product/reset-git-status.txt
+?? docs/evidence/local-product/start-check.txt
+?? docs/evidence/local-product/start-health.json
+?? docs/evidence/local-product/start-reset-tests-ps1.txt
+?? docs/evidence/local-product/start-reset-tests-sh.txt
+?? docs/evidence/local-product/test-audit.txt
+?? docs/evidence/local-product/test-notices.txt
+?? docs/evidence/local-product/web-check-licence-fix.txt
+?? docs/evidence/local-product/web-data-regen.txt
+?? scripts/audit-tracked.mjs
+?? scripts/build-image.ps1
+?? scripts/build-image.sh
+?? scripts/check-license.mjs
+?? scripts/licence-table.mjs
+?? scripts/reset-local.ps1
+?? scripts/reset-local.sh
+?? scripts/start.ps1
+?? scripts/start.sh
+# reset-local.ps1 output
+Nothing to remove: local-data/runs does not exist
+Nothing to remove: local-data/tmp does not exist
+No containers labelled reprolab.run.
+# exit=0
+# git status --short after
+ M .dockerignore
+ M .kiro/specs/03-local-product/tasks.md
+ M .kiro/specs/03-local-product/tasks.meta.json
+ M apps/local/src/docker.mjs
+ M apps/local/tests/docker.test.mjs
+ M apps/local/tests/runs.test.mjs
+ M apps/web/content/sample-run.json
+ M apps/web/scripts/authored.mjs
+ M docs/evidence/local-product/m2-final-guard.txt
+ M docs/third-party-notices.md
+ M infra/openbugs/Dockerfile
+ M scripts/run-container.ps1
+?? LICENSE
+?? README.md
+?? apps/local/tests/audit.test.mjs
+?? apps/local/tests/notices.test.mjs
+?? docs/evidence/local-product/audit-tracked.txt
+?? docs/evidence/local-product/build-image-coin-check.txt
+?? docs/evidence/local-product/build-image-id.txt
+?? docs/evidence/local-product/build-image-no-curl.txt
+?? docs/evidence/local-product/build-image-publish-paths.txt
+?? docs/evidence/local-product/build-image-runner-tests.txt
+?? docs/evidence/local-product/build-image.txt
+?? docs/evidence/local-product/licence-table.md
+?? docs/evidence/local-product/license-author.txt
+?? docs/evidence/local-product/license-check.txt
+?? docs/evidence/local-product/readme-checks.txt
+?? docs/evidence/local-product/reset-git-status.txt
+?? docs/evidence/local-product/start-check.txt
+?? docs/evidence/local-product/start-health.json
+?? docs/evidence/local-product/start-reset-tests-ps1.txt
+?? docs/evidence/local-product/start-reset-tests-sh.txt
+?? docs/evidence/local-product/test-audit.txt
+?? docs/evidence/local-product/test-notices.txt
+?? docs/evidence/local-product/web-check-licence-fix.txt
+?? docs/evidence/local-product/web-data-regen.txt
+?? scripts/audit-tracked.mjs
+?? scripts/build-image.ps1
+?? scripts/build-image.sh
+?? scripts/check-license.mjs
+?? scripts/licence-table.mjs
+?? scripts/reset-local.ps1
+?? scripts/reset-local.sh
+?? scripts/start.ps1
+?? scripts/start.sh
+# identical: True
+# local-data/upstream still present: True
+# local-data/runs present: False  tmp present: False

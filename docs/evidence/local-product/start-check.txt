@@ -1,0 +1,6 @@
+ReproLab local start check
+OK    Node.js: v24.18.0
+OK    Docker: running
+OK    Image: reprolab-openbugs:3.2.3 is present
+Check only: nothing started. The server would listen on http://127.0.0.1:8765/
+exit=0

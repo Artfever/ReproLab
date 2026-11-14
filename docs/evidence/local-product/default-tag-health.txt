@@ -1,0 +1,1 @@
+{"ok":true,"docker":"ok","image":"present","imageId":"sha256:4d9ebd5fd85cbe9bc2d2e847ef4bcdbb99d2c4b6b4128558282a53c43c992ac7"}

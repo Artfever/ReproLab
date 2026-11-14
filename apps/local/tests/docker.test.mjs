@@ -65,7 +65,7 @@ test('run id, container name and image are validated', () => {
 });
 
 test('image comes from REPROLAB_IMAGE and defaults to the pinned tag', () => {
-  assert.equal(resolveImage({}), 'reprolab-openbugs:3.2.3');
+  assert.equal(resolveImage({}), 'reprolab-openbugs:3.2.3-vendored');
   assert.equal(resolveImage({ REPROLAB_IMAGE: 'reprolab-openbugs:other' }), 'reprolab-openbugs:other');
   assert.throws(() => resolveImage({ REPROLAB_IMAGE: '-v /:/h' }));
 });

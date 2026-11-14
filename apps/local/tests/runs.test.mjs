@@ -57,7 +57,7 @@ async function runAndWait(ctx, value = request()) {
 test('succeeded: state, files, summary, manifest, cleanup of both containers', async () => {
   const ctx = setup({ behaviour: succeededBehaviour() });
   try {
-    const { id, run } = await runAndWait(ctx, request({ names: { model: 'C:\\Users\\bob\\model.txt', data: 'data.txt', inits: ['i1.txt', 'i2.txt'] } }));
+    const { id, run } = await runAndWait(ctx, request({ names: { model: 'C:\\Users\\<user>\\model.txt', data: 'data.txt', inits: ['i1.txt', 'i2.txt'] } }));
     assert.equal(run.state, 'succeeded');
     assert.equal(run.engineVersion, '3.2.3 rev 1012');
     assert.equal(run.runtimeS, 1.5);

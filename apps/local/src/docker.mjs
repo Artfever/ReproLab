@@ -7,7 +7,7 @@
 import { spawn } from 'node:child_process';
 import { isRunId } from './sanitize.mjs';
 
-export const DEFAULT_IMAGE = 'reprolab-openbugs:3.2.3';
+export const DEFAULT_IMAGE = 'reprolab-openbugs:3.2.3-vendored';
 export const RUN_LABEL = 'reprolab.run';
 const DOCKER_BIN = 'docker';
 const MAX_CAPTURE_BYTES = 1024 * 1024;
