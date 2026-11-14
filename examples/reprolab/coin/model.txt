@@ -1,0 +1,4 @@
+model {
+  r ~ dbin(p, n)
+  p ~ dbeta(1, 1)
+}
