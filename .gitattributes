@@ -1,0 +1,10 @@
+# Line endings (found by the clean-clone check, spec 03-local-product task 13.1).
+# Without this file, a clone on Windows with core.autocrlf=true checks text files out with CRLF.
+# apps/web/scripts/build-sample-data.mjs hashes evidence files (docs/evidence, docs/*.md,
+# services/runner/reference) byte for byte, so `npm run check` in apps/web then fails with
+# "content/sample-run.json is out of date with the evidence". The coin and Seeds inputs sent to
+# the engine also change size and SHA-256 with CRLF, and bash scripts need LF to run on Linux.
+* text=auto eol=lf
+*.tar.gz binary
+*.png binary
+*.jpg binary

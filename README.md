@@ -178,7 +178,7 @@ cd apps\local
 npm.cmd test
 ```
 
-`npm test` runs `node --test "tests/**/*.test.mjs"`. It includes a journey test that runs the real image. If Docker or the image is missing, that test prints `SKIPPED: ...` and skips. A recorded full run passed 208 tests, none skipped (`docs/evidence/local-product/test-journey.txt`).
+`npm test` runs `node --test "tests/**/*.test.mjs"`. It includes a journey test that runs the real image. If Docker or the image is missing, that test prints `SKIPPED: ...` and skips. A recorded full run passed 208 tests, none skipped (`docs/evidence/local-product/test-journey.txt`). In a fresh clone, one more sub-test of the journey test (Seeds) prints `SKIPPED: Seeds sub-test` and counts as skipped until you have run `extract-seeds` (see "Seeds, from your own tarball"). The coin accuracy test (`tests/coin-check.test.mjs`) rewrites the tracked file `docs/evidence/local-product/coin-check.txt` with its new numbers, so `git status` shows that file as modified after `npm test`. Discard it with `git checkout -- docs/evidence/local-product/coin-check.txt` if you do not want the change.
 
 Other checks:
 
@@ -203,7 +203,7 @@ node scripts/check-license.mjs
 
 Run the Docker command from the repository root. On Linux use `$(pwd)` instead of `${PWD}` and `npm` instead of `npm.cmd`.
 
-`audit-tracked.mjs` fails if the repository tracks tarballs, binaries, `vendor/`, `local-data/` or `runs/` content, upstream example files with a listed hash, credential-looking text, machine user paths, or files over 5 MiB. `check-license.mjs` compares `LICENSE` with the SPDX MIT template and prints `MIT OK`.
+`audit-tracked.mjs` fails if the repository tracks tarballs, binaries, `vendor/`, `local-data/` or a top-level folder named runs, upstream example files with a listed hash, credential-looking text, machine user paths, or files over 5 MiB. `check-license.mjs` compares `LICENSE` with the SPDX MIT template and prints `MIT OK`.
 
 ## Expected outputs
 
