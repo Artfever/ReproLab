@@ -1,0 +1,68 @@
+Task 6.5: real provider end-to-end test (Requirement 13.11)
+EXERCISED (partly; see "What was not done").
+
+Setup
+- Provider: Ollama (local daemon), endpoint http://127.0.0.1:11434/v1, model llama3.2:3b (Q4_K_M, about 2.0 GB).
+  The model was already present on the machine; nothing was pulled. It is larger than the "about 1 GB" target
+  that was suggested for a pull, but pulling was not needed. nomic-embed-text was also present and unused.
+- The daemon was not running at the start. Running `ollama list` started the Ollama desktop app and its server
+  as a side effect; no separate `ollama serve` was started. Both processes were stopped at the end.
+- Server: apps/local `node src/server.mjs` on port 8766 with REPROLAB_LLM_BASE_URL=http://127.0.0.1:11434/v1
+  and REPROLAB_LLM_MODEL=llama3.2:3b. No API key was set, used or asked for.
+- All requests went through the HTTP API (no browser UI was driven; the UI was not used for this check).
+
+Status (GET /api/assistant/status), HTTP 200:
+{"status":"enabled","reason":"A language-model endpoint is configured and answered a health check."}
+
+Real run used as the subject
+- Submitted through POST /api/runs: the built-in coin demo with the model edited to reference an undefined
+  node (`r ~ dbin(p, nn)` instead of `dbin(p, n)`). Real OpenBUGS 3.2.3 rev 1012 in the Docker image ran it.
+- Final state: engine_error. Reason: "engine reported a problem: variable nn is not defined".
+- Real log lines include: "model is syntactically correct", "data loaded (variables not in the model: n)",
+  "variable nn is not defined", "model must be compiled before initial values loaded", ...
+
+Attempt 1 (cold model), run id 8a59e7e459a0e4adb9dee888a9f94cf8
+Q1 (in-corpus, with runId): "Why did this run fail? What does the log say about the error?"
+  HTTP 502 after 60029 ms:
+  {"kind":"error","class":"timeout","message":"The language-model endpoint did not answer within 60 seconds."}
+  Cause: the first request had to load the 3B model on this CPU-only machine and exceeded the 60 s limit
+  (PROVIDER_TIMEOUT_MS). The server reported a plain timeout error and no answer text. No defect found.
+Q2 (off-topic): "What is the capital of France?"
+  HTTP 200 after 14 ms: {"kind":"declined","message":"I cannot answer that from the ReproLab documentation or
+  this run's log and manifest."}  No provider call (retrieval found nothing supported).
+
+Attempt 2 (model warmed first with a one-token request to Ollama), run id 05c7d4613d47e901005fd5b9e3a14848
+(same edited model, again engine_error, "variable nn is not defined")
+Q1 (in-corpus, with runId): "Why did this run fail? What does the log say about the error?"
+  HTTP 200 after 2589 ms:
+  kind: answer
+  text: "Based on the provided passages, it is unclear why the run failed. The passages do not provide
+  information on what causes a run to fail. \n\nHowever, the log may contain information about the error.
+  According to passage [states-03], the engine error reason is the first matching log line. This means that
+  the log should contain the reason for the engine error."
+  citations: [ states-03 (docs/assistant/states.md, "## engine_error ...The first matching log line is given
+  as the reason.") ]
+  Assessment (honest): this is a weak answer. The model did not quote the actual log line
+  ("variable nn is not defined") even though the run passages were available, and said the cause is
+  "unclear". The server accepted it because it cited one valid retrieved passage id (states-03); the server's
+  check only verifies that cited ids exist in the retrieved context, not that the answer is useful or uses the
+  run log. Nothing in it is false about engine behaviour, but it does not answer the question. Because the answer
+  was not rejected, the user sees a low-value but cited answer, not a decline.
+Q2 (off-topic): "What is the capital of France?"
+  HTTP 200 after 11 ms: {"kind":"declined","message":"I cannot answer that from the ReproLab documentation or
+  this run's log and manifest."}  Declined by the server before any provider call; no model text shown.
+
+What was not done
+- A bad/uncited provider answer that the server rejects (verifyAnswer failure) was not observed with the real
+  model. The only weak answer seen was cited, so it was shown. That rejection path is covered by the Fake_Provider
+  tests only (tasks 6.3 and 7.1), not by this real test.
+- The task text asks for three questions through the UI (docs, run log, unsupported). This run used the HTTP API
+  with two questions (run-log, off-topic). A docs-only question and a UI session were not run.
+- Only one small model was tried. Answer quality from other models is unknown.
+- During cleanup several overlapping launches of the same runner were queued by a lagging shell, so the
+  attempt-2 output file could have been overwritten by a later identical launch. The values above were read
+  from the file as written by attempt 2.
+
+Caveats
+- Output of a language model; it is not an analysis result and not a scientific interpretation.
+- Paths in this file were redacted; no machine paths, keys or tokens are included.

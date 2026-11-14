@@ -1,14 +1,16 @@
 // Assistant routes (spec 03-local-product, tasks 6.3 and 6.4). Requirements 12.6, 13.1 to 13.10.
-// POST /api/assistant/ask is implemented here. GET /api/assistant/status stays 501 until task 6.4.
+// POST /api/assistant/ask (task 6.3) and GET /api/assistant/status (task 6.4, requirements 14.1 to 14.3).
 import { buildCorpus, buildRunPassages, loadFilePassages } from '../../assistant/corpus.mjs';
 import { retrieve, limitContext } from '../../assistant/retrieve.mjs';
 import {
   DECLINE_MESSAGE, buildMessages, isJudgementQuestion, verifyAnswer,
 } from '../../assistant/answer.mjs';
-import { readConfig, chatCompletion, scrubKey, ProviderError, PROVIDER_TIMEOUT_MS } from '../../assistant/provider.mjs';
+import {
+  readConfig, chatCompletion, probeEndpoint, scrubKey, ProviderError, PROVIDER_TIMEOUT_MS, PROBE_TIMEOUT_MS,
+} from '../../assistant/provider.mjs';
 import { getRuns } from './runs.mjs';
 
-const notImplemented = () => ({ status: 501, json: { error: 'Not implemented yet.' } });
+export const STATUS_CACHE_MS = 10_000;
 const ALLOWED_KEYS = new Set(['question', 'runId']);
 
 const declined = () => ({ status: 200, json: { kind: 'declined', message: DECLINE_MESSAGE } });
@@ -117,8 +119,27 @@ export function routes(deps = {}) {
     };
   }
 
+  // Requirement 14.1 to 14.3. The probe runs at most once per STATUS_CACHE_MS for the same settings.
+  // The response holds only a state and a plain reason: no key, no URL.
+  let cached = null; // { key, at, body }
+  const nowMs = () => (deps.now ? deps.now() : Date.now());
+
+  async function status() {
+    const cfg = readConfig(env());
+    if (!cfg.ok) return { status: 200, json: { status: 'disabled', reason: `${cfg.reason}.` } };
+    const key = `${cfg.baseUrl}\n${cfg.model}\n${cfg.apiKey ?? ''}`;
+    const ttl = deps.statusCacheMs ?? STATUS_CACHE_MS;
+    if (cached && cached.key === key && nowMs() - cached.at < ttl) return { status: 200, json: cached.body };
+    const { reachable } = await probeEndpoint(cfg, deps.probeTimeoutMs ?? PROBE_TIMEOUT_MS);
+    const body = reachable
+      ? { status: 'enabled', reason: 'A language-model endpoint is configured and answered a health check.' }
+      : { status: 'disabled', reason: 'The language-model endpoint is unreachable.' };
+    cached = { key, at: nowMs(), body };
+    return { status: 200, json: body };
+  }
+
   return [
     { method: 'POST', pattern: /^\/api\/assistant\/ask$/, handler: ask },
-    { method: 'GET', pattern: /^\/api\/assistant\/status$/, handler: notImplemented },
+    { method: 'GET', pattern: /^\/api\/assistant\/status$/, handler: status },
   ];
 }

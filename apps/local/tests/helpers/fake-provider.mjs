@@ -8,6 +8,7 @@ import http from 'node:http';
  */
 export async function startFakeProvider(respond) {
   const calls = [];
+  const probes = []; // GET /v1/models health probes (not counted in `calls`)
   const sockets = new Set();
   const server = http.createServer((req, res) => {
     const chunks = [];
@@ -15,6 +16,11 @@ export async function startFakeProvider(respond) {
     req.on('end', () => {
       let body = null;
       try { body = JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { /* keep null */ }
+      if (req.method === 'GET' && req.url === '/v1/models') {
+        probes.push({ headers: req.headers });
+        res.writeHead(200, { 'Content-Type': 'application/json' }).end(JSON.stringify({ data: [{ id: 'fake-model' }] }));
+        return;
+      }
       if (req.method !== 'POST' || req.url !== '/v1/chat/completions') {
         res.writeHead(404).end();
         return;
@@ -31,6 +37,7 @@ export async function startFakeProvider(respond) {
     port,
     baseUrl: `http://127.0.0.1:${port}/v1`,
     calls,
+    probes,
     get count() { return calls.length; },
     close: () => new Promise((resolve) => {
       for (const s of sockets) s.destroy();

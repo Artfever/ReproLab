@@ -1,0 +1,21 @@
+*** no provider configured: disabled with the required reason (39.729ms)
+*** a base URL without a model name is disabled with a plain reason (6.9911ms)
+*** a base URL with a password is disabled and the password is never echoed (5.6125ms)
+*** Fake_Provider up: enabled, probe sent once, no chat call made (13.0009ms)
+*** Fake_Provider down (connection refused): disabled, unreachable (8.8031ms)
+*** endpoint that accepts but never answers: disabled after the probe timeout (267.8524ms)
+*** status is cached for 10 seconds, then probed again (18.0496ms)
+*** the response never contains the key, the address, the port or a URL path (8.7822ms)
+*** UI helper: disabled status gives a reason; enabled gives none needed (0.474ms)
+*** UI helper: question checks and request body (0.4256ms)
+*** UI helper: answers carry the label and citations; declines and errors are plain (0.4882ms)
+*** panel markup: shared slot on run and results pages, script is same-origin, textContent only (1.1961ms)
+*** tests 12
+*** suites 0
+*** pass 12
+*** fail 0
+*** cancelled 0
+*** skipped 0
+*** todo 0
+*** duration_ms 514.2441
+

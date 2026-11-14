@@ -1,0 +1,8 @@
+Task 6.4 local Ollama check (no question was sent to any real provider)
+
+ollama command on PATH: found
+GET http://127.0.0.1:11434/api/tags (3 s timeout): no answer (connection failed). Ollama is installed but its server is not running.
+No model list could be read, so it is unknown whether a model is pulled.
+
+Real provider exercise: NOT EXERCISED (Ollama server not running). Task 6.5 remains open.
+Everything in test-assistant-status.txt and test-assistant-ui.txt used the Fake_Provider test double or no provider.

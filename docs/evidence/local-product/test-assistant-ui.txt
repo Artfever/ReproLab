@@ -1,0 +1,42 @@
+Task 6.4 headless Chrome check: node scripts/assistant-browser-check.mjs
+NO REAL LANGUAGE-MODEL PROVIDER WAS EXERCISED. The ENABLED path uses the Fake_Provider test double
+(apps/local/tests/helpers/fake-provider.mjs). The DISABLED path has no REPROLAB_LLM_* variables.
+Screenshots: docs/evidence/local-product/shots/assistant-*.png
+
+PASS server on 8793 is up
+PASS server on 8794 is up
+PASS chrome target found
+INFO --- DISABLED path: no provider environment variables ---
+INFO {"disabledTa":true,"disabledBtn":true,"boxHidden":false,"reason":"No language-model endpoint is configured.","describedby":"assistant-hint assistant-reason"}
+PASS disabled: question box and button are disabled
+PASS disabled: reason is shown beside the box
+PASS disabled: reason is linked to the question box with aria-describedby
+PASS disabled: live region exists with aria-live=polite
+PASS disabled: no question was sent
+INFO screenshot assistant-disabled-1280.png
+PASS disabled on run.html as well
+INFO screenshot assistant-disabled-run-390.png
+INFO --- ENABLED path: Fake_Provider test double (no real provider) ---
+PASS enabled: question box becomes usable
+PASS enabled: reason box is hidden
+INFO tab order tail: A > A > assistant-question > assistant-ask
+PASS keyboard: Tab reaches the question box then the Ask button
+PASS answer path: kind is answer (Ctrl+Enter submitted) | answer
+PASS answer shows its text
+PASS answer is labelled as model generated
+PASS answer lists the cited source passage with id and source
+PASS answer is inside the aria-live region
+INFO screenshot assistant-answer-1280.png
+PASS unsupported question: declined with the fixed message
+PASS unsupported question: provider was not called | 1 -> 1
+PASS validity/convergence question is declined
+PASS uncited provider text is not shown; decline is shown
+INFO error text: The assistant could not answer. The language-model endpoint answered with HTTP status 500.
+PASS provider error is shown plainly
+INFO screenshot assistant-error-1280.png
+PASS textContent only: markup in a model answer is shown literally, not run
+PASS mobile width: no horizontal page overflow
+INFO screenshot assistant-answer-390.png
+PASS no uncaught script errors
+NOTE No real language-model provider was exercised by this script. ENABLED answers come from the Fake_Provider test double.
+SUMMARY 25 passed, 0 failed

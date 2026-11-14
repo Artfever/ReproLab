@@ -70,6 +70,43 @@ export function scrubKey(text, apiKey) {
   return text.split(apiKey).join('[redacted]');
 }
 
+export const PROBE_TIMEOUT_MS = 3000;
+
+/**
+ * Health probe: GET <baseUrl>/models. The endpoint counts as reachable when it sends any HTTP
+ * response within the timeout (the status code is not judged: this checks reachability only,
+ * not that the model works). Resolves {reachable:boolean}; never rejects. No redirects are followed.
+ * The key, when set, goes only in the Authorization header.
+ */
+export function probeEndpoint(config, timeoutMs = PROBE_TIMEOUT_MS) {
+  const target = new URL(`${config.baseUrl}/models`);
+  const headers = { Accept: 'application/json', Connection: 'close' };
+  if (config.apiKey) headers.Authorization = `Bearer ${config.apiKey}`;
+  const lib = target.protocol === 'https:' ? https : http;
+  return new Promise((resolve) => {
+    let settled = false;
+    let req;
+    const done = (reachable) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      try { req?.destroy(); } catch { /* ignore */ }
+      resolve({ reachable });
+    };
+    const timer = setTimeout(() => done(false), timeoutMs);
+    try {
+      req = lib.request(target, { method: 'GET', headers, agent: false }, (res) => {
+        res.resume();
+        done(true);
+      });
+      req.on('error', () => done(false));
+      req.end();
+    } catch {
+      done(false);
+    }
+  });
+}
+
 /**
  * POST <baseUrl>/chat/completions. Resolves to the assistant message text.
  * Rejects with ProviderError of class unreachable, timeout, bad_status or malformed.
