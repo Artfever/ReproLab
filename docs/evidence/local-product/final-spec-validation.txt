@@ -1,0 +1,12 @@
+Spec format validation (validate_spec_format tool), final verification task 13.4
+File                                                  Result
+.kiro/specs/00-engine-feasibility/requirements.md     No format issues found.
+.kiro/specs/00-engine-feasibility/design.md           No format issues found.
+.kiro/specs/00-engine-feasibility/tasks.md            No format issues found.
+.kiro/specs/01-web-mvp/requirements.md                No format issues found.
+.kiro/specs/01-web-mvp/design.md                      No format issues found.
+.kiro/specs/01-web-mvp/tasks.md                       No format issues found.
+.kiro/specs/03-local-product/requirements.md          No format issues found.
+.kiro/specs/03-local-product/design.md                1 warning: line 0, missing recommended section "## Correctness Properties" (design/missing-correctness-properties). Not an error. Deliberate: the spec states property-based tests are not used (dependency-free rule).
+.kiro/specs/03-local-product/tasks.md                 No format issues found.
+exit: validator returned no errors for any file; one warning (above).

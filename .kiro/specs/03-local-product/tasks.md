@@ -118,7 +118,7 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - _Requirements: 1.1, 1.2, 15.1 to 15.7_
     - Acceptance check: `node --test tests/pages.test.mjs` parses each file for: one `h1`, `lang`, skip link first, `nav[aria-label]`, no `http(s)://` resource URL except documented link text, required sentences present, no `<script>` without `src`; output in `docs/evidence/local-product/test-pages.txt`. A contrast test (WCAG formula, copied approach from `apps/web/tests/helpers/contrast.mjs`, rewritten here) checks every colour pair in `styles.css` against 4.5:1 (3:1 for large text and non-text).
 
-  - [x] 5.2 Run page with validation messages
+  - [ ] 5.2 Run page with validation messages
     - `run.html` plus `app.js` module: demo picker, file inputs with names and sizes, monitors, settings with range hints, chains selector, client-side checks mirroring `validate.mjs` (shared via a copied constants block tested for equality), call `/api/validate` before submit, show problems next to fields, focus first problem, submit, then redirect to `results.html?id=<id>`.
     - _Requirements: 4.7, 4.8, 8.7, 11.1 to 11.5_
     - Acceptance check: `node --test tests/ui-logic.test.mjs` runs `app.js` pure helpers (exported for test) for each message; MANUAL: keyboard-only pass recorded in `docs/evidence/local-product/ui-keyboard.md`.
@@ -128,7 +128,7 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - _Requirements: 8.1 to 8.8_
     - Acceptance check: `node --test tests/ui-logic.test.mjs` extended: log truncation note, no HTML interpretation (a log line containing `<img onerror>` stays text), summary label present, summary absent shows the reason; output in `docs/evidence/local-product/test-ui-logic.txt`.
 
-  - [x] 5.4 Responsive and accessibility review
+  - [ ] 5.4 Responsive and accessibility review
     - With the server running, capture headless screenshots of every page at 1280x800 and 390x844 and of Run and Results at 320 px width into `docs/evidence/local-product/shots/local-*.png`, read them, and write `local-ui-review.md` (overflow, focus, labels, contrast). Fix real defects.
     - _Requirements: 15.5, 15.6_
     - Acceptance check: PNGs exist; `local-ui-review.md` lists each page and finding. MANUAL: screen reader and 200% zoom check by a person, recorded as done or not done.
@@ -219,29 +219,29 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - _Requirements: 18.4, 19.1 to 19.11_
     - Acceptance check: `node --test tests/readme.test.mjs` extracts fenced commands and asserts each referenced script and npm script exists, the required headings exist, no SourceForge checksum is claimed, and the words "authenticated upstream" never describe a mirror; output in `docs/evidence/local-product/test-readme.txt`.
 
-- [ ] 12. Milestone 3 close
-  - [-] 12.1 Milestone 3 review and commit
+- [x] 12. Milestone 3 close
+  - [x] 12.1 Milestone 3 review and commit
     - Run `node scripts/audit-tracked.mjs`, `npm.cmd test` in `apps/local`, `scripts/check-publish-paths.ps1`. Review diff; stage explicitly; commit `chore(m3): add MIT licence, notices, README, vendored build, scripts`. No push. Keep `.kiro` tracked.
     - _Requirements: 19.11, 20.1_
     - Acceptance check: outputs and `git log -1 --stat` in `docs/evidence/local-product/m3-commit.txt`; `git ls-files .kiro | Measure-Object` count in the same file is greater than 0; no `.tar.gz` or `vendor/` in `git ls-files`.
 
 - [ ] 13. Milestone 4: judgeable local submission
-  - [ ] 13.1 Clean-clone verification script and run
+  - [x] 13.1 Clean-clone verification script and run
     - `scripts/verify-clean-clone.ps1 [-Tarball path]`: clone the committed repository to a temp directory outside the working tree, follow README commands in order (copy tarball to `vendor/`, hash check, `build-image`, `npm.cmd ci` in `apps/web`, `npm.cmd test` in `apps/local`, `npm.cmd run check` in `apps/web`, start, health probe, coin Run through the API), write the transcript, remove the clone and containers in `finally`. MANUAL: the independent browser download from SourceForge. If the executor cannot do it, run with `.scratch/gh.tar.gz` and the evidence states "stand-in for the manual browser download; hash a289c4da...". Use a distinct image tag so existing tags are not removed.
     - _Requirements: 21.1 to 21.5_
     - Acceptance check: `docs/evidence/local-product/clean-clone.txt` ends with `RESULT: PASS` or the first failing step; temp directory no longer exists (`Test-Path` printed in the file); no leftover containers.
 
-  - [ ] 13.2 Demo script and shot list
+  - [x] 13.2 Demo script and shot list
     - `docs/demo/script.md` (timed segments totalling under 3:00, with narration drawn from real README wording and the real product: validation error, coin run, results with SHA-256, invalid model failure, assistant disabled or enabled state as it really is, limitations page) and `docs/demo/shot-list.md`. States that the recording is of the real product and that no upload has occurred.
     - _Requirements: 22.1, 22.2_
     - Acceptance check: `node --test tests/demo-docs.test.mjs` sums the segment durations in `script.md` (a `[mm:ss-mm:ss]` format) and asserts the total is under 180 seconds and that the words "uploaded" and "published" do not appear as claims; output in `docs/evidence/local-product/test-demo-docs.txt`. MANUAL: person records the screen capture.
 
-  - [ ] 13.3 Devpost checklist
+  - [x] 13.3 Devpost checklist
     - `docs/devpost-checklist.md`: repository link (tryout/test build) `MISSING`, YouTube link `MISSING`, category Resurrection, Kiro usage write-up drafted from real files (specs 00 to 03, steering, hook, release gate, guard tests, evidence directory, task acceptance checks), setup instructions for judges (README link), hosting-free note, repository availability through judging, open items (legal name, real assistant test status, independent tarball download status).
     - _Requirements: 22.3 to 22.5_
     - Acceptance check: `node --test tests/devpost-docs.test.mjs` asserts every referenced file path in the write-up exists and each missing link is marked `MISSING`; output in `docs/evidence/local-product/test-devpost-docs.txt`.
 
-  - [ ] 13.4 Final verification
+  - [-] 13.4 Final verification
     - Rerun `npm.cmd test` in `apps/local`, `npm.cmd run check` in `apps/web`, `node scripts/audit-tracked.mjs`, `scripts/check-publish-paths.ps1`, release-guard tests. Write `docs/evidence/local-product/final-status.md`: each requirement id with evidence file or gap, what was MANUAL and not done, assistant real test status, tarball independence status, legal-name confirmation status.
     - _Requirements: 1.4, 1.5, 17.8, 20.1_
     - Acceptance check: `final-*.txt` files show exit 0; `final-status.md` has no requirement without an evidence file or an explicit gap.
@@ -255,6 +255,7 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
 
 - Tasks marked MANUAL need a person; record done or not done, never imply it was done.
 - Advisory `blocked_until` as in `01-web-mvp/tasks.md`: Kiro reads only `waves`. Real gates are the acceptance checks.
+- Final reconciliation (task 13.4): ticked tasks whose acceptance evidence has a gap, and all open or MANUAL items, are listed in `docs/evidence/local-product/final-open-items.md`. No checkbox was changed by that review.
 - Property-based tests are not used (no library allowed by the dependency-free rule); see `design.md` Testing Strategy.
 
 ## Task Dependency Graph

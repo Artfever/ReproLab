@@ -1,0 +1,7 @@
+COMMAND: node scripts\audit-tracked.mjs (cwd relative to <repo>)
+STARTED: 2026-11-15T03:47:32
+----- OUTPUT -----
+Tracked-file audit: 416 tracked files checked.
+Result: PASS
+
+exit=0

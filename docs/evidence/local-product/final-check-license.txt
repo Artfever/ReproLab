@@ -1,0 +1,6 @@
+COMMAND: node scripts\check-license.mjs (cwd relative to <repo>)
+STARTED: 2026-11-15T03:47:32
+----- OUTPUT -----
+MIT OK
+
+exit=0

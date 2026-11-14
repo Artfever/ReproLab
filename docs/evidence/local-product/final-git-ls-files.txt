@@ -1,0 +1,76 @@
+COMMAND: git ls-files (tracked-file inspection) (cwd relative to <repo>)
+tracked files: 416
+paths matching archive/binary/image-tarball/vendor/local-data/runs/.scratch/node_modules patterns: 0
+tracked files over 1 MiB: 0
+names resembling upstream example/engine files (Seeds*, OpenBUGS*, libOpenBUGS*): 0
+tracked raster/pdf/font files (not binaries of the engine; listed for review): 49
+docs/evidence/local-product/shots/assistant-answer-1280.png
+docs/evidence/local-product/shots/assistant-answer-390.png
+docs/evidence/local-product/shots/assistant-disabled-1280.png
+docs/evidence/local-product/shots/assistant-disabled-run-390.png
+docs/evidence/local-product/shots/assistant-error-1280.png
+docs/evidence/local-product/shots/local-docs-1280.png
+docs/evidence/local-product/shots/local-docs-320.png
+docs/evidence/local-product/shots/local-docs-390.png
+docs/evidence/local-product/shots/local-home-1280.png
+docs/evidence/local-product/shots/local-home-320.png
+docs/evidence/local-product/shots/local-home-390.png
+docs/evidence/local-product/shots/local-how-it-works-1280.png
+docs/evidence/local-product/shots/local-how-it-works-320.png
+docs/evidence/local-product/shots/local-how-it-works-390.png
+docs/evidence/local-product/shots/local-limitations-1280.png
+docs/evidence/local-product/shots/local-limitations-320.png
+docs/evidence/local-product/shots/local-limitations-390.png
+docs/evidence/local-product/shots/local-privacy-1280.png
+docs/evidence/local-product/shots/local-privacy-320.png
+docs/evidence/local-product/shots/local-privacy-390.png
+docs/evidence/local-product/shots/local-results-1280.png
+docs/evidence/local-product/shots/local-results-320.png
+docs/evidence/local-product/shots/local-results-390.png
+docs/evidence/local-product/shots/local-results-empty-1280.png
+docs/evidence/local-product/shots/local-results-empty-320.png
+docs/evidence/local-product/shots/local-results-empty-390.png
+docs/evidence/local-product/shots/local-results-engine-error-1280.png
+docs/evidence/local-product/shots/local-results-engine-error-390.png
+docs/evidence/local-product/shots/local-results-succeeded-1280.png
+docs/evidence/local-product/shots/local-results-succeeded-320.png
+docs/evidence/local-product/shots/local-results-succeeded-390.png
+docs/evidence/local-product/shots/local-results-timed-out-1280.png
+docs/evidence/local-product/shots/local-run-1280.png
+docs/evidence/local-product/shots/local-run-320.png
+docs/evidence/local-product/shots/local-run-390.png
+docs/evidence/local-product/shots/local-run-problems-1280.png
+docs/evidence/local-product/shots/local-run-problems-320.png
+docs/evidence/local-product/shots/local-run-problems-390.png
+docs/evidence/local-product/shots/local-terms-1280.png
+docs/evidence/local-product/shots/local-terms-320.png
+docs/evidence/local-product/shots/local-terms-390.png
+docs/evidence/local-product/shots/m1-home-1280-full.png
+docs/evidence/local-product/shots/m1-home-1280x800.png
+docs/evidence/local-product/shots/m1-home-390-full.png
+docs/evidence/local-product/shots/m1-home-390x844.png
+docs/evidence/local-product/shots/m1-sample-run-1280-full.png
+docs/evidence/local-product/shots/m1-sample-run-1280x800.png
+docs/evidence/local-product/shots/m1-sample-run-390-full.png
+docs/evidence/local-product/shots/m1-sample-run-390x844.png
+extension counts:
+.txt 165
+.mjs 61
+.md 49
+.png 49
+.json 32
+.ps1 12
+.tsx 8
+.html 8
+.py 6
+.js 6
+.sh 4
+.ts 2
+.mts 2
+.gitignore 2
+.gitkeep 2
+ 2
+.kiro 2
+.css 2
+.dockerignore 1
+.gitattributes 1

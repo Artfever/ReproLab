@@ -1,0 +1,10 @@
+COMMAND: powershell -NoProfile -ExecutionPolicy Bypass -File scripts\release-guard.ps1 -ImageDigest sha256:4d9ebd5fd85cbe9bc2d2e847ef4bcdbb99d2c4b6b4128558282a53c43c992ac7 (image tagged reprolab-openbugs:3.2.3-vendored) (cwd relative to <repo>)
+----- OUTPUT -----
+release-guard: BLOCKED - do not publish, distribute, export or share the image.
+  - gate G1 status is 'UNMET', must be MET
+  - gate G2 status is 'UNMET', must be MET
+  - gate G3 status is 'UNMET', must be MET
+  - gate G4 status is 'UNMET', must be MET
+  - no Decision log row names exactly this image digest
+
+exit=1

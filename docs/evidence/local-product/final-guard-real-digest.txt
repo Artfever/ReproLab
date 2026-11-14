@@ -1,0 +1,11 @@
+COMMAND: powershell -NoProfile -ExecutionPolicy Bypass -File scripts\release-guard.ps1 -ImageDigest sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f (cwd relative to <repo>)
+STARTED: 2026-11-15T03:47:32
+----- OUTPUT -----
+release-guard: BLOCKED - do not publish, distribute, export or share the image.
+  - gate G1 status is 'UNMET', must be MET
+  - gate G2 status is 'UNMET', must be MET
+  - gate G3 status is 'UNMET', must be MET
+  - gate G4 status is 'UNMET', must be MET
+  - no Decision log row names exactly this image digest
+
+exit=1

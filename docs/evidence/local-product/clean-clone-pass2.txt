@@ -1,0 +1,675 @@
+﻿
+ReproLab clean-clone verification (spec 03-local-product task 13.1)
+date (UTC): 2026-11-14 22:40:20
+repository: https://github.com/Artfever/ReproLab.git
+temp directory: <tmp>
+
+=== preflight ===
+node: v24.18.0
+powershell: 5.1.26100.9444
+docker info exit=0
+tarball (stand-in for the manual browser download): <repo>\.scratch\gh.tar.gz
+Default tag reprolab-openbugs:3.2.3-vendored already exists locally. Building under a separate temporary tag reprolab-openbugs:cleanclone-0ee2ef so the existing image is not replaced.
+Port 8765 is in use on this machine; using REPROLAB_PORT=18765 (README documents REPROLAB_PORT).
+containers labelled reprolab.run before: 0
+
+=== README: git clone ===
+$ git ls-remote <repo> HEAD
+0e7896f66a6e89907e6dd6536590edca02a096c4	HEAD
+$ git clone <repo> <tmp>/ReproLab
+exit=0
+clone HEAD: 0e7896f66a6e89907e6dd6536590edca02a096c4 (branch main)
+clone HEAD subject: docs: add demo script, shot list and Devpost checklist with tests
+working repo HEAD (for comparison): 0e7896f66a6e89907e6dd6536590edca02a096c4
+
+=== README: manual step stand-in (copy tarball to vendor/) ===
+STAND-IN: the README says to download the tarball in a browser from SourceForge. A script cannot do that. The locally held copy is used instead.
+SHA-256 of vendor/OpenBUGS-3.2.3.tar.gz: a289c4da0c4ac371f8013226c85ebd0a9e1dec5de9b858950e4854cb814b4ed8
+copy we tested (README): a289c4da0c4ac371f8013226c85ebd0a9e1dec5de9b858950e4854cb814b4ed8  match=True
+git status --short in clone (vendor/ must not be listed): []
+
+=== README Tests: npm ci in apps/web ===
+$ npm.cmd ci   (cwd apps/web)
+
+added 344 packages, and audited 345 packages in 23s
+
+141 packages are looking for funding
+  run `npm fund` for details
+
+7 moderate severity vulnerabilities
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+[stderr]
+npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+exit=0
+
+=== README Quick start: build-image ===
+$ powershell -ExecutionPolicy Bypass -File scripts\build-image.ps1 -Tag reprolab-openbugs:cleanclone-0ee2ef
+SHA-256 of vendor/OpenBUGS-3.2.3.tar.gz : a289c4da0c4ac371f8013226c85ebd0a9e1dec5de9b858950e4854cb814b4ed8
+SHA-256 of the copy we tested           : a289c4da0c4ac371f8013226c85ebd0a9e1dec5de9b858950e4854cb814b4ed8
+Hash check: match (the file is byte-identical to the copy we tested).
+Built image reprolab-openbugs:cleanclone-0ee2ef (local only; nothing was pushed or saved).
+[stderr]
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.83kB 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/debian:bookworm-slim@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 135B done
+#3 DONE 0.0s
+
+#4 [build 1/7] FROM docker.io/library/debian:bookworm-slim@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc
+#4 resolve docker.io/library/debian:bookworm-slim@sha256:734a72b3d6142a71993b4bc580ca01d8ca687f77a2c422d96a961d3376b179bc 0.0s done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 17.24kB 0.0s done
+#5 DONE 0.0s
+
+#6 [build 2/7] RUN dpkg --add-architecture i386  && apt-get update  && apt-get install -y --no-install-recommends build-essential gcc-multilib libc6:i386  && rm -rf /var/lib/apt/lists/*
+#6 CACHED
+
+#7 [build 5/7] RUN echo "a289c4da0c4ac371f8013226c85ebd0a9e1dec5de9b858950e4854cb814b4ed8  openbugs.tar.gz" | sha256sum -c -  && tar xzf openbugs.tar.gz
+#7 CACHED
+
+#8 [runtime 5/6] RUN mkdir -p /work && chown 10001:10001 /work
+#8 CACHED
+
+#9 [runtime 4/6] COPY services/runner/reprolab_runner /opt/reprolab/reprolab_runner
+#9 CACHED
+
+#10 [build 4/7] COPY vendor/OpenBUGS-3.2.3.tar.gz /src/openbugs.tar.gz
+#10 CACHED
+
+#11 [build 6/7] WORKDIR /src/OpenBUGS-3.2.3
+#11 CACHED
+
+#12 [build 7/7] RUN ./configure --prefix=/opt/openbugs && make && make install  && mkdir -p /opt/openbugs/licenses && cp COPYING AUTHORS NEWS /opt/openbugs/licenses/
+#12 CACHED
+
+#13 [runtime 3/6] COPY --from=build /opt/openbugs /opt/openbugs
+#13 CACHED
+
+#14 [build 3/7] WORKDIR /src
+#14 CACHED
+
+#15 [runtime 2/6] RUN dpkg --add-architecture i386  && apt-get update  && apt-get install -y --no-install-recommends libc6:i386 python3-minimal libpython3.11-stdlib  && rm -rf /var/lib/apt/lists/*  && useradd --system --uid 10001 --no-create-home --shell /usr/sbin/nologin bugs
+#15 CACHED
+
+#16 [runtime 6/6] WORKDIR /work
+#16 CACHED
+
+#17 exporting to image
+#17 exporting layers done
+#17 exporting manifest sha256:717fd0ba5ebeec2a0b93f400c9c4d2b4dfe0a0d40c5ad4ac4b0c9b097581e7a8 done
+#17 exporting config sha256:c348b124fb10dfaf7f55138f4788dff3603cc8261e4086de30a32187fea1e1e5 done
+#17 exporting attestation manifest sha256:499aeb7a7a4483c496bfe516acb87eb2c098ee5716b425d52ae0cdb1a074fd59 0.0s done
+#17 exporting manifest list sha256:77fad08bed60370a362f0143b23c794bde3a750497f3c0c55d79e0f0d6082946 done
+#17 naming to docker.io/library/reprolab-openbugs:cleanclone-0ee2ef done
+#17 unpacking to docker.io/library/reprolab-openbugs:cleanclone-0ee2ef done
+#17 DONE 0.1s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/h9zfycjkjae5kq3b3p8ahp532
+exit=0
+image reprolab-openbugs:cleanclone-0ee2ef id: sha256:77fad08bed60370a362f0143b23c794bde3a750497f3c0c55d79e0f0d6082946
+existing default-tag image id: sha256:4d9ebd5fd85cbe9bc2d2e847ef4bcdbb99d2c4b6b4128558282a53c43c992ac7
+
+=== README Quick start: start -CheckOnly ===
+$ powershell -ExecutionPolicy Bypass -File scripts\start.ps1 -CheckOnly
+ReproLab local start check
+OK    Node.js: v24.18.0
+OK    Docker: running
+OK    Image: reprolab-openbugs:cleanclone-0ee2ef is present
+Check only: nothing started. The server would listen on http://127.0.0.1:18765/
+exit=0
+
+=== README Tests: npm test in apps/local (includes the journey test against the image) ===
+$ npm.cmd test   (cwd apps/local)
+
+> reprolab-local@0.1.0 test
+> node --test "tests/**/*.test.mjs"
+
+✔ no provider configured: disabled with the required reason (92.652ms)
+✔ a base URL without a model name is disabled with a plain reason (20.7287ms)
+✔ a base URL with a password is disabled and the password is never echoed (17.7212ms)
+✔ Fake_Provider up: enabled, probe sent once, no chat call made (30.5516ms)
+✔ Fake_Provider down (connection refused): disabled, unreachable (25.3622ms)
+✔ endpoint that accepts but never answers: disabled after the probe timeout (264.6292ms)
+✔ status is cached for 10 seconds, then probed again (31.3676ms)
+✔ the response never contains the key, the address, the port or a URL path (21.887ms)
+✔ UI helper: disabled status gives a reason; enabled gives none needed (0.8273ms)
+✔ UI helper: question checks and request body (0.6625ms)
+✔ UI helper: answers carry the label and citations; declines and errors are plain (0.7344ms)
+✔ panel markup: shared slot on run and results pages, script is same-origin, textContent only (4.2159ms)
+✔ retrieval ranking reaches the prompt and a cited answer is shown with its source (184.7848ms)
+✔ run passages are retrieved and cited for a specific run (49.4013ms)
+✔ an unsupported question is declined without any provider call (44.1799ms)
+✔ validity, convergence and medical questions are declined without a provider call (105.5883ms)
+✔ an uncited answer is rejected and its text is discarded (23.9885ms)
+✔ an answer that cites a passage that was not retrieved is rejected (69.4771ms)
+✔ provider failures return a class and no answer text (482.2379ms)
+✔ missing configuration gives a plain error and no provider call (15.3843ms)
+✔ bad requests are rejected (39.1785ms)
+✔ URL validation and config reading (0.986ms)
+✔ citation extraction and verification (0.2228ms)
+✔ the API key never appears in any response, log capture or manifest (89.3641ms)
+✔ clean file list passes (3.1915ms)
+✔ forbidden extensions fail (1.2898ms)
+✔ forbidden path prefixes fail (2.2737ms)
+✔ upstream example with matching name and hash fails; same name, other content passes (3.2146ms)
+✔ credential patterns fail (0.5379ms)
+✔ credential negatives pass (0.507ms)
+✔ tracked file over 5 MiB fails (0.3468ms)
+✔ machine paths with a user name fail; placeholders pass (0.4294ms)
+✔ the real tracked tree passes (717.4361ms)
+✔ coin model matches the analytic posterior within 0.01 (2183.7825ms)
+✔ the script has seven timed segments, each with a positive duration (2.2787ms)
+✔ segments are contiguous, start at 0:00, and total at most 180 seconds (0.441ms)
+✔ the summary table and the stated total agree with the segment headings (0.632ms)
+✔ shot list times match the script segments (2.6041ms)
+✔ narration fits each segment at no more than 2.6 words per second (0.4414ms)
+✔ the script and shot list say plainly that no video exists and nothing is uploaded (0.471ms)
+✔ "uploaded" and "published" never appear as a claim: every use sits in a negated sentence (1.0529ms)
+✔ required honesty statements are present in the script (0.6268ms)
+✔ the shot list has a pre-recording checklist, a disabled-assistant fallback and the ollama state (0.39ms)
+✔ the demo docs name no hosted URL and no secret-looking text (0.8191ms)
+✔ parseHashFile reads hash and name, ignores other lines (6.9491ms)
+✔ coin and coin-invalid demos carry requests; coin passes validation (26.9053ms)
+✔ Seeds absent: no request, missingReason explains extraction (16.3123ms)
+✔ Seeds partial: no request, names the missing file (19.5161ms)
+✔ Seeds with a wrong hash is not offered (32.5386ms)
+✔ Seeds with an unreadable hash list is not offered (22.8377ms)
+✔ Seeds with all four correct files carries the assembled request and the historical label (16.8158ms)
+✔ GET /api/demos returns the list over HTTP (103.8345ms)
+✔ required rows are present (2.2208ms)
+✔ the YouTube row is MISSING and no row claims the video is DONE (2.3778ms)
+✔ every backticked repository path exists (16.5677ms)
+✔ REPROLAB_IMAGE_DIGEST is the image id, never the run id; absent when unknown; bad ids rejected (3.5863ms)
+... [68 lines omitted from this transcript] ...
+[omitted part: lines mentioning skip, fail or error]
+  ✔ validation errors come back before any container exists (17.0053ms)
+  ✔ invalid model syntax gives engine_error with the engine message (1050.3397ms)
+  ✔ undefined variable gives engine_error (1049.1539ms)
+SKIPPED: Seeds sub-test. Seeds is not included. Download the OpenBUGS tarball yourself, then run scripts/extract-seeds.ps1 (or .sh) with its path to place the four Seeds files in local-data/upstream/. (missing: Seedsmodel.txt, Seedsdata.txt, Seedsinits1.txt, Seedsinits2.txt)
+✔ contrast error on paper >= 4.5 (0.1732ms)
+✔ contrast error on surface >= 4.5 (0.0911ms)
+✔ contrast border-strong on paper >= 3 (0.1776ms)
+✔ contrast border-strong on surface >= 3 (0.1687ms)
+✔ contrast border-strong on band >= 3 (0.1319ms)
+✔ contrast primary on paper >= 3 (0.1206ms)
+✔ contrast primary on surface >= 3 (0.1132ms)
+✔ contrast primary on band >= 3 (0.1031ms)
+✔ styles.css has no raw colour outside the token block, no remote url or import (1.4301ms)
+✔ styles.css provides visible focus and a skip link (0.2838ms)
+✔ README names a reasonable number of repository paths (guards against an empty extraction) (3.1042ms)
+✔ every path, script and folder named in the README exists (git-ignored vendor/ and local-data/ excepted) (10.4046ms)
+✔ every script the README runs is one of the scripts in scripts/ (1.4215ms)
+✔ flags used on script command lines exist in that script (34.7739ms)
+✔ flags named on their own in prose exist in a script (1.9124ms)
+✔ every REPROLAB_ variable in the README is read by the server or a script (1.8573ms)
+✔ the default image tag is the same in the server, scripts and README, and no tag has to be passed (6.7431ms)
+✔ npm commands in the README exist in a package.json (2.4578ms)
+✔ required sections are present (1.0711ms)
+✔ prerequisites name Node 24, Docker, Git, PowerShell and the Windows WSL2 / Linux setups (2.0261ms)
+✔ the manual tarball download box is a prominent blockquote before the quick start (0.5828ms)
+✔ the hash is labelled "the copy we tested" and matches what the build scripts check (1.8302ms)
+✔ no invented SourceForge checksum: the only 64-hex value is the tested copy, and no short hashes appear (1.4747ms)
+✔ the mirror is described as unauthenticated and never as authenticated or official (0.4797ms)
+✔ troubleshooting covers Docker not running, image missing, port in use and the WSL seek problem (0.4066ms)
+✔ scope statements: NO-GO release status, no image redistribution, and the MIT scope sentence (0.1959ms)
+✔ "How Kiro shaped this" names the specs, steering files, hook, release gate and guard, and they exist (2.0262ms)
+✔ README makes no claim that is unbacked by the repository for the recorded evidence files it cites (1.4896ms)
+CONSTANTS TOP_K=5 MIN_SCORE=2 MAX_QUESTION_CHARS=500 MAX_CONTEXT_CHARS=6000
+✔ constants are pinned and printed (3.7957ms)
+ℹ TOP_K=5 MIN_SCORE=2 MAX_QUESTION_CHARS=500 MAX_CONTEXT_CHARS=6000
+✔ top passage for "What port does the server listen on?" is setup-04 (5.2525ms)
+✔ top passage for "Why did my run end in timed_out?" is states-04 (1.2382ms)
+✔ top passage for "Where is my API key stored?" is privacy-04 (1.3117ms)
+✔ top passage for "How do I delete saved runs?" is privacy-06 (1.4434ms)
+✔ top passage for "Does the assistant tell me if my model converged?" is assistant-02 (5.5561ms)
+✔ a question unrelated to the corpus returns an empty list (3.1287ms)
+✔ same input gives the same output when run twice (28.375ms)
+✔ ties are broken by id regardless of input order (3.7273ms)
+✔ at most TOP_K passages are returned (1.0691ms)
+✔ file passage ids are stable, two-digit, in document order and sourced only from docs/assistant (17.9174ms)
+✔ splitSections splits only at second-level headings and ignores the preamble (0.5706ms)
+✔ Run passages use run-log-L<n> and run-manifest-<field> ids (0.7624ms)
+✔ a Run log line is retrievable with its line id (26.0127ms)
+✔ Run passages are bounded in count and length (5.5882ms)
+✔ question length is bounded at 500 characters (2.2698ms)
+✔ context is bounded at 6000 characters and passages are never truncated (3.2229ms)
+✔ tokenizer lowercases, keeps underscores and drops stop words (0.2772ms)
+✔ succeeded: state, files, summary, manifest, cleanup of both containers (69.2716ms)
+✔ a run reads as running, with no manifest, until summary, files and manifest are final (63.9551ms)
+✔ state mapping: failed to engine_error, timed_out to timed_out, with the engine line kept (42.1887ms)
+✔ success is never derived from an exit code: missing or unreadable manifest is runner_error (71.4457ms)
+✔ server cap: docker kill, runner_error, container removed even if a succeeded manifest exists (33.8604ms)
+✔ Docker missing, not running, image missing and create failure give plain runner_error reasons (42.6868ms)
+✔ summary failure keeps the run state and shows a reason with no numbers (34.3975ms)
+✔ one run at a time: second submit is busy until the first finishes (50.2763ms)
+✔ log is bounded by lines and by bytes with a truncated flag (316.532ms)
+✔ startup: stale containers are cleaned and unfinished state.json becomes runner_error (13.29ms)
+✔ routes: validate, submit, poll, files, manifest; every response is free of host paths (184.4064ms)
+✔ routes: 404 for unknown, malformed ids and file names outside the list; 429 when busy (216.9163ms)
+✔ scrubs repository root and home in raw, forward and back slash forms (8.5752ms)
+✔ scrubs file:/// and URL-encoded forms (1.1948ms)
+✔ scrubs paths inside nested JSON strings (0.7642ms)
+✔ is case-insensitive for Windows roots and leaves unrelated text alone (0.7051ms)
+✔ safeBaseName strips directories and rejects unusable names (0.7227ms)
+✔ isSafeFileName rejects separators, dot-dot, NUL and empty (0.3616ms)
+✔ isRunId accepts only 32 lowercase hex characters (0.2517ms)
+✔ binds to 127.0.0.1 only (14.3565ms)
+✔ bind-address settings are refused and ports are validated (1.3312ms)
+✔ bad Host header gets 403 (44.3534ms)
+✔ localhost and 127.0.0.1 hosts are accepted (11.679ms)
+✔ bad Origin gets 403, good Origins pass (23.1282ms)
+✔ body of exactly 1 MiB is read; 1 MiB + 1 byte gets 413 (26.4737ms)
+✔ invalid JSON and empty body get 400 without a stack trace (7.1803ms)
+✔ wrong method gets 405 with Allow; static rejects POST (10.3196ms)
+✔ path traversal and dotfiles get 404 (25.2036ms)
+✔ static files are served and every response carries the security headers (27.0386ms)
+✔ all required routes exist (a handler answers; never 404 or 405 for the documented method) (33.9483ms)
+✔ copied constants equal src/validate.mjs (3.3562ms)
+✔ a valid form has no problems and builds a request the server validator accepts (2.8646ms)
+✔ range messages at min-1, max+1, non-integer and empty; boundaries pass (2.2007ms)
+✔ chains out of range and inits count follows the chains selector (0.677ms)
+✔ empty, non-ASCII, NUL and oversize files are reported next to their field (2.4188ms)
+✔ monitors: empty, too many, bad name, duplicate; separators (0.8195ms)
+✔ client checks agree with the server validator on the same inputs (0.9899ms)
+✔ control ids map server problem fields; first focus target and grouping (0.6824ms)
+✔ summary heading, size formatting and results hand-off url (1.1495ms)
+✔ http failure messages are plain English (0.4688ms)
+✔ safeBaseName keeps plain base names only (0.4913ms)
+✔ real demos load into form state and pass both validators (27.6088ms)
+✔ run.html: every form control has a label, and described-by targets exist (2.4017ms)
+✔ run.html: error summary, aria-live status, file inputs, settings and chains selector (1.124ms)
+✔ app.js: every element id it looks up exists in run.html; no HTML injection or remote calls (0.8552ms)
+✔ results: constants equal the server (1.3688ms)
+✔ results: every run state has a visible word; unknown state is not shown as success (3.45ms)
+✔ results: run id from the query string accepts only a 32-hex id (0.8201ms)
+✔ results: state changes are announced once (0.2538ms)
+✔ results: details show engine version, settings, runtime and say "not reported" when missing (0.6564ms)
+✔ results: the first engine error line is taken from the log, only for engine_error (0.5937ms)
+✔ results: a log within bounds has no note; line and byte bounds add the note (9.0551ms)
+✔ results: log text with HTML stays text (the module only returns strings) (0.9119ms)
+✔ results: file rows show name, size and SHA-256 (0.3144ms)
+✔ results: summary table carries the required label; label never comes from the response (0.4634ms)
+✔ results: summary absent or failed shows the reason and no numbers (0.3815ms)
+✔ results: fetch failures are plain English (0.7026ms)
+✔ results.html: live region, table caption and scope, manifest link, assistant slot, no inline script (0.384ms)
+✔ results.js: every id it looks up exists; textContent only; no remote calls (0.3919ms)
+✔ a valid request is accepted and chains is derived from inits (4.0319ms)
+✔ non-object requests are rejected (0.4728ms)
+✔ burnIn: min 0 and max 50000 accepted, min-1 and max+1 rejected (0.9203ms)
+✔ burnIn: non-integers and missing values are rejected (0.7831ms)
+✔ samples: min 1 and max 50000 accepted, min-1 and max+1 rejected (0.4236ms)
+✔ samples: non-integers and missing values are rejected (0.3933ms)
+✔ thin: min 1 and max 100 accepted, min-1 and max+1 rejected (0.2118ms)
+✔ thin: non-integers and missing values are rejected (0.2445ms)
+✔ seed: min 1 and max 14 accepted, min-1 and max+1 rejected (0.2734ms)
+✔ seed: non-integers and missing values are rejected (2.591ms)
+✔ timeoutS: min 1 and max 300 accepted, min-1 and max+1 rejected (0.5844ms)
+✔ timeoutS: non-integers and missing values are rejected (0.3483ms)
+✔ chains 1..4 accepted when inits count matches; 0 and 5 rejected (0.5308ms)
+✔ inits count must equal chains, in plain English (0.3444ms)
+✔ inits must be a non-empty list of at most 4 non-empty texts (0.3573ms)
+✔ model size: 0 rejected, max accepted, max+1 rejected (1.6148ms)
+✔ data size: 0 rejected, max accepted, max+1 rejected (11.6184ms)
+✔ inits size: max accepted, max+1 rejected (12.7959ms)
+✔ non-ASCII and NUL are rejected in model, data and inits (0.8645ms)
+✔ ASCII tab, newline and carriage return are allowed; other control characters are not (0.6826ms)
+✔ monitors: 25 accepted, 26 and 0 rejected (0.3955ms)
+✔ monitor names: pattern and duplicates (0.3722ms)
+✔ unknown keys are rejected by name (4.0418ms)
+✔ names are optional, bounded text and never alter staging names (2.2327ms)
+✔ several problems are all reported, each with a field and a sentence (1.7344ms)
+✔ the input object is not mutated and value is a copy (0.3992ms)
+✔ pin: numeric ranges equal services/runner adapter.py (timeout max 300 vs 3600) (2.35ms)
+ℹ tests 252
+ℹ suites 0
+ℹ pass 251
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 9574.4851
+exit=0
+
+=== README Tests: npm run check in apps/web ===
+$ npm.cmd run check   (cwd apps/web)
+
+> reprolab-web@0.1.0 check
+> npm run lint && npm run typecheck && npm run build && npm run test
+
+
+> reprolab-web@0.1.0 lint
+> eslint .
+
+
+> reprolab-web@0.1.0 typecheck
+> tsc --noEmit
+
+
+> reprolab-web@0.1.0 build
+> node scripts/validate-sample-data.mjs && next build
+
+sample data OK
+▲ Next.js 16.4.6 (Turbopack)
+✓ Running next.config.mjs took 25ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1836ms
+  Running TypeScript ...
+  Finished TypeScript in 1819ms ...
+  Collecting page data using 5 workers ...
+  Generating static pages using 5 workers (0/4) ...
+  Generating static pages using 5 workers (1/4) 
+  Generating static pages using 5 workers (2/4) 
+  Generating static pages using 5 workers (3/4) 
+✓ Generating static pages using 5 workers (4/4) in 825ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+└ ○ /sample-run
+
+
+○  (Static)  prerendered as static content
+
+
+> reprolab-web@0.1.0 test
+> node --test "tests/**/*.test.mjs"
+
+✔ all tokens named in the contrast table exist in globals.css (1.1874ms)
+✔ contrast ink on paper >= 4.5 (0.2838ms)
+✔ contrast ink on surface >= 4.5 (0.1243ms)
+✔ contrast ink on band >= 4.5 (0.0996ms)
+✔ contrast muted on paper >= 4.5 (0.1212ms)
+✔ contrast muted on band >= 4.5 (0.0927ms)
+✔ contrast primary on paper >= 4.5 (0.0779ms)
+✔ contrast primary on surface >= 4.5 (0.0663ms)
+✔ contrast primary on band >= 4.5 (0.121ms)
+✔ contrast surface on primary >= 4.5 (0.1813ms)
+✔ contrast accent on paper >= 4.5 (1.1203ms)
+✔ contrast accent on surface >= 4.5 (0.1592ms)
+✔ contrast success on paper >= 4.5 (0.0599ms)
+✔ contrast success on surface >= 4.5 (0.105ms)
+✔ contrast warning on paper >= 4.5 (0.0556ms)
+✔ contrast warning on surface >= 4.5 (0.056ms)
+✔ contrast error on paper >= 4.5 (0.131ms)
+✔ contrast error on surface >= 4.5 (0.045ms)
+✔ contrast error on band >= 4.5 (0.0419ms)
+✔ contrast border-strong on paper >= 3 (0.0736ms)
+✔ contrast border-strong on surface >= 3 (0.0375ms)
+✔ contrast border-strong on band >= 3 (0.032ms)
+✔ contrast primary on paper >= 3 (0.0295ms)
+✔ contrast primary on surface >= 3 (0.0288ms)
+✔ contrast primary on band >= 3 (0.0333ms)
+✔ known failing accent value stays rejected (0.1974ms)
+✔ css has no external url() or @import (0.2729ms)
+✔ viewport allows zoom (1.1166ms)
+✔ site source has no forbidden pattern (no forms, fetch, subprocess, docker, secrets, inline styles) (14.0278ms)
+✔ no API route, route handler, middleware or server action exists (0.6691ms)
+✔ only error.tsx is a client component (8.161ms)
+✔ package.json has only the allowed dependencies and no publish-style script (0.7615ms)
+✔ guard catches child_process (0.1476ms)
+✔ guard catches fetch-call (0.0677ms)
+✔ guard catches form-control (0.0765ms)
+✔ guard catches server-action (0.0914ms)
+✔ guard catches docker-or-engine (0.0821ms)
+✔ guard catches secret-like (1.1312ms)
+✔ guard catches inline-style-attr (0.1108ms)
+✔ guard catches dangerous-html (0.0528ms)
+✔ guard ignores harmless text (0.0929ms)
+✔ committed sample-run.json equals what the generator produces from the evidence (no drift) (52.5931ms)
+✔ committed sample-run.json passes the schema (2.2465ms)
+✔ pre-declared comparison is recorded as failing on all five nodes; post hoc ones are labelled (1.473ms)
+✔ every claim has existing, non-empty evidence files (9.5901ms)
+✔ input hashes are the same in every successful run (1.0062ms)
+✔ schema rejects: missing schema_version (1.2626ms)
+✔ schema rejects: bad hash (uppercase) (1.609ms)
+✔ schema rejects: bad run status (1.0568ms)
+✔ schema rejects: run order changed (0.9812ms)
+✔ schema rejects: comparison row removed (1.132ms)
+✔ schema rejects: pre-declared made to pass (1.0986ms)
+✔ schema rejects: pre-declared reclassified (1.0953ms)
+✔ schema rejects: NaN-like runtime (1.3948ms)
+✔ schema rejects: claim without evidence (1.6187ms)
+✔ schema rejects: limitation cites unknown claim (1.7781ms)
+✔ schema rejects: image marked pushed (1.8544ms)
+✔ schema rejects non-objects (0.2942ms)
+✔ out/ has the folder-plus-html shape this test depends on (1.2995ms)
+✔ /sample-run serves sample-run.html (status 200, not the 404 page) (37.6055ms)
+✔ /sample-run/ with a trailing slash also serves the page (9.2861ms)
+✔ an unknown path still returns status 404 with the not-found page (9.5059ms)
+(node:25856) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///<tmp>/ReproLab/apps/web/src/lib/copy.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\<tmp>\ReproLab\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ home: structure (lang, one h1, one main, skip link first, banner, nav) (1.3318ms)
+✔ home: no forms, buttons, inputs, inline styles, external scripts or style attributes (0.3064ms)
+✔ home: forbidden claims are absent (0.238ms)
+✔ sample: structure (lang, one h1, one main, skip link first, banner, nav) (0.5408ms)
+✔ sample: no forms, buttons, inputs, inline styles, external scripts or style attributes (0.53ms)
+✔ sample: forbidden claims are absent (0.1932ms)
+✔ notFound: structure (lang, one h1, one main, skip link first, banner, nav) (0.1517ms)
+✔ notFound: no forms, buttons, inputs, inline styles, external scripts or style attributes (0.0982ms)
+✔ notFound: forbidden claims are absent (0.1012ms)
+✔ navigation lists exactly Home and Sample run, and every internal link resolves (3.6235ms)
+✔ current page link has aria-current (0.2754ms)
+✔ external links use only the two allowed hosts and rel noopener noreferrer (0.9888ms)
+✔ home: first-viewport sentence, one call to action, sections, no Run controls (0.3032ms)
+✔ sample-run: section order and the pre-declared failure comes first (0.4545ms)
+✔ sample-run: comparison tables are labelled pre_declared or post hoc, and numbers match the data (0.9294ms)
+✔ sample-run: every input and output hash, runtime and byte count shown equals the data (14.0843ms)
+✔ sample-run: invalid-model failures state exit code 0 and the post hoc caveats are present (0.2661ms)
+✔ every data-claim id on a page exists in the claims data (0.3499ms)
+✔ no run of 12 consecutive words is copied from the upstream text corpus (17.4756ms)
+✔ 404 page has an h1 and links home (0.2355ms)
+✔ table has a min-width in rem so narrow screens scroll the labelled region instead of crushing columns (1.0047ms)
+✔ table is wrapped in a horizontally scrolling region (0.3099ms)
+✔ th and td wrap only at word boundaries (break-word, never "anywhere") (0.378ms)
+✔ hash cells keep their own break rule so 64-hex strings do not widen the table (0.2232ms)
+ℹ tests 86
+ℹ suites 0
+ℹ pass 86
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 241.4578
+exit=0
+
+=== README Quick start: start (no assistant provider configured) ===
+[server output so far]
+ReproLab local start check
+OK    Node.js: v24.18.0
+OK    Docker: running
+OK    Image: reprolab-openbugs:cleanclone-0ee2ef is present
+Starting ReproLab on http://127.0.0.1:18765/ (press Ctrl+C to stop)
+ReproLab local server: http://127.0.0.1:18765/
+Open http://127.0.0.1:18765/
+$ GET /api/health
+GET /api/health -> HTTP 200 {"ok":true,"docker":"ok","image":"present","imageId":"sha256:77fad08bed60370a362f0143b23c794bde3a750497f3c0c55d79e0f0d6082946"}
+exit=0
+$ GET /api/demos (before extract-seeds)
+demo coin: offered
+demo coin-invalid: offered
+demo seeds-upstream: NOT offered (Seeds is not included. Download the OpenBUGS tarball yourself, then run scripts/extract-seeds.ps1 (or .sh) with its path to place the four Seeds files in local-data/upstream/. (missing: Seedsmodel.txt, Seedsdata.txt, Seedsinits1.txt, Seedsinits2.txt))
+exit=0
+
+$ GET /api/assistant/status (no provider)
+GET /api/assistant/status -> HTTP 200 {"status":"disabled","reason":"No language-model endpoint is configured."}
+exit=0
+
+=== README Sample run 1: Coin ===
+$ run coin
+POST /api/runs (coin) -> HTTP 202 id=42bbf2c40ba507f099ee6987b23beb57
+state: succeeded
+reason: engine finished and all expected files exist
+engineVersion: 3.2.3 rev 1012
+runtimeS: 0.032
+first engine error line in log: 		mean	sd	MC_error	val2.5pc	median	val97.5pc	start	sample
+log lines:
+  | OpenBUGS version 3.2.3 rev 1012
+  | model is syntactically correct
+  | data loaded
+  | model compiled
+  | initial values loaded and chain initialized but another chain contain uninitialized variables
+  | model is initialized
+  | 1000 updates took 0 s
+  | monitor set
+  | 10000 updates took 0 s
+  | Node statistics
+  | 		mean	sd	MC_error	val2.5pc	median	val97.5pc	start	sample
+  | 	p	0.6686	0.1298	9.654E-4	0.3935	0.6785	0.8897	1001	20000
+  | CODA files written
+files:
+  coda_CODAchain1.txt  129880 bytes  sha256=61cf508305c691626bdda15f5a48502691c2491d8a1871b10464957886749220
+  coda_CODAchain2.txt  129897 bytes  sha256=f7d470b24412c7b453ebcd6bf138b5993eaca73d2f4d4bfbb729130c1d1fc68d
+  coda_CODAindex.txt  11 bytes  sha256=806af55bcc746aea8eedda9fe9efe87a03bc46b5f2a8b642d694bbfe99a37e8e
+  data.txt  20 bytes  sha256=bb76f180aa2669847b9e0177ea04e3af9c21ecbba9eb1c780e6ae361b97b6780
+  inits1.txt  14 bytes  sha256=c4e66d090f9712e3b0a5ad32797df14c01e8fe990fe57f04893e67074685c906
+  inits2.txt  14 bytes  sha256=e5ec65a85438a273a4254338f5f6defbf50f0124f952e80deb3423ea6053530d
+  log.txt  413 bytes  sha256=9bb2038eb2149a45e687104c7c848fd0ffe60504cfa5cb1157185ed9aa1a9b22
+  model.txt  45 bytes  sha256=1777e2f32fcebe33ea45e877485d1579e44650938cca8418f9dc32d517ea600c
+  script.txt  269 bytes  sha256=6836b70b68a35a51e96a55d1ee6036f93c08c1d3c15c9d5ca53030c647449c42
+  stderr.txt  0 bytes  sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+summary label: Computed by ReproLab from the exported samples. Not a convergence or validity claim.
+summary nodes: {"p":{"mean":0.66862377,"median":0.6785,"n":20000,"q2.5":0.39348750000000005,"q97.5":0.8897,"sd":0.12977736881005048}}
+GET manifest -> HTTP 200, 4604 bytes
+manifest keys: argv, engine_version, exit_code, files, image_digest, n_chains, reason, runtime_s, script, settings, status, run_id, state, image, created_at, inputs, output_files, limits_note, summary_computed_by
+manifest image: {"tag":"reprolab-openbugs:cleanclone-0ee2ef","id":"sha256:77fad08bed60370a362f0143b23c794bde3a750497f3c0c55d79e0f0d6082946"}
+GET /results.html?id=... -> HTTP 200, h1 present: true
+exit=0
+
+=== README Sample run 2: Coin with a deliberate syntax error ===
+$ run coin-invalid
+POST /api/runs (coin-invalid) -> HTTP 202 id=354e5c978e37f87ee522e521b8cce42a
+state: engine_error
+reason: engine reported a problem: expected right parenthesis error pos 26 (error on line 3)
+engineVersion: 3.2.3 rev 1012
+runtimeS: 0.008
+first engine error line in log: expected right parenthesis error pos 26 (error on line 3)
+log lines:
+  | OpenBUGS version 3.2.3 rev 1012
+  | expected right parenthesis error pos 26 (error on line 3)
+  | model must be checked before data is loaded
+  | model must be checked before compiling
+  | model must have been compiled but not updated to be able to change RN generator
+  | model must be compiled before initial values loaded
+  | model must be compiled before initial values loaded
+  | model must be initialized before updating
+  | model must be initialized before monitors used
+  | model must be initialized before updating
+  | model must be initialized before monitors used
+  | model must be initialized before monitors used
+files:
+  data.txt  20 bytes  sha256=bb76f180aa2669847b9e0177ea04e3af9c21ecbba9eb1c780e6ae361b97b6780
+  inits1.txt  14 bytes  sha256=c4e66d090f9712e3b0a5ad32797df14c01e8fe990fe57f04893e67074685c906
+  inits2.txt  14 bytes  sha256=e5ec65a85438a273a4254338f5f6defbf50f0124f952e80deb3423ea6053530d
+  log.txt  582 bytes  sha256=680f505d34ac0f8a4bfc37a3dba022a710e900bb09ad5baa658268bc4d781bb6
+  model.txt  44 bytes  sha256=e6309b50ae4205b60de43a52f855943c5174faeaf2c537983c4fc5430a51e874
+  script.txt  269 bytes  sha256=6836b70b68a35a51e96a55d1ee6036f93c08c1d3c15c9d5ca53030c647449c42
+  stderr.txt  0 bytes  sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+summary: not available (none)
+GET manifest -> HTTP 200, 3699 bytes
+manifest keys: argv, engine_version, exit_code, files, image_digest, n_chains, reason, runtime_s, script, settings, status, run_id, state, image, created_at, inputs, output_files, limits_note
+manifest image: {"tag":"reprolab-openbugs:cleanclone-0ee2ef","id":"sha256:77fad08bed60370a362f0143b23c794bde3a750497f3c0c55d79e0f0d6082946"}
+GET /results.html?id=... -> HTTP 200, h1 present: true
+exit=0
+
+=== README Sample run 3: Seeds via extract-seeds ===
+$ powershell -ExecutionPolicy Bypass -File scripts\extract-seeds.ps1 -Tarball vendor\OpenBUGS-3.2.3.tar.gz
+MATCH     eccd496ee854a5bf519bf70f486a5e3c7049be9d508d028c0456e3a610027816  Seedsmodel.txt
+MATCH     2d12e0924474690865a9202cf3fdf67afccab97372d7dbaeb1bcb93c7b9e3e76  Seedsdata.txt
+MATCH     96e24659d8af72398e29276ef9b3f155949b1c8e3a80cf867ffef4061d2a5980  Seedsinits1.txt
+MATCH     d3b5d8fb340253676048876597ec0e6db20391e5c6463ecf64cdfbbb7c57d702  Seedsinits2.txt
+OK: four Seeds files matched the recorded hashes and were written to <tmp>\ReproLab\local-data\upstream
+exit=0
+git status --short in clone after extract-seeds: [ M docs/evidence/local-product/coin-check.txt]
+$ GET /api/demos (after extract-seeds; README says reload the Run page)
+demo coin: offered
+demo coin-invalid: offered
+demo seeds-upstream: offered
+exit=0
+$ run seeds-upstream
+POST /api/runs (seeds-upstream) -> HTTP 202 id=0471a592f6b16e48fc8fab2379858d39
+state: succeeded
+reason: engine finished and all expected files exist
+engineVersion: 3.2.3 rev 1012
+runtimeS: 1.777
+first engine error line in log: 		mean	sd	MC_error	val2.5pc	median	val97.5pc	start	sample
+log lines:
+  | OpenBUGS version 3.2.3 rev 1012
+  | model is syntactically correct
+  | data loaded
+  | model compiled
+  | initial values loaded and chain initialized but another chain contain uninitialized variables
+  | model is initialized
+  | 1000 updates took 0 s
+  | monitor set
+  | monitor set
+  | monitor set
+  | monitor set
+  | monitor set
+  | 10000 updates took 1 s
+  | Node statistics
+  | 		mean	sd	MC_error	val2.5pc	median	val97.5pc	start	sample
+  | 	alpha0	0.02839	1.776	0.1236	-0.9313	-0.5146	5.901	1001	20000
+  | 	alpha1	0.9554	4.226	0.2968	-4.577	0.1031	15.32	1001	20000
+  | 	alpha12	-0.9129	2.259	0.1516	-6.444	-0.8299	3.611	1001	20000
+  | 	alpha2	2.658	3.871	0.2725	0.8288	1.392	16.62	1001	20000
+  | 	sigma	2.316	5.992	0.4175	0.05167	0.3039	23.47	1001	20000
+  | CODA files written
+files:
+  coda_CODAchain1.txt  664609 bytes  sha256=c8c5db5473020129db4a301e45626fc7459c51c881dd6eaf53eabd11288b5660
+  coda_CODAchain2.txt  651203 bytes  sha256=f18c7189121e39306cbb14ed933afd00f7f990f7de7a33400c9a3c05da618929
+  coda_CODAindex.txt  96 bytes  sha256=a93fc634540d6d79020e7abdc1b88081350d464ba2281f1391a19188f1b67743
+  data.txt  408 bytes  sha256=2d12e0924474690865a9202cf3fdf67afccab97372d7dbaeb1bcb93c7b9e3e76
+  inits1.txt  137 bytes  sha256=96e24659d8af72398e29276ef9b3f155949b1c8e3a80cf867ffef4061d2a5980
+  inits2.txt  202 bytes  sha256=d3b5d8fb340253676048876597ec0e6db20391e5c6463ecf64cdfbbb7c57d702
+  log.txt  701 bytes  sha256=c13dd271ddf94197d737775c0faf3cb925b4b85011847718a3d1588c45e9815f
+  model.txt  387 bytes  sha256=eccd496ee854a5bf519bf70f486a5e3c7049be9d508d028c0456e3a610027816
+  script.txt  358 bytes  sha256=df6829903a3a1d087b4369f437739adc9ad2c0e6d0189ba6171f8d06aa124d08
+  stderr.txt  0 bytes  sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+summary label: Computed by ReproLab from the exported samples. Not a convergence or validity claim.
+summary nodes: {"alpha0":{"mean":0.028391275985,"median":-0.51465,"n":20000,"q2.5":-0.931305,"q97.5":5.898074999999993,"sd":1.77563746021684},"alpha1":{"mean":0.9554097863434001,"median":0.10305,"n":20000,"q2.5":-4.5771999999999995,"q97.5":15.32,"sd":4.226483020282648},"alpha12":{"mean":-0.9128815998350001,"median":-0.8299,"n":20000,"q2.5":-6.444,"q97.5":3.6090499999999954,"sd":2.258921747388806},"alpha2":{"mean":2.6575278445,"median":1.392,"n":20000,"q2.5":0.8288,"q97.5":16.61024999999998,"sd":3.8715730449359986},"sigma":{"mean":2.315673719,"median":0.30385,"n":20000,"q2.5":0.0516695,"q97.5":23.46024999999998,"sd":5.992425393305615}}
+GET manifest -> HTTP 200, 4778 bytes
+manifest keys: argv, engine_version, exit_code, files, image_digest, n_chains, reason, runtime_s, script, settings, status, run_id, state, image, created_at, inputs, output_files, limits_note, summary_computed_by
+manifest image: {"tag":"reprolab-openbugs:cleanclone-0ee2ef","id":"sha256:77fad08bed60370a362f0143b23c794bde3a750497f3c0c55d79e0f0d6082946"}
+GET /results.html?id=... -> HTTP 200, h1 present: true
+exit=0
+
+=== README Assistant setup: honest status ===
+Ollama is reachable and llama3.2:3b is listed. Restarting the server with the README Ollama variables and asking one question.
+[server output so far]
+ReproLab local start check
+OK    Node.js: v24.18.0
+OK    Docker: running
+OK    Image: reprolab-openbugs:cleanclone-0ee2ef is present
+Starting ReproLab on http://127.0.0.1:18765/ (press Ctrl+C to stop)
+ReproLab local server: http://127.0.0.1:18765/
+$ GET /api/assistant/status (Ollama configured)
+GET /api/assistant/status -> HTTP 200 {"status":"enabled","reason":"A language-model endpoint is configured and answered a health check."}
+exit=0
+$ POST /api/assistant/ask: What port does the server listen on?
+POST /api/assistant/ask -> HTTP 200 {"kind":"declined","message":"I cannot answer that from the ReproLab documentation or this run's log and manifest."}
+exit=0
+
+=== cleanup ===
+containers removed: 0
+docker rmi reprolab-openbugs:cleanclone-0ee2ef exit=0
+Test-Path <tmp> after removal: False
+containers labelled reprolab.run now: 0
+
+RESULT: PASS

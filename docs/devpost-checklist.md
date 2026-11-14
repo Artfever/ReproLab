@@ -18,7 +18,7 @@ Every entry below is DONE (with an evidence path), MISSING, or MANUAL (needs a p
 | Text description of features and functionality | MISSING | Not written for the Devpost form. Draft it from `README.md`. |
 | Hosting or deployment | DONE (none used) | See "No hosting or deployment". |
 | Real assistant test with a language model | DONE, partly | `docs/evidence/local-product/assistant-real.txt` (Ollama, llama3.2:3b, HTTP API only; the UI was not driven). |
-| Independent browser download of the OpenBUGS tarball | MANUAL | Not done by anyone other than the maintainers' own copy. A clean-clone transcript (task 13.1) is not yet produced; no file for it exists. |
+| Independent browser download of the OpenBUGS tarball | MANUAL | Not done by anyone other than the maintainers' own copy. A clean-clone run of the pushed repository passed using the local tarball copy as a stand-in for this manual step: `docs/evidence/local-product/clean-clone-pass2.txt` (pass 1, `clean-clone.txt`, failed and led to fixes). |
 | Manual keyboard and screen-reader checks | MANUAL | Not done. See `docs/evidence/local-product/ui-keyboard.md`. |
 | Demo recording | MANUAL | A person must record the real product. |
 | Confirmation of legal name for `LICENSE` | MANUAL | See `docs/evidence/local-product/license-author.txt`. |
@@ -105,7 +105,7 @@ Could not verify:
 - The licence review of OpenBUGS, its bundled library and its examples is incomplete (`docs/licensing-review.md`). This is not legal advice.
 - Manual keyboard and screen-reader checks have not been done (`docs/evidence/local-product/ui-keyboard.md`). Only Chrome was used in automated checks.
 - The assistant answer quality is weak. In the real test, the answer to a failure question said it was unclear why the run failed, even though the log contained the line "variable nn is not defined". The first request on a cold model also timed out at 60 seconds (`docs/evidence/local-product/assistant-real.txt`).
-- The independent browser download of the tarball has not been done, and the clean-clone verification (task 13.1) has no transcript yet.
+- The independent browser download of the tarball has not been done, and the clean-clone run used the maintainers' local tarball copy as a stand-in (`docs/evidence/local-product/clean-clone-pass2.txt`).
 - The demo video has not been recorded or uploaded. The YouTube link is MISSING.
 - The Devpost text description has not been written.
 - The Docker image is not distributed, so every judge must build it.

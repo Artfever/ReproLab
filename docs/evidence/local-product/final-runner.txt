@@ -1,0 +1,24 @@
+COMMAND: docker run --rm --network none -v "<repo>\services\runner:/runner-src:ro" -w /runner-src --entrypoint python3 reprolab-openbugs:3.2.3 -B -m unittest discover -v -s tests (cwd relative to <repo>)
+STARTED: 2026-11-15T03:47:34
+----- OUTPUT -----
+test_never_success_from_exit_code_alone (test_runner.ClassifyTests.test_never_success_from_exit_code_alone) ... ok
+test_missing_input_and_existing_output_dir (test_runner.CleanErrorTests.test_missing_input_and_existing_output_dir) ... ok
+test_malformed (test_runner.CodaTests.test_malformed) ... ok
+test_parse_and_summary (test_runner.CodaTests.test_parse_and_summary) ... ok
+test_select_chains (test_runner.CodaTests.test_select_chains) ... ok
+test_tolerance (test_runner.CompareTests.test_tolerance) ... ok
+test_ascii_nul_size (test_runner.InputTests.test_ascii_nul_size) ... ok
+test_manifest_round_trip (test_runner.ManifestTests.test_manifest_round_trip) ... ok
+test_unwritable_manifest_raises (test_runner.ManifestTests.test_unwritable_manifest_raises) ... ok
+test_invalid_models_fail_even_with_exit_code_zero (test_runner.RealLogTests.test_invalid_models_fail_even_with_exit_code_zero) ... ok
+test_success_log_not_tripped_by_mc_error_header (test_runner.RealLogTests.test_success_log_not_tripped_by_mc_error_header) ... ok
+test_rejects_injection_and_ranges (test_runner.ScriptTests.test_rejects_injection_and_ranges) ... ok
+test_script_order_and_values (test_runner.ScriptTests.test_script_order_and_values) ... ok
+test_timeout_kills_engine_and_reports (test_runner.TimeoutTests.test_timeout_kills_engine_and_reports) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 1.023s
+
+OK
+
+exit=0
