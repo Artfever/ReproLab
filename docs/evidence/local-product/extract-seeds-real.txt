@@ -1,0 +1,6 @@
+MATCH     eccd496ee854a5bf519bf70f486a5e3c7049be9d508d028c0456e3a610027816  Seedsmodel.txt
+MATCH     2d12e0924474690865a9202cf3fdf67afccab97372d7dbaeb1bcb93c7b9e3e76  Seedsdata.txt
+MATCH     96e24659d8af72398e29276ef9b3f155949b1c8e3a80cf867ffef4061d2a5980  Seedsinits1.txt
+MATCH     d3b5d8fb340253676048876597ec0e6db20391e5c6463ecf64cdfbbb7c57d702  Seedsinits2.txt
+OK: four Seeds files matched the recorded hashes and were written to <repo>\local-data\upstream
+exit=0
