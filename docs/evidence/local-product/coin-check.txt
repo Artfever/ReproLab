@@ -1,5 +1,5 @@
 Coin accuracy check against the analytic posterior (task 4.3)
-run id: 37827eedaf3b9ffdb3ccfde23b846e09
+run id: bc81526a1b773bb138b07ca4dfd8c5c0
 final state: succeeded
 engine: 3.2.3 rev 1012
 settings: chains=2 burnIn=1000 samples=10000 thin=1 seed=1

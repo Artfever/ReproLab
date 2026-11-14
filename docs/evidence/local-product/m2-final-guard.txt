@@ -36,7 +36,7 @@ COMMAND: powershell -NoProfile -ExecutionPolicy Bypass -File scripts\tests\test-
 [PASS] G6 Kiro hook that creates a release with no guard -> FAIL -- exit=1 expected=1 -- check-publish-paths: FAIL |   - .kiro\hooks\h.json:1: publish-style command without an earlier release-guard.ps1 call: {"command": "gh release create v1 image.tar"}
 [PASS] G7 build/run/cp only -> OK -- exit=0 expected=0 -- check-publish-paths: OK - scanned 1 file(s); no unguarded publish path found.
 [PASS] G8 Dockerfile without publish commands -> OK -- exit=0 expected=0 -- check-publish-paths: OK - scanned 1 file(s); no unguarded publish path found.
-[PASS] G9 the real repository contains no unguarded publish path -> OK -- exit=0 expected=0 -- check-publish-paths: OK - scanned 1095 file(s); no unguarded publish path found.
+[PASS] G9 the real repository contains no unguarded publish path -> OK -- exit=0 expected=0 -- check-publish-paths: OK - scanned 1107 file(s); no unguarded publish path found.
 [PASS] H1 real docs/release-decision.md unchanged by the tests -- before=6FBA6F7D53B3FC5A4D48C1EFAE594612D97D535CA2BACC2F0C2FA0C731EBF79B after=6FBA6F7D53B3FC5A4D48C1EFAE594612D97D535CA2BACC2F0C2FA0C731EBF79B
 [PASS] H2 real docs/release-decision.md contains no **APPROVED** row
 cases=39 failures=0

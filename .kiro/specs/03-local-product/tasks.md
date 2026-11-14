@@ -171,56 +171,56 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - _Requirements: 16.1 to 16.4_
     - Acceptance check: `npm.cmd run check` in `apps/web` exit 0 with at least 78 tests, output in `docs/evidence/local-product/m2-web-check.txt`; or `web-pages-gap.md` exists and `git diff --stat -- apps/web` is empty. In both cases the Seeds comparison text is unchanged (`git diff -- apps/web/content apps/web/src/components/sample-run` saved to `m2-web-sample-diff.txt` is empty).
 
-- [ ] 9. Milestone 2 close
+- [x] 9. Milestone 2 close
   - [x] 9.1 Run all suites
     - `npm.cmd test` in `apps/local`; `npm.cmd run check` in `apps/web`; Runner tests in the image; `scripts/tests/test-release-gate.ps1`; `scripts/check-publish-paths.ps1`. Save each output.
     - _Requirements: 1.5, 16.1, 17.8_
     - Acceptance check: `m2-final-local.txt`, `m2-final-web.txt`, `m2-final-runner.txt`, `m2-final-guard.txt`, `m2-final-publish-paths.txt` all show passing results and exit 0; skipped tests are listed by name in `m2-final-local.txt`.
 
-  - [ ] 9.2 Milestone 2 review and commit
+  - [x] 9.2 Milestone 2 review and commit
     - Review `git status` and `git diff` for secrets, host paths, upstream bytes and `local-data` content. Stage M2 paths explicitly. Commit `feat(local): add local OpenBUGS runner, interface, and grounded assistant`. No push.
     - _Requirements: 1.4, 7.4_
     - Acceptance check: `git log -1 --stat` and `git status --short` saved to `m2-commit.txt`; `git ls-files | Select-String -Pattern 'local-data|vendor|\.tar'` in `m2-ls-files-check.txt` prints nothing.
 
-- [ ] 10. Milestone 3: licence and notices
-  - [ ] 10.1 Add the MIT LICENSE
+- [x] 10. Milestone 3: licence and notices
+  - [x] 10.1 Add the MIT LICENSE
     - Root `LICENSE` with the SPDX MIT template text and first line after the title `Copyright (c) 2026 artfever` (read the holder from `git log -1 --format=%an`). **The user must confirm that `artfever` is the legal name** to be used as copyright holder; record the open question in the final report.
     - _Requirements: 18.1, 18.2, 18.3_
     - Acceptance check: `node scripts/check-license.mjs` (new, small) compares `LICENSE` with the embedded SPDX MIT template modulo the copyright line and prints `MIT OK`; output in `docs/evidence/local-product/license-check.txt`; `git log -1 --format=%an` output saved beside it.
 
-  - [ ] 10.2 Audit dependency licences
+  - [x] 10.2 Audit dependency licences
     - `scripts/licence-table.mjs`: reads `apps/web/package-lock.json` (`packages[*].license`), groups by identifier, lists packages with missing or unusual identifiers (for example optional `sharp` and libvips components, LGPL, or `0BSD`). Output a markdown table. Also list any other committed code with third-party origin (none expected) via `git ls-files` review.
     - _Requirements: 18.5_
     - Acceptance check: `node scripts/licence-table.mjs > docs/evidence/local-product/licence-table.md` exits 0 and the file has one row per identifier with a count; unresolved packages are listed explicitly.
 
-  - [ ] 10.3 Update `docs/third-party-notices.md`
+  - [x] 10.3 Update `docs/third-party-notices.md`
     - Component by component: ReproLab code (MIT, covers ReproLab-owned code only, no rights to OpenBUGS, BlackBox, CpcBeautifier, examples or documentation), `examples/reprolab`, `services/runner/reference/seeds_published.json`, Node dependencies (table from 10.2 with verdicts), `apps/local` (no dependencies), Worker_Image contents and Debian layers, upstream tarball held by the user, mirror caveat. Keep the open items plain: GPL v2/v3 inconsistency, tarball predates r1018, unknown `libOpenBUGS.so` revision, CpcBeautifier, TAUCS, Examples rights, no legal review. Replace the "No LICENSE file" text.
     - _Requirements: 18.4, 18.6, 18.7_
     - Acceptance check: `node --test tests/notices.test.mjs` (in `apps/local/tests`) asserts the strings `MIT`, `grants no rights`, each open item and the table heading exist; output in `docs/evidence/local-product/test-notices.txt`. MANUAL: person reads for accuracy; not legal advice.
 
-- [ ] 11. Milestone 3: install and packaging
-  - [ ] 11.1 Vendored-tarball Dockerfile and build script
+- [x] 11. Milestone 3: install and packaging
+  - [x] 11.1 Vendored-tarball Dockerfile and build script
     - Change `infra/openbugs/Dockerfile` build stage to `COPY vendor/OpenBUGS-3.2.3.tar.gz /src/openbugs.tar.gz`, `sha256sum -c` with the pinned hash, no `curl`, no `ca-certificates`, network only for Debian `apt-get`. Change `.dockerignore` to allow only the Dockerfile, the vendored tarball and the runner package. Add `scripts/build-image.ps1` and `.sh`: check the file exists, print its SHA-256 next to "the copy we tested", fail on mismatch, `docker build`; optional `-FetchMirror` / `--fetch-mirror` flag downloads from the old pinned URL into `vendor/` and prints "unauthenticated mirror copy, not upstream-verified". Copy `.scratch/gh.tar.gz` to `vendor/OpenBUGS-3.2.3.tar.gz` as a recorded stand-in for the manual step. Build under a new tag `reprolab-openbugs:3.2.3-vendored` first; do not retag the original tag.
     - _Requirements: 19.2 to 19.6_
     - Acceptance check: `scripts/build-image.ps1 -Tag reprolab-openbugs:3.2.3-vendored` output in `docs/evidence/local-product/build-image.txt` shows the hash check and a successful build with no `curl`; `docker image inspect` ID saved in `build-image-id.txt` (record whether it equals the earlier ID; a different ID is expected to be explained, not hidden); runner tests pass in the new tag (`build-image-runner-tests.txt`); `Select-String 'curl|raw.githubusercontent' infra/openbugs/Dockerfile` prints nothing. MANUAL: decide whether to retag.
 
-  - [ ] 11.2 Start and reset scripts
+  - [x] 11.2 Start and reset scripts
     - `scripts/start.ps1`/`.sh`: check Node 24.x, Docker running, image present (warn with exact fix, do not abort), then start `apps/local` on 127.0.0.1 and print the URL. `package.json` root script not required; add `npm start` in `apps/local`. `scripts/reset-local.ps1`/`.sh`: remove `local-data/runs`, `local-data/tmp` and containers labelled `reprolab.run`; never touch tracked files or `local-data/upstream`.
     - _Requirements: 19.7, 19.10_
     - Acceptance check: run `scripts/start.ps1 -CheckOnly` (prints prerequisite results and exits) into `docs/evidence/local-product/start-check.txt`; start the server through `start.ps1`, `GET /api/health` saved to `start-health.json`; `scripts/reset-local.ps1` then `git status --short` before and after are identical (`reset-git-status.txt`).
 
-  - [ ] 11.3 Tracked-file audit script and test
+  - [x] 11.3 Tracked-file audit script and test
     - `scripts/audit-tracked.mjs` implementing Requirement 20.1 to 20.4 with an injectable file list; `apps/local/tests/audit.test.mjs` synthetic failures for each rule and a pass for the real tree.
     - _Requirements: 1.4, 20.1 to 20.5_
     - Acceptance check: `node --test tests/audit.test.mjs` passes; `node scripts/audit-tracked.mjs` exit 0 output in `docs/evidence/local-product/audit-tracked.txt`.
 
-  - [ ] 11.4 Root README
+  - [x] 11.4 Root README
     - `README.md` per Requirement 19: product boundary, prerequisites with versions, clean clone, `npm ci` (where needed), independent tarball download with the prominent manual-step box, `vendor/` placement, SHA-256 of the tested copy (honest label), build, start, coin run, Seeds run through `extract-seeds`, assistant setup, tests, expected outputs, limitations, troubleshooting (Docker not running, image missing, port in use, WSL seek problem), reset, MIT scope sentence, "How Kiro shaped this" (specs `00` to `03`, steering files, hook, release gate and guard, task evidence). Every command in it appears in `scripts/` or `package.json`.
     - _Requirements: 18.4, 19.1 to 19.11_
     - Acceptance check: `node --test tests/readme.test.mjs` extracts fenced commands and asserts each referenced script and npm script exists, the required headings exist, no SourceForge checksum is claimed, and the words "authenticated upstream" never describe a mirror; output in `docs/evidence/local-product/test-readme.txt`.
 
 - [ ] 12. Milestone 3 close
-  - [ ] 12.1 Milestone 3 review and commit
+  - [-] 12.1 Milestone 3 review and commit
     - Run `node scripts/audit-tracked.mjs`, `npm.cmd test` in `apps/local`, `scripts/check-publish-paths.ps1`. Review diff; stage explicitly; commit `chore(m3): add MIT licence, notices, README, vendored build, scripts`. No push. Keep `.kiro` tracked.
     - _Requirements: 19.11, 20.1_
     - Acceptance check: outputs and `git log -1 --stat` in `docs/evidence/local-product/m3-commit.txt`; `git ls-files .kiro | Measure-Object` count in the same file is greater than 0; no `.tar.gz` or `vendor/` in `git ls-files`.

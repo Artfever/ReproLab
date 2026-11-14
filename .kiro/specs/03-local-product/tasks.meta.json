@@ -521,6 +521,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680157551
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794692151108
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794692165851
       }
     ],
     "10.1 Add the MIT LICENSE": [
@@ -528,6 +538,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680157594
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794692172100
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794693798835
       }
     ],
     "10.2 Audit dependency licences": [
@@ -535,6 +555,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680157635
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794692172336
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794693799026
       }
     ],
     "10.3 Update `docs/third-party-notices.md`": [
@@ -542,6 +572,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680157680
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794693801563
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794694021709
       }
     ],
     "11.1 Vendored-tarball Dockerfile and build script": [
@@ -549,6 +589,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680157721
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794692172428
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794693799342
       }
     ],
     "11.2 Start and reset scripts": [
@@ -556,6 +606,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680157760
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794692173386
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794693800072
       }
     ],
     "11.3 Tracked-file audit script and test": [
@@ -563,6 +623,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680157808
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794692173975
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794693800895
       }
     ],
     "11.4 Root README": [
@@ -570,6 +640,16 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680157850
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794694021946
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794694619578
       }
     ],
     "12.1 Milestone 3 review and commit": [
@@ -577,6 +657,11 @@
         "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794680157919
+      },
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794694619732
       }
     ],
     "13.1 Clean-clone verification script and run": [
@@ -668,6 +753,27 @@
         "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
         "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
         "timestamp": 1794691617466
+      }
+    ],
+    "9. Milestone 2 close": [
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794692165965
+      }
+    ],
+    "10. Milestone 3: licence and notices": [
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794694021790
+      }
+    ],
+    "11. Milestone 3: install and packaging": [
+      {
+        "executionId": "d86f1b4f-c8e1-4a73-b394-36e677f56717",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794694619629
       }
     ]
   }
