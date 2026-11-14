@@ -1,0 +1,2 @@
+canaries: <repo> | <repo> | <home> | <home>
+scan done (no match lines above means none)

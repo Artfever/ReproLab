@@ -1,0 +1,15 @@
+﻿Γ£ö create args contain exactly the Requirement 5.2 flags in order (4.912ms)
+Γ£ö no bind mount and no host path flag is ever produced (0.579ms)
+Γ£ö run id, container name and image are validated (0.6828ms)
+Γ£ö image comes from REPROLAB_IMAGE and defaults to the pinned tag (0.3554ms)
+Γ£ö runDocker never uses a shell: metacharacters stay literal arguments (164.9689ms)
+Γ£ö only docker.mjs imports child_process; docker.mjs uses shell:false (3.9125ms)
+Γä╣ tests 6
+Γä╣ suites 0
+Γä╣ pass 6
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 298.8628
+exit=0

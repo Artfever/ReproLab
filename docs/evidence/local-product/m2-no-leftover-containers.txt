@@ -1,0 +1,1 @@
+docker ps -a --filter label=reprolab.run  ->  containers listed: 0

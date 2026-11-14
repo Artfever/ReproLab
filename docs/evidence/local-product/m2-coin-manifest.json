@@ -1,0 +1,148 @@
+{
+  "argv": [
+    "/opt/openbugs/bin/OpenBUGS",
+    "-t",
+    "script.txt"
+  ],
+  "engine_version": "3.2.3 rev 1012",
+  "exit_code": 0,
+  "files": {
+    "coda_CODAchain1.txt": {
+      "bytes": 129880,
+      "sha256": "61cf508305c691626bdda15f5a48502691c2491d8a1871b10464957886749220"
+    },
+    "coda_CODAchain2.txt": {
+      "bytes": 129897,
+      "sha256": "f7d470b24412c7b453ebcd6bf138b5993eaca73d2f4d4bfbb729130c1d1fc68d"
+    },
+    "coda_CODAindex.txt": {
+      "bytes": 11,
+      "sha256": "806af55bcc746aea8eedda9fe9efe87a03bc46b5f2a8b642d694bbfe99a37e8e"
+    },
+    "data.txt": {
+      "bytes": 20,
+      "sha256": "bb76f180aa2669847b9e0177ea04e3af9c21ecbba9eb1c780e6ae361b97b6780"
+    },
+    "inits1.txt": {
+      "bytes": 14,
+      "sha256": "c4e66d090f9712e3b0a5ad32797df14c01e8fe990fe57f04893e67074685c906"
+    },
+    "inits2.txt": {
+      "bytes": 14,
+      "sha256": "e5ec65a85438a273a4254338f5f6defbf50f0124f952e80deb3423ea6053530d"
+    },
+    "log.txt": {
+      "bytes": 413,
+      "sha256": "9bb2038eb2149a45e687104c7c848fd0ffe60504cfa5cb1157185ed9aa1a9b22"
+    },
+    "model.txt": {
+      "bytes": 45,
+      "sha256": "1777e2f32fcebe33ea45e877485d1579e44650938cca8418f9dc32d517ea600c"
+    },
+    "script.txt": {
+      "bytes": 269,
+      "sha256": "6836b70b68a35a51e96a55d1ee6036f93c08c1d3c15c9d5ca53030c647449c42"
+    },
+    "stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "image_digest": "sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f",
+  "n_chains": 2,
+  "reason": "engine finished and all expected files exist",
+  "runtime_s": 0.066,
+  "script": "modelSetWD('/work/out')\nmodelCheck('model.txt')\nmodelData('data.txt')\nmodelCompile(2)\nmodelSetRN(1)\nmodelInits('inits1.txt',1)\nmodelInits('inits2.txt',2)\nmodelUpdate(1000)\nsamplesSet('p')\nmodelUpdate(10000,1)\nsamplesStats('*')\nsamplesCoda('*','coda_')\nmodelQuit('yes')\n",
+  "settings": {
+    "burn_in": 1000,
+    "monitors": [
+      "p"
+    ],
+    "samples": 10000,
+    "seed": 1,
+    "thin": 1,
+    "timeout_s": 120
+  },
+  "status": "succeeded",
+  "run_id": "02f680050f0adf7d31d6e71a702cf276",
+  "state": "succeeded",
+  "image": {
+    "tag": "reprolab-openbugs:3.2.3",
+    "id": "sha256:f65e2244463b5899308e9fd51361589de518f9a534fbc62d758e17277e76b88f"
+  },
+  "created_at": "2026-11-14T20:29:14.984Z",
+  "inputs": {
+    "model": {
+      "sha256": "1777e2f32fcebe33ea45e877485d1579e44650938cca8418f9dc32d517ea600c",
+      "bytes": 45
+    },
+    "data": {
+      "sha256": "bb76f180aa2669847b9e0177ea04e3af9c21ecbba9eb1c780e6ae361b97b6780",
+      "bytes": 20
+    },
+    "inits": [
+      {
+        "sha256": "c4e66d090f9712e3b0a5ad32797df14c01e8fe990fe57f04893e67074685c906",
+        "bytes": 14
+      },
+      {
+        "sha256": "e5ec65a85438a273a4254338f5f6defbf50f0124f952e80deb3423ea6053530d",
+        "bytes": 14
+      }
+    ]
+  },
+  "output_files": [
+    {
+      "name": "coda_CODAchain1.txt",
+      "bytes": 129880,
+      "sha256": "61cf508305c691626bdda15f5a48502691c2491d8a1871b10464957886749220"
+    },
+    {
+      "name": "coda_CODAchain2.txt",
+      "bytes": 129897,
+      "sha256": "f7d470b24412c7b453ebcd6bf138b5993eaca73d2f4d4bfbb729130c1d1fc68d"
+    },
+    {
+      "name": "coda_CODAindex.txt",
+      "bytes": 11,
+      "sha256": "806af55bcc746aea8eedda9fe9efe87a03bc46b5f2a8b642d694bbfe99a37e8e"
+    },
+    {
+      "name": "data.txt",
+      "bytes": 20,
+      "sha256": "bb76f180aa2669847b9e0177ea04e3af9c21ecbba9eb1c780e6ae361b97b6780"
+    },
+    {
+      "name": "inits1.txt",
+      "bytes": 14,
+      "sha256": "c4e66d090f9712e3b0a5ad32797df14c01e8fe990fe57f04893e67074685c906"
+    },
+    {
+      "name": "inits2.txt",
+      "bytes": 14,
+      "sha256": "e5ec65a85438a273a4254338f5f6defbf50f0124f952e80deb3423ea6053530d"
+    },
+    {
+      "name": "log.txt",
+      "bytes": 413,
+      "sha256": "9bb2038eb2149a45e687104c7c848fd0ffe60504cfa5cb1157185ed9aa1a9b22"
+    },
+    {
+      "name": "model.txt",
+      "bytes": 45,
+      "sha256": "1777e2f32fcebe33ea45e877485d1579e44650938cca8418f9dc32d517ea600c"
+    },
+    {
+      "name": "script.txt",
+      "bytes": 269,
+      "sha256": "6836b70b68a35a51e96a55d1ee6036f93c08c1d3c15c9d5ca53030c647449c42"
+    },
+    {
+      "name": "stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "limits_note": "Local run of the OpenBUGS command-line workflow. A finished run is not a validated scientific result.",
+  "summary_computed_by": "ReproLab services/runner coda.py"
+}
