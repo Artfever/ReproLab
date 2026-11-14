@@ -1,0 +1,44 @@
+COMMAND: powershell -NoProfile -ExecutionPolicy Bypass -File scripts\tests\test-release-gate.ps1 (cwd relative to <repo>)
+----- OUTPUT -----
+[PASS] A1 real decision record + final local image digest -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - gate G1 status is 'UNMET', must be MET |   - gate G2 status is 'UNMET', must be MET ...
+[PASS] A2 real decision record reports unmet gates -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - gate G1 status is 'UNMET', must be MET |   - gate G2 status is 'UNMET', must be MET ...
+[PASS] A3 real decision record reports no row for the digest -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - gate G1 status is 'UNMET', must be MET |   - gate G2 status is 'UNMET', must be MET ...
+[PASS] B1 no -ImageDigest -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - no -ImageDigest given |   - gate G1 status is 'UNMET', must be MET |   - gate G2 sta...
+[PASS] B2 malformed digest (short) -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - image digest is not a full lower-case sha256:<64 hex> value: 'sha256:abc' |   - gate...
+[PASS] B3 malformed digest (upper case) -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - image digest is not a full lower-case sha256:<64 hex> value: 'sha256:AAAAAAAAAAAAAAA...
+[PASS] B4 digest given as image tag -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - image digest is not a full lower-case sha256:<64 hex> value: 'reprolab-openbugs:3.2....
+[PASS] B5 decision file missing -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - decision record missing: <tmp>\nope.md
+[PASS] B6 decision file empty -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - decision record is empty
+[PASS] B7 decision file without gate table or log -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - no '## Gate conditions' section |   - no '## Decision log' section
+[PASS] B8 internal error (invalid repo root path) -> exit 2, still non-zero -- exit=2 expected=2 -- release-guard: ERROR (treated as BLOCKED): Illegal characters in path.
+[PASS] C1 gates MET but no Decision log row -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - no Decision log row names exactly this image digest
+[PASS] C2 NO-GO row for the digest -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - latest Decision log row for this digest is 'NO-GO', not APPROVED
+[PASS] C3 APPROVED row for a DIFFERENT digest -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - no Decision log row names exactly this image digest
+[PASS] C4 APPROVED row with abbreviated digest -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - no Decision log row names exactly this image digest
+[PASS] C5 approval later revoked by a NO-GO row -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - latest Decision log row for this digest is 'NO-GO', not APPROVED
+[PASS] C6 APPROVED but placeholder decider -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - decider is empty or a placeholder: 'review session'
+[PASS] C7 decision text not exactly APPROVED -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - latest Decision log row for this digest is 'approved-ish', not APPROVED
+[PASS] D1 APPROVED, linked evidence files do not exist -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - G1 evidence file does not exist: docs/evidence/g1.txt |   - G2 evidence file does no...
+[PASS] D2 APPROVED, evidence cells are prose without file links -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - G1 evidence cell has no file link in backticks: 'partial' |   - G2 evidence cell has...
+[PASS] D3 APPROVED, G3 evidence cell empty -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - G3 evidence cell has no file link in backticks: ''
+[PASS] D4 APPROVED, one evidence file is empty -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - G2 evidence file is empty: docs/evidence/g2.txt
+[PASS] D5 APPROVED, evidence link escapes the repo -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - G1 evidence link must be repo-relative without '..': ../outside.txt
+[PASS] D6 APPROVED, evidence link is an absolute path -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - G1 evidence link must be repo-relative without '..': C:/Windows/win.ini
+[PASS] E1 valid APPROVED row but gates UNMET -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - gate G1 status is 'UNMET', must be MET |   - gate G2 status is 'UNMET', must be MET ...
+[PASS] F1 SYNTHETIC GO fixture (NO-GO then APPROVED, gates MET, evidence present) -> exit 0 -- exit=0 expected=0 -- release-guard: APPROVED for sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa by the Decision log row in <tmp>\f1\docs\release-decision.md
+[PASS] F2 same synthetic GO fixture, different digest -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - no Decision log row names exactly this image digest
+[PASS] F3 same synthetic GO fixture asked about the real image digest -> BLOCKED -- exit=1 expected=1 -- release-guard: BLOCKED - do not publish, distribute, export or share the image. |   - no Decision log row names exactly this image digest
+[PASS] G1 docker push with no guard -> FAIL -- exit=1 expected=1 -- check-publish-paths: FAIL |   - scripts\publish.ps1:1: publish-style command without an earlier release-guard.ps1 call: docker push registry.example/x:1
+[PASS] G2 guard call before docker push -> OK -- exit=0 expected=0 -- check-publish-paths: OK - scanned 1 file(s); no unguarded publish path found.
+[PASS] G3 guard call AFTER docker push -> FAIL -- exit=1 expected=1 -- check-publish-paths: FAIL |   - scripts\publish.ps1:1: publish-style command without an earlier release-guard.ps1 call: docker push registry.example/x:1
+[PASS] G4 guard only mentioned in a comment -> FAIL -- exit=1 expected=1 -- check-publish-paths: FAIL |   - scripts\publish.ps1:2: publish-style command without an earlier release-guard.ps1 call: docker save -o img.tar x
+[PASS] G5 CI workflow that pushes with no guard -> FAIL -- exit=1 expected=1 -- check-publish-paths: FAIL |   - .github\workflows\release.yml:4: publish-style command without an earlier release-guard.ps1 call: - uses: docker/build-push-action@v5 |   ...
+[PASS] G6 Kiro hook that creates a release with no guard -> FAIL -- exit=1 expected=1 -- check-publish-paths: FAIL |   - .kiro\hooks\h.json:1: publish-style command without an earlier release-guard.ps1 call: {"command": "gh release create v1 image.tar"}
+[PASS] G7 build/run/cp only -> OK -- exit=0 expected=0 -- check-publish-paths: OK - scanned 1 file(s); no unguarded publish path found.
+[PASS] G8 Dockerfile without publish commands -> OK -- exit=0 expected=0 -- check-publish-paths: OK - scanned 1 file(s); no unguarded publish path found.
+[PASS] G9 the real repository contains no unguarded publish path -> OK -- exit=0 expected=0 -- check-publish-paths: OK - scanned 1095 file(s); no unguarded publish path found.
+[PASS] H1 real docs/release-decision.md unchanged by the tests -- before=6FBA6F7D53B3FC5A4D48C1EFAE594612D97D535CA2BACC2F0C2FA0C731EBF79B after=6FBA6F7D53B3FC5A4D48C1EFAE594612D97D535CA2BACC2F0C2FA0C731EBF79B
+[PASS] H2 real docs/release-decision.md contains no **APPROVED** row
+cases=39 failures=0
+
+exit=0

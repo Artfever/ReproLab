@@ -1,0 +1,5 @@
+COMMAND: powershell -NoProfile -ExecutionPolicy Bypass -File scripts\check-publish-paths.ps1 (cwd relative to <repo>)
+----- OUTPUT -----
+check-publish-paths: OK - scanned 1098 file(s); no unguarded publish path found.
+
+exit=0

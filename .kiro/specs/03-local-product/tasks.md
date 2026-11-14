@@ -70,7 +70,7 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - _Requirements: 9.1, 9.2, 9.3, 9.5_
     - Acceptance check: `node --test tests/examples.test.mjs` (new, in `apps/local/tests`) passes: files exist, are ASCII, within size caps, pass `validateRunRequest` when assembled; the invalid model has unbalanced parentheses; output in `docs/evidence/local-product/test-examples.txt`.
 
-- [ ] 3. Server and container execution
+- [x] 3. Server and container execution
   - [x] 3.1 Implement the server skeleton
     - `src/server.mjs`: bind `127.0.0.1` on `REPROLAB_PORT` (default 8765, reject any bind-address setting), Host and Origin checks, security headers, 1 MiB body reader, JSON parse errors, 405, static serving from `apps/local/public` with traversal protection, a route table with one file per route group under `src/routes/` (`health.mjs`, `demos.mjs`, `runs.mjs`, `assistant.mjs`) returning 501 until later tasks fill them. Export `createServer(deps)` taking injected `docker`, `runs`, `provider` for tests.
     - _Requirements: 3.1 to 3.10_
@@ -86,7 +86,7 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - _Requirements: 5.8, 5.9, 5.10, 5.11, 6.1 to 6.10, 7.1 to 7.7, 8.2_
     - Acceptance check: `node --test tests/runs.test.mjs`; output in `docs/evidence/local-product/test-runs.txt`.
 
-  - [ ] 3.4 Real container smoke run (coin model)
+  - [x] 3.4 Real container smoke run (coin model)
     - Start the server (`control_pwsh_process`, `node src/server.mjs` in `apps/local`), POST the coin Run through the HTTP API with a small script `apps/local/scripts/smoke-run.mjs`, poll to completion, save the final JSON, manifest and log. Confirm the open risk in `design.md` (root-owned files from `docker cp`). If it fails, fix `docker.mjs` (for example set ownership through the tar header) and rerun.
     - _Requirements: 5.2 to 5.5, 6.2, 8.1 to 8.4_
     - Acceptance check: `docs/evidence/local-product/m2-coin-run.json`, `m2-coin-manifest.json`, `m2-coin-log.txt` show state `succeeded`, engine version `3.2.3 rev 1012`, CODA files with SHA-256; `docker ps -a --filter label=reprolab.run` in `m2-no-leftover-containers.txt` lists no container; a grep for the repository path in the three files prints nothing (`m2-canary.txt`).
@@ -96,7 +96,7 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - _Requirements: 17.7_
     - Acceptance check: either `runner-tests-after-change.txt` shows all tests including the new one passing in the image, or `runner-no-change.txt` exists.
 
-- [ ] 4. Demonstrations
+- [x] 4. Demonstrations
   - [x] 4.1 Implement `/api/demos`
     - `src/demos.mjs`, `src/routes/demos.mjs`: coin, coin-invalid, and "Seeds (your own upstream copy)" only when all four files exist in `local-data/upstream/` and match the hashes in `docs/evidence/input_hashes_upstream_examples.txt` (parsed at runtime). Demo entries carry the assembled Run_Request. Seeds entry carries the historical label and, when absent, a `missingReason` field.
     - _Requirements: 9.7, 10.4, 10.5, 10.6_
@@ -107,33 +107,33 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - _Requirements: 10.1, 10.2, 10.3_
     - Acceptance check: `scripts/tests/test-extract-seeds.ps1` builds a synthetic tarball from ReproLab text with wrong content, runs the script, expects non-zero exit and an empty `local-data/upstream/`; output in `docs/evidence/local-product/test-extract-seeds.txt`. Real run (uses `.scratch/gh.tar.gz` as the local copy): `scripts/extract-seeds.ps1 -Tarball .scratch/gh.tar.gz` output in `extract-seeds-real.txt` shows four matched hashes; `git status --short` in `extract-seeds-git.txt` shows `local-data/` not listed.
 
-  - [ ] 4.3 Coin accuracy check against the analytic posterior
+  - [x] 4.3 Coin accuracy check against the analytic posterior
     - `apps/local/tests/coin-check.test.mjs`: runs the coin model (2 chains, burn-in 1000, samples 10000, seed 1) through the real HTTP API, reads the summary, compares pooled mean and sd of `p` with 0.66667 and 0.13074, tolerance 0.01 absolute (fixed in the test source before the first run). Writes mean, sd, differences and the verdict to `docs/evidence/local-product/coin-check.txt`. Skips loudly when Docker or the image is missing.
     - _Requirements: 9.4, 9.5, 9.6, 17.6_
     - Acceptance check: `node --test tests/coin-check.test.mjs` exits 0; `coin-check.txt` shows the actual numbers. If it fails, keep the failing record, investigate (do not widen the tolerance to pass), and report.
 
-- [ ] 5. Local interface
+- [x] 5. Local interface
   - [x] 5.1 Shell, styles and static pages
     - `apps/local/public/`: `index.html` (Home), `run.html`, `results.html`, `how-it-works.html`, `docs.html`, `limitations.html`, `privacy.html`, `terms.html`, `styles.css`. Shared header, skip link, nav, footer, one `h1` each. Wording per Requirements 1.1, 1.2, 15.2, 15.3, 15.4. No remote resource, no inline script.
     - _Requirements: 1.1, 1.2, 15.1 to 15.7_
     - Acceptance check: `node --test tests/pages.test.mjs` parses each file for: one `h1`, `lang`, skip link first, `nav[aria-label]`, no `http(s)://` resource URL except documented link text, required sentences present, no `<script>` without `src`; output in `docs/evidence/local-product/test-pages.txt`. A contrast test (WCAG formula, copied approach from `apps/web/tests/helpers/contrast.mjs`, rewritten here) checks every colour pair in `styles.css` against 4.5:1 (3:1 for large text and non-text).
 
-  - [ ] 5.2 Run page with validation messages
+  - [x] 5.2 Run page with validation messages
     - `run.html` plus `app.js` module: demo picker, file inputs with names and sizes, monitors, settings with range hints, chains selector, client-side checks mirroring `validate.mjs` (shared via a copied constants block tested for equality), call `/api/validate` before submit, show problems next to fields, focus first problem, submit, then redirect to `results.html?id=<id>`.
     - _Requirements: 4.7, 4.8, 8.7, 11.1 to 11.5_
     - Acceptance check: `node --test tests/ui-logic.test.mjs` runs `app.js` pure helpers (exported for test) for each message; MANUAL: keyboard-only pass recorded in `docs/evidence/local-product/ui-keyboard.md`.
 
-  - [ ] 5.3 Results page
+  - [x] 5.3 Results page
     - `results.html` and `results.js`: state badge, details, bounded log with truncation note, file table (caption, scope), manifest download, summary table with the required label, aria-live status region, polling 1 to 2 s, `textContent` only.
     - _Requirements: 8.1 to 8.8_
     - Acceptance check: `node --test tests/ui-logic.test.mjs` extended: log truncation note, no HTML interpretation (a log line containing `<img onerror>` stays text), summary label present, summary absent shows the reason; output in `docs/evidence/local-product/test-ui-logic.txt`.
 
-  - [ ] 5.4 Responsive and accessibility review
+  - [x] 5.4 Responsive and accessibility review
     - With the server running, capture headless screenshots of every page at 1280x800 and 390x844 and of Run and Results at 320 px width into `docs/evidence/local-product/shots/local-*.png`, read them, and write `local-ui-review.md` (overflow, focus, labels, contrast). Fix real defects.
     - _Requirements: 15.5, 15.6_
     - Acceptance check: PNGs exist; `local-ui-review.md` lists each page and finding. MANUAL: screen reader and 200% zoom check by a person, recorded as done or not done.
 
-- [ ] 6. Grounded assistant
+- [x] 6. Grounded assistant
   - [x] 6.1 Write the assistant documents
     - `docs/assistant/{setup,running,validation,states,files,assistant,limitations,privacy}.md`, original ReproLab text, `##` headings per topic, each passage short. State facts only as true of this repository (limits, states, flags, files). No upstream text.
     - _Requirements: 12.1, 12.2, 12.9_
@@ -144,23 +144,23 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - _Requirements: 12.3 to 12.8_
     - Acceptance check: `node --test tests/retrieve.test.mjs`; output in `docs/evidence/local-product/test-retrieve.txt`, including the printed constants.
 
-  - [ ] 6.3 Provider client, answer verification and ask route
+  - [x] 6.3 Provider client, answer verification and ask route
     - `assistant/provider.mjs`, `assistant/answer.mjs`, `src/routes/assistant.mjs`: env-only config, URL validation, 60 s timeout, 64 KiB cap, error classes, citation verification, fixed Decline_Message, key scrubbing. `tests/helpers/fake-provider.mjs` is the Fake_Provider (test-only). Tests: retrieval ranking reaches the prompt; cited answer shown with source; unsupported question declined with the fake's call count 0; uncited answer rejected; wrongly cited answer rejected; connection refused, timeout, 500, malformed JSON; the key never appears in any response, error, log capture or manifest; validity or convergence question declined.
     - _Requirements: 12.6, 13.1 to 13.10_
     - Acceptance check: `node --test tests/assistant.test.mjs`; output in `docs/evidence/local-product/test-assistant.txt`.
 
-  - [ ] 6.4 Assistant status and interface
+  - [x] 6.4 Assistant status and interface
     - `src/routes/assistant.mjs` status handler with 3 s probe and 10 s cache; assistant panel in `run.html` and `results.html` (or a shared include): disabled box with reason, aria-live region, citations list, model-generated label.
     - _Requirements: 13.5, 14.1 to 14.6_
     - Acceptance check: `node --test tests/assistant-status.test.mjs`: no config gives `disabled` with the required reason; Fake_Provider up gives `enabled`; Fake_Provider down gives `disabled` unreachable; response never contains the key or a URL path; UI helper test shows disabled textarea and reason; output in `docs/evidence/local-product/test-assistant-status.txt`.
 
-  - [ ] 6.5 Real provider end-to-end test (MANUAL)
+  - [x] 6.5 Real provider end-to-end test (MANUAL)
     - MANUAL: with Ollama running at `http://127.0.0.1:11434/v1` and a pulled model (or a user-supplied key through environment variables, never written to a file), ask three questions through the UI: one answerable from `docs/assistant`, one about a finished run's log, one unsupported. Save the status JSON and the three responses (key removed) to `docs/evidence/local-product/assistant-real.txt`. If no provider is available, write `NOT EXERCISED: <reason>` in that file.
     - _Requirements: 13.11_
     - Acceptance check: `assistant-real.txt` exists and states exercised or `NOT EXERCISED`; a grep for `sk-` and `Bearer` over `docs/evidence/local-product` prints nothing (`assistant-real-grep.txt`).
 
-- [ ] 7. User-journey test
-  - [ ] 7.1 Drive the real API against the real image
+- [x] 7. User-journey test
+  - [x] 7.1 Drive the real API against the real image
     - `apps/local/tests/journey.test.mjs`: probe Docker and image; if missing, print `SKIPPED: <what is missing>` to stderr and `t.skip`. Otherwise start the server on port 0, then: validate (bad then good), coin Run to `succeeded` with summary and manifest checks, invalid-syntax Run to `engine_error` with the engine error line, undefined-variable Run to `engine_error`, 3 s timeout Run to `timed_out`, busy rejection while a Run is running, then canary scan of all collected responses and `docker ps -a --filter label=reprolab.run` empty.
     - _Requirements: 5.8, 5.9, 6.2 to 6.9, 7.4, 17.5, 17.6_
     - Acceptance check: `npm.cmd test` in `apps/local` exit 0, output in `docs/evidence/local-product/test-journey.txt` showing the journey test passed (not skipped). Also run once with the image tag set to a missing tag via `REPROLAB_IMAGE=reprolab-openbugs:absent` and save the loud skip output to `test-journey-skipped.txt`.
@@ -172,7 +172,7 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - Acceptance check: `npm.cmd run check` in `apps/web` exit 0 with at least 78 tests, output in `docs/evidence/local-product/m2-web-check.txt`; or `web-pages-gap.md` exists and `git diff --stat -- apps/web` is empty. In both cases the Seeds comparison text is unchanged (`git diff -- apps/web/content apps/web/src/components/sample-run` saved to `m2-web-sample-diff.txt` is empty).
 
 - [ ] 9. Milestone 2 close
-  - [ ] 9.1 Run all suites
+  - [x] 9.1 Run all suites
     - `npm.cmd test` in `apps/local`; `npm.cmd run check` in `apps/web`; Runner tests in the image; `scripts/tests/test-release-gate.ps1`; `scripts/check-publish-paths.ps1`. Save each output.
     - _Requirements: 1.5, 16.1, 17.8_
     - Acceptance check: `m2-final-local.txt`, `m2-final-web.txt`, `m2-final-runner.txt`, `m2-final-guard.txt`, `m2-final-publish-paths.txt` all show passing results and exit 0; skipped tests are listed by name in `m2-final-local.txt`.

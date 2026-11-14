@@ -1,0 +1,19 @@
+COMMAND: powershell -NoProfile -ExecutionPolicy Bypass -File scripts\tests\test-extract-seeds.ps1 (cwd relative to <repo>)
+----- OUTPUT -----
+PASS  ps1 wrong content: exit code is non-zero
+PASS  ps1 wrong content: output directory is empty
+PASS  ps1 wrong content: reports MISMATCH
+PASS  ps1 missing member: exit code is non-zero
+PASS  ps1 missing member: output directory is empty
+PASS  ps1 missing member: names the missing file
+PASS  ps1 not a tarball: exit code is non-zero
+PASS  ps1 not a tarball: output directory is empty
+PASS  sh wrong content: exit code is non-zero
+PASS  sh wrong content: output directory is empty
+PASS  sh missing member: exit code is non-zero
+PASS  sh missing member: output directory is empty
+PASS  sh not a tarball: exit code is non-zero
+PASS  sh not a tarball: output directory is empty
+RESULT: all checks passed
+
+exit=0
