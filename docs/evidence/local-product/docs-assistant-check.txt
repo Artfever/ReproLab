@@ -1,0 +1,10 @@
+reference files scanned: 214
+setup: 6 passages, longest 421
+running: 6 passages, longest 419
+validation: 7 passages, longest 353
+states: 7 passages, longest 604
+files: 7 passages, longest 432
+assistant: 7 passages, longest 506
+limitations: 8 passages, longest 432
+privacy: 6 passages, longest 579
+PASS

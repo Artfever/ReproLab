@@ -1,0 +1,29 @@
+CONSTANTS TOP_K=5 MIN_SCORE=2 MAX_QUESTION_CHARS=500 MAX_CONTEXT_CHARS=6000
+??? constants are pinned and printed (1.4802ms)
+??? TOP_K=5 MIN_SCORE=2 MAX_QUESTION_CHARS=500 MAX_CONTEXT_CHARS=6000
+??? top passage for "What port does the server listen on?" is setup-04 (2.2936ms)
+??? top passage for "Why did my run end in timed_out?" is states-04 (0.6195ms)
+??? top passage for "Where is my API key stored?" is privacy-04 (0.5536ms)
+??? top passage for "How do I delete saved runs?" is privacy-06 (0.5341ms)
+??? top passage for "Does the assistant tell me if my model converged?" is assistant-02 (0.7273ms)
+??? a question unrelated to the corpus returns an empty list (1.4351ms)
+??? same input gives the same output when run twice (2.6555ms)
+??? ties are broken by id regardless of input order (0.5334ms)
+??? at most TOP_K passages are returned (0.7065ms)
+??? file passage ids are stable, two-digit, in document order and sourced only from docs/assistant (1.7257ms)
+??? splitSections splits only at second-level headings and ignores the preamble (0.1754ms)
+??? Run passages use run-log-L<n> and run-manifest-<field> ids (0.3332ms)
+??? a Run log line is retrievable with its line id (2.5702ms)
+??? Run passages are bounded in count and length (1.5186ms)
+??? question length is bounded at 500 characters (0.983ms)
+??? context is bounded at 6000 characters and passages are never truncated (0.8618ms)
+??? tokenizer lowercases, keeps underscores and drops stop words (0.1068ms)
+??? tests 18
+??? suites 0
+??? pass 18
+??? fail 0
+??? cancelled 0
+??? skipped 0
+??? todo 0
+??? duration_ms 110.1051
+

@@ -1,0 +1,15 @@
+??? all eight required documents exist and are non-empty (3.3709ms)
+??? documents are pure ASCII (3.5117ms)
+??? every document has at least one second-level heading passage (2.1292ms)
+??? every passage is under 1200 characters (1.6454ms)
+??? every passage id is unique and of the form <stem>-NN (1.4036ms)
+??? no 12-word window is shared with docs/evidence/licensing/*.txt (13.7158ms)
+??? tests 6
+??? suites 0
+??? pass 6
+??? fail 0
+??? cancelled 0
+??? skipped 0
+??? todo 0
+??? duration_ms 116.4858
+
