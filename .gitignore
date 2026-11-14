@@ -22,3 +22,8 @@ node_modules/
 
 # Scratch output from local tools
 *.log
+
+# Local product (03-local-product)
+local-data/
+vendor/
+apps/local/node_modules/
