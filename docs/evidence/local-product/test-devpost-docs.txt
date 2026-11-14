@@ -1,0 +1,12 @@
+﻿Γ£ö required rows are present (1.1275ms)
+Γ£ö the YouTube row is MISSING and no row claims the video is DONE (0.8792ms)
+Γ£ö every backticked repository path exists (5.483ms)
+Γä╣ tests 3
+Γä╣ suites 0
+Γä╣ pass 3
+Γä╣ fail 0
+Γä╣ cancelled 0
+Γä╣ skipped 0
+Γä╣ todo 0
+Γä╣ duration_ms 100.1314
+exit=0
