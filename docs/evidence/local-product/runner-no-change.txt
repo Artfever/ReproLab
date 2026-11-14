@@ -1,0 +1,43 @@
+Task 3.5 decision: NO RUNNER CHANGE. No code was changed and no test was added.
+This is a no-op completion of a conditional task.
+
+Basis and limits of this decision
+- Tasks 3.3 and 3.4 have not been executed. apps/local/src/runs.mjs and
+  docker.mjs contain no references to the runner, the manifest or summarize
+  (grep for "summarize|manifest|reprolab_runner" under apps/local/src returned
+  no matches). So the decision rests on design.md plus the current Runner
+  source, not on observed behaviour of a real smoke run (task 3.4).
+- If task 3.3 or 3.4 later shows a Runner gap, reopen this task and record the
+  gap here. No Runner test was run for this task (no code changed); the last
+  Runner test result is docs/evidence/local-product/m1-runner-tests.txt (task 1.2).
+
+What design.md needs from the Runner, and where it already exists
+(services/runner/reprolab_runner/cli.py, adapter.py)
+1. `python3 -m reprolab_runner.cli run --model --data --inits ... --monitor ...
+   --burn-in --samples --thin --seed --timeout --out`: present (cli.py lines 18-28).
+   Design container command uses exactly these flags. Runner timeout accepts
+   1..3600; the local 1..300 cap is enforced in the Node validator, as the
+   design states.
+2. Manifest with status, reason, argv, script, exit_code, runtime_s,
+   engine_version, image_digest, settings, n_chains, files (name -> sha256,
+   bytes): present (adapter.py lines 207-221, written to manifest.json).
+   State mapping (succeeded / failed / timed_out) comes from classify() in
+   adapter.py, which design.md reuses on purpose.
+3. Exit codes: run returns 0 on succeeded, 1 otherwise; summarize/compare
+   return 3 on RunnerError or CodaParseError (error text on stderr).
+   The server decides state from manifest.json, and treats "no manifest" as
+   runner_error with the last stderr lines, so it does not depend on a new
+   stable exit code.
+4. Machine-readable summary: `cli summarize --dir <dir>` already prints JSON
+   (sort_keys) on stdout, and `--per-chain` exists. The design's second
+   container runs exactly `python3 -m reprolab_runner.cli summarize --dir /work/in`.
+   No new `--summary-json` flag is needed.
+5. Image digest: read from the REPROLAB_IMAGE_DIGEST environment variable
+   (cli.py line 41), which the design passes with -e.
+
+Reasons for no change
+- Every Runner interface the design calls already exists and is covered by the
+  14 existing tests (m1-runner-tests.txt).
+- Requirement 17.7 and the task allow a change only when 3.3/3.4 show a need.
+  Changing the Runner now would be speculative and would alter the image
+  contents before the rebuild in task 11.1.

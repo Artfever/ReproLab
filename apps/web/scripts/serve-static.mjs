@@ -14,7 +14,11 @@ export function createServer() {
     if (rel.includes('..')) { res.writeHead(400).end('bad path'); return; }
     let file = path.join(root, rel);
     try {
-      if ((await stat(file)).isDirectory()) file = path.join(file, 'index.html');
+      if ((await stat(file)).isDirectory()) {
+        // Next static export writes /x.html next to an /x/ directory of data files.
+        const index = path.join(file, 'index.html');
+        file = await stat(index).then(() => index, () => file.replace(/[\\/]+$/, '') + '.html');
+      }
     } catch { if (!path.extname(file)) file += '.html'; }
     try {
       const body = await readFile(file);

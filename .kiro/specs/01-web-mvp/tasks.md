@@ -295,7 +295,7 @@ Task checkboxes stay open until each task's own acceptance evidence exists or th
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5, 8.8_
     - Acceptance check: `node --test tests/render.test.mjs`; evidence in `apps/web/evidence/test-render.txt`.
 
-  - [ ] 8.15 Run `npm run check` and record it (slice 1)
+  - [x] 8.15 Run `npm run check` and record it (slice 1)
     - Run from `apps/web`: `npm.cmd run check` (lint, typecheck, build with no environment variable set for the build, then all tests). Also run `npm.cmd run start-static` briefly to confirm `out/` is served, then stop it. Fix failures before ticking; do not skip or loosen a test.
     - _Requirements: 8.6, 8.7, 9.8, 9.10, 10.1, 10.2, 12.2, 12.8_
     - Acceptance check: `npm.cmd run check` exits 0; evidence file `apps/web/evidence/check.txt` with the complete output and the exit code.

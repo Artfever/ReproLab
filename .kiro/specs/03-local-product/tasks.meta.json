@@ -1,0 +1,430 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Copy the recorded web check evidence": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680154915
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680169269
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680220432
+      }
+    ],
+    "1.2 Run the Runner unit tests inside the image": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680155894
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680220514
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794681652815
+      }
+    ],
+    "1.3 Run the release-guard and publish-path tests": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680155999
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794681675076
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685428997
+      }
+    ],
+    "1.4 Local browser review of `apps/web`": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156150
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794681678088
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685429206
+      }
+    ],
+    "1.5 Reconcile `01-web-mvp/tasks.md` and fix real defects": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156205
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685501334
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685710328
+      }
+    ],
+    "1.6 Milestone 1 review and commit": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156263
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685718941
+      }
+    ],
+    "2.1 Scaffold `apps/local`": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156306
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680220592
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794681667342
+      }
+    ],
+    "2.2 Implement `validate.mjs` with tests": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156360
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685501593
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685710431
+      }
+    ],
+    "2.3 Implement `sanitize.mjs` with tests": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156407
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685502422
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685711207
+      }
+    ],
+    "2.4 Write the ReproLab demonstration models": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156453
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685503208
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685711880
+      }
+    ],
+    "3.1 Implement the server skeleton": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156502
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685719005
+      }
+    ],
+    "3.2 Implement `docker.mjs` and the flag-list test": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156550
+      }
+    ],
+    "3.3 Implement run lifecycle, manifest and routes": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156600
+      }
+    ],
+    "3.4 Real container smoke run (coin model)": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156667
+      }
+    ],
+    "3.5 Runner change and Python test (conditional)": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156740
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685444505
+      },
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685495705
+      }
+    ],
+    "4.1 Implement `/api/demos`": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156802
+      }
+    ],
+    "4.2 Write the Seeds extraction scripts": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156841
+      }
+    ],
+    "4.3 Coin accuracy check against the analytic posterior": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156904
+      }
+    ],
+    "5.1 Shell, styles and static pages": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156960
+      }
+    ],
+    "5.2 Run page with validation messages": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680156998
+      }
+    ],
+    "5.3 Results page": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157033
+      }
+    ],
+    "5.4 Responsive and accessibility review": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157076
+      }
+    ],
+    "6.1 Write the assistant documents": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157122
+      }
+    ],
+    "6.2 Corpus and retrieval": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157169
+      }
+    ],
+    "6.3 Provider client, answer verification and ask route": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157212
+      }
+    ],
+    "6.4 Assistant status and interface": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157261
+      }
+    ],
+    "6.5 Real provider end-to-end test (MANUAL)": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157341
+      }
+    ],
+    "7.1 Drive the real API against the real image": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157396
+      }
+    ],
+    "8.1 Add static pages to `apps/web` if cheap, else record the gap": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157441
+      }
+    ],
+    "9.1 Run all suites": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157489
+      }
+    ],
+    "9.2 Milestone 2 review and commit": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157551
+      }
+    ],
+    "10.1 Add the MIT LICENSE": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157594
+      }
+    ],
+    "10.2 Audit dependency licences": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157635
+      }
+    ],
+    "10.3 Update `docs/third-party-notices.md`": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157680
+      }
+    ],
+    "11.1 Vendored-tarball Dockerfile and build script": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157721
+      }
+    ],
+    "11.2 Start and reset scripts": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157760
+      }
+    ],
+    "11.3 Tracked-file audit script and test": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157808
+      }
+    ],
+    "11.4 Root README": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157850
+      }
+    ],
+    "12.1 Milestone 3 review and commit": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157919
+      }
+    ],
+    "13.1 Clean-clone verification script and run": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680157964
+      }
+    ],
+    "13.2 Demo script and shot list": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680158007
+      }
+    ],
+    "13.3 Devpost checklist": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680158043
+      }
+    ],
+    "13.4 Final verification": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680158088
+      }
+    ],
+    "13.5 Milestone 4 review and commit": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794680158128
+      }
+    ],
+    "2. Milestone 2 foundations": [
+      {
+        "executionId": "65881aad-ac76-44b3-8b83-b1d702ea6156",
+        "chatSessionId": "sess_6b3e31a0-d898-452c-9106-4294797ac1a9",
+        "timestamp": 1794685711919
+      }
+    ]
+  }
+}
