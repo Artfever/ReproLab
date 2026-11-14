@@ -27,16 +27,98 @@
   </header>
   <main id="main" tabindex="-1">
     <h1>Run results</h1>
-    <p>This page will show the state, log, output files and manifest of a run started on this computer. The live results view is not available in this build yet.</p>
+    <p>State, engine log, output files and manifest of a run started on this computer.</p>
     <div class="notice">
       <p>Every value shown comes from the engine log or the engine output files. Summary numbers, when shown, are computed by ReproLab from the exported samples and are labelled as such.</p>
     </div>
-    <p>No run is selected. <a href="/run.html">Start a run</a>.</p>
 
+    <p id="announce" class="visually-hidden" role="status" aria-live="polite"></p>
+
+    <div id="no-run" hidden>
+      <p id="no-run-text">No run is selected. <a href="/run.html">Start a run</a>.</p>
+    </div>
+
+    <div id="load-problem" class="notice error-summary" role="alert" hidden>
+      <p id="load-problem-text"></p>
+    </div>
+
+    <div id="run-view" hidden>
+      <section aria-labelledby="state-heading">
+        <h2 id="state-heading">State</h2>
+        <p><span id="state-badge" class="badge" data-tone="wait">Loading</span></p>
+        <p id="state-text"></p>
+        <p id="poll-note" class="file-info" hidden>This page checks for updates every 1.5 seconds until the run finishes.</p>
+        <div id="reason-box" class="notice" hidden>
+          <p><strong id="reason-label">Reason</strong></p>
+          <p id="reason" class="mono"></p>
+          <p id="engine-line-wrap" hidden><strong>First engine error line in the log</strong></p>
+          <p id="engine-line" class="mono" hidden></p>
+        </div>
+      </section>
+
+      <section aria-labelledby="details-heading">
+        <h2 id="details-heading">Details</h2>
+        <dl id="details" class="details"></dl>
+      </section>
+
+      <section aria-labelledby="log-heading">
+        <h2 id="log-heading">Engine log</h2>
+        <p id="log-note" class="notice warn" hidden></p>
+        <p id="log-empty" hidden>The engine wrote no log lines yet.</p>
+        <pre id="log" class="log" tabindex="0" aria-label="Engine log text, scrollable"></pre>
+      </section>
+
+      <section aria-labelledby="files-heading">
+        <h2 id="files-heading">Output files</h2>
+        <p id="files-empty" hidden>No files are available yet.</p>
+        <div id="files-wrap" class="scroll-region" tabindex="0" role="region" aria-label="Output files table, scrollable" hidden>
+          <table id="files-table">
+            <caption>Files written by this run, with size and SHA-256 checksum</caption>
+            <thead>
+              <tr>
+                <th scope="col">File</th>
+                <th scope="col">Size</th>
+                <th scope="col">SHA-256</th>
+                <th scope="col">Download</th>
+              </tr>
+            </thead>
+            <tbody id="files-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-labelledby="manifest-heading">
+        <h2 id="manifest-heading">Run manifest</h2>
+        <p>The manifest records the settings, engine version, image identity and a SHA-256 checksum of every input and output file. Machine paths are removed.</p>
+        <p id="manifest-wait">The manifest is available when the run has finished.</p>
+        <p id="manifest-link-wrap" hidden><a id="manifest-link" class="button" download="manifest.json" href="#">Download manifest.json</a></p>
+      </section>
+
+      <section aria-labelledby="summary-heading">
+        <h2 id="summary-heading">Summary</h2>
+        <p id="summary-none">A summary is computed only for a run that succeeded.</p>
+        <p id="summary-unavailable" class="notice" hidden></p>
+        <div id="summary-table-wrap" hidden>
+          <p id="summary-label"></p>
+          <div class="scroll-region" tabindex="0" role="region" aria-label="Summary table, scrollable">
+            <table>
+              <caption>Summary of the exported samples</caption>
+              <thead id="summary-head"></thead>
+              <tbody id="summary-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- The assistant panel is built into this slot by assistant.js. -->
+    <div id="assistant-slot"></div>
   </main>
   <footer class="site-footer">
     <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
     <p>ReproLab code is MIT licensed. The licence covers ReproLab code only, not OpenBUGS.</p>
   </footer>
+  <script type="module" src="/results.js"></script>
+  <script type="module" src="/assistant.js"></script>
 </body>
 </html>

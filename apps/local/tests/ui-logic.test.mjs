@@ -222,3 +222,171 @@ test('app.js: every element id it looks up exists in run.html; no HTML injection
   // validate is called before runs
   assert.ok(appJs.indexOf("post('/api/validate'") < appJs.indexOf("post('/api/runs'"));
 });
+
+// ---- Results page (task 5.3): requirements 8.1 to 8.8 ----
+import * as R from '../public/results-logic.js';
+import { LOG_MAX_LINES as SRV_LINES, LOG_MAX_BYTES as SRV_BYTES, SUMMARY_LABEL as SRV_LABEL, RUN_STATES } from '../src/runs.mjs';
+
+const RID = 'a'.repeat(32);
+const runOf = (over = {}) => ({
+  id: RID, state: 'succeeded', reason: 'engine finished and all expected files exist',
+  settings: { burnIn: 1000, samples: 10000, thin: 1, seed: 1, timeoutS: 120, chains: 2, monitors: ['p'] },
+  engineVersion: '3.2.3 rev 1012', runtimeS: 0.066, createdAt: '2026-01-01T00:00:00.000Z',
+  files: [{ name: 'log.txt', bytes: 413, sha256: 'ab'.repeat(32) }],
+  log: { lines: ['OpenBUGS version 3.2.3 rev 1012', 'model is syntactically correct'], truncated: false },
+  summary: { available: true, label: 'x', nodes: { p: { mean: 0.66862377, sd: 0.12977736881005048, median: 0.6785, 'q2.5': 0.3934, 'q97.5': 0.8897, n: 20000 } } },
+  ...over,
+});
+
+test('results: constants equal the server', () => {
+  assert.equal(R.LOG_MAX_LINES, SRV_LINES);
+  assert.equal(R.LOG_MAX_BYTES, SRV_BYTES);
+  assert.equal(R.SUMMARY_LABEL, SRV_LABEL);
+  assert.deepEqual([...R.ACTIVE_STATES, ...R.TERMINAL_STATES].sort(), [...RUN_STATES].sort());
+  assert.ok(R.POLL_MS >= 1000 && R.POLL_MS <= 2000);
+});
+
+test('results: every run state has a visible word; unknown state is not shown as success', () => {
+  for (const s of RUN_STATES) assert.ok(R.describeState(s).word.length > 0, s);
+  assert.equal(R.describeState('succeeded').word, 'Succeeded');
+  assert.equal(R.describeState('engine_error').word, 'Engine error');
+  assert.equal(R.describeState('timed_out').word, 'Timed out');
+  assert.equal(R.describeState('runner_error').word, 'Runner error');
+  assert.equal(R.describeState('bogus').tone, 'bad');
+  assert.equal(R.isActive('running'), true);
+  assert.equal(R.isActive('queued'), true);
+  assert.equal(R.isActive('succeeded'), false);
+  assert.match(R.describeState('succeeded').text, /not a statement that the result is scientifically valid/);
+});
+
+test('results: run id from the query string accepts only a 32-hex id', () => {
+  assert.equal(R.runIdFromSearch(`?id=${RID}`), RID);
+  assert.equal(R.runIdFromSearch(`?x=1&id=${RID}`), RID);
+  for (const bad of ['', '?', '?id=', '?id=../../x', '?id=%3Cimg%3E', `?id=${RID}0`, '?id=ABC', '?id=%E0%A4%A']) {
+    assert.equal(R.runIdFromSearch(bad), null, bad);
+  }
+  assert.equal(R.manifestUrl(RID), `/api/runs/${RID}/manifest`);
+  assert.equal(R.fileUrl(RID, 'a b.txt'), `/api/runs/${RID}/files/a%20b.txt`);
+});
+
+test('results: state changes are announced once', () => {
+  assert.equal(R.announceState('running', null), 'Run state: Running.');
+  assert.equal(R.announceState('running', 'running'), null);
+  assert.equal(R.announceState('succeeded', 'running'), 'Run state changed from Running to Succeeded.');
+});
+
+test('results: details show engine version, settings, runtime and say "not reported" when missing', () => {
+  const rows = Object.fromEntries(R.detailRows(runOf()));
+  assert.equal(rows['Engine version'], '3.2.3 rev 1012');
+  assert.equal(rows.Runtime, '0.066 s');
+  assert.equal(rows.Samples, '10000');
+  assert.equal(rows.Monitors, 'p');
+  const none = Object.fromEntries(R.detailRows(runOf({ engineVersion: null, runtimeS: null, settings: {} })));
+  assert.equal(none['Engine version'], 'not reported');
+  assert.equal(none.Runtime, 'not reported');
+  assert.equal(none.Chains, 'not reported');
+});
+
+test('results: the first engine error line is taken from the log, only for engine_error', () => {
+  const log = { lines: ['OpenBUGS version 3.2.3 rev 1012', 'expected right parenthesis error pos 58 (error on line 4)', 'model must be syntactically correct before data can be loaded'], truncated: false };
+  const bad = runOf({ state: 'engine_error', log, summary: null });
+  assert.equal(R.firstEngineErrorLine(bad), 'expected right parenthesis error pos 58 (error on line 4)');
+  const undef = runOf({ state: 'engine_error', log: { lines: ['variable gamma_missing is not defined'], truncated: false } });
+  assert.equal(R.firstEngineErrorLine(undef), 'variable gamma_missing is not defined');
+  assert.equal(R.firstEngineErrorLine(runOf({ log })), null, 'not shown for a succeeded run');
+  assert.equal(R.firstEngineErrorLine(runOf({ state: 'engine_error', log: { lines: ['fine'], truncated: false } })), null);
+});
+
+test('results: a log within bounds has no note; line and byte bounds add the note', () => {
+  assert.equal(R.boundLog({ lines: ['a', 'b'], truncated: false }).note, null);
+  assert.equal(R.boundLog({ lines: [], truncated: false }).empty, true);
+  assert.equal(R.boundLog(null).empty, true);
+  const exact = R.boundLog({ lines: Array.from({ length: 2000 }, () => 'x'), truncated: false });
+  assert.equal(exact.lines.length, 2000);
+  assert.equal(exact.note, null);
+  const over = R.boundLog({ lines: Array.from({ length: 2001 }, () => 'x'), truncated: false });
+  assert.equal(over.lines.length, 2000);
+  assert.match(over.note, /first 2000 lines or 256 KiB/);
+  const server = R.boundLog({ lines: ['a'], truncated: true });
+  assert.match(server.note, /longer than this page shows/);
+  const wide = R.boundLog({ lines: Array.from({ length: 10 }, () => 'y'.repeat(40000)), truncated: false });
+  assert.ok(wide.lines.length < 10);
+  assert.ok(wide.note);
+});
+
+test('results: log text with HTML stays text (the module only returns strings)', () => {
+  const evil = '<img src=x onerror=alert(1)>';
+  const b = R.boundLog({ lines: [evil, '</pre><script>x</script>'], truncated: false });
+  assert.deepEqual(b.lines, [evil, '</pre><script>x</script>']);
+  const run = runOf({ state: 'engine_error', reason: evil, log: { lines: [evil, 'x is not defined'], truncated: false }, files: [{ name: evil, bytes: 1, sha256: evil }] });
+  assert.equal(R.reasonText(run), evil);
+  assert.equal(R.fileRows(run)[0].name, evil);
+  assert.equal(typeof R.fileRows(run)[0].sha256, 'string');
+});
+
+test('results: file rows show name, size and SHA-256', () => {
+  const rows = R.fileRows(runOf({ files: [{ name: 'a.txt', bytes: 2048, sha256: 'f'.repeat(64) }, { name: 'b.txt', bytes: 0, sha256: 'e3b0' }, null, { bytes: 1 }] }));
+  assert.deepEqual(rows, [
+    { name: 'a.txt', size: '2.0 KiB', sha256: 'f'.repeat(64) },
+    { name: 'b.txt', size: '0 bytes', sha256: 'e3b0' },
+  ]);
+  assert.deepEqual(R.fileRows(runOf({ files: undefined })), []);
+});
+
+test('results: summary table carries the required label; label never comes from the response', () => {
+  const v = R.summaryView(runOf());
+  assert.equal(v.kind, 'table');
+  assert.equal(v.label, 'Computed by ReproLab from the exported samples. Not a convergence or validity claim.');
+  assert.deepEqual(v.rows[0], ['p', '0.6686', '0.1298', '0.6785', '0.3934', '0.8897', '20000']);
+  const sneaky = R.summaryView(runOf({ summary: { available: true, label: 'Validated and converged', nodes: { p: { mean: 1 } } } }));
+  assert.equal(sneaky.label, R.SUMMARY_LABEL);
+  assert.equal(sneaky.rows[0][1], '1');
+  assert.equal(sneaky.rows[0][2], 'n/a');
+});
+
+test('results: summary absent or failed shows the reason and no numbers', () => {
+  const failed = R.summaryView(runOf({ summary: { available: false, reason: 'The summary command failed.' } }));
+  assert.equal(failed.kind, 'unavailable');
+  assert.equal(failed.message, 'The summary command failed.');
+  assert.equal(failed.rows, undefined);
+  const missing = R.summaryView(runOf({ summary: null }));
+  assert.equal(missing.kind, 'unavailable');
+  assert.match(missing.message, /No summary was computed/);
+  const nonSuccess = R.summaryView(runOf({ state: 'engine_error', summary: { available: true, nodes: { p: { mean: 1 } } } }));
+  assert.equal(nonSuccess.kind, 'none');
+  assert.equal(R.summaryView(runOf({ summary: { available: true, nodes: {} } })).kind, 'unavailable');
+});
+
+test('results: fetch failures are plain English', () => {
+  assert.match(R.describeFetchFailure(404), /not found/);
+  assert.match(R.describeFetchFailure(403), /refused/);
+  assert.match(R.describeFetchFailure(500), /terminal/);
+  assert.match(R.describeFetchFailure(418), /status 418/);
+});
+
+const rhtml = readFileSync(path.join(PUBLIC, 'results.html'), 'utf8');
+const rjs = readFileSync(path.join(PUBLIC, 'results.js'), 'utf8');
+const rlogic = readFileSync(path.join(PUBLIC, 'results-logic.js'), 'utf8');
+const rids = new Set([...rhtml.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
+
+test('results.html: live region, table caption and scope, manifest link, assistant slot, no inline script', () => {
+  assert.match(rhtml, /id="announce"[^>]*role="status"[^>]*aria-live="polite"/);
+  assert.match(rhtml, /<caption>Files written by this run/);
+  assert.match(rhtml, /<th scope="col">SHA-256<\/th>/);
+  assert.match(rhtml, /id="manifest-link"[^>]*download="manifest.json"/);
+  assert.match(rhtml, /<div id="assistant-slot"><\/div>/);
+  assert.match(rhtml, /<script type="module" src="\/results\.js"><\/script>/);
+  assert.doesNotMatch(rhtml, /not available in this build yet/);
+  assert.doesNotMatch(rhtml, /tabindex="[1-9]/);
+  assert.equal((rhtml.match(/<h1[\s>]/g) ?? []).length, 1);
+});
+
+test('results.js: every id it looks up exists; textContent only; no remote calls', () => {
+  for (const m of rjs.matchAll(/\$\('([A-Za-z-]+)'\)/g)) assert.ok(rids.has(m[1]), `id ${m[1]}`);
+  for (const src of [rjs, rlogic]) {
+    assert.doesNotMatch(src, /innerHTML|outerHTML|insertAdjacentHTML|document\.write|eval\(|new Function/);
+    assert.doesNotMatch(src, /https?:\/\//);
+  }
+  assert.match(rjs, /setTimeout\(\(\) => poll\(id\), POLL_MS\)/);
+  assert.match(rjs, /\$\('log'\)\.textContent = /);
+});

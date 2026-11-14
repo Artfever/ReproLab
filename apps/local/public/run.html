@@ -121,11 +121,15 @@
       <p><button type="submit" id="submit" class="button">Check and run</button></p>
       <p id="status" class="status" role="status" aria-live="polite"></p>
     </form>
+
+    <!-- The assistant panel is built into this slot by assistant.js. -->
+    <div id="assistant-slot"></div>
   </main>
   <footer class="site-footer">
     <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
     <p>ReproLab code is MIT licensed. The licence covers ReproLab code only, not OpenBUGS.</p>
   </footer>
   <script type="module" src="/app.js"></script>
+  <script type="module" src="/assistant.js"></script>
 </body>
 </html>
