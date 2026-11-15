@@ -241,7 +241,7 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - _Requirements: 22.3 to 22.5_
     - Acceptance check: `node --test tests/devpost-docs.test.mjs` asserts every referenced file path in the write-up exists and each missing link is marked `MISSING`; output in `docs/evidence/local-product/test-devpost-docs.txt`.
 
-  - [-] 13.4 Final verification
+  - [x] 13.4 Final verification
     - Rerun `npm.cmd test` in `apps/local`, `npm.cmd run check` in `apps/web`, `node scripts/audit-tracked.mjs`, `scripts/check-publish-paths.ps1`, release-guard tests. Write `docs/evidence/local-product/final-status.md`: each requirement id with evidence file or gap, what was MANUAL and not done, assistant real test status, tarball independence status, legal-name confirmation status.
     - _Requirements: 1.4, 1.5, 17.8, 20.1_
     - Acceptance check: `final-*.txt` files show exit 0; `final-status.md` has no requirement without an evidence file or an explicit gap.
