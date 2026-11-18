@@ -10,6 +10,8 @@ section 6, and `docs/third-party-notices.md`).
 
 This status is a project release gate for public redistribution of the Docker image. It does not say OpenBUGS lacks permission to be used, modified or redistributed under its GPL licence, and it does not block local building and use. The remaining checks concern compliance for this image's prebuilt engine library and bundled components.
 
+The project owner has authorized reuse and redistribution of ReproLab-owned code under the root MIT licence; that permission is documented in `README.md` and `docs/third-party-notices.md`. It does not grant rights to OpenBUGS or other third-party components and does not by itself satisfy the image release gates.
+
 ## What counts as publishing or distributing
 
 Any step that makes the image, its layers, or the OpenBUGS files in it available to anyone outside the machine that built it: a registry push (public or

@@ -10,9 +10,11 @@ ReproLab does not own OpenBUGS, BlackBox, CpcBeautifier or the OpenBUGS examples
 
 ## Boundary: what the ReproLab licence covers
 
-ReproLab-owned code is licensed under the MIT licence (root `LICENSE`, copyright holder `artfever`; the holder name is still to be confirmed as a legal name).
+The project owner authorizes reuse, modification and redistribution of ReproLab-owned code under the MIT licence in the root `LICENSE` (copyright notice: `artfever`). This grant does not cover third-party components or source material listed below.
+
+**OpenBUGS licence reference:** the OpenBUGS 3.2.3 Linux archive's `COPYING` grants use, modification and redistribution under GPL version 3, subject to its conditions. The upstream repository's [r1018 `cli/trunk/COPYING`](https://sourceforge.net/p/openbugs/code/HEAD/tree/cli/trunk/COPYING) contains the maintainer's clarification for redistribution of `libOpenBUGS.so`, and the repository provides the [GPL v3 text](https://sourceforge.net/p/openbugs/code/HEAD/tree/openbugs/trunk/gpl-3.0.txt). The package also contains GPL v2 text in its manual and the SourceForge project page lists GPLv2; see the evidence and remaining scope questions in [`licensing-review.md`](licensing-review.md).
 That licence covers only code and text written for ReproLab. It **grants no rights** to OpenBUGS, BlackBox, CpcBeautifier, the OpenBUGS examples
-or the OpenBUGS documentation. Permission to redistribute those upstream components, if it is ever obtained, does not come from the ReproLab licence.
+or the OpenBUGS documentation. Any rights to use or redistribute those components come from their respective licences, not the ReproLab licence.
 Nothing in this repository relicenses any third-party file.
 
 ## Component by component

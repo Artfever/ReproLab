@@ -221,8 +221,10 @@ test('troubleshooting covers Docker not running, image missing, port in use and 
 test('scope statements: NO-GO release status, no image redistribution, and the MIT scope sentence', () => {
   assert.match(readme, /### Release status: NO-GO/);
   assert.match(readme, /No image redistribution/);
-  assert.match(readme, /covers ReproLab-owned code only/);
-  assert.match(readme, /no rights to OpenBUGS/);
+  assert.match(readme, /project owner authorizes reuse, modification and redistribution of ReproLab-owned code under the MIT terms/);
+  assert.match(readme, /OpenBUGS licence reference/);
+  assert.match(readme, /r1018 `COPYING` clarification for `libOpenBUGS\.so`/);
+  assert.match(readme, /not cleared for public redistribution/);
 });
 
 test('"How Kiro shaped this" names the specs, steering files, hook, release gate and guard, and they exist', () => {
