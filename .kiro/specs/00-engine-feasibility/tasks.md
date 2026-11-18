@@ -210,12 +210,14 @@ Status at this review: the engine runs Seeds and the evidence is recorded. The p
     - _Requirements: 11.3, 12.3, 13.3_
 
 - [ ] 18. E18: Rebuild the image with the full licence set for any public distribution
-  - Open because the current image ships only the r1017 `COPYING`, `AUTHORS` and `NEWS` under `/opt/openbugs/licenses`. This is a code and Dockerfile task. It depends on 9.1, 16.1, 17.1 and 19.1. Rebuilding locally is allowed. **No push, export or share of the rebuilt image may follow until 21.3 (the approved Decision-log row) exists.**
+  - Open because the original image shipped only the r1017 `COPYING`, `AUTHORS` and `NEWS` under `/opt/openbugs/licenses`, and the current Dockerfile still lacks several distribution requirements. This is a code and Dockerfile task. It depends on 9.1, 16.1, 17.1 and 19.1. Rebuilding locally is allowed. **No push, export or share of the rebuilt image may follow until 21.3 (the approved Decision-log row) exists.**
+  - 2026-11-18 partial progress: new runtime images also include the full GPL v3 text copied from Debian. The r1018 clarification, BlackBox notice and matching source information remain absent; E18 stays open.
   - [ ] 18.1 Change `infra/openbugs/Dockerfile` so the image contains: the GPL v3 text, the r1018 `COPYING`, the BlackBox licence text, component notices, a source pointer or offer matched to the library build, the Debian `copyright` files, and pinned `apt` versions. Rebuild, then list `/opt/openbugs/licenses` in the built image and record the listing in `docs/evidence/`
     - _Requirements: 2.7, 11.2, 12.3, 13.3, 13.4_
 
 - [ ] 19. E19: Decide and implement the Examples policy
   - Open because `doc/Examples`, `doc/GeoBUGS` and `doc/Reliability` have no licence marker and reproduce third-party datasets.
+  - 2026-11-18 progress: the Dockerfile now excludes the complete upstream documentation and example tree from new runtime images. A local build and real-run tests passed. Keep the task open until the publication policy and legal review are complete; older local images still contain the tree.
   - [ ] 19.1 Either obtain written permission to redistribute `doc/Examples`, `doc/GeoBUGS` and `doc/Reliability`, or build the published image without them and make the runner read user-supplied inputs. Keep upstream example files out of git in both cases
     - Depends on 17.1.
     - _Requirements: 3.8, 11.4, 11.6, 13.3_

@@ -1,6 +1,6 @@
 # Release inventory (what would be committed or published)
 
-Originally assessed 2026-11-13; ReproLab licence rows updated 2026-11-18. Based on `docs/licensing-review.md` (evidence paths in `docs/evidence/licensing/`). Not legal advice.
+Originally assessed 2026-11-13; updated for the 2026-11-18 runtime-image reduction. Based on `docs/licensing-review.md` (evidence paths in `docs/evidence/licensing/`). Not legal advice.
 "Source available" = corresponding source obtainable for the exact artefact we would distribute.
 
 | # | Component | Origin | Version / hash | Licence evidence | Source available? | Commit to repo? | Action before public distribution |
@@ -13,10 +13,10 @@ Originally assessed 2026-11-13; ReproLab licence rows updated 2026-11-18. Based 
 | 6 | `lib/libOpenBUGS.so` (engine) | Same tarball; built locally by the maintainer (`package.sh`) | SHA-256 `3fc1b64d...a11cf`, 3,090,092 bytes, 32-bit i386 | `COPYING`: GPL v3. Upstream r1018 adds: library redistributable under GPL v3 because all sources are GPL-compatible. **Our copy predates r1018** | **Partly.** Source is upstream SVN `openbugs/trunk` (public), but the revision/toolchain that produced this binary is unknown, and the build needs BlackBox on Windows | **No** | Obtain build revision from maintainer; include r1018 text, GPL v3 text and a source pointer/offer matched to the binary; legal review |
 | 7 | BlackBox Component Builder parts inside OpenBUGS | Oberon microsystems | version unknown | `Docu/BB-Open-Source-License.odc`: BSD-style; requires notice reproduction in docs and info on obtaining complete source | Yes (oberon.ch, per `COPYING`); which files are affected is unknown | **No** | Include BlackBox licence text and notice in the image; legal check of its "GPL-compatible" status (asserted by r1018, unverified) |
 | 8 | CpcBeautifier parts | "Zinn" (zinnamturm.eu) | version unknown | **None found**; upstream source files carry no licence text | Unknown | **No** | Ask maintainer/author for licence; confirm whether any of it is in the shipped library |
-| 9 | TAUCS 2008-02-28 | Upstream SVN `compiled/taucs20080228/btaucs.dll` | n/a | Not stated; not named in `COPYING` | Unknown | **No** | Ask maintainer whether it is linked into the Linux library |
-| 10 | `doc/Manuals`, `doc/Developer` (HTML + images) | Tarball | 24 + 18 html | Package says GPL v3 (`COPYING`) but its own legal link points to a GPL **v2** text | In tarball | **No** | Resolve v2/v3 discrepancy with maintainer; ship the correct text |
-| 11 | `doc/Examples` (313 html, 240 data/model, 270 bmp), incl. Seeds model/data/inits | Tarball; reproduce third-party datasets | Seeds files hashed in `docs/evidence/input_hashes_upstream_examples.txt` | **No licence or copyright marker in any file**; third-party data | In tarball | **No** | Do not commit or publish. Either obtain written permission or ship an image without `doc/Examples` and have users supply their own inputs |
-| 12 | `doc/GeoBUGS`, `doc/Reliability` | Tarball | 50 + 108 html | No marker found | In tarball | **No** | Same as 11; drop from the image if not needed (the runner does not use them) |
+| 9 | TAUCS 2008-02-28 | Upstream SVN `compiled/taucs20080228/btaucs.dll` | n/a | Not stated; not named in `COPYING`. The upstream developer tools page says the library version does not use TAUCS | Unknown for the exact prebuilt binary | **No** | Ask maintainer whether it is linked into this Linux library |
+| 10 | `doc/Manuals`, `doc/Developer` (HTML + images) | Tarball | 24 + 18 html | Package says GPL v3 (`COPYING`) but its own legal link points to a GPL **v2** text | In tarball | **No** | Excluded from new runtime images; resolve the v2/v3 discrepancy for the remaining engine binary |
+| 11 | `doc/Examples` (313 html, 240 data/model, 270 bmp), incl. Seeds model/data/inits | Tarball; reproduce third-party datasets | Seeds files hashed in `docs/evidence/input_hashes_upstream_examples.txt` | **No licence or copyright marker in any file**; third-party data | In tarball | **No** | Excluded from new runtime images by the current Dockerfile. Users supply their own inputs |
+| 12 | `doc/GeoBUGS`, `doc/Reliability` | Tarball | 50 + 108 html | No marker found | In tarball | **No** | Excluded from new runtime images by the current Dockerfile |
 | 13 | `configure`, `aclocal.m4`, `Makefile.in`, `missing`, `INSTALL`, `install-sh` | Tarball (autotools output) | n/a | FSF notices; `install-sh` is X11-style | In tarball | **No** | Standard notices; keep in any source distribution |
 | 14 | Debian bookworm-slim base + `libc6:i386`, build tools (build stage only), ~110 packages | Debian | base digest `sha256:734a72b3...179bc`; apt versions unpinned | Debian per-package licences (e.g. glibc LGPL) | Debian source archive | **No** (pulled at build time) | Keep `/usr/share/doc/*/copyright` in image; provide source offer or pin versions for an image we publish |
 | 15 | Python 3.11 stdlib (`python3-minimal`, `libpython3.11-stdlib`) | Debian | 3.11.2 | PSF licence | Debian | **No** | Same as 14 |
@@ -28,12 +28,12 @@ The formal gate (G1 provenance, G2 licence obligations, G3 matching source, G4 r
 
 **Publishing the engine image (registry push, release asset or download): NO-GO.** Evidence:
 
-1. The image ships `COPYING` at r1017 only. It lacks the GPL v3 text, the r1018 clarification, the BlackBox licence text, and any CpcBeautifier or TAUCS statement (`docs/evidence/licensing/10_*`). BlackBox requires notice reproduction and a source-availability statement for binary redistribution.
+1. The current Dockerfile ships GPL v3 text with the r1017 `COPYING`, but not the r1018 clarification, the BlackBox licence text, or a CpcBeautifier statement (`docs/evidence/licensing/runtime-scope-2026-11-18.txt`). BlackBox requires notice reproduction and a source-availability statement for binary redistribution.
 2. The corresponding source for `libOpenBUGS.so` cannot be tied to the binary: build revision unknown, no published build record, and `package.sh` says the library is built locally (`03_*`). GPL v3 section 6 needs source matching what is distributed.
 3. The binary's provenance is not verified: no upstream checksum reachable (SourceForge returns 403 to scripts), no 3.2.3 Linux artefact or `.so` in SVN (`01_*`, `03_*`).
 4. The package contradicts itself on the GPL version (v3 `COPYING` vs v2 `GNU-Licence.html`; SourceForge page says v2) (`06_*`).
 5. The CpcBeautifier licence is unknown; the r1018 compatibility claim covers it only by the maintainer's assertion.
-6. The image contains Examples, GeoBUGS and Reliability material with no licence marker and third-party data.
+6. Older local image builds contain Examples, GeoBUGS and Reliability material. The current Dockerfile excludes these trees from new runtime images; this resolves the image-content part of the examples issue, while the other blockers above remain.
 
 **Conditions that would flip this to GO** (all needed): browser-verified tarball checksum; maintainer answers on build revision, CpcBeautifier and TAUCS; image rebuilt with the full licence set, source pointer/offer, no unlicensed example data; Debian package pinning or source offer; legal review of the r1018 statement.
 

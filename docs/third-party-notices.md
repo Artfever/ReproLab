@@ -52,12 +52,11 @@ with information on how to obtain complete source code.
 
 **Component Pascal Source Code Beautifier (CpcBeautifier)** (credited to "Zinn"): the two files in upstream SVN carry no licence text. **Licence unknown.**
 
-**TAUCS 2008-02-28** (sparse linear algebra): upstream SVN has `compiled/taucs20080228/btaucs.dll` (Windows DLL), not mentioned in `COPYING`. No evidence that it is linked
-into the Linux library, but absence of strings is not proof. Status unknown.
+**TAUCS 2008-02-28** (sparse linear algebra): upstream SVN has `compiled/taucs20080228/btaucs.dll` (Windows DLL), not mentioned in `COPYING`. The [OpenBUGS developer tools page](https://chjackson.github.io/openbugsdoc/Developer/Tools.html) says the library version does not use TAUCS. Whether that statement describes the exact prebuilt Linux library in our tarball remains unconfirmed.
 
 **OpenBUGS examples, GeoBUGS and Reliability material** (`doc/Examples`, `doc/GeoBUGS`, `doc/Reliability`): no file carries a licence or copyright marker, and they reproduce
 third-party published datasets and figures (Seeds: Crowder 1978, Breslow and Clayton 1993). Redistribution rights **unknown**. ReproLab does not commit or publish them. The local
-tool reads Seeds only from a copy the user extracts from their own tarball.
+tool reads Seeds only from a copy the user extracts from their own tarball. The current Dockerfile excludes the upstream documentation and examples from new runtime images; older locally built images may still contain them.
 
 **GNU build files** (`configure`, `aclocal.m4`, `Makefile.in`, `missing`, `INSTALL`): Free Software Foundation notices. `install-sh`: Copyright (C) 1994 X Consortium (X11-style). Per-file terms not analysed.
 
@@ -123,7 +122,7 @@ Plainly unresolved. None of these has been settled by this project.
 
 ## Required before any public distribution of the worker image
 
-1. Ship the complete licence set inside the image: GPL v3 text, the r1018 `COPYING`, the BlackBox licence text, and a notice for each component above.
+1. Complete the licence set inside the image: GPL v3 text is now included in new runtime images; the r1018 `COPYING`, the BlackBox licence text, and notices for the remaining components are still needed.
 2. Provide, with the image, a written pointer or offer for the corresponding source of `libOpenBUGS.so`, tied to the actual build revision (currently unknown).
 3. Resolve the open items above and in docs/release-inventory.md.
 4. Meet all four gates G1 to G4 in docs/release-decision.md. Until then do not push, export or share the image.

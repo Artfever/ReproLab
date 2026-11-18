@@ -1,0 +1,24 @@
+Runtime image scope check (2026-11-18)
+
+Built from infra/openbugs/Dockerfile with the locally held tarball:
+  powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-image.ps1 -Tag reprolab-openbugs:license-scope-review
+Build output ended: Built image reprolab-openbugs:license-scope-review (local only; nothing was pushed or saved).
+Local image ID after adding the GPL v3 text: sha256:adca81542aafde48fa840c3e31734e54d599a991180d7a5c3e79ed63e3977abd
+This is a local ID, not a registry digest.
+
+Checked inside the new image with --network none:
+  /opt/openbugs/bin
+  /opt/openbugs/lib
+  /opt/openbugs/licenses
+  /opt/openbugs/share absent
+  licences present: AUTHORS, COPYING, GPL-3, NEWS
+  /opt/openbugs/licenses/GPL-3 matches /usr/share/common-licenses/GPL-3 byte-for-byte
+
+Verification against the new image:
+  Python runner unittest discovery: Ran 14 tests; OK.
+  REPROLAB_IMAGE=reprolab-openbugs:license-scope-review npm.cmd test in apps/local:
+  252 tests, 252 pass, 0 fail, 0 skipped. Includes live coin, invalid-model,
+  timeout and Seeds journeys against OpenBUGS.
+
+The reduced runtime image is still NO-GO for redistribution. The prebuilt
+library's matching source and several licence obligations remain unresolved.

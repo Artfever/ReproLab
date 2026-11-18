@@ -26,7 +26,13 @@ RUN dpkg --add-architecture i386 \
  && apt-get install -y --no-install-recommends libc6:i386 python3-minimal libpython3.11-stdlib \
  && rm -rf /var/lib/apt/lists/* \
  && useradd --system --uid 10001 --no-create-home --shell /usr/sbin/nologin bugs
-COPY --from=build /opt/openbugs /opt/openbugs
+# The local runner needs only the executable wrapper and engine library. Keep
+# upstream examples and documentation out of the runtime image while their
+# redistribution terms remain unresolved.
+COPY --from=build /opt/openbugs/bin /opt/openbugs/bin
+COPY --from=build /opt/openbugs/lib /opt/openbugs/lib
+COPY --from=build /opt/openbugs/licenses /opt/openbugs/licenses
+RUN cp /usr/share/common-licenses/GPL-3 /opt/openbugs/licenses/GPL-3
 COPY services/runner/reprolab_runner /opt/reprolab/reprolab_runner
 ENV PYTHONPATH=/opt/reprolab PYTHONDONTWRITEBYTECODE=1 PATH=/opt/openbugs/bin:$PATH
 RUN mkdir -p /work && chown 10001:10001 /work

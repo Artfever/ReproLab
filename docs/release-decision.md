@@ -5,8 +5,10 @@ record-keeping, **not legal advice**, and it does not claim the licence review i
 
 ## Current status
 
-**NO-GO. No release decision has been recorded.** Last assessed 2026-11-13. The guard script exists and blocks this record (see Enforcement). The licence review is **incomplete** (see `docs/licensing-review.md`,
+**NO-GO. No release decision has been recorded.** Reassessed 2026-11-18 after reducing the runtime image to executables, library and notices. The guard script exists and blocks this record (see Enforcement). The licence review is **incomplete** (see `docs/licensing-review.md`,
 section 6, and `docs/third-party-notices.md`).
+
+This status is a project release gate for public redistribution of the Docker image. It does not say OpenBUGS lacks permission to be used, modified or redistributed under its GPL licence, and it does not block local building and use. The remaining checks concern compliance for this image's prebuilt engine library and bundled components.
 
 ## What counts as publishing or distributing
 
@@ -17,10 +19,10 @@ it needs its own review before any public launch.
 
 ## Gate conditions (all four must be met before a push, release asset or download)
 
-| Gate | Condition | Status 2026-11-13 | Evidence now | What would satisfy it |
+| Gate | Condition | Status 2026-11-18 | Evidence now | What would satisfy it |
 |---|---|---|---|---|
 | G1 Provenance | The 3.2.3 tarball checksum matches a value from SourceForge (browser download) or the maintainer, and the build revision of the prebuilt `libOpenBUGS.so` is known | **UNMET** | `docs/licensing-review.md` section 3: 9 small files match upstream SVN r1018; library and docs have no upstream counterpart; SourceForge returned HTTP 403 to scripts | Task 7.1 and task 16.1 done and recorded |
-| G2 Licence obligations | The v2/v3 conflict is resolved; the image carries the GPL v3 text, the r1018 `COPYING`, the BlackBox licence text and component notices; CpcBeautifier and TAUCS terms are answered; the Examples policy is implemented; Debian notices are kept; a legal review is recorded | **UNMET** | `docs/third-party-notices.md`; `docs/release-inventory.md`; the image ships only the r1017 `COPYING`, `AUTHORS`, `NEWS` (`docs/evidence/licensing/10_*`) | Tasks 6.1 to 6.3, 17.1, 18.1, 19.1 done |
+| G2 Licence obligations | The v2/v3 conflict is resolved; the image carries the GPL v3 text, the r1018 `COPYING`, the BlackBox licence text and component notices; CpcBeautifier and TAUCS terms are answered; the Examples policy is implemented; Debian notices are kept; a legal review is recorded | **UNMET** | `docs/third-party-notices.md`; `docs/release-inventory.md`; the current Dockerfile excludes upstream examples and documentation and adds GPL v3 text to new runtime images, but r1018 `COPYING`, BlackBox notice and matching source information remain absent | Tasks 6.1 to 6.3, 17.1, 18.1, 19.1 done |
 | G3 Matching source | A written source pointer or offer for `libOpenBUGS.so` names the SVN revision and toolchain that produced the distributed binary; Debian source offer or pinned package versions exist | **UNMET** | Build revision unknown; upstream `package.sh` says the library is built locally | Task 16.1 answer plus task 18.1 |
 | G4 Recorded decision | An entry in the Decision log below names the date, the decider, the exact image digest, and links the evidence for G1 to G3 | **UNMET** | No entry | A person adds the entry after G1 to G3 are met (task 21.3) |
 

@@ -88,16 +88,27 @@ Files tab in a browser (SourceForge shows MD5/SHA1 there) and compare, or ask th
 | `doc/GeoBUGS/`, `doc/Reliability/` | No copyright text found in html/txt | VERIFIED absence; rights UNKNOWN |
 | `doc/Manuals/` (24 html, 125 bmp), `doc/Developer/` | OpenBUGS documentation; Developer pages also describe BlackBox and Oberon's tools | covered by OpenBUGS GPL by assumption; UNVERIFIED |
 
-### 4.6 What the Docker image ships (built from this tarball)
-- 1,542 files, 18 MB under `/opt/openbugs`, plus 110 Debian packages from the base image (`10_*`).
+### 4.6 What the original Docker image shipped (built from this tarball)
+- At the time of the original review, 1,542 files, 18 MB under `/opt/openbugs`, plus 110 Debian packages from the base image (`10_*`). The 2026-11-18 reduced runtime image is documented in section 7 below.
 - `/opt/openbugs/licenses/` contains only `COPYING` (r1017 text), `AUTHORS`, `NEWS`. The image also contains `doc/Manuals/GNU-Licence.html` (v2).
 - **The image does NOT contain:** the GPL v3 text, the r1018 clarification, the BlackBox licence text, any CpcBeautifier notice, any pointer or offer for `libOpenBUGS.so` corresponding source, or the Debian `copyright` review. Whether Debian-layer notices are intact was not audited.
 
 ## 5. Rebuild
-No engine rebuild was performed: no finding changed the build inputs. The findings change what must ship with a published image (section 4.6), which is listed as an open task.
+No engine rebuild was performed during the original review. The later runtime-image reduction is recorded in section 7.
 
 ## 6. Open items that need a person
+
 1. Download the 3.2.3 tarball from SourceForge in a browser; compare SHA-256 with `a289c4da...` and, if equal, record it. If different, replace the pin.
 2. Ask the maintainers (Chris Jackson, `AUTHORS`) for: the SVN revision used for the 3.2.3 Linux `libOpenBUGS.so`, the CpcBeautifier licence, whether TAUCS or other third-party code is linked, and whether "GPL v2" on the SourceForge page is stale.
 3. Have a legal reviewer assess the r1018 statement against `BB-Open-Source-License.odc` condition 3 and the (unknown) CpcBeautifier terms.
-4. Decide the Examples policy (keep reading them from the image; do not commit or publish) until rights are clarified.
+4. Keep upstream example files out of git and runtime images unless their redistribution rights are established. Users extract Seeds from their own tarball.
+
+## 7. 2026-11-18 runtime-image reduction and TAUCS evidence
+
+The tarball's `COPYING` grants permission to use, modify and redistribute OpenBUGS under GPL version 3, subject to its conditions. The release NO-GO concerns whether ReproLab can satisfy those conditions and the other applicable component terms for this exact prebuilt image; it is not a claim that OpenBUGS lacks general redistribution permission.
+
+The Dockerfile now copies only `/opt/openbugs/bin`, `/opt/openbugs/lib` and `/opt/openbugs/licenses` from the build stage into the runtime stage. A local build tagged `reprolab-openbugs:license-scope-review` contained no `/opt/openbugs/share` tree, and the 14 runner tests plus all 252 local tests (including live engine runs) passed against it (`docs/evidence/licensing/runtime-scope-2026-11-18.txt`). This removes the OpenBUGS example and documentation trees from **new runtime images**. It does not establish compliance for redistribution of the remaining binary or change the release NO-GO. The older image tags were not replaced or distributed.
+
+The runtime stage now also copies Debian's `/usr/share/common-licenses/GPL-3` to `/opt/openbugs/licenses/GPL-3`; a local container check found the two files byte-identical. This supplies the full GPL v3 text alongside the OpenBUGS notices. The r1018 clarification, BlackBox notice and matching source information are still absent.
+
+The archived [OpenBUGS developer tools page](https://chjackson.github.io/openbugsdoc/Developer/Tools.html) says that the library version of OpenBUGS does not use TAUCS and describes adding `MathTaucsImp` only if an ELF TAUCS library is obtained. This is stronger evidence than the absence of `taucs` strings in our binary, but it does not identify the exact modules linked into the 3.2.3 `libOpenBUGS.so`; confirmation from the maintainer remains open. The prebuilt library's source revision and toolchain, the GPL v2/v3 inconsistency, CpcBeautifier terms, BlackBox obligations and the legal review also remain open. A focused, unsent question draft is in `docs/openbugs-maintainer-questions.md`.

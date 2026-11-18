@@ -15,11 +15,11 @@ Source: https://github.com/Artfever/ReproLab
 | A recorder: logs, CODA output files with SHA-256 hashes, and a run manifest. | A validator. It does not judge convergence, correctness or medical meaning. |
 | A documentation assistant that is off unless you configure a language model. | An analyst. It cannot approve, change or interpret a result. |
 
-### Release status: NO-GO
+### Release status: NO-GO for public image distribution
 
 These statements are recorded in [`docs/release-decision.md`](docs/release-decision.md) and hold today:
 
-- **No image redistribution.** The OpenBUGS Docker image is never pushed, saved, exported or shared. You build it locally from a tarball you obtain yourself.
+- **No image redistribution yet.** Build and run the OpenBUGS Docker image locally from a tarball you obtain yourself. The project release gate tracks the remaining image packaging checks before public distribution or sharing outside your machine.
 - **No public execution.** Nothing here runs other people's models on a server.
 - **No hosting.** The repository describes no hosted deployment.
 - The licence review of OpenBUGS, its bundled library and its examples is incomplete. See [`docs/licensing-review.md`](docs/licensing-review.md). This is not legal advice.
@@ -28,7 +28,7 @@ These statements are recorded in [`docs/release-decision.md`](docs/release-decis
 
 The [`LICENSE`](LICENSE) (MIT) covers ReproLab-owned code only. It grants no rights to OpenBUGS, BlackBox, CpcBeautifier, the OpenBUGS examples or the OpenBUGS documentation. Those belong to their authors and carry their own terms. Details and open questions: [`docs/third-party-notices.md`](docs/third-party-notices.md).
 
-OpenBUGS does have licence text available: the OpenBUGS 3.2.3 Linux tarball contains `COPYING`, which states GPL version 3, and the upstream source tree contains the [OpenBUGS licence document](https://sourceforge.net/p/openbugs/code/HEAD/tree/openbugs/trunk/Docu/OpenBUGS-License.odc) and [GPL v3 text](https://sourceforge.net/p/openbugs/code/HEAD/tree/openbugs/trunk/gpl-3.0.txt). The tarball also contains a manual page with GPL version 2 text, while the [SourceForge project listing](https://sourceforge.net/projects/openbugs/) identifies GPL version 2. The applicable terms for the complete package and its bundled components therefore remain unresolved. See [`docs/licensing-review.md`](docs/licensing-review.md) for the evidence and open questions. ReproLab does not bundle the OpenBUGS tarball, binary, licence files or examples; obtain the tarball yourself and inspect its `COPYING` before building. The local Docker image is **not cleared for redistribution** under the current [release decision](docs/release-decision.md).
+OpenBUGS does have licence text available: the OpenBUGS 3.2.3 Linux tarball contains `COPYING`, which permits use, modification and redistribution under GPL version 3, subject to its conditions. The upstream source tree also contains the [OpenBUGS licence document](https://sourceforge.net/p/openbugs/code/HEAD/tree/openbugs/trunk/Docu/OpenBUGS-License.odc) and [GPL v3 text](https://sourceforge.net/p/openbugs/code/HEAD/tree/openbugs/trunk/gpl-3.0.txt). The tarball also contains a manual page with GPL version 2 text, while the [SourceForge project listing](https://sourceforge.net/projects/openbugs/) identifies GPL version 2. The remaining issue is documenting compliance for this particular prebuilt library and its bundled components, including corresponding source and notices. See [`docs/licensing-review.md`](docs/licensing-review.md) for the evidence and open questions. This repository does not bundle the OpenBUGS tarball, binary, licence files or examples; obtain the tarball yourself and inspect its `COPYING` before building. The local Docker image is **not cleared for public redistribution** under the current [release decision](docs/release-decision.md); local building and use are supported.
 
 ReproLab's own example models are in `examples/reprolab/`. The OpenBUGS Seeds files are not in this repository. You extract them from your own tarball (see "Seeds run").
 
@@ -92,7 +92,7 @@ Then open http://127.0.0.1:8765/.
 
 About the tag. Both `build-image` and `apps/local` use `reprolab-openbugs:3.2.3-vendored` by default, so you pass no tag. To use another tag, pass it to `build-image` (`-Tag` on Windows, `--tag` on Linux) and set the environment variable `REPROLAB_IMAGE` to the same tag before `start`.
 
-What `build-image` does: it checks that the tarball exists, prints both SHA-256 values, stops on a mismatch, then runs `docker build` with `infra/openbugs/Dockerfile`. Only Debian package downloads use the network during the build. It never pushes or saves the image. Build time depends on your machine.
+What `build-image` does: it checks that the tarball exists, prints both SHA-256 values, stops on a mismatch, then runs `docker build` with `infra/openbugs/Dockerfile`. Only Debian package downloads use the network during the build. The runtime image contains the OpenBUGS executables, library, notices copied from the tarball, and Debian's GPL v3 text; it does not include upstream documentation or examples. It never pushes or saves the image. Build time depends on your machine.
 
 What `start` does: it checks Node 24.x (a wrong version stops it), Docker and the image (only warns, with the exact fix), then starts `apps/local` on `127.0.0.1`. To check without starting:
 
