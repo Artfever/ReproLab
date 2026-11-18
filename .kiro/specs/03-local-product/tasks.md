@@ -256,6 +256,7 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
 - Tasks marked MANUAL need a person; record done or not done, never imply it was done.
 - Advisory `blocked_until` as in `01-web-mvp/tasks.md`: Kiro reads only `waves`. Real gates are the acceptance checks.
 - Final reconciliation (task 13.4): ticked tasks whose acceptance evidence has a gap, and all open or MANUAL items, are listed in `docs/evidence/local-product/final-open-items.md`. No checkbox was changed by that review.
+- Review on 2026-11-18: the root MIT licence is present and the README now points to available OpenBUGS licence text while preserving the image NO-GO. Docker Desktop was started on the review machine; 252 local tests passed with no skips, including live coin, invalid-model, timeout and Seeds runs. The static web check and 14 runner tests passed. A fresh clean-clone check of this revision remains to be run after publication. The manual and release items in `final-open-items.md` remain open. Task 13.5 remains unticked.
 - Property-based tests are not used (no library allowed by the dependency-free rule); see `design.md` Testing Strategy.
 
 ## Task Dependency Graph

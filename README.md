@@ -24,9 +24,11 @@ These statements are recorded in [`docs/release-decision.md`](docs/release-decis
 - **No hosting.** The repository describes no hosted deployment.
 - The licence review of OpenBUGS, its bundled library and its examples is incomplete. See [`docs/licensing-review.md`](docs/licensing-review.md). This is not legal advice.
 
-### What the MIT licence covers
+### What the MIT licence covers and OpenBUGS licence availability
 
 The [`LICENSE`](LICENSE) (MIT) covers ReproLab-owned code only. It grants no rights to OpenBUGS, BlackBox, CpcBeautifier, the OpenBUGS examples or the OpenBUGS documentation. Those belong to their authors and carry their own terms. Details and open questions: [`docs/third-party-notices.md`](docs/third-party-notices.md).
+
+OpenBUGS does have licence text available: the OpenBUGS 3.2.3 Linux tarball contains `COPYING`, which states GPL version 3, and the upstream source tree contains the [OpenBUGS licence document](https://sourceforge.net/p/openbugs/code/HEAD/tree/openbugs/trunk/Docu/OpenBUGS-License.odc) and [GPL v3 text](https://sourceforge.net/p/openbugs/code/HEAD/tree/openbugs/trunk/gpl-3.0.txt). The tarball also contains a manual page with GPL version 2 text, while the [SourceForge project listing](https://sourceforge.net/projects/openbugs/) identifies GPL version 2. The applicable terms for the complete package and its bundled components therefore remain unresolved. See [`docs/licensing-review.md`](docs/licensing-review.md) for the evidence and open questions. ReproLab does not bundle the OpenBUGS tarball, binary, licence files or examples; obtain the tarball yourself and inspect its `COPYING` before building. The local Docker image is **not cleared for redistribution** under the current [release decision](docs/release-decision.md).
 
 ReproLab's own example models are in `examples/reprolab/`. The OpenBUGS Seeds files are not in this repository. You extract them from your own tarball (see "Seeds run").
 
@@ -178,7 +180,7 @@ cd apps\local
 npm.cmd test
 ```
 
-`npm test` runs `node --test "tests/**/*.test.mjs"`. It includes a journey test that runs the real image. If Docker or the image is missing, that test prints `SKIPPED: ...` and skips. A recorded full run passed 208 tests, none skipped (`docs/evidence/local-product/test-journey.txt`). In a fresh clone, one more sub-test of the journey test (Seeds) prints `SKIPPED: Seeds sub-test` and counts as skipped until you have run `extract-seeds` (see "Seeds, from your own tarball"). The coin accuracy test (`tests/coin-check.test.mjs`) rewrites the tracked file `docs/evidence/local-product/coin-check.txt` with its new numbers, so `git status` shows that file as modified after `npm test`. Discard it with `git checkout -- docs/evidence/local-product/coin-check.txt` if you do not want the change.
+`npm test` runs `node --test "tests/**/*.test.mjs"`. It includes a journey test that runs the real image. If Docker or the image is missing, Docker-dependent tests print `SKIPPED: ...` and skip; a passing exit code alone does not prove an engine run. A recorded full run passed 208 tests, none skipped (`docs/evidence/local-product/test-journey.txt`). In a fresh clone, the Seeds sub-test also skips until you have run `extract-seeds` (see "Seeds, from your own tarball"). When Docker is available, the coin accuracy test (`tests/coin-check.test.mjs`) rewrites the tracked file `docs/evidence/local-product/coin-check.txt` with its new numbers, so `git status` may show that file as modified after `npm test`. Discard it with `git checkout -- docs/evidence/local-product/coin-check.txt` if you do not want the change.
 
 Other checks:
 

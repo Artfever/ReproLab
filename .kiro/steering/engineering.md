@@ -9,4 +9,4 @@
 - Do not add a second queue system, backend framework or search index without documenting a measured need.
 - Make site pages accessible and responsive; explain errors in plain English.
 
-Use `ReproLab_Harnessed_Build_Plan.md` as a planning reference; when implementation discovers a conflict, update the affected spec before changing scope.
+Use the active requirements, design and tasks in `.kiro/specs/03-local-product/` as the planning reference for the local product. Earlier hosted-app specs are historical or deferred. When implementation discovers a conflict, update the affected spec before changing scope.

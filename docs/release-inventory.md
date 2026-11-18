@@ -1,12 +1,12 @@
 # Release inventory (what would be committed or published)
 
-2026-11-13. Based on `docs/licensing-review.md` (evidence paths in `docs/evidence/licensing/`). Not legal advice.
+Originally assessed 2026-11-13; ReproLab licence rows updated 2026-11-18. Based on `docs/licensing-review.md` (evidence paths in `docs/evidence/licensing/`). Not legal advice.
 "Source available" = corresponding source obtainable for the exact artefact we would distribute.
 
 | # | Component | Origin | Version / hash | Licence evidence | Source available? | Commit to repo? | Action before public distribution |
 |---|---|---|---|---|---|---|---|
-| 1 | ReproLab adapter, scripts, tests, docs, Dockerfile | This project | n/a | None yet: no `LICENSE` file | Yes (it is ours) | **Yes** | Choose licence after legal review (see notices). Nothing in it embeds OpenBUGS source |
-| 2 | `examples/openbugs/invalid/*` | Written for ReproLab | n/a | Original work | Yes | **Yes** | Covered by repo licence once chosen |
+| 1 | ReproLab adapter, scripts, tests, docs, Dockerfile | This project | n/a | Root `LICENSE` (MIT) for ReproLab-owned work | Yes (it is ours) | **Yes** | Keep the MIT boundary clear. Nothing in it embeds OpenBUGS source |
+| 2 | `examples/openbugs/invalid/*` | Written for ReproLab | n/a | Original work under root MIT licence | Yes | **Yes** | No OpenBUGS example files included |
 | 3 | `services/runner/reference/seeds_published.json` | 15 numbers read by eye from the OpenBUGS Seeds page image | n/a | Source terms unknown; numbers are facts, but attribution is kept | n/a | **Yes** (attributed) | Second-person check of transcription; confirm acceptable under the unknown example terms |
 | 4 | `OpenBUGS-3.2.3.tar.gz` (build input only) | GitHub `chjackson/openbugsdoc@27abd6d1` copy of the SourceForge Linux package | SHA-256 `a289c4da...b4ed8`, 3,066,528 bytes. **Authenticity not proven** (section 3 of the review) | Contains `COPYING` r1017 (GPL v3 wording) | Yes, it is a source package, except the prebuilt library | **No** (URL + hash only) | Compare with a browser download from SourceForge; keep pin |
 | 5 | `src/OpenBUGSCli.c`, `src/OpenBUGS.h`, `bin/OpenBUGS` (wrapper) | Same tarball; byte-identical to upstream SVN `cli/trunk` r1018 | `59cdd293...` / `41caf51c...` / `069b058f...` | No header in the files; Developer docs label the same code "GNU General Public Licence"; authorship credit to Nathan Coulter | Yes (public SVN) | **No** | Treat as GPL-3.0; include if the image is distributed |
@@ -40,4 +40,4 @@ The formal gate (G1 provenance, G2 licence obligations, G3 matching source, G4 r
 **What is acceptable now (does not need the above):**
 - **Committing this repository's own files** (rows 1-3 plus the Dockerfile, which only downloads upstream bytes and verifies a hash): GO. No upstream binary, example or documentation is in the repository, and nothing in it conflicts with any licence found.
 - **Running the engine privately or on our own server and returning outputs to users**: not distribution of the program; I found nothing in GPL v3 or the BlackBox policy page that forbids it, but this is not legal advice and the hosted product's terms should be reviewed before launch.
-- **Root `LICENSE`**: still not selected. No included code currently constrains the choice; do not pick one until the legal review, and do not use a licence that forbids use, modification or redistribution.
+- **Root `LICENSE`**: MIT covers ReproLab-owned work only. It does not grant redistribution rights to OpenBUGS or other upstream material; the engine image remains NO-GO under `docs/release-decision.md`.

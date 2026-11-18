@@ -14,7 +14,7 @@ Facts that bind this spec (all taken from `docs/engine-feasibility.md`, `docs/re
 - All four gates G1 to G4 in `docs/release-decision.md` are UNMET. `scripts/release-guard.ps1` and `scripts/check-publish-paths.ps1` exist.
 - The upstream Seeds model, data and initial-value files, upstream documentation text and upstream binaries are not publishable here because their rights are unknown. The Web_Site shows file names, sizes and SHA-256 hashes for them and describes the model in original words.
 
-Where `ReproLab_Harnessed_Build_Plan.md` conflicts with these facts, the facts win.
+This is a historical web milestone. The current local product and licence boundary are in `.kiro/specs/03-local-product/`, the root `LICENSE`, `README.md` and `docs/release-decision.md`. The statement above that no root `LICENSE` exists applied only when this milestone was written.
 
 First slice: Home and Sample_Run_Page are live. How_It_Works_Page and Documentation_Pages are specified (Requirements 5 and 6) but not built in the first slice.
 
