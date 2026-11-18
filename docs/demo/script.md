@@ -20,7 +20,7 @@ Segment times use the `[mm:ss-mm:ss]` format and run back to back. Duration is t
 | 4. Files, hashes, manifest | [01:10-01:40] | 30 | Results |
 | 5. A failed model is a failure | [01:40-02:05] | 25 | Run, then Results |
 | 6. The assistant, as it really is | [02:05-02:25] | 20 | Results |
-| 7. Seeds, limits, release status | [02:25-02:55] | 30 | Limitations |
+| 7. Seeds and limits | [02:25-02:55] | 30 | Limitations |
 
 Total: 175 seconds (2:55). The 5 seconds left under the 3:00 limit are slack for page loads.
 
@@ -68,11 +68,11 @@ On screen: Assistant panel on the Results page. Show whichever state the recordi
 
 Record only one of the two versions, the one that matches the screen.
 
-### [02:25-02:55] 7. Seeds, limits, release status
+### [02:25-02:55] 7. Seeds and limits
 
-On screen: Limitations page. Show the "Seeds" paragraph and the release status. Then show the README section "Release status: NO-GO" or `docs/release-decision.md`.
+On screen: Limitations page. Show the "Seeds" paragraph and the engine description.
 
-> **Narration:** One last honest point. The Seeds example is historical. Our pre-declared comparison against the published values failed, and we report it as failed. Do not read a Seeds run as a reproduction. ReproLab is MIT licensed for its own code only, not OpenBUGS. The release status is NO-GO: no image redistribution, no public execution, no hosting.
+> **Narration:** One last honest point. The Seeds example is historical. Our pre-declared comparison against the published values failed, and we report it as failed. Do not read a Seeds run as a reproduction. ReproLab uses OpenBUGS as its original engine, and the app records the real engine logs and output files.
 
 ## What NOT to claim
 
@@ -82,6 +82,5 @@ On screen: Limitations page. Show the "Seeds" paragraph and the release status. 
 - Do not say the assistant is always on, accurate or an analyst. It is off unless configured, and its one real test gave a weak answer.
 - Do not say there is a hosted site, a public runner or a live demo URL. There is none.
 - Do not say the MIT licence covers OpenBUGS, its examples or its documentation. It covers ReproLab code only.
-- Do not say the OpenBUGS licence review is finished or that the project is cleared for release. The status is NO-GO.
 - Do not read the coin run time as a performance claim. It depends on the machine.
 - Do not show the OpenBUGS tarball, upstream Seeds files or any key, token or personal path on screen.

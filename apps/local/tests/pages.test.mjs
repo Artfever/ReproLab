@@ -71,10 +71,11 @@ test('Terms: open-source local tool, no hosted service, MIT covers ReproLab code
   assert.match(t, /MIT licence covers ReproLab code only/);
 });
 
-test('Limitations: gates unmet, NO-GO, Docker Desktop only, Seeds historical', () => {
+test('Limitations: included OpenBUGS engine, Docker Desktop only, Seeds historical', () => {
   const t = text(read('limitations.html'));
-  assert.match(t, /G1 provenance, G2 licence obligations, G3 matching source and G4 a recorded decision. All four are unmet/);
-  assert.match(t, /Public execution is NO-GO/);
+  assert.match(t, /ReproLab includes OpenBUGS 3\.2\.3 as its inference engine/);
+  assert.match(t, /build the local image and test the Coin example/);
+  assert.doesNotMatch(t, /NO-GO|release gates/i);
   assert.match(t, /Docker Desktop isolation is the only isolation that has been tested/);
   assert.match(t, /Seeds example are historical/);
 });

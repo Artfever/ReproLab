@@ -42,7 +42,7 @@ Every task names an acceptance check and an output file. The orchestrator handed
 
 **Hook.** `.kiro/hooks/validate-on-save.json` defines a TypeScript check after saving `.ts` or `.tsx` files. It is disabled (`"enabled": false`) because it was not tested in the installed Kiro. It has not saved any time in this build.
 
-**Release gate and guard.** `docs/release-decision.md` records NO-GO and the gate conditions. `scripts/release-guard.ps1` fails closed. `scripts/check-publish-paths.ps1` looks for publish-style commands. `scripts/tests/` holds the guard cases, with output in `docs/evidence/release-guard-tests.txt` and `docs/evidence/local-product/m2-final-guard.txt`. The guard is a text check and cannot stop a hand-typed command.
+**Included engine.** ReproLab-owned source code is MIT licensed. OpenBUGS 3.2.3 is included in the local execution stack as the inference engine. Judges build the Docker image from an OpenBUGS copy they obtain, then can test a successful Coin run and a real engine syntax error; the README gives the setup and optional Seeds steps. The public repository does not contain the OpenBUGS binary.
 
 **Evidence directory.** `docs/evidence/` and `docs/evidence/local-product/` hold test output, real run logs, manifests and review notes, one file per task check.
 
@@ -70,7 +70,7 @@ The setup needs Docker and a local image build. The first build takes a while an
 
 ## No hosting or deployment
 
-ReproLab has no hosted site, no deployment step and no Vercel configuration added by this spec. It runs on `127.0.0.1`. The Docker image is never pushed, saved or exported (`docs/release-decision.md`). The Devpost "functional application" and "test build" link is therefore the repository itself. A judge cannot try the product without building the image locally.
+ReproLab has no hosted site and runs on `127.0.0.1`. The Devpost "functional application" and "test build" link is the repository; a judge builds the local Docker image and can exercise real OpenBUGS runs by following the README.
 
 ## Repository availability
 
@@ -101,8 +101,7 @@ Could not verify:
 
 ## Known limitations and open items
 
-- The legal name of the copyright holder in `LICENSE` is not confirmed. It currently uses the git author name.
-- The licence review of OpenBUGS, its bundled library and its examples is incomplete (`docs/licensing-review.md`). This is not legal advice.
+- The copyright line in `LICENSE` currently uses the project owner's GitHub name (`artfever`); replace it with a preferred legal or project-owner name if desired before submission.
 - Manual keyboard and screen-reader checks have not been done (`docs/evidence/local-product/ui-keyboard.md`). Only Chrome was used in automated checks.
 - The assistant answer quality is weak. In the real test, the answer to a failure question said it was unclear why the run failed, even though the log contained the line "variable nn is not defined". The first request on a cold model also timed out at 60 seconds (`docs/evidence/local-product/assistant-real.txt`).
 - The independent browser download of the tarball has not been done, and the clean-clone run used the maintainers' local tarball copy as a stand-in (`docs/evidence/local-product/clean-clone-pass2.txt`).

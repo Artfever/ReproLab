@@ -215,7 +215,7 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - Acceptance check: `node --test tests/audit.test.mjs` passes; `node scripts/audit-tracked.mjs` exit 0 output in `docs/evidence/local-product/audit-tracked.txt`.
 
   - [x] 11.4 Root README
-    - `README.md` per Requirement 19: product boundary, prerequisites with versions, clean clone, `npm ci` (where needed), independent tarball download with the prominent manual-step box, `vendor/` placement, SHA-256 of the tested copy (honest label), build, start, coin run, Seeds run through `extract-seeds`, assistant setup, tests, expected outputs, limitations, troubleshooting (Docker not running, image missing, port in use, WSL seek problem), reset, MIT scope sentence, "How Kiro shaped this" (specs `00` to `03`, steering files, hook, release gate and guard, task evidence). Every command in it appears in `scripts/` or `package.json`.
+    - `README.md` per Requirement 19: product boundary, OpenBUGS as included engine, prerequisites with versions, clean clone, manual tarball download, `vendor/` placement, tested-copy SHA-256, build, start, successful coin run, deliberate engine error, Seeds run through `extract-seeds`, optional assistant setup, tests, limitations, troubleshooting, reset, MIT scope, judge-facing engine test instructions, Kiro process and task evidence. Every command in it appears in `scripts/` or `package.json`.
     - _Requirements: 18.4, 19.1 to 19.11_
     - Acceptance check: `node --test tests/readme.test.mjs` extracts fenced commands and asserts each referenced script and npm script exists, the required headings exist, no SourceForge checksum is claimed, and the words "authenticated upstream" never describe a mirror; output in `docs/evidence/local-product/test-readme.txt`.
 
@@ -237,7 +237,7 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - Acceptance check: `node --test tests/demo-docs.test.mjs` sums the segment durations in `script.md` (a `[mm:ss-mm:ss]` format) and asserts the total is under 180 seconds and that the words "uploaded" and "published" do not appear as claims; output in `docs/evidence/local-product/test-demo-docs.txt`. MANUAL: person records the screen capture.
 
   - [x] 13.3 Devpost checklist
-    - `docs/devpost-checklist.md`: repository link (tryout/test build) `MISSING`, YouTube link `MISSING`, category Resurrection, Kiro usage write-up drafted from real files (specs 00 to 03, steering, hook, release gate, guard tests, evidence directory, task acceptance checks), setup instructions for judges (README link), hosting-free note, repository availability through judging, open items (legal name, real assistant test status, independent tarball download status).
+    - `docs/devpost-checklist.md`: repository link (tryout/test build) `MISSING`, YouTube link `MISSING`, category Resurrection, Kiro usage write-up drafted from real files (specs 00 to 03, steering, hook, evidence directory, task acceptance checks), setup instructions for judges (README link), OpenBUGS engine test, hosting-free note, repository availability through judging and open manual items.
     - _Requirements: 22.3 to 22.5_
     - Acceptance check: `node --test tests/devpost-docs.test.mjs` asserts every referenced file path in the write-up exists and each missing link is marked `MISSING`; output in `docs/evidence/local-product/test-devpost-docs.txt`.
 
@@ -256,7 +256,7 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
 - Tasks marked MANUAL need a person; record done or not done, never imply it was done.
 - Advisory `blocked_until` as in `01-web-mvp/tasks.md`: Kiro reads only `waves`. Real gates are the acceptance checks.
 - Final reconciliation (task 13.4): ticked tasks whose acceptance evidence has a gap, and all open or MANUAL items, are listed in `docs/evidence/local-product/final-open-items.md`. No checkbox was changed by that review.
-- Review on 2026-11-18: the root MIT licence is present and the README now points to available OpenBUGS licence text while preserving the image NO-GO. Docker Desktop was started on the review machine; 252 local tests passed with no skips, including live coin, invalid-model, timeout and Seeds runs. The static web check and 14 runner tests passed. A fresh clean-clone check of this revision remains to be run after publication. The manual and release items in `final-open-items.md` remain open. Task 13.5 remains unticked.
+- Review on 2026-11-18: the root MIT licence is present. The judge-facing README now describes OpenBUGS as the included local engine and gives successful and failure test paths. Docker Desktop was started on the review machine; 252 local tests passed with no skips, including live coin, invalid-model, timeout and Seeds runs. The static web check and 14 runner tests passed. A fresh clean-clone check of this revision remains to be run after publication. Manual items in `final-open-items.md` remain open. Task 13.5 remains unticked.
 - Property-based tests are not used (no library allowed by the dependency-free rule); see `design.md` Testing Strategy.
 
 ## Task Dependency Graph

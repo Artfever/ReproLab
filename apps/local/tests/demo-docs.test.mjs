@@ -93,7 +93,7 @@ test('"uploaded" and "published" never appear as a claim: every use sits in a ne
 test('required honesty statements are present in the script', () => {
   const required = [
     /FAILED/, /pre-declared/i, /historical/i, /post hoc/i,
-    /NO-GO/, /MIT/, /ReproLab code only/i,
+    /MIT/, /ReproLab code only/i, /OpenBUGS as its original engine/i,
     /not a scientific finding/i, /switched off/i, /not a hosted service/i,
     /engine error/i, /SHA-256/, /What NOT to claim/,
   ];

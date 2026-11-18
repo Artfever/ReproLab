@@ -80,7 +80,6 @@ test('every script the README runs is one of the scripts in scripts/', () => {
     assert.ok(named.has(`${base}.ps1`) && named.has(`${base}.sh`), `${base} .ps1 and .sh are both named`);
   }
   assert.ok(named.has('audit-tracked.mjs') && named.has('check-license.mjs'));
-  assert.ok(named.has('release-guard.ps1') || /release-guard\.ps1/.test(readme));
 });
 
 // ---------- flags ----------
@@ -163,7 +162,7 @@ test('npm commands in the README exist in a package.json', () => {
 test('required sections are present', () => {
   const headings = [...readme.matchAll(/^#{1,4} (.+)$/gm)].map((m) => m[1]);
   const need = [
-    /^ReproLab$/, /What this is and is not/, /Release status/, /What the MIT licence covers/, /^Prerequisites$/,
+    /^ReproLab$/, /What this is and is not/, /Product scope and licence/, /Test the real OpenBUGS engine/, /^Prerequisites$/,
     /Manual step/, /^Quick start$/, /Sample runs/, /Coin/, /Seeds/, /Assistant setup/, /^Tests$/, /Expected outputs/,
     /^Limitations$/, /^Troubleshooting$/, /Quick reset/, /How Kiro shaped this/, /^Licence$/,
   ];
@@ -218,16 +217,15 @@ test('troubleshooting covers Docker not running, image missing, port in use and 
   assert.match(sec, /bind mount/);
 });
 
-test('scope statements: NO-GO release status, no image redistribution, and the MIT scope sentence', () => {
-  assert.match(readme, /### Release status: NO-GO/);
-  assert.match(readme, /No image redistribution/);
-  assert.match(readme, /project owner authorizes reuse, modification and redistribution of ReproLab-owned code under the MIT terms/);
-  assert.match(readme, /OpenBUGS licence reference/);
-  assert.match(readme, /r1018 `COPYING` clarification for `libOpenBUGS\.so`/);
-  assert.match(readme, /not cleared for public redistribution/);
+test('scope statements: ReproLab licence and testable OpenBUGS engine', () => {
+  assert.match(readme, /project owner authorizes reuse, modification and redistribution of ReproLab-authored code under the MIT terms/);
+  assert.match(readme, /OpenBUGS 3\.2\.3 is included in ReproLab's local execution stack as its third-party inference engine/);
+  assert.match(readme, /Test the real OpenBUGS engine/);
+  assert.match(readme, /deliberate syntax-error model/);
+  assert.doesNotMatch(readme, /NO-GO|not cleared for public redistribution/i);
 });
 
-test('"How Kiro shaped this" names the specs, steering files, hook, release gate and guard, and they exist', () => {
+test('"How Kiro shaped this" names the specs, steering files and hook', () => {
   const sec = readme.split(/^## How Kiro shaped this$/m)[1].split(/^## /m)[0];
   for (const s of ['00-engine-feasibility', '01-web-mvp', '01-end-to-end-web-run', '02-grounded-assistant', '03-local-product']) {
     assert.ok(sec.includes(s), s);
@@ -238,7 +236,6 @@ test('"How Kiro shaped this" names the specs, steering files, hook, release gate
     assert.ok(exists(`.kiro/steering/${s}`), `.kiro/steering/${s}`);
   }
   assert.ok(sec.includes('validate-on-save.json') && exists('.kiro/hooks/validate-on-save.json'));
-  for (const s of ['release-decision.md', 'release-guard.ps1', 'check-publish-paths.ps1']) assert.ok(sec.includes(s), s);
 });
 
 test('README makes no claim that is unbacked by the repository for the recorded evidence files it cites', () => {

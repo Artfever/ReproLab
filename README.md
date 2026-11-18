@@ -15,20 +15,17 @@ Source: https://github.com/Artfever/ReproLab
 | A recorder: logs, CODA output files with SHA-256 hashes, and a run manifest. | A validator. It does not judge convergence, correctness or medical meaning. |
 | A documentation assistant that is off unless you configure a language model. | An analyst. It cannot approve, change or interpret a result. |
 
-### Release status: NO-GO for public image distribution
+### Product scope and licence
 
-These statements are recorded in [`docs/release-decision.md`](docs/release-decision.md) and hold today:
+The project owner authorizes reuse, modification and redistribution of ReproLab-authored code under the MIT terms in [`LICENSE`](LICENSE). OpenBUGS 3.2.3 is included in ReproLab's local execution stack as its third-party inference engine. The repository contains the adapter, runner, interface and tests; judges build the Docker image locally from their own OpenBUGS archive. OpenBUGS keeps its own licence and notices; see [`docs/third-party-notices.md`](docs/third-party-notices.md).
 
-- **No image redistribution yet.** Build and run the OpenBUGS Docker image locally from a tarball you obtain yourself. The project release gate tracks the remaining image packaging checks before public distribution or sharing outside your machine.
-- **No public execution.** Nothing here runs other people's models on a server.
-- **No hosting.** The repository describes no hosted deployment.
-- The licence review of OpenBUGS, its bundled library and its examples is incomplete. See [`docs/licensing-review.md`](docs/licensing-review.md). This is not legal advice.
+OpenBUGS licence references for judges: the 3.2.3 archive includes `COPYING` with GPLv3 terms, and the upstream [r1018 `COPYING` file](https://sourceforge.net/p/openbugs/code/HEAD/tree/cli/trunk/COPYING) clarifies redistribution of `libOpenBUGS.so`.
 
-### What the MIT licence covers and OpenBUGS licence availability
+### Test the real OpenBUGS engine
 
-The project owner authorizes reuse, modification and redistribution of ReproLab-owned code under the MIT terms in [`LICENSE`](LICENSE). This permission covers ReproLab-owned work only; it does not change the terms for OpenBUGS, BlackBox, CpcBeautifier, OpenBUGS examples or documentation, which remain under their respective authors' terms. Details: [`docs/third-party-notices.md`](docs/third-party-notices.md).
+Judges can build the local image from their own OpenBUGS 3.2.3 archive, then try the built-in Coin model and the deliberate syntax-error model from the Run page. The first exercises a successful inference; the second shows the real engine reporting an invalid model. The Seeds example can also be run with input files extracted from the judge's own archive. The full setup starts below.
 
-OpenBUGS licence reference: the OpenBUGS 3.2.3 Linux tarball's `COPYING` permits use, modification and redistribution under GPL version 3, subject to its conditions. The upstream repository also has the [r1018 `COPYING` clarification for `libOpenBUGS.so`](https://sourceforge.net/p/openbugs/code/HEAD/tree/cli/trunk/COPYING), the [OpenBUGS licence document](https://sourceforge.net/p/openbugs/code/HEAD/tree/openbugs/trunk/Docu/OpenBUGS-License.odc) and [GPL v3 text](https://sourceforge.net/p/openbugs/code/HEAD/tree/openbugs/trunk/gpl-3.0.txt). The tarball's manual also contains GPL version 2 text, while the [SourceForge project listing](https://sourceforge.net/projects/openbugs/) identifies GPL version 2. The remaining issue is documenting compliance for this particular prebuilt library and its bundled components, including corresponding source and notices. See [`docs/licensing-review.md`](docs/licensing-review.md) for the evidence and open questions. This repository does not bundle the OpenBUGS tarball, binary, licence files or examples; obtain the tarball yourself and inspect its `COPYING` before building. The local Docker image is **not cleared for public redistribution** under the current [release decision](docs/release-decision.md); local building and use are supported.
+ReproLab does not modify legacy software to remove its need for OpenBUGS. It preserves and records a legacy analysis by running it with the original engine. The optional AI documentation assistant is a separate feature: it is off by default, uses a provider configured by the user, and does not assess scientific validity.
 
 ReproLab's own example models are in `examples/reprolab/`. The OpenBUGS Seeds files are not in this repository. You extract them from your own tarball (see "Seeds run").
 
@@ -225,7 +222,7 @@ Run states: `running`, `succeeded`, `engine_error`, `timed_out`, `runner_error`.
 - Run data lives in `local-data/runs/` on your computer. Nothing is uploaded by ReproLab. Only the optional assistant calls the endpoint you configure.
 - Supports Docker Desktop with WSL2 and Linux Docker Engine. Other setups are untested.
 - The summary table is computed from CODA samples and is labelled so. It does not include convergence diagnostics.
-- The libOpenBUGS build revision in the tarball is unknown, and the licence review is open. See `docs/third-party-notices.md`.
+- OpenBUGS 3.2.3 is required for local model execution. The judge setup above builds and tests it locally; licence references and third-party notices are in `docs/third-party-notices.md`.
 
 ## Troubleshooting
 
@@ -260,7 +257,6 @@ ReproLab was built with Kiro using specs, steering and checks that live in the r
 - **Specs** in `.kiro/specs/`: `00-engine-feasibility` (can the engine run in a container, and what is the licence situation), `01-web-mvp` and `01-end-to-end-web-run` (the static comparison-first site and the run path), `02-grounded-assistant` (citation-checked answers), and `03-local-product` (this local tool, including requirements, design and tasks).
 - **Steering** in `.kiro/steering/`: `product.md`, `engineering.md`, `security-and-privacy.md`, `scientific-integrity.md`, `open-source.md`. They set rules such as "do not fabricate results", "every claim about a run needs a real log line" and "no arbitrary executable upload".
 - **Hook**: `.kiro/hooks/validate-on-save.json` defines a check after saving TypeScript files. It is currently disabled (`"enabled": false`) pending a test in the installed Kiro.
-- **Release gate and guard**: `docs/release-decision.md` holds the NO-GO record and four gate conditions. `scripts/release-guard.ps1` fails closed, `scripts/check-publish-paths.ps1` finds publish-style commands without the guard, and `scripts/tests/test-release-gate.ps1` has 39 cases. The guard is a text check and cannot stop a hand-typed command.
 - **Task evidence**: each task in `.kiro/specs/*/tasks.md` names an acceptance check. Outputs are saved in `docs/evidence/` and `docs/evidence/local-product/`, and task boxes are ticked only after that evidence exists.
 
 ## Repository map
@@ -275,11 +271,11 @@ ReproLab was built with Kiro using specs, steering and checks that live in the r
 | `examples/openbugs/invalid/` | Small invalid-model examples. |
 | `docs/assistant/` | The documents the assistant retrieves from. |
 | `docs/evidence/` | Recorded outputs: feasibility runs, comparisons, licensing evidence, `local-product/` task evidence. |
-| `docs/*.md` | Licensing review, release decision and inventory, third-party notices, engine feasibility. |
-| `scripts/` | `start`, `reset-local`, `build-image`, `extract-seeds` (`.ps1` and `.sh`), `check-license.mjs`, `audit-tracked.mjs`, `licence-table.mjs`, release guard scripts, and `tests/`. |
+| `docs/*.md` | Setup, engine feasibility, third-party notices, assistant help, demo and judge guidance. |
+| `scripts/` | `start`, `reset-local`, `build-image`, `extract-seeds` (`.ps1` and `.sh`), `check-license.mjs`, `audit-tracked.mjs`, and `tests/`. |
 | `.kiro/` | Specs, steering and hook. Tracked on purpose. |
 | `vendor/`, `local-data/` | Git-ignored. Your tarball and your run data. |
 
 ## Licence
 
-MIT for ReproLab-owned code. See "What the MIT licence covers" above and `docs/third-party-notices.md`.
+MIT for ReproLab-authored code. See "Product scope and licence" above and `docs/third-party-notices.md`.

@@ -30,8 +30,8 @@
     <div class="notice warn">
       <p>A finished run is not a valid scientific finding and not a convergence claim.</p>
     </div>
-    <h2>Release gates</h2>
-    <p>The project has four release gates for sharing the engine image: G1 provenance, G2 licence obligations, G3 matching source and G4 a recorded decision. All four are unmet. Public execution is NO-GO. ReproLab does not publish, export or share the worker image.</p>
+    <h2>Engine</h2>
+    <p>ReproLab includes OpenBUGS 3.2.3 as its inference engine and runs it in Docker on your computer. Follow the README to build the local image and test the Coin example or the deliberate syntax error. ReproLab's own code is MIT licensed; OpenBUGS retains its own licence, listed in the repository's third-party notices.</p>
     <h2>Isolation</h2>
     <p>Docker Desktop isolation is the only isolation that has been tested. No other sandbox has been tested. Run only inputs you trust enough for that level of isolation.</p>
     <h2>Seeds</h2>
@@ -46,7 +46,7 @@
   </main>
   <footer class="site-footer">
     <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
-    <p>ReproLab code is MIT licensed. The licence covers ReproLab code only, not OpenBUGS.</p>
+    <p>ReproLab-authored code is MIT licensed. OpenBUGS is the included third-party engine and keeps its own licence.</p>
   </footer>
 </body>
 </html>
