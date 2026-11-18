@@ -78,7 +78,7 @@ if ($CheckOnly) {
 Write-Host "Starting ReproLab on http://127.0.0.1:$Port/ (press Ctrl+C to stop)"
 Push-Location $AppDir
 try {
-  & $NodeCmd 'src/server.mjs'
+  & $NodeCmd '--env-file-if-exists=../../.env' 'src/server.mjs'
   exit $LASTEXITCODE
 } finally {
   Pop-Location

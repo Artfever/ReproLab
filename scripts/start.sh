@@ -70,4 +70,4 @@ if [ "$CHECK_ONLY" -eq 1 ]; then
 fi
 
 echo "Starting ReproLab on http://127.0.0.1:$PORT/ (press Ctrl+C to stop)"
-cd "$APP_DIR" && exec "$NODE_CMD" src/server.mjs
+cd "$APP_DIR" && exec "$NODE_CMD" --env-file-if-exists=../../.env src/server.mjs

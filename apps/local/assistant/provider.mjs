@@ -46,20 +46,31 @@ export function parseBaseUrl(raw) {
  * Returns {ok:true, baseUrl, model, apiKey|null} or {ok:false, reason}. The reason never contains the key.
  */
 export function readConfig(env = process.env) {
-  const base = parseBaseUrl(env.REPROLAB_LLM_BASE_URL);
+  const geminiConfigured = Boolean(env.GEMINI_API_KEY || env.CHAT_MODEL);
+  const base = parseBaseUrl(
+    env.REPROLAB_LLM_BASE_URL
+      ?? env.CHAT_BASE_URL
+      ?? (geminiConfigured ? 'https://generativelanguage.googleapis.com/v1beta/openai' : undefined),
+  );
   if (!base.ok) return base;
-  const model = typeof env.REPROLAB_LLM_MODEL === 'string' ? env.REPROLAB_LLM_MODEL.trim() : '';
+  const modelValue = env.CHAT_MODEL ?? env.REPROLAB_LLM_MODEL;
+  const model = typeof modelValue === 'string' ? modelValue.trim() : '';
   if (model === '') return { ok: false, reason: 'No language-model name is configured' };
   if (model.length > 200 || !/^[\x20-\x7E]+$/.test(model)) {
     return { ok: false, reason: 'The language-model name is not valid' };
   }
   let apiKey = null;
-  const rawKey = env.REPROLAB_LLM_API_KEY;
+  const rawKey = typeof env.GEMINI_API_KEY === 'string' && env.GEMINI_API_KEY.trim() !== ''
+    ? env.GEMINI_API_KEY
+    : env.REPROLAB_LLM_API_KEY;
   if (typeof rawKey === 'string' && rawKey.trim() !== '') {
     apiKey = rawKey.trim();
     if (apiKey.length > 4096 || !/^[\x21-\x7E]+$/.test(apiKey)) {
       return { ok: false, reason: 'The language-model API key setting is not valid' };
     }
+  }
+  if (base.url.includes('generativelanguage.googleapis.com') && !apiKey) {
+    return { ok: false, reason: 'No Gemini API key is configured' };
   }
   return { ok: true, baseUrl: base.url, model, apiKey };
 }

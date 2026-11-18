@@ -203,6 +203,15 @@ test('URL validation and config reading', () => {
   assert.equal(bad.ok, false);
   assert.ok(!bad.reason.includes(KEY));
   assert.equal(readConfig({ REPROLAB_LLM_BASE_URL: 'http://h/v1', REPROLAB_LLM_MODEL: 'm' }).apiKey, null);
+  const gemini = readConfig({ CHAT_MODEL: 'gemini-3.5-flash-lite', GEMINI_API_KEY: KEY });
+  assert.deepEqual({ ok: gemini.ok, baseUrl: gemini.baseUrl, model: gemini.model, apiKey: gemini.apiKey }, {
+    ok: true, baseUrl: 'https://generativelanguage.googleapis.com/v1beta/openai', model: 'gemini-3.5-flash-lite', apiKey: KEY,
+  });
+  assert.match(readConfig({ CHAT_MODEL: 'gemini-3.5-flash-lite' }).reason, /Gemini API key/);
+  const custom = readConfig({ CHAT_BASE_URL: 'http://127.0.0.1:11434/v1', CHAT_MODEL: 'llama3.2:3b', REPROLAB_LLM_API_KEY: KEY });
+  assert.equal(custom.ok, true);
+  assert.equal(custom.baseUrl, 'http://127.0.0.1:11434/v1');
+  assert.equal(custom.model, 'llama3.2:3b');
 });
 
 test('citation extraction and verification', () => {
