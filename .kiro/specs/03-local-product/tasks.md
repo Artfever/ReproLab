@@ -13,7 +13,7 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
 - The OpenBUGS tarball copy used for the image is `.scratch/gh.tar.gz` (SHA-256 `a289c4da0c4ac371f8013226c85ebd0a9e1dec5de9b858950e4854cb814b4ed8`, verified equal to the pin in `infra/openbugs/Dockerfile`). It is gitignored. Never commit it.
 - Git identity: the repository's configured identity (author `artfever`). Stage by explicit path, never `git add -A`. No `git push`.
 - `MANUAL` marks a check a person must perform. The executor records what was and was not done.
-- Real assistant end-to-end test: it needs a reachable Ollama or a user-supplied key. Tasks 6.3 and 7.1 use only a Fake_Provider (a test double). Task 6.5 is the only real test. The final report must say whether 6.5 was actually exercised. If it was not, the evidence file says `NOT EXERCISED`.
+- Real assistant end-to-end test: it needs a reachable Ollama or a user-supplied key. Tasks 6.3 and 7.1 use only a Fake_Provider (a test double). Task 6.5 covers the three-question Ollama/UI review; task 6.6 records live Gemini and Groq smoke checks separately. The final report must distinguish which checks were actually exercised.
 - Evidence directory: `docs/evidence/local-product/` (create it in task 1.1).
 
 ## Tasks
@@ -158,6 +158,11 @@ All checkboxes are unticked. Tick a task only after its acceptance command ran a
     - MANUAL: with Ollama running at `http://127.0.0.1:11434/v1` and a pulled model (or a user-supplied key through environment variables, never written to a file), ask three questions through the UI: one answerable from `docs/assistant`, one about a finished run's log, one unsupported. Save the status JSON and the three responses (key removed) to `docs/evidence/local-product/assistant-real.txt`. If no provider is available, write `NOT EXERCISED: <reason>` in that file.
     - _Requirements: 13.11_
     - Acceptance check: `assistant-real.txt` exists and states exercised or `NOT EXERCISED`; a grep for `sk-` and `Bearer` over `docs/evidence/local-product` prints nothing (`assistant-real-grep.txt`).
+
+  - [x] 6.6 Gemini chat and Groq transcription smoke test (MANUAL)
+    - With user-supplied keys loaded from the ignored root `.env`, verify chat and voice status, submit one answerable documentation question to Gemini and verify a cited answer, and submit a harmless synthesized phrase to Groq Whisper. Record provider/model names and outcomes only; never record keys or raw request headers.
+    - _Requirements: 13.1, 13.5, 13.11, 14.1_
+    - Acceptance check: `docs/evidence/local-product/assistant-gemini-groq-smoke.md` reports both live calls succeeded and contains no credentials.
 
 - [x] 7. User-journey test
   - [x] 7.1 Drive the real API against the real image

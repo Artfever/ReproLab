@@ -67,7 +67,10 @@ Optional convenience, off by default: `build-image` has a flag (`-FetchMirror` o
 ```powershell
 git clone https://github.com/Artfever/ReproLab.git
 cd ReproLab
+Copy-Item .env.example .env
 ```
+
+On Linux, use `cp .env.example .env`. Edit the root `.env` with your provider keys before starting the app. `.env` is ignored by Git; commit only `.env.example`.
 
 Put the tarball at `vendor/OpenBUGS-3.2.3.tar.gz` (previous section), then build the image and start the server.
 
@@ -110,7 +113,10 @@ Environment variables read by the server and scripts:
 | `REPROLAB_PORT` | `8765` | Port on `127.0.0.1`. The bind address cannot be changed; any attempt to set one is refused. |
 | `REPROLAB_IMAGE` | `reprolab-openbugs:3.2.3-vendored` | Docker image tag used for runs. |
 | `REPROLAB_NODE`, `REPROLAB_DOCKER` | `node`, `docker` | Executables used by the start and reset scripts. |
-| `REPROLAB_LLM_BASE_URL`, `REPROLAB_LLM_MODEL`, `REPROLAB_LLM_API_KEY` | unset | Assistant setup (below). |
+| `CHAT_MODEL`, `GEMINI_API_KEY` | `gemini-3.5-flash-lite`, key unset | Optional text assistant. Gemini API key is required to enable it. |
+| `CHAT_BASE_URL` | Gemini OpenAI-compatible endpoint | Optional override for another OpenAI-compatible chat endpoint. |
+| `STT_MODEL`, `GROQ_API_KEY` | `whisper-large-v3`, key unset | Optional voice transcription. Groq API key is required to enable it. |
+| `REPROLAB_LLM_BASE_URL`, `REPROLAB_LLM_MODEL`, `REPROLAB_LLM_API_KEY` | unset | Backward-compatible chat settings; `CHAT_*` settings take precedence. |
 
 ## Sample runs
 
@@ -142,27 +148,30 @@ The script lists the archive, extracts only `Seedsmodel.txt`, `Seedsdata.txt`, `
 
 **Read this before you trust the Seeds output.** Seeds is a historical example. The maintainers' pre-declared comparison of the pooled two-chain run against the published reference values **failed** for all five monitored nodes (`alpha0`, `alpha1`, `alpha2`, `alpha12`, `sigma`). A comparison of chain 1 alone, decided after seeing the results (post hoc), was inside tolerance. Chain 2 was not. The same seed reproduced identical files, and a different seed produced different files. The full numbers are in `docs/evidence/comparisons_seeds-a_seeds-c.txt`, and the public static page in `apps/web` shows the comparison first. ReproLab does not claim to know why. Do not present a Seeds run from this tool as a reproduction of the published values.
 
-## Assistant setup and honest status
+## Assistant setup, voice input and honest status
 
-The assistant answers questions about ReproLab and about one finished run, using only the documents in `docs/assistant/` and that run's log and manifest. Each answer must cite a retrieved passage or it is rejected. Questions it cannot support are declined with a fixed message, and questions about whether a result is valid or converged are declined without calling the model. It is disabled unless you configure it. No model is bundled.
+The optional assistant has separate text-chat and speech-to-text providers. No model or API key is bundled. Start from the root `.env.example` copied to `.env`; the normal Windows and Linux start scripts and `npm start` load that ignored root file.
 
-Local model through Ollama (no key):
+**Text chat uses Gemini 3.5 Flash-Lite.** Add a Google AI Studio key to `GEMINI_API_KEY` in `.env`. ReproLab sends chat-completions requests to Google's OpenAI-compatible Gemini endpoint with `CHAT_MODEL=gemini-3.5-flash-lite`. This model is served by Google, not Groq. The app can also use another OpenAI-compatible service by setting `CHAT_BASE_URL` and `CHAT_MODEL`. For Ollama, set the following in `.env` and leave both API keys empty:
 
-```powershell
-$env:REPROLAB_LLM_BASE_URL = "http://127.0.0.1:11434/v1"
-$env:REPROLAB_LLM_MODEL = "llama3.2:3b"
-powershell -ExecutionPolicy Bypass -File scripts\start.ps1
+```env
+CHAT_BASE_URL=http://127.0.0.1:11434/v1
+CHAT_MODEL=llama3.2:3b
 ```
 
-```bash
-REPROLAB_LLM_BASE_URL=http://127.0.0.1:11434/v1 REPROLAB_LLM_MODEL=llama3.2:3b scripts/start.sh
-```
+**Optional voice input uses Groq Whisper.** Add your Groq key to `GROQ_API_KEY`; `STT_MODEL=whisper-large-v3` is the default. On Run or Results, choose **Record a question**, allow microphone access, then choose **Stop and transcribe**. The recording is sent to Groq and the transcript is inserted into the question box. Review it and press **Ask** to send the text to Gemini with the retrieved context. Audio is not stored by ReproLab. Voice remains disabled if no Groq key is set.
 
-Or your own OpenAI-compatible endpoint: set the same two variables, plus `REPROLAB_LLM_API_KEY` in your own environment. Never put a key in a file in this repository. When enabled, your question and the retrieved passages are sent to that endpoint. See the Privacy page.
+### What the assistant can explain
+
+For general questions, ReproLab retrieves short cited passages from the authored notes in `docs/assistant/`. On a Results page, it can also retrieve that run's sanitized log and manifest. The question and retrieved passages are sent to the configured chat provider only when you press **Ask**. ReproLab displays an answer only when its citations refer to passages actually retrieved for that question. Unsupported questions are declined; questions asking the assistant to judge validity, convergence or medical meaning are rejected before a model call. It cannot run commands, change model files or approve an analysis. Read the Privacy page before enabling a remote provider.
+
+The assistant is disabled until Gemini's key is configured. Voice input is separately disabled until Groq's key is configured. You can use typed questions with Gemini alone, or disable both features by leaving the keys blank.
+
+On 2026-11-18, the configured Gemini and Groq pipelines were also exercised live using keys from the ignored root `.env`; the key values were not recorded. Gemini returned a cited answer to an answerable documentation question, and Groq Whisper transcribed a short synthesized phrase. This smoke check confirms the configured endpoints and request formats work; it is not a broad answer-quality review. Automated tests use fake providers and do not require real keys. See `docs/evidence/local-product/assistant-gemini-groq-smoke.md`.
 
 **Honest status:**
 
-- A real model was exercised **once**: Ollama with `llama3.2:3b`, through the HTTP API, on a failed run (`docs/evidence/local-product/assistant-real.txt`).
+- A real model was previously exercised once: Ollama with `llama3.2:3b`, through the HTTP API, on a failed run (`docs/evidence/local-product/assistant-real.txt`). A separate Gemini/Groq smoke check is recorded in `docs/evidence/local-product/assistant-gemini-groq-smoke.md`.
 - **Answer quality was weak.** The model said the cause was "unclear" and did not quote the log line `variable nn is not defined`, yet its answer was shown because it cited a valid retrieved passage. The server checks that citations exist, not that an answer is useful.
 - The first request timed out after 60 s while the 3B model loaded on a CPU-only machine.
 - An off-topic question was declined before any model call.

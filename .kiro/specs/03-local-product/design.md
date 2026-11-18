@@ -20,6 +20,14 @@ Timeout note: the Runner accepts 1 to 3600 s; the local UI and API cap at 300 s 
 
 Research basis (read, not fetched): `adapter.py` (limits, `classify`, manifest keys), `cli.py` (`run`, `summarize`), `coda.py`, `scripts/run-container.ps1` (the container flags and the create/cp/rm pattern), `docs/evidence/seeds-a/script.txt` (generated engine script), `infra/openbugs/Dockerfile` (`/work` owned by uid 10001, runner at `/opt/reprolab`).
 
+## Local UI visual language
+
+Use a restrained, light interface for a research tool: warm neutral page background, white content surfaces, dark readable text, and one muted green action color. Keep navigation, cards, form groups, result metadata and assistant output visually consistent through the shared `public/styles.css`. Avoid decorative animation, remote fonts and imagery. Use a two-column arrangement for file inputs and a three-column arrangement for numeric settings on wide screens; collapse to one column on narrow screens. Preserve visible keyboard focus, skip navigation, readable status/error distinctions, and reduced-motion support. The contrast regression test covers text/action colors and checks decorative separator borders separately from control borders.
+
+## Assistant provider pipelines
+
+Chat defaults to Gemini's OpenAI-compatible `chat/completions` endpoint, using `CHAT_MODEL` and `GEMINI_API_KEY`; `CHAT_BASE_URL` can select another compatible endpoint. The existing retrieval and citation checks stay in front of the user-visible answer. Optional voice input records in the browser, submits one bounded multipart audio file to the local server, and forwards it to Groq's transcription API with `STT_MODEL` and `GROQ_API_KEY`. Return only recognized text to the browser for review. The browser does not submit that text to chat until the user presses Ask. Load the ignored root `.env` only through the normal Node start commands; keep `.env.example` key-free.
+
 ## Architecture
 
 ```mermaid
