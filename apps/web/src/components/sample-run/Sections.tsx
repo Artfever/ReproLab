@@ -39,7 +39,7 @@ export function SampleRunSections({ d }: { d: SampleRun }) {
       <section id="about" aria-labelledby="about-h">
         <h2 id="about-h">What this page is</h2>
         <p>This page is a recording. It is read-only: nothing on this site runs the engine, and there is no form to submit.</p>
-        <p data-claim="engine-version">The engine was {d.engine.name} {d.engine.version}, run inside a container image with ID <Hash value={d.engine.image_id} />. The image was kept on one developer machine and never pushed to a registry.</p>
+        <p data-claim="engine-version">The engine was {d.engine.name} {d.engine.version}, run inside a container image with ID <Hash value={d.engine.image_id} /> on one developer machine.</p>
         <p>The model: {d.model_summary} The Seeds data are credited by the example to Crowder (1978) and to Breslow and Clayton (1993); bibliographic details have not been verified here.</p>
         <p data-claim="baseline-by-eye">The published baseline comes from the OpenBUGS Seeds example page and its results image on{' '}
           <a href="https://chjackson.github.io/openbugsdoc/Examples/Seeds.html" rel="noopener noreferrer">the OpenBUGS examples pages</a>. The numbers below were read by eye from that image, and the source page does not state the number of chains. The image itself is not reproduced here. OpenBUGS is hosted on{' '}
