@@ -13,10 +13,12 @@ import { routes as healthRoutes } from './routes/health.mjs';
 import { routes as demosRoutes } from './routes/demos.mjs';
 import { routes as runsRoutes } from './routes/runs.mjs';
 import { routes as assistantRoutes } from './routes/assistant.mjs';
+import { MAX_AUDIO_BYTES } from '../assistant/transcription.mjs';
 
 export const BIND_ADDRESS = '127.0.0.1';
 export const DEFAULT_PORT = 8765;
 export const MAX_BODY_BYTES = 1024 * 1024;
+export const MAX_AUDIO_REQUEST_BYTES = MAX_AUDIO_BYTES + 16 * 1024;
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const DEFAULT_PUBLIC_DIR = path.resolve(HERE, '..', 'public');
@@ -26,6 +28,7 @@ export const SECURITY_HEADERS = Object.freeze({
   'Content-Security-Policy': "default-src 'self'",
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'no-referrer',
+  'Permissions-Policy': 'microphone=(self)',
   'Cache-Control': 'no-store',
 });
 
@@ -241,7 +244,8 @@ export function createServer(deps = {}) {
     let body;
     if (method === 'POST') {
       try {
-        body = parseJsonBody(await readBody(req, MAX_BODY_BYTES));
+        body = await readBody(req, hit.route.rawBody ? MAX_AUDIO_REQUEST_BYTES : MAX_BODY_BYTES);
+        if (!hit.route.rawBody) body = parseJsonBody(body);
       } catch (e) {
         if (e instanceof HttpError) {
           const headers = e.status === 413 ? { Connection: 'close' } : {};

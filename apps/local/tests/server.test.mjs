@@ -163,6 +163,7 @@ test('static files are served and every response carries the security headers', 
     assert.equal(r.headers['content-security-policy'], "default-src 'self'", p);
     assert.equal(r.headers['x-content-type-options'], 'nosniff', p);
     assert.equal(r.headers['referrer-policy'], 'no-referrer', p);
+    assert.equal(r.headers['permissions-policy'], 'microphone=(self)', p);
     assert.equal(r.headers['cache-control'], 'no-store', p);
   }
   const bad = await request({ path: '/', headers: { Host: 'evil.example' } });
@@ -180,6 +181,8 @@ test('all required routes exist (a handler answers; never 404 or 405 for the doc
     ['GET', `/api/runs/${'0'.repeat(32)}/files/log.txt`],
     ['POST', '/api/assistant/ask'],
     ['GET', '/api/assistant/status'],
+    ['GET', '/api/assistant/voice-status'],
+    ['POST', '/api/assistant/transcribe'],
   ];
   for (const [method, p] of routes) {
     const r = await request({ method, path: p, body: method === 'POST' ? '{}' : undefined });

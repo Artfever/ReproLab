@@ -50,6 +50,11 @@ function mount() {
   field.append(el('p', { id: 'assistant-hint', class: 'hint' },
     `Up to ${QUESTION_MAX} characters. Press Ctrl+Enter or the button to ask.`));
   form.append(field);
+  const voice = el('div', { class: 'assistant-voice' });
+  const recordButton = el('button', { type: 'button', id: 'assistant-record', class: 'button button-secondary', disabled: '' }, 'Record a question');
+  const voiceHint = el('p', { id: 'assistant-voice-hint', class: 'hint', role: 'status', 'aria-live': 'polite' }, 'Checking voice transcription setup.');
+  voice.append(recordButton, voiceHint);
+  form.append(voice);
   const button = el('button', { type: 'submit', id: 'assistant-ask', class: 'button' }, 'Ask');
   button.disabled = true;
   const p = el('p');
@@ -60,19 +65,31 @@ function mount() {
   const live = el('div', { id: 'assistant-live', 'aria-live': 'polite', 'aria-atomic': 'false', class: 'assistant-live' });
   section.append(live);
   slot.replaceChildren(section);
+  let chatEnabled = false;
+  let voiceEnabled = false;
+  let waiting = false;
+  let recorder = null;
+  let recordingStream = null;
+  let audioParts = [];
+
+  function syncControls() {
+    textarea.disabled = waiting || !chatEnabled;
+    button.disabled = waiting || !chatEnabled;
+    recordButton.disabled = waiting || !voiceEnabled || (typeof MediaRecorder === 'undefined');
+  }
 
   function showDisabled(reason) {
     reasonP.textContent = reason;
     disabledBox.hidden = false;
-    textarea.disabled = true;
-    button.disabled = true;
+    chatEnabled = false;
+    syncControls();
   }
 
   function showEnabled() {
     reasonP.textContent = '';
     disabledBox.hidden = true;
-    textarea.disabled = false;
-    button.disabled = false;
+    chatEnabled = true;
+    syncControls();
   }
 
   function renderResult(v) {
@@ -107,8 +124,8 @@ function mount() {
       textarea.focus();
       return;
     }
-    button.disabled = true;
-    textarea.disabled = true;
+    waiting = true;
+    syncControls();
     say('Waiting for the assistant. This can take up to a minute.');
     try {
       const res = await fetch(ASK_URL, {
@@ -120,10 +137,97 @@ function mount() {
     } catch {
       renderResult({ kind: 'error', text: SERVER_UNREACHABLE, citations: [] });
     } finally {
-      button.disabled = false;
-      textarea.disabled = false;
+      waiting = false;
+      syncControls();
     }
   }
+
+  function stopTracks() {
+    for (const track of recordingStream?.getTracks?.() ?? []) track.stop();
+    recordingStream = null;
+  }
+
+  function appendTranscript(text) {
+    const clean = text.trim();
+    const next = textarea.value.trim() ? `${textarea.value.trim()} ${clean}` : clean;
+    if (next.length > QUESTION_MAX) {
+      voiceHint.textContent = `The transcript is longer than ${QUESTION_MAX} characters. Shorten it before asking.`;
+      return;
+    }
+    textarea.value = next;
+    textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    voiceHint.textContent = 'Transcript added to your question. Review it, then choose Ask.';
+    if (chatEnabled) textarea.focus();
+  }
+
+  async function submitRecording(blob) {
+    if (blob.size === 0) { voiceHint.textContent = 'No audio was recorded. Try again.'; return; }
+    if (blob.size > 25 * 1024 * 1024) { voiceHint.textContent = 'The recording is larger than 25 MiB. Record a shorter question.'; return; }
+    const mime = (blob.type || 'audio/webm').split(';')[0].toLowerCase();
+    const ext = ({ 'audio/webm': 'webm', 'audio/ogg': 'ogg', 'audio/mp4': 'mp4', 'audio/mpeg': 'mp3', 'audio/wav': 'wav', 'audio/flac': 'flac' })[mime] ?? 'webm';
+    const data = new FormData();
+    data.append('file', blob, `voice.${ext}`);
+    recordButton.disabled = true;
+    voiceHint.textContent = 'Sending this recording to Groq for transcription…';
+    try {
+      const response = await fetch('/api/assistant/transcribe', { method: 'POST', headers: { Accept: 'application/json' }, body: data });
+      const result = await readJson(response);
+      if (!response.ok || typeof result?.text !== 'string') {
+        voiceHint.textContent = typeof result?.error === 'string' ? result.error : 'Transcription failed. Check the Groq setup and try again.';
+        return;
+      }
+      appendTranscript(result.text);
+    } catch {
+      voiceHint.textContent = 'The local server could not reach Groq. Check your connection and try again.';
+    } finally {
+      syncControls();
+    }
+  }
+
+  async function toggleRecording() {
+    if (recorder?.state === 'recording') {
+      recordButton.disabled = true;
+      recordButton.textContent = 'Transcribing…';
+      recorder.stop();
+      stopTracks();
+      return;
+    }
+    if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') {
+      voiceHint.textContent = 'This browser does not support microphone recording. You can type your question instead.';
+      return;
+    }
+    try {
+      recordingStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mimeType = ['audio/webm;codecs=opus', 'audio/ogg;codecs=opus', 'audio/mp4']
+        .find((type) => MediaRecorder.isTypeSupported(type));
+      recorder = new MediaRecorder(recordingStream, mimeType ? { mimeType } : undefined);
+      audioParts = [];
+      recorder.addEventListener('dataavailable', (event) => { if (event.data?.size) audioParts.push(event.data); });
+      recorder.addEventListener('error', () => {
+        stopTracks();
+        recordButton.textContent = 'Record a question';
+        syncControls();
+        voiceHint.textContent = 'The recording could not be read. Check microphone permission and try again.';
+      }, { once: true });
+      recorder.addEventListener('stop', () => {
+        const audio = new Blob(audioParts, { type: recorder.mimeType || 'audio/webm' });
+        audioParts = [];
+        recorder = null;
+        recordButton.textContent = 'Record a question';
+        syncControls();
+        void submitRecording(audio);
+      }, { once: true });
+      recorder.start();
+      recordButton.textContent = 'Stop and transcribe';
+      voiceHint.textContent = 'Recording. Choose Stop and transcribe when you finish your question.';
+    } catch {
+      stopTracks();
+      voiceHint.textContent = 'Microphone access was not available. Check browser permission, or type your question.';
+      syncControls();
+    }
+  }
+
+  recordButton.addEventListener('click', toggleRecording);
 
   form.addEventListener('submit', (e) => { e.preventDefault(); ask(); });
   textarea.addEventListener('keydown', (e) => {
@@ -138,6 +242,22 @@ function mount() {
       if (v.enabled) showEnabled(); else showDisabled(v.reason);
     } catch {
       showDisabled(STATUS_UNREADABLE);
+    }
+  })();
+
+  (async () => {
+    try {
+      const response = await fetch('/api/assistant/voice-status', { headers: { Accept: 'application/json' } });
+      const status = await readJson(response);
+      voiceEnabled = response.ok && status?.status === 'enabled';
+      if (voiceEnabled) {
+        voiceHint.textContent = `Optional voice input is ready (${status.model}). Audio is sent to Groq; the transcript is added here and sent to the chat model only if you choose Ask.`;
+      } else {
+        voiceHint.textContent = `${status?.reason || 'Voice input is not configured.'} You can still type your question.`;
+      }
+      syncControls();
+    } catch {
+      voiceHint.textContent = 'Voice transcription setup could not be checked. You can still type your question.';
     }
   })();
 }

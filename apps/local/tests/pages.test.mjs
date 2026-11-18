@@ -58,10 +58,12 @@ test('Home states the product boundary and that a run is not a finding', () => {
 
 test('Privacy states no data leaves the machine and lists assistant call contents', () => {
   const t = text(read('privacy.html'));
-  assert.match(t, /No data leaves this machine, except optional calls to the language-model endpoint/);
+  assert.match(t, /No data leaves this machine unless you use an optional assistant feature/);
   assert.match(t, /your question text/);
   assert.match(t, /text of the documentation passages retrieved/);
   assert.match(t, /never sent, unless their content appears in the current run's log lines/);
+  assert.match(t, /sends that recording to Groq's Whisper transcription API/);
+  assert.match(t, /sent to your configured chat provider only if you choose Ask/);
 });
 
 test('Terms: open-source local tool, no hosted service, MIT covers ReproLab code only', () => {
@@ -105,6 +107,7 @@ const PAIRS = [
   ['surface', 'primary', 4.5],
   ['error', 'paper', 4.5], ['error', 'surface', 4.5],
   ['warning', 'paper', 3], ['warning', 'surface', 3],
+  ['border', 'paper', 1.5], ['border', 'surface', 1.5], ['border', 'band', 1.5],
   ['border-strong', 'paper', 3], ['border-strong', 'surface', 3], ['border-strong', 'band', 3],
   ['primary', 'paper', 3], ['primary', 'surface', 3], ['primary', 'band', 3],
 ];

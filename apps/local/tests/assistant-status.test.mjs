@@ -168,6 +168,9 @@ test('panel markup: shared slot on run and results pages, script is same-origin,
     .split('\n').filter((l) => !l.trimStart().startsWith('//')).join('\n'); // code only, not comments
   assert.doesNotMatch(js, /innerHTML|outerHTML|insertAdjacentHTML|document\.write|eval\(|new Function/);
   assert.match(js, /'aria-live': 'polite'/);
-  assert.match(js, /textarea\.disabled = true/);
+  assert.match(js, /textarea\.disabled = waiting \|\| !chatEnabled/);
+  assert.match(js, /assistant\/transcribe/);
+  assert.match(js, /Stop and transcribe/);
+  assert.match(js, /only if you choose Ask/);
   assert.doesNotMatch(js, /REPROLAB_LLM|sk-|Bearer/);
 });

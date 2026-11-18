@@ -9,6 +9,7 @@ import {
   readConfig, chatCompletion, probeEndpoint, scrubKey, ProviderError, PROVIDER_TIMEOUT_MS, PROBE_TIMEOUT_MS,
 } from '../../assistant/provider.mjs';
 import { getRuns } from './runs.mjs';
+import { readTranscriptionConfig, parseAudioUpload, transcribeAudio } from '../../assistant/transcription.mjs';
 
 export const STATUS_CACHE_MS = 10_000;
 const ALLOWED_KEYS = new Set(['question', 'runId']);
@@ -138,8 +139,35 @@ export function routes(deps = {}) {
     return { status: 200, json: body };
   }
 
+  function voiceStatus() {
+    const cfg = readTranscriptionConfig(env());
+    return cfg.ok
+      ? { status: 200, json: { status: 'enabled', model: cfg.model } }
+      : { status: 200, json: { status: 'disabled', reason: `${cfg.reason}.` } };
+  }
+
+  async function transcribe({ body, req }) {
+    const config = readTranscriptionConfig(env());
+    if (!config.ok) return { status: 503, json: { error: `${config.reason}.` } };
+    const upload = parseAudioUpload(body, req.headers['content-type']);
+    if (!upload.ok) return { status: upload.status, json: { error: upload.message } };
+    let result;
+    try {
+      result = await (deps.transcribeAudio ?? transcribeAudio)(upload, config, deps.transcriptionOptions ?? {});
+    } catch {
+      result = { ok: false, class: 'unreachable', message: 'Groq could not complete the transcription.' };
+    }
+    if (!result.ok) {
+      try { deps.log?.(`assistant transcription failure: ${result.class}`); } catch { /* logging must never throw */ }
+      return { status: result.class === 'bad_status' ? 502 : 503, json: { error: result.message } };
+    }
+    return { status: 200, json: { text: result.text } };
+  }
+
   return [
     { method: 'POST', pattern: /^\/api\/assistant\/ask$/, handler: ask },
     { method: 'GET', pattern: /^\/api\/assistant\/status$/, handler: status },
+    { method: 'GET', pattern: /^\/api\/assistant\/voice-status$/, handler: voiceStatus },
+    { method: 'POST', pattern: /^\/api\/assistant\/transcribe$/, rawBody: true, handler: transcribe },
   ];
 }
