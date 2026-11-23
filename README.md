@@ -4,6 +4,27 @@ ReproLab runs a supported old analysis with its original engine on your own comp
 
 A finished run is not a scientific finding. ReproLab only reports what the engine produced.
 
+### Local engine selector
+
+The **Run** page lists OpenBUGS, PyMC 2, Caffe, Theano, Chainer, QIIME 1, TopHat2, Cufflinks and NiftyNet. The app probes the corresponding local image before showing it as Ready. See the [verification ledger](.kiro/specs/04-multi-engine/tasks.md) for completed browser journeys and remaining work.
+
+Build OpenBUGS using Quick start below. Build the other CPU images from the repository root, one at a time. This loop continues when a build fails:
+
+```powershell
+foreach ($engine in 'pymc2','caffe','theano','chainer','qiime1','tophat2','cufflinks','niftynet') {
+    docker build --platform linux/amd64 --target $engine -t "reprolab-${engine}:cpu-v1" infra/engines
+    if ($LASTEXITCODE -ne 0) { Write-Warning "Build failed for $engine" }
+}
+```
+
+Docker stores its image layers and build cache on its configured data disk. Check physical free space as well as `docker system df`. The eight fixture workers use the Linux amd64 CPU path and run with one CPU, a 1 GiB memory cap, up to 128 processes, and a 120-second engine budget plus time for collection. Use the existing OpenBUGS form for uploads. The other workers accept only their built-in cases, with an additional TopHat2 run ID field for the Cufflinks linked case.
+
+On Results, execution status and comparison are shown separately. Download artifacts individually, use the JSON bundle for outputs and rerun metadata, or choose **Metadata only**. Choose **Include local input files** to add the OpenBUGS input bytes. JSON bundle file contents are base64 encoded. To reproduce Cufflinks linked mode, first run the TopHat2 demonstration and use its run ID.
+
+To repeat the browser check, start the app, install Playwright for Python in a development environment, and run `python apps/local/scripts/multi-engine-browser-check.py` from the repository root. Chrome must be installed. Pass engine IDs to check a subset or `--base` to override the local URL. Pass both `tophat2 cufflinks` to exercise the linked result.
+
+The [verification evidence](docs/evidence/multi-engine.md) includes an optional native Ollama GPU benchmark. The app's engine workflows use CPU. To keep your historical OpenBUGS accuracy evidence intact when running the local tests, set `REPROLAB_COIN_EVIDENCE` to an output path under the ignored `local-data` directory before running the suite.
+
 Source: https://github.com/Artfever/ReproLab
 
 ## What this is and is not
@@ -163,7 +184,7 @@ CHAT_MODEL=llama3.2:3b
 
 ### What the assistant can explain
 
-For general questions, ReproLab retrieves short cited passages from the authored notes in `docs/assistant/`. On a Results page, it can also retrieve that run's sanitized log and manifest. The question and retrieved passages are sent to the configured chat provider only when you press **Ask**. ReproLab displays an answer only when its citations refer to passages actually retrieved for that question. Unsupported questions are declined; questions asking the assistant to judge validity, convergence or medical meaning are rejected before a model call. It cannot run commands, change model files or approve an analysis. Read the Privacy page before enabling a remote provider.
+For general questions, ReproLab retrieves short cited passages from the authored notes in `docs/assistant/`. On a Results page, select **Include this run’s log and manifest excerpts** when you want the assistant to see context from that run. The question and retrieved passages are sent to the configured chat provider when you press **Ask**. ReproLab displays an answer only when its citations refer to passages actually retrieved for that question. Unsupported questions are declined; questions asking the assistant to judge validity, convergence or medical meaning are rejected before a model call. It cannot run commands, change model files or approve an analysis. Read the Privacy page before enabling a remote provider.
 
 The assistant is disabled until Gemini's key is configured. Voice input is separately disabled until Groq's key is configured. You can use typed questions with Gemini alone, or disable both features by leaving the keys blank.
 

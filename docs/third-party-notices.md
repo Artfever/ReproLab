@@ -17,6 +17,23 @@ That licence covers only code and text written for ReproLab. It **grants no righ
 or the OpenBUGS documentation. Any rights to use or redistribute those components come from their respective licences, not the ReproLab licence.
 Nothing in this repository relicenses any third-party file.
 
+## Additional local engine runtimes
+
+The recipes in `infra/engines/Dockerfile` fetch the runtimes during local builds. Each runtime and dependency keeps its upstream terms. The ReproLab fixtures and checkpoints created by the fixture scripts are authored for this repository. This inventory does not clear the resulting images for redistribution.
+
+| Engine | Runtime reference |
+|---|---|
+| PyMC 2.3.8 | [PyPI release and Academic Free License metadata](https://pypi.org/project/pymc/2.3.8/) |
+| Caffe CPU 1.0 | [Ubuntu focal source package](https://launchpad.net/ubuntu/focal/+source/caffe), upstream [licence](https://github.com/BVLC/caffe/blob/1.0/LICENSE) |
+| Theano 1.0.5 | [PyPI release](https://pypi.org/project/Theano/1.0.5/), upstream [licence](https://github.com/Theano/Theano/blob/rel-1.0.5/LICENSE.txt) |
+| Chainer 7.8.1 | [PyPI release](https://pypi.org/project/chainer/7.8.1/), upstream [licence](https://github.com/chainer/chainer/blob/v7.8.1/LICENSE) |
+| QIIME 1.9.1 | [Bioconda package](https://anaconda.org/bioconda/qiime) and [upstream repository](https://github.com/biocore/qiime) |
+| TopHat 2.1.1 | [Bioconda package](https://anaconda.org/bioconda/tophat) and [upstream repository](https://github.com/infphilo/tophat) |
+| Cufflinks 2.2.1 | [Bioconda package](https://anaconda.org/bioconda/cufflinks) and [upstream repository](https://github.com/cole-trapnell-lab/cufflinks) |
+| NiftyNet 0.6.0 | [PyPI release and Apache 2.0 metadata](https://pypi.org/project/NiftyNet/0.6.0/) |
+
+Before any distribution review, inventory installed package versions and component notices from each exact image. The BioContainers parent images include tools beyond the engines named in the selector.
+
 ## Component by component
 
 | Component | Origin | In this repository? | Licence position |

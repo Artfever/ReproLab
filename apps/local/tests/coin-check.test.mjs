@@ -14,7 +14,8 @@ import * as realDocker from '../src/docker.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(HERE, '..', '..', '..');
-const EVIDENCE = path.join(REPO_ROOT, 'docs', 'evidence', 'local-product', 'coin-check.txt');
+const EVIDENCE = process.env.REPROLAB_COIN_EVIDENCE
+  ?? path.join(REPO_ROOT, 'docs', 'evidence', 'local-product', 'coin-check.txt');
 
 const EXPECTED_MEAN = 0.66667;
 const EXPECTED_SD = 0.13074;

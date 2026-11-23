@@ -22,8 +22,10 @@ const prose = readme.replace(/```[A-Za-z]*\n[\s\S]*?```/g, '');
 const spans = [...prose.matchAll(/`([^`\n]+)`/g)].map((m) => m[1]);
 const codeLines = fenced.flatMap((b) => b.split('\n'));
 
-const scriptsText = fs.readdirSync(path.join(root, 'scripts'), { withFileTypes: true })
-  .filter((e) => e.isFile()).map((e) => fs.readFileSync(path.join(root, 'scripts', e.name), 'utf8')).join('\n');
+const scriptsText = [path.join(root, 'scripts'), path.join(localApp, 'scripts')]
+  .flatMap((dir) => fs.readdirSync(dir, { withFileTypes: true })
+    .filter((entry) => entry.isFile()).map((entry) => fs.readFileSync(path.join(dir, entry.name), 'utf8')))
+  .join('\n');
 
 function walk(dir, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -122,10 +124,11 @@ test('flags named on their own in prose exist in a script', () => {
 
 // ---------- environment variables and defaults ----------
 
-test('every REPROLAB_ variable in the README is read by the server or a script', () => {
+test('every REPROLAB_ variable in the README is read by the server, a script or a test', () => {
   const vars = new Set(readme.match(/\bREPROLAB_[A-Z_]+\b/g));
+  const testsText = walk(here).map((file) => fs.readFileSync(file, 'utf8')).join('\n');
   assert.ok(vars.has('REPROLAB_IMAGE') && vars.has('REPROLAB_PORT') && vars.has('REPROLAB_LLM_BASE_URL'));
-  for (const v of vars) assert.ok((sourceText + scriptsText).includes(v), `${v} is not read anywhere`);
+  for (const v of vars) assert.ok((sourceText + scriptsText + testsText).includes(v), `${v} is not read anywhere`);
 });
 
 test('the default image tag is the same in the server, scripts and README, and no tag has to be passed', () => {

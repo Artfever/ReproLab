@@ -93,13 +93,13 @@
     },
     {
       "path": "docs/third-party-notices.md",
-      "sha256": "3bb36a20aefa61290341538213de92d73217d858a51026184627270acfee02df",
-      "bytes": 13610
+      "sha256": "9674afb02ba64d5a5d2feb4b5f8e658ade0738c69f039a0a22cbcb790a84adb5",
+      "bytes": 15313
     },
     {
       "path": "README.md",
-      "sha256": "12a99ff335691b721aac4c259ee8b3c17fa3d467d4bbc43da87d47f8ef1dd013",
-      "bytes": 19930
+      "sha256": "87cc7258aab946858f4fa94f508df38afd7c478726882d8605858cc8f235e2e5",
+      "bytes": 24782
     },
     {
       "path": "services/runner/reference/seeds_published.json",
