@@ -342,7 +342,7 @@ export function createRunManager(opts) {
           rec.state = rec.comparison ? 'succeeded' : 'engine_error';
           rec.reason = rec.comparison ? 'The engine produced the required outputs.' : 'Required engine outputs were missing or malformed.';
           rec.runtimeS = rec.comparison ? report.runtimeS : null;
-          rec.engineVersion = rec.comparison ? report.version : null;
+          rec.engineVersion = rec.comparison ? entry.version : null;
           rec.peakRssKiB = rec.comparison ? report.peakRssKiB : null;
         }
         return;

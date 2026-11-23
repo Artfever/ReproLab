@@ -11,7 +11,7 @@ const engines = [
   { id: 'qiime1', name: 'QIIME 1', version: '1.9.1', workflow: 'counts', description: 'Summarize an artificial feature count table.', files: ['counts.tsv'], reference: { sampleTotals: [6, 9], featureTotals: [5, 2, 8], featureCount: 3 }, source: 'https://anaconda.org/bioconda/qiime' },
   { id: 'tophat2', name: 'TopHat2', version: '2.1.1', workflow: 'align', description: 'Align four artificial reads to a generated reference.', files: ['accepted_hits.bam'], reference: { records: 4, reference: 'artificial' }, source: 'https://anaconda.org/bioconda/tophat' },
   { id: 'cufflinks', name: 'Cufflinks', version: '2.2.1', workflow: 'assemble', description: 'Assemble isoforms from an authored artificial alignment.', files: ['isoforms.tsv'], reference: { isoforms: 1, positive: 1 }, source: 'https://anaconda.org/bioconda/cufflinks' },
-  { id: 'niftynet', name: 'NiftyNet', version: '0.6.0', workflow: 'volume', description: 'Restore an authored checkpoint and run CPU inference on a synthetic volume.', files: ['volume.npy', 'slice.png'], reference: { shape: [2, 3, 4], sum: 552, range: [0, 46] }, source: 'https://pypi.org/project/NiftyNet/0.6.0/' },
+  { id: 'niftynet', name: 'NiftyNet', version: '0.6.0', versionBanner: 'NiftyNet version 0.6.0', workflow: 'volume', description: 'Restore an authored checkpoint and run CPU inference on a synthetic volume.', files: ['volume.npy', 'slice.png'], reference: { shape: [2, 3, 4], sum: 552, range: [0, 46] }, source: 'https://pypi.org/project/NiftyNet/0.6.0/' },
 ];
 const runtimePins = {
   pymc2: { python: '3.8.20', numpy: '1.19.5', scipy: '1.5.4' },
@@ -91,7 +91,7 @@ export async function listEngines(docker, openbugsImage) {
       const setup = id === 'openbugs' ? 'Build the OpenBUGS image using the README.' : `Build the ${id} image using the README.`;
       return { ...metadata, status: 'setup_required', setup };
     }
-    const probe = await docker.probeEngine?.(installed.id, engine.command?.('probe'), version);
+    const probe = await docker.probeEngine?.(installed.id, engine.command?.('probe'), engine.versionBanner ?? version);
     return { ...metadata, status: probe ? 'ready' : 'setup_required', setup: probe ? '' : 'The installed image did not pass its version probe.' };
   }));
 }
@@ -111,7 +111,7 @@ function isWellFormed(actual, expected) {
 }
 
 export function interpretFixture(entry, report, files) {
-  if (report?.version !== entry.version || !Number.isFinite(report.runtimeS) || report.runtimeS < 0
+  if (report?.version !== (entry.versionBanner ?? entry.version) || !Number.isFinite(report.runtimeS) || report.runtimeS < 0
       || !Number.isFinite(report.peakRssKiB) || report.peakRssKiB <= 0
       || !report.values || Object.keys(report.values).length !== Object.keys(entry.reference).length
       || !Object.entries(entry.reference).every(([key, value]) => isWellFormed(report.values[key], value))
