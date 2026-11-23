@@ -12,7 +12,7 @@ export const DOCS_DIR = path.resolve(
 
 // Manifest fields that become Run passages (design.md, Corpus passages).
 export const MANIFEST_FIELDS = Object.freeze([
-  'state', 'reason', 'engine_version', 'settings', 'runtime_s', 'image_id', 'exit_code',
+  'state', 'reason', 'engine', 'engine_version', 'settings', 'runtime_s', 'image_id', 'exit_code',
 ]);
 
 // Bounds so one Run cannot make the corpus unbounded.

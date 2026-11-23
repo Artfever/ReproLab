@@ -50,6 +50,12 @@ function mount() {
   field.append(el('p', { id: 'assistant-hint', class: 'hint' },
     `Up to ${QUESTION_MAX} characters. Press Ctrl+Enter or the button to ask.`));
   form.append(field);
+  const shareContext = el('input', { type: 'checkbox' });
+  if (runId) {
+    const consent = el('label', { class: 'hint block' });
+    consent.append(shareContext, ' Include this run’s log and manifest excerpts in the question sent to the assistant.');
+    form.append(consent);
+  }
   const voice = el('div', { class: 'assistant-voice' });
   const recordButton = el('button', { type: 'button', id: 'assistant-record', class: 'button button-secondary', disabled: '' }, 'Record a question');
   const voiceHint = el('p', { id: 'assistant-voice-hint', class: 'hint', role: 'status', 'aria-live': 'polite' }, 'Checking voice transcription setup.');
@@ -131,7 +137,9 @@ function mount() {
       const res = await fetch(ASK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(askBody(checked.question, runId)),
+        body: JSON.stringify(shareContext.checked
+          ? { ...askBody(checked.question, runId), shareRunContext: true }
+          : askBody(checked.question)),
       });
       renderResult(answerView(res.status, await readJson(res)));
     } catch {

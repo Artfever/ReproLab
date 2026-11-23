@@ -12,13 +12,14 @@ import { getRuns } from './runs.mjs';
 import { readTranscriptionConfig, parseAudioUpload, transcribeAudio } from '../../assistant/transcription.mjs';
 
 export const STATUS_CACHE_MS = 10_000;
-const ALLOWED_KEYS = new Set(['question', 'runId']);
+const ALLOWED_KEYS = new Set(['question', 'runId', 'shareRunContext']);
 
 const declined = () => ({ status: 200, json: { kind: 'declined', message: DECLINE_MESSAGE } });
 
 /** Run passages from the run manager's sanitised record, manifest and scrubbed log. */
 function runPassagesFor(run, manifestBuf) {
   const manifest = {
+    engine: run.engine,
     state: run.state,
     reason: run.reason,
     engine_version: run.engineVersion,
@@ -51,12 +52,15 @@ export function routes(deps = {}) {
     for (const k of Object.keys(body)) {
       if (!ALLOWED_KEYS.has(k)) return { status: 400, json: { error: `The request has an unknown field "${k}".` } };
     }
-    const { question, runId } = body;
+    const { question, runId, shareRunContext } = body;
     if (typeof question !== 'string' || question.trim() === '') {
       return { status: 400, json: { error: 'The question is empty.' } };
     }
     if (runId !== undefined && typeof runId !== 'string') {
       return { status: 400, json: { error: 'The runId must be a string.' } };
+    }
+    if (shareRunContext !== undefined && typeof shareRunContext !== 'boolean') {
+      return { status: 400, json: { error: 'The run context choice must be a boolean.' } };
     }
 
     let passages;
@@ -67,7 +71,10 @@ export function routes(deps = {}) {
       await runs.ready;
       const run = runs.getRun(runId);
       if (!run) return { status: 404, json: { error: 'Run not found.' } };
-      passages = buildCorpus().concat(runPassagesFor(run, runs.getManifest(runId)));
+      const config = readConfig(env());
+      const local = config.ok && ['localhost', '127.0.0.1', '[::1]'].includes(new URL(config.baseUrl).hostname);
+      passages = buildCorpus();
+      if (local || shareRunContext === true) passages = passages.concat(runPassagesFor(run, runs.getManifest(runId)));
     }
 
     // 13.10: judgement questions are declined and never sent to the Provider.
