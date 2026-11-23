@@ -4,11 +4,13 @@ ReproLab runs a supported old analysis with its original engine on your own comp
 
 A finished run is not a scientific finding. ReproLab only reports what the engine produced.
 
-### Local engine selector
+### Build the eight additional engine images
 
 The **Run** page lists OpenBUGS, PyMC 2, Caffe, Theano, Chainer, QIIME 1, TopHat2, Cufflinks and NiftyNet. The app probes the corresponding local image before showing it as Ready. See the [verification ledger](.kiro/specs/04-multi-engine/tasks.md) for completed browser journeys and remaining work.
 
-Build OpenBUGS using Quick start below. Build the other CPU images from the repository root, one at a time. This loop continues when a build fails:
+Build OpenBUGS using [Quick start](#quick-start). Build the other CPU images from the repository root, one at a time. Both loops report failures and continue with the remaining engines.
+
+Windows (PowerShell):
 
 ```powershell
 foreach ($engine in 'pymc2','caffe','theano','chainer','qiime1','tophat2','cufflinks','niftynet') {
@@ -17,11 +19,20 @@ foreach ($engine in 'pymc2','caffe','theano','chainer','qiime1','tophat2','cuffl
 }
 ```
 
+Linux (Bash):
+
+```bash
+for engine in pymc2 caffe theano chainer qiime1 tophat2 cufflinks niftynet; do
+    docker build --platform linux/amd64 --target "$engine" -t "reprolab-${engine}:cpu-v1" infra/engines ||
+        printf 'Build failed for %s\n' "$engine" >&2
+done
+```
+
 Docker stores its image layers and build cache on its configured data disk. Check physical free space as well as `docker system df`. The eight fixture workers use the Linux amd64 CPU path and run with one CPU, a 1 GiB memory cap, up to 128 processes, and a 120-second engine budget plus time for collection. Use the existing OpenBUGS form for uploads. The other workers accept only their built-in cases, with an additional TopHat2 run ID field for the Cufflinks linked case.
 
 On Results, execution status and comparison are shown separately. Download artifacts individually, use the JSON bundle for outputs and rerun metadata, or choose **Metadata only**. Choose **Include local input files** to add the OpenBUGS input bytes. JSON bundle file contents are base64 encoded. To reproduce Cufflinks linked mode, first run the TopHat2 demonstration and use its run ID.
 
-To repeat the browser check, start the app, install Playwright for Python in a development environment, and run `python apps/local/scripts/multi-engine-browser-check.py` from the repository root. Chrome must be installed. Pass engine IDs to check a subset or `--base` to override the local URL. Pass both `tophat2 cufflinks` to exercise the linked result.
+To repeat the browser check, follow [Verify on a second machine](#verify-on-a-second-machine).
 
 The [verification evidence](docs/evidence/multi-engine.md) includes an optional native Ollama GPU benchmark. The app's engine workflows use CPU. To keep your historical OpenBUGS accuracy evidence intact when running the local tests, set `REPROLAB_COIN_EVIDENCE` to an output path under the ignored `local-data` directory before running the suite.
 
@@ -57,7 +68,7 @@ ReproLab's own example models are in `examples/reprolab/`. The OpenBUGS Seeds fi
 | Node.js | 24.x | `apps/local` has no npm dependencies. |
 | Docker | Docker Desktop with WSL2 (Windows), or Docker Engine (Linux) | Must be running. The image targets `linux/amd64`. |
 | Git | any recent | |
-| Python | only inside the image | You do not need it on your computer. |
+| Python | 3.12 tested for browser verification | The app and manual runs need no host Python. The automated browser check needs host Python, Playwright and Google Chrome. |
 | PowerShell | Windows PowerShell 5.1 or later | For the `.ps1` scripts. Linux uses the `.sh` scripts (bash, `tar`, `sha256sum`). |
 
 On Windows, run every script as `powershell -ExecutionPolicy Bypass -File scripts\<name>.ps1`. This avoids the default script-execution policy.
@@ -91,7 +102,7 @@ cd ReproLab
 Copy-Item .env.example .env
 ```
 
-On Linux, use `cp .env.example .env`. Edit the root `.env` with your provider keys before starting the app. `.env` is ignored by Git; commit only `.env.example`.
+On Linux, use `cp .env.example .env`. Leave the keys blank for engine verification. Add your own keys if you want to test the optional assistant or voice input. Git ignores `.env`.
 
 Put the tarball at `vendor/OpenBUGS-3.2.3.tar.gz` (previous section), then build the image and start the server.
 
@@ -138,6 +149,41 @@ Environment variables read by the server and scripts:
 | `CHAT_BASE_URL` | Gemini OpenAI-compatible endpoint | Optional override for another OpenAI-compatible chat endpoint. |
 | `STT_MODEL`, `GROQ_API_KEY` | `whisper-large-v3`, key unset | Optional voice transcription. Groq API key is required to enable it. |
 | `REPROLAB_LLM_BASE_URL`, `REPROLAB_LLM_MODEL`, `REPROLAB_LLM_API_KEY` | unset | Backward-compatible chat settings; `CHAT_*` settings take precedence. |
+
+## Verify on a second machine
+
+Use a separate x86-64 Windows machine with Docker Desktop and WSL2, or a separate x86-64 Linux machine with Docker Engine. The full suite was verified on Windows 11 with WSL2 and Linux amd64 containers. The second-machine check is open. ARM hosts and macOS are outside this verification checklist.
+
+- Install Git and Node.js 24.x. Start Docker in Linux container mode and confirm `docker info` succeeds. Build access needs the package and image registries referenced in the Dockerfiles. The run containers use CPU and run offline.
+- Check free space on the drive that stores Docker data, including its build cache. Budget about 30 GiB of initially free disk space for a fresh nine-image build. This is a planning estimate. The verified host had 24 GiB RAM and gave Docker about 12 GiB and 6 CPUs. Builds run sequentially. A GPU, API keys, Ollama and the upstream Seeds example are optional.
+- Clone the repo and record the commit with `git rev-parse HEAD`. Obtain the matching OpenBUGS archive using the [manual archive instructions](#manual-step-get-the-openbugs-tarball-yourself). Follow [Quick start](#quick-start) to build OpenBUGS and start the server, then build the [eight additional images](#build-the-eight-additional-engine-images) from the repository root in a second terminal.
+- Open [Run](http://127.0.0.1:8765/run.html) and check that all nine engines show **Ready**. A **Setup required** entry means the image is missing or its probe did not pass. Save the build output or runner reason for that engine and continue with the others.
+
+### Run the automated browser check
+
+Install Google Chrome. Create a Python environment from the repository root in the second terminal and run the check while the app is running.
+
+Windows (PowerShell):
+
+```powershell
+python -m venv local-data/browser-verify
+.\local-data\browser-verify\Scripts\python.exe -m pip install playwright
+.\local-data\browser-verify\Scripts\python.exe apps/local/scripts/multi-engine-browser-check.py
+```
+
+Linux (Bash):
+
+```bash
+python3 -m venv local-data/browser-verify
+local-data/browser-verify/bin/python -m pip install playwright
+local-data/browser-verify/bin/python apps/local/scripts/multi-engine-browser-check.py
+```
+
+With no engine arguments the check runs all nine. Expect a `PASS` for each demo and deliberate failure, the OpenBUGS repeat with matching CODA hashes, and the linked TopHat2 to Cufflinks run. The script downloads manifests and artifacts, checks artifact hashes, and verifies the results bundle. It exits nonzero for a failed check or blocked engine. Pass engine IDs to run a subset, and include both `tophat2 cufflinks` to verify the linked case. If you changed the app port, pass `--base` with the new loopback URL.
+
+For a manual check, select each engine and run its demo and deliberate failure. OpenBUGS calls these **Coin** and **Coin with a deliberate syntax error**. Check for **Succeeded** and a passed comparison on the demo, **Engine error** on the deliberate failure, and working downloads on both. Use the successful TopHat2 run ID in Cufflinks to verify the linked case.
+
+Record the Git commit, OS and architecture, Node.js and Docker versions, and the browser check output. If an engine fails, include its name, image ID if available, and the exact error. Compare the run comparisons and expected failure states with the [reference evidence](docs/evidence/multi-engine.md). A rebuild can produce a different local image ID, so record the ID observed on the test machine.
 
 ## Sample runs
 
@@ -252,7 +298,7 @@ Run states: `running`, `succeeded`, `engine_error`, `timed_out`, `runner_error`.
 - Run data lives in `local-data/runs/` on your computer. Nothing is uploaded by ReproLab. Only the optional assistant calls the endpoint you configure.
 - Supports Docker Desktop with WSL2 and Linux Docker Engine. Other setups are untested.
 - The summary table is computed from CODA samples and is labelled so. It does not include convergence diagnostics.
-- OpenBUGS 3.2.3 is required for local model execution. The judge setup above builds and tests it locally; licence references and third-party notices are in `docs/third-party-notices.md`.
+- OpenBUGS 3.2.3 is required for the OpenBUGS workflow. The other engines use their own images. Licence references and third-party notices are in `docs/third-party-notices.md`.
 
 ## Troubleshooting
 

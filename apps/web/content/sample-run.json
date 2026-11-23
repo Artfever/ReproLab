@@ -98,8 +98,8 @@
     },
     {
       "path": "README.md",
-      "sha256": "87cc7258aab946858f4fa94f508df38afd7c478726882d8605858cc8f235e2e5",
-      "bytes": 24782
+      "sha256": "62e0b36ba0db6a84c947c6a7ccdbee8c5287e4ca63c133ca462765c66f4e85c6",
+      "bytes": 28498
     },
     {
       "path": "services/runner/reference/seeds_published.json",
