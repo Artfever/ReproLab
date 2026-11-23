@@ -43,6 +43,12 @@ function coinRequest(dir, model) {
   };
 }
 
+export function isStandardCoin(request) {
+  const example = coinRequest(path.join(DEFAULT_EXAMPLES_DIR, 'coin'), 'model.txt');
+  return Object.entries(example).every(([key, value]) => key === 'timeoutS'
+    || JSON.stringify(request[key]) === JSON.stringify(value));
+}
+
 /** Returns the Seeds demo entry: with `request` when present and verified, else with `missingReason`. */
 function seedsEntry({ upstreamDir, hashFile }) {
   const base = { id: 'seeds-upstream', title: SEEDS_TITLE, kind: 'upstream', label: SEEDS_LABEL };

@@ -2,13 +2,18 @@
 // Seeds entry. Seeds carries a `request` only when all four upstream files verify; otherwise it
 // carries `missingReason` and no `request`. Tests inject `deps.demos` (examplesDir, upstreamDir, hashFile).
 import { listDemos } from '../demos.mjs';
+import { engineById, fixtureDemos } from '../engines.mjs';
 
 export function routes(deps = {}) {
   return [
     {
       method: 'GET',
       pattern: /^\/api\/demos$/,
-      handler: () => {
+      handler: ({ url }) => {
+        const id = url.searchParams.get('engine') ?? 'openbugs';
+        const engine = engineById(id);
+        if (!engine) return { status: 404, json: { error: 'Unknown engine.' } };
+        if (id !== 'openbugs') return { status: 200, json: fixtureDemos(engine) };
         try {
           return { status: 200, json: listDemos(deps.demos ?? {}) };
         } catch {

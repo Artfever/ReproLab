@@ -14,6 +14,7 @@ const MAX_CAPTURE_BYTES = 1024 * 1024;
 const NAME_RE = /^rl-[0-9a-f]{32}(-[a-z]{1,16})?$/;
 const IMAGE_ID_RE = /^sha256:[0-9a-f]{64}$/;
 const IMAGE_RE = /^[A-Za-z0-9][A-Za-z0-9._\-/:@]{0,199}$/;
+const versionProbes = new Map();
 
 /** Requirement 5.2, in the order of design.md. The run label and name are added separately. */
 export const SECURITY_FLAGS = Object.freeze([
@@ -86,7 +87,7 @@ export function buildCreateArgs(spec) {
  * Run `docker <args>` with no shell. Output is captured up to a byte cap.
  * @returns {Promise<{code: number|null, stdout: string, stderr: string, timedOut: boolean, spawnError?: string}>}
  */
-export function runDocker(args, { timeoutMs = 60000, input, maxBytes = MAX_CAPTURE_BYTES } = {}) {
+export function runDocker(args, { timeoutMs = 60000, input, maxBytes = MAX_CAPTURE_BYTES, signal } = {}) {
   return new Promise((resolve) => {
     let child;
     try {
@@ -115,10 +116,14 @@ export function runDocker(args, { timeoutMs = 60000, input, maxBytes = MAX_CAPTU
       timedOut = true;
       child.kill('SIGKILL');
     }, timeoutMs);
+    const abort = () => child.kill('SIGKILL');
+    signal?.addEventListener('abort', abort, { once: true });
+    if (signal?.aborted) abort();
     const finish = (code) => {
       if (settled) return;
       settled = true;
       clearTimeout(timer);
+      signal?.removeEventListener('abort', abort);
       resolve({
         code,
         stdout: Buffer.concat(out).toString('utf8'),
@@ -152,6 +157,22 @@ export async function checkImage(tag) {
   return { present: false };
 }
 
+export async function probeEngine(imageId, command, version) {
+  if (!IMAGE_ID_RE.test(imageId)) return false;
+  const key = JSON.stringify([imageId, command, version]);
+  const cached = versionProbes.get(key);
+  if (cached && Date.now() < cached.expiresAt) return cached.result;
+  const result = runDocker([
+    'run', '--rm', '--pull=never', ...SECURITY_FLAGS, imageId,
+    ...(command ?? ['sh', '-c', 'printf "modelQuit()\\n" | OpenBUGS']),
+  ], { timeoutMs: 15000, maxBytes: 8192 }).then((run) => run.code === 0 && (command
+    ? run.stdout.trim().split(/\r?\n/).at(-1) === version
+    : run.stdout.includes(version)));
+  if (versionProbes.size >= 32) versionProbes.delete(versionProbes.keys().next().value);
+  versionProbes.set(key, { result, expiresAt: Date.now() + 60000 });
+  return result;
+}
+
 /** `docker create` with the fixed flag list. Resolves with the runDocker result. */
 export function createContainer(spec) {
   return runDocker(buildCreateArgs(spec), { timeoutMs: 60000 });
@@ -178,9 +199,9 @@ export function cpOut(name, destDir, from = '/work/out') {
 }
 
 /** `docker start -a`. The caller applies the wall-clock cap by passing timeoutMs. */
-export function startAttached(name, { timeoutMs }) {
+export function startAttached(name, { timeoutMs, signal }) {
   assertName(name);
-  return runDocker(['start', '-a', name], { timeoutMs });
+  return runDocker(['start', '-a', name], { timeoutMs, signal });
 }
 
 export function kill(name) {

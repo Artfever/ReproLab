@@ -92,6 +92,11 @@
         <p>The manifest records the settings, engine version, image identity and a SHA-256 checksum of every input and output file. Machine paths are removed.</p>
         <p id="manifest-wait">The manifest is available when the run has finished.</p>
         <p id="manifest-link-wrap" hidden><a id="manifest-link" class="button" download="manifest.json" href="#">Download manifest.json</a></p>
+        <p id="bundle-links" hidden>
+          <a id="bundle-output" download="reprolab-bundle.json" href="#">Download results bundle</a> ·
+          <a id="bundle-metadata" download="reprolab-bundle.json" href="#">Metadata only</a>
+          <span id="bundle-input-wrap" hidden> · <a id="bundle-input" download="reprolab-bundle.json" href="#">Include local input files</a></span>
+        </p>
       </section>
 
       <section aria-labelledby="summary-heading">
@@ -113,6 +118,13 @@
 
     <!-- The assistant panel is built into this slot by assistant.js. -->
     <div id="assistant-slot"></div>
+    <button type="button" class="button button-secondary" id="cancel-run" hidden>Cancel run</button>
+    <p id="cancel-status" role="status"></p>
+    <section id="fixture-results" hidden>
+      <h2>Fixture comparison</h2>
+      <pre id="fixture-values"></pre>
+      <img id="slice-preview" width="160" height="120" alt="Output slice from the synthetic volume" hidden>
+    </section>
   </main>
   <footer class="site-footer">
     <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>

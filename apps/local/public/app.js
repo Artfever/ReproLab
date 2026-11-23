@@ -9,6 +9,43 @@ import {
 const $ = (id) => document.getElementById(id);
 const state = { model: null, data: null, inits: [null, null, null, null] };
 let demos = [];
+let engines = [];
+
+function selectedEngine() {
+  return engines.find((engine) => engine.id === $('engine-select').value);
+}
+
+function showEngine() {
+  const engine = selectedEngine();
+  const builtin = engine && engine.id !== 'openbugs';
+  $('engine-note').textContent = engine
+    ? [engine.description, engine.setup].filter(Boolean).join(' ')
+    : '';
+  $('fixture-fields').hidden = !builtin || engine.status === 'planned';
+  const cases = $('fixture-case');
+  cases.querySelector('option[value="linked"]')?.remove();
+  if (engine?.id === 'cufflinks') cases.append(el('option', { value: 'linked' }, 'Use a TopHat2 demonstration result'));
+  $('parent-field').hidden = true;
+  for (const group of $('run-form').querySelectorAll('fieldset')) group.hidden = Boolean(builtin);
+  setBusy(busy);
+  clearProblems();
+  setStatus('');
+}
+
+async function loadEngines() {
+  try {
+    const response = await fetch('/api/engines');
+    if (!response.ok) throw new Error('Engine list unavailable');
+    engines = await response.json();
+    $('engine-select').replaceChildren(...engines.map((engine) => {
+      const status = { ready: 'Ready', setup_required: 'Setup required', planned: 'Planned' }[engine.status];
+      return el('option', { value: engine.id }, `${engine.name} · ${status}`);
+    }));
+    showEngine();
+  } catch {
+    $('engine-note').textContent = 'Could not load the engine list. The OpenBUGS form is still available.';
+  }
+}
 let busy = false;
 
 function setStatus(text) { $('status').textContent = text; }
@@ -149,21 +186,36 @@ async function post(path, body) {
 
 function setBusy(v) {
   busy = v;
-  $('submit').disabled = v;
-  $('submit').setAttribute('aria-disabled', String(v));
+  const engine = selectedEngine();
+  const disabled = v || Boolean(engine && engine.id !== 'openbugs' && engine.status !== 'ready');
+  $('submit').disabled = disabled;
+  $('submit').setAttribute('aria-disabled', String(disabled));
 }
 
 async function onSubmit(ev) {
   ev.preventDefault();
   if (busy) return;
   setStatus('');
-  const local = validateForm(currentState());
+  const engine = selectedEngine();
+  const builtin = engine && engine.id !== 'openbugs';
+  if (builtin && engine.status !== 'ready') return;
+  const local = builtin ? [] : validateForm(currentState());
   if (local.length > 0) {
     showProblems(local);
     setStatus(summaryHeading(local.length) + '.');
     return;
   }
-  const request = buildRequest(currentState());
+  const request = builtin
+    ? { engine: engine.id, workflow: engine.workflow, case: $('fixture-case').value }
+    : buildRequest(currentState());
+  if (request.case === 'linked') {
+    request.parentRunId = $('parent-run').value.trim();
+    if (!/^[a-f0-9]{32}$/.test(request.parentRunId)) {
+      setStatus('Enter the 32-character ID of a successful TopHat2 demonstration.');
+      $('parent-run').focus();
+      return;
+    }
+  }
   setBusy(true);
   try {
     setStatus('Checking your inputs.');
@@ -236,7 +288,12 @@ function init() {
   $('data').addEventListener('change', (ev) => readFile(ev.target, (f) => { state.data = f; refreshInfo('data', f); }));
   $('demo').addEventListener('change', onDemoChange);
   $('run-form').addEventListener('submit', onSubmit);
+  $('engine-select').addEventListener('change', showEngine);
+  $('fixture-case').addEventListener('change', () => {
+    $('parent-field').hidden = $('fixture-case').value !== 'linked';
+  });
   loadDemos();
+  loadEngines();
 }
 
 init();

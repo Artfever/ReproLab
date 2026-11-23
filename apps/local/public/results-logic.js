@@ -10,7 +10,7 @@ export const POLL_MIN_MS = 1000;
 export const POLL_MAX_MS = 2000;
 export const SUMMARY_LABEL = 'Computed by ReproLab from the exported samples. Not a convergence or validity claim.';
 export const ACTIVE_STATES = Object.freeze(['queued', 'running']);
-export const TERMINAL_STATES = Object.freeze(['succeeded', 'engine_error', 'timed_out', 'runner_error']);
+export const TERMINAL_STATES = Object.freeze(['succeeded', 'engine_error', 'timed_out', 'runner_error', 'cancelled', 'interrupted']);
 
 // Copy of the engine-problem patterns in services/runner/reprolab_runner/adapter.py
 // (ENGINE_ERROR_PATTERNS). Used only to point at the first matching line in the log.
@@ -24,6 +24,8 @@ const STATES = Object.freeze({
   engine_error: { word: 'Engine error', text: 'The engine reported a problem with the model, data or initial values. See the engine message and log below.', tone: 'bad' },
   timed_out: { word: 'Timed out', text: 'The run reached its time limit and was stopped. No result is available.', tone: 'bad' },
   runner_error: { word: 'Runner error', text: 'The run could not be completed because of a problem outside the model. See the reason below.', tone: 'bad' },
+  cancelled: { word: 'Cancelled', text: 'The user stopped this run. Any collected partial files are listed below.', tone: 'bad' },
+  interrupted: { word: 'Interrupted', text: 'The server stopped during this run. Start another run to try again.', tone: 'bad' },
 });
 
 export const isActive = (state) => ACTIVE_STATES.includes(state);
@@ -71,6 +73,10 @@ export function formatRuntime(s) {
 /** Label/value rows for the details list. Values are plain strings. */
 export function detailRows(run) {
   const s = run.settings ?? {};
+  if (run.engine && run.engine !== 'openbugs') return [
+    ['Engine', run.engine], ['Engine version', run.engineVersion ?? 'not reported'],
+    ['Workflow', run.workflow], ['Fixture', s.case], ['Runtime', formatRuntime(run.runtimeS)],
+  ];
   const list = (v) => (Array.isArray(v) ? v.join(', ') : 'not reported');
   const num = (v) => (Number.isFinite(v) ? String(v) : 'not reported');
   return [

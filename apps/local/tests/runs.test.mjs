@@ -218,6 +218,23 @@ test('one run at a time: second submit is busy until the first finishes', async 
   } finally { release(); ctx.cleanup(); }
 });
 
+test('cancellation completes cleanup and can export metadata with no file bytes', async () => {
+  let release;
+  const gate = new Promise((resolve) => { release = resolve; });
+  const ctx = setup({ behaviour: { ...succeededBehaviour(), gate } });
+  try {
+    const run = await ctx.runs.submit(request());
+    assert.equal(ctx.runs.cancel(run.id), true);
+    release();
+    await ctx.runs.whenIdle();
+    assert.equal(ctx.runs.getRun(run.id).state, 'cancelled');
+    assert.equal(ctx.runs.cancel(run.id), false);
+    const bundle = JSON.parse(ctx.runs.getBundle(run.id, 'metadata').bytes);
+    assert.equal(bundle.manifest.state, 'cancelled');
+    assert.deepEqual(bundle.files, {});
+  } finally { release(); ctx.cleanup(); }
+});
+
 test('log is bounded by lines and by bytes with a truncated flag', async () => {
   const many = Array.from({ length: LOG_MAX_LINES + 50 }, (_, i) => `line ${i}`).join('\n') + '\n';
   const wide = ('x'.repeat(99) + '\n').repeat(Math.ceil(LOG_MAX_BYTES / 100) + 20);
@@ -241,15 +258,17 @@ test('log is bounded by lines and by bytes with a truncated flag', async () => {
 test('startup: stale containers are cleaned and unfinished state.json becomes runner_error', async () => {
   const dataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'rl-recover-'));
   try {
-    const mk = (id, state) => {
+    const mk = (id, state, engine) => {
       const d = path.join(dataDir, 'runs', id);
       fs.mkdirSync(d, { recursive: true });
       fs.writeFileSync(path.join(d, 'state.json'), JSON.stringify({
-        id, state, reason: 'r', createdAt: 'now', request: {}, files: [{ name: 'log.txt', bytes: 1, sha256: 'a'.repeat(64) }, { name: '../evil', bytes: 1, sha256: 'b' }],
+        id, state, engine, reason: 'r', createdAt: 'now', request: {}, files: [{ name: 'log.txt', bytes: 1, sha256: 'a'.repeat(64) }, { name: '../evil', bytes: 1, sha256: 'b' }],
       }));
     };
     const a = 'a'.repeat(32); const b = 'b'.repeat(32);
     mk(a, 'running'); mk(b, 'succeeded');
+    const c = 'c'.repeat(32);
+    mk(c, 'running', 'theano');
     fs.mkdirSync(path.join(dataDir, 'runs', 'not-an-id'), { recursive: true });
     const docker = createFakeDocker();
     const runs = createRunManager({ docker, dataDir, image: 'x:y' });
@@ -258,6 +277,8 @@ test('startup: stale containers are cleaned and unfinished state.json becomes ru
     assert.equal(runs.getRun(a).state, 'runner_error');
     assert.match(runs.getRun(a).reason, /restarted/);
     assert.equal(runs.getRun(b).state, 'succeeded');
+    assert.equal(runs.getRun(c).state, 'interrupted');
+    assert.equal(JSON.parse(runs.getManifest(c)).state, 'interrupted');
     assert.deepEqual(runs.getRun(b).files.map((f) => f.name), ['log.txt'], 'unsafe stored file name dropped');
     assert.equal(runs.getRun('not-an-id'), null);
   } finally { fs.rmSync(dataDir, { recursive: true, force: true }); }

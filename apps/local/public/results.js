@@ -91,7 +91,15 @@ function renderManifest(run) {
   const ready = isTerminal(run.state);
   $('manifest-wait').hidden = ready;
   $('manifest-link-wrap').hidden = !ready;
-  if (ready) $('manifest-link').setAttribute('href', manifestUrl(run.id));
+  $('bundle-links').hidden = !ready;
+  if (ready) {
+    $('manifest-link').setAttribute('href', manifestUrl(run.id));
+    const bundle = `${runUrl(run.id)}/bundle`;
+    $('bundle-output').href = bundle;
+    $('bundle-metadata').href = `${bundle}?mode=metadata`;
+    $('bundle-input-wrap').hidden = run.engine !== 'openbugs';
+    $('bundle-input').href = `${bundle}?mode=inputs`;
+  }
 }
 
 function renderSummary(run) {
@@ -131,6 +139,13 @@ function render(run) {
   renderFiles(run);
   renderManifest(run);
   renderSummary(run);
+  $('fixture-results').hidden = !run.comparison;
+  if (run.comparison) $('fixture-values').textContent = JSON.stringify(run.comparison, null, 2);
+  $('cancel-run').hidden = !isActive(run.state);
+  if ($('slice-preview').hidden && run.engine === 'niftynet' && run.files.some((file) => file.name === 'slice.png')) {
+    $('slice-preview').src = `${fileUrl(run.id, 'slice.png')}?preview=1`;
+    $('slice-preview').hidden = false;
+  }
   announce(announceState(run.state, lastState));
   lastState = run.state;
 }
@@ -164,6 +179,18 @@ function init() {
     }
     return;
   }
+  $('cancel-run').addEventListener('click', async () => {
+    $('cancel-run').disabled = true;
+    try {
+      const response = await fetch(`${runUrl(id)}/cancel`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}',
+      });
+      $('cancel-status').textContent = response.ok ? 'Cancellation requested.' : 'This run is no longer active.';
+    } catch {
+      $('cancel-status').textContent = 'Could not request cancellation. Try again.';
+      $('cancel-run').disabled = false;
+    }
+  });
   poll(id);
 }
 
