@@ -38,6 +38,24 @@ Cancellation and a metadata-only export passed through the real API. A local Oll
 
 For direct reproduction, run each of the eight new images with the command defined in `apps/local/src/engines.mjs`, substituting `probe`, `demo` and `failure` in turn. Use Docker's isolated CPU flags from `apps/local/src/docker.mjs`. For OpenBUGS use the built-in coin and invalid coin cases. The source and parent image pins are recorded in `infra/engines/Dockerfile` and each run manifest.
 
+## Clean worktree repeat
+
+All nine images rebuilt successfully from a detached worktree at runtime commit `8875f59`. BuildKit reused layers and the NiftyNet build used the SHA-256 checked TensorFlow wheel. OpenBUGS used the owner-supplied archive with its checked SHA-256. The rebuilt tags were then selected by a verification server using the regular browser routes, scheduler and Docker adapter. Every successful browser manifest matched its rebuilt image ID. All deliberate failures, downloads and the linked TopHat2 to Cufflinks run passed again. The OpenBUGS CODA hashes matched with the same seed and no test run container was left behind.
+
+| Engine | Local rebuild ID |
+|---|---|
+| OpenBUGS | `sha256:23c3fa69033b8055587d7e1075e8996bfc9d42d46a4a9d86f843c7597eae07b3` |
+| PyMC 2 | `sha256:1598de9dd3b93a47a52d555b07e1f693666aba747b8bd8eaf3183413bf1eef66` |
+| Caffe | `sha256:56408387eb0da65d5ef756781b2d15bbcfc5068a17901fd8221b3a4aaeeb926a` |
+| Theano | `sha256:563a0ca7e5e61459be39b103000a61a87559fb33d685da7701887b6d2bd9c8cf` |
+| Chainer | `sha256:9d61ef558220e95367a8d048f65c6cb6403f219a7c0e477cd6ed84edb65e7888` |
+| QIIME 1 | `sha256:45dce2d634cc51d57e724400cfd12e960e71c8934ab3535feeb279ae69d820fd` |
+| TopHat2 | `sha256:c3d932e9dacb3a9306610efe7b014595738a2e68f59251533e5fcff7c67dc365` |
+| Cufflinks | `sha256:116a4a65bc7a8092ecdd9be640fc28cf56023bace0438785c91479aae38ea127` |
+| NiftyNet | `sha256:eb6495fc3681e8d80cf4ade643cff512e07f296753af27d169f474706618c827` |
+
+PyMC 2 used GNU Fortran 12.2.0 (Debian `12.2.0-14+deb12u1`). Theano used g++ 12.2.0 (Debian `12.2.0-14`). NiftyNet reported no broken requirements in `pip check`. Open items are a second machine, a complete transitive dependency inventory, and a separate Docker work volume quota with per-engine peak temporary disk measurements.
+
 ## Optional Ollama GPU check
 
 Ollama 0.40.15, `nomic-embed-text:latest` (local model ID prefix `0a109f422b47`), RTX 3070 Laptop GPU driver 616.92. Same 32 synthetic strings, four requested threads, one warm-up call per mode. Native Windows loopback `POST /api/embed` used `num_gpu=0` for CPU and `num_gpu=99` for GPU. Each mode was unloaded before the next. One measured request per mode:
