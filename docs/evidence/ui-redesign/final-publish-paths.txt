@@ -1,0 +1,3 @@
+check-publish-paths: OK - scanned 1054 file(s); no unguarded publish path found.
+
+EXIT=0 (100.6 s) cmd: powershell -ExecutionPolicy Bypass -File scripts/check-publish-paths.ps1

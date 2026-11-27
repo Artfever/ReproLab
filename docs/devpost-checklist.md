@@ -29,16 +29,20 @@ Draft text for the Devpost form. Each claim points at a file that exists in the 
 
 ReproLab was built in the Kiro IDE with specs, steering, one hook and evidence-ticked tasks. The product is a local tool that runs OpenBUGS models in a Docker container and records the real log, output files and a manifest. It does not judge results.
 
-**Spec-driven development.** Five spec folders in `.kiro/specs/`, each with `requirements.md`, `design.md` and `tasks.md`:
+**Spec-driven development.** Seven spec folders in `.kiro/specs/`, each with `requirements.md`, `design.md` and `tasks.md`:
 
 - `.kiro/specs/00-engine-feasibility/tasks.md`: can OpenBUGS 3.2.3 run in a container, and what is the licence position.
 - `.kiro/specs/01-web-mvp/tasks.md` and `.kiro/specs/01-end-to-end-web-run/tasks.md`: the static comparison site and the run path.
 - `.kiro/specs/02-grounded-assistant/tasks.md`: a documentation assistant whose answers must cite real passages.
 - `.kiro/specs/03-local-product/tasks.md`: the local product. Requirements use numbered acceptance criteria, and each task lists the requirement ids it covers.
+- `.kiro/specs/04-multi-engine/tasks.md`: the nine-engine selector and its verification ledger.
+- `.kiro/specs/05-ui-redesign/tasks.md`: the redesign of both front ends, with its recorded test amendments.
 
 Every task names an acceptance check and an output file. The orchestrator handed one task at a time to a task-execution subagent. The subagent was not allowed to update task status. A task box was ticked only after its evidence file existed. The `03-local-product` tasks file marks unfinished tasks with open or in-progress boxes; the 13.x tasks are still open.
 
-**Steering.** `.kiro/steering/product.md`, `engineering.md`, `security-and-privacy.md`, `scientific-integrity.md` and `open-source.md`. They fixed rules that the work kept to: no fabricated results, every claim about a run needs a log line, no arbitrary executable upload, no hosted execution, keep the GPL and third-party material out of the repository.
+**Steering.** `.kiro/steering/product.md`, `engineering.md`, `security-and-privacy.md`, `scientific-integrity.md`, `open-source.md` and, since spec 05, `design.md`. They fixed rules that the work kept to: no fabricated results, every claim about a run needs a log line, no arbitrary executable upload, no hosted execution, keep the GPL and third-party material out of the repository.
+
+**Skill and the UI redesign (spec 05).** The interface was redesigned in a Kiro session that loaded the community skill [unslop](https://github.com/heydamir/unslop) (by Damir Sokolovsky, @heydamir, CC BY 4.0), installed as a global Kiro skill. The skill's audit and direction ("exact, candid, archival"; the run timeline and the sample plot as the two moments; the hash tag as the signature) are recorded in `.kiro/specs/05-ui-redesign/design.md` and turned into a sixth steering file, `.kiro/steering/design.md`. Spec 05 lists every test amendment it needed, and its evidence is in `docs/evidence/ui-redesign/`.
 
 **Hook.** `.kiro/hooks/validate-on-save.json` defines a TypeScript check after saving `.ts` or `.tsx` files. It is disabled (`"enabled": false`) because it was not tested in the installed Kiro. It has not saved any time in this build.
 
@@ -52,7 +56,7 @@ Every task names an acceptance check and an output file. The orchestrator handed
 - The `REPROLAB_IMAGE_DIGEST` bug, found by the real container run. The fix is covered by the test named "REPROLAB_IMAGE_DIGEST is the image id, never the run id; absent when unknown; bad ids rejected" in `apps/local/tests/docker.test.mjs`. The two coin manifests `docs/evidence/local-product/m2-coin-manifest.json` and `docs/evidence/local-product/default-tag-coin-manifest.json` hold different image ids because they came from two different image tags (`docs/evidence/local-product/build-image-id.txt`). The account of how the bug was found comes from the build session, not from a saved log; the test is the file evidence.
 - A run reported `succeeded` too early. The test "a run reads as running, with no manifest, until summary, files and manifest are final" in `apps/local/tests/runs.test.mjs` covers it, with output in `docs/evidence/local-product/test-runs.txt`. The same file tests that success is never derived from an exit code alone.
 
-**Not used or not shown.** No MCP server, custom agent, Kiro power or property-based testing library is part of this repository. (`.kiro/specs/03-local-product/tasks.md` says property-based tests are not used because the dependency-free rule forbids a library.) The write-up makes no claim about them.
+**Not used or not shown.** No MCP server, custom agent, Kiro power or property-based testing library is part of this repository. The one Kiro skill used (unslop, above) is installed on the developer machine, not committed. (`.kiro/specs/03-local-product/tasks.md` says property-based tests are not used because the dependency-free rule forbids a library.) The write-up makes no claim about them.
 
 ## Judge setup
 

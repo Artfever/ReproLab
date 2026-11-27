@@ -30,7 +30,7 @@ Narration pace is about 2.3 words per second. Read the narration aloud once with
 
 ### [00:00-00:20] 1. What it is
 
-On screen: Home page, heading "ReproLab local", the header line "Runs on your machine only. Not a hosted service."
+On screen: Home page. The heading "Run an old analysis with its original engine, on this computer", the header line "Runs on your machine only. Not a hosted service.", and the specimen case closing over the recorded Coin hash. (Spec 05 changed the heading; it was "ReproLab local", which is now the line above it.)
 
 > **Narration:** ReproLab runs the OpenBUGS command-line workflow on your own computer. It uses the original engine inside a locked-down Docker container and shows you the real log and output files. It runs only on this machine. It is not a hosted service.
 

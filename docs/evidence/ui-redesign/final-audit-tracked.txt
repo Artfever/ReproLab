@@ -1,0 +1,4 @@
+Tracked-file audit: 485 tracked files checked.
+Result: PASS
+
+EXIT=0 (1.2 s) cmd: node scripts/audit-tracked.mjs

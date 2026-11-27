@@ -1,0 +1,7 @@
+
+> reprolab-web@0.1.0 data
+> node scripts/build-sample-data.mjs --write
+
+wrote apps\web\content\sample-run.json
+
+EXIT=0 (3.6 s) cmd: npm.cmd run data

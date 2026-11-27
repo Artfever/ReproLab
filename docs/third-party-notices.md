@@ -90,14 +90,14 @@ verified**, and we do not call it authenticated. The hash is the hash of "the co
 
 ## npm dependencies (apps/web)
 
-Heading used by the notices test: **Dependency licences (apps/web)**. Counts are from the lockfile, 397 packages excluding the root project. The verdict column is our reading, not legal advice.
+Heading used by the notices test: **Dependency licences (apps/web)**. Counts are from the lockfile, 406 packages excluding the root project, after spec 05-ui-redesign added `gsap` 3.15.1, `three` 0.187.0 and `@types/three` 0.187.0 at exact pins (counts from `node scripts/licence-table.mjs`, 2026-11-27). The verdict column is our reading, not legal advice.
 
 ### Dependency licences (apps/web)
 
 | Licence identifier | Packages | Verdict |
 |---|---:|---|
-| MIT | 318 | Permissive. Keep the licence notice when redistributing. `node_modules` is not committed, so the repository redistributes none of it |
-| Apache-2.0 | 34 | Permissive. Same note |
+| MIT | 325 | Permissive. Keep the licence notice when redistributing. `node_modules` is not committed, so the repository redistributes none of it |
+| Apache-2.0 | 35 | Permissive. Same note |
 | ISC | 16 | Permissive. Same note |
 | BSD-2-Clause | 7 | Permissive. Same note |
 | BSD-3-Clause | 2 | Permissive. Same note |
@@ -110,7 +110,8 @@ Heading used by the notices test: **Dependency licences (apps/web)**. Counts are
 | Apache-2.0 AND LGPL-3.0-or-later (`@img/sharp-win32-*`) | 3 | Same as above (optional) |
 | Apache-2.0 AND LGPL-3.0-or-later AND MIT (`@img/sharp-wasm32`) | 1 | Same as above (optional) |
 | MPL-2.0 (`axe-core`) | 1 | File-level copyleft. See the note below |
-| **Total** | **397** | No package without a declared licence |
+| GreenSock Standard "no charge" licence (`gsap`) | 1 | **Not an OSI open-source licence.** Free use, including commercial, under GreenSock's terms (https://gsap.com/standard-license). Bundled into the static site's client JavaScript when built. Not covered by ReproLab's MIT grant |
+| **Total** | **406** | No package without a declared licence |
 
 **LGPL optional `sharp` and libvips packages.** `@img/sharp-*` and `@img/sharp-libvips-*` are optional dependencies of Next.js's image tooling. The lockfile marks all of
 them optional. This repository commits no binary from them. If a deployment bundle or image ever contained these binaries, the LGPL conditions (licence text, and the

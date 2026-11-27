@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ReproLab Results, unslop story</title>
+<meta name="unslop-steps" content="Spacing, Color and type, Details, Timeline and plot">
+<meta name="unslop-frame" content="24 24 980">
+<!-- Presentation piece for spec 05-ui-redesign task 15. Step 0 copies the spec 03 Results styles;
+     each later step is CSS on top. The data is the recorded Coin run from docs/evidence
+     (log lines and hashes); the plot bars are a drawing, not data. unslop by @heydamir, CC BY 4.0. -->
+<style>
+  @font-face { font-family: "Plex Mono"; src: url("../apps/local/public/fonts/IBMPlexMono-Regular.woff2") format("woff2"); font-weight: 400; }
+  @font-face { font-family: "Plex Mono"; src: url("../apps/local/public/fonts/IBMPlexMono-Medium.woff2") format("woff2"); font-weight: 500; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { width: 1440px; min-height: 960px; background: #f5f7f4; color: #202923; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 16px; line-height: 1.65; }
+  .screen { width: 1440px; padding: 0 0 80px; }
+  header { padding: 16px 70px; background: #ffffff; border-bottom: 1px solid #b1bdb3; }
+  .brand { font-size: 19px; font-weight: 750; letter-spacing: -0.035em; }
+  .nav { display: flex; gap: 4px; margin-top: 13px; }
+  .nav a { padding: 6px 12px; border-radius: 8px; color: #515e55; font-size: 15px; font-weight: 550; text-decoration: none; }
+  .nav a.cur { background: #eaf1eb; color: #245c43; font-weight: 700; }
+  main { width: 1120px; margin: 0 auto; padding: 48px 0 0; }
+  h1 { margin: 0 0 10px; font-size: 45px; line-height: 1.15; font-weight: 720; letter-spacing: -0.025em; }
+  h2 { margin: 40px 0 11px; font-size: 22px; font-weight: 680; letter-spacing: -0.025em; }
+  p { margin: 0 0 16px; }
+  .lede { color: #515e55; }
+  .badge { display: inline-flex; align-items: center; gap: 0; min-height: 32px; padding: 5px 12px; border: 1px solid #7c8980; border-radius: 16px; background: #eaf1eb; color: #245c43; font-size: 14.5px; font-weight: 700; }
+  .badge .dot { width: 0; height: 8px; border-radius: 4px; background: #245c43; margin-right: 0; }
+  .state-text { color: #202923; }
+  .details { display: grid; grid-template-columns: 150px 1fr; gap: 7px 16px; padding: 16px; border: 1px solid #b1bdb3; border-radius: 13px; background: #ffffff; font-size: 15px; }
+  .details dt { color: #515e55; font-weight: 600; }
+  .details dd { margin: 0; font-family: Inter, system-ui, sans-serif; }
+  .log { margin: 0; padding: 16px; border: 1px solid #b1bdb3; border-radius: 10px; background: #eaf1eb; color: #202923; font: 14.5px/1.6 ui-monospace, Consolas, monospace; white-space: pre; }
+  .files { border: 1px solid #b1bdb3; border-radius: 10px; background: #ffffff; overflow: hidden; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { padding: 11px 13px; border-top: 1px solid #b1bdb3; text-align: left; vertical-align: top; }
+  thead th { background: #eaf1eb; font-size: 14px; font-weight: 650; border-top: 0; }
+  td.size { font-family: Inter, system-ui, sans-serif; }
+  .tag { display: inline-block; max-width: 520px; padding: 0; border: 1px solid transparent; border-radius: 0; background: transparent; font: 13.5px/1.5 ui-monospace, Consolas, monospace; overflow: hidden; text-overflow: ellipsis; white-space: normal; word-break: break-all; vertical-align: top; }
+  .tag .algo { display: inline-block; max-width: 0; overflow: hidden; vertical-align: top; color: #545b55; }
+  .btn { display: inline-flex; align-items: center; min-height: 45px; padding: 10px 17px; border: 1px solid #245c43; border-radius: 9px; background: #245c43; color: #fff; font-weight: 650; }
+  .moments { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .timeline { margin: 0; padding: 20px 24px; border: 1px solid rgba(28,33,30,.12); border-radius: 16px; background: #fff; }
+  .timeline ol { display: grid; grid-template-columns: repeat(7, 1fr); margin: 12px 0 0; padding: 0; list-style: none; }
+  .timeline li { position: relative; padding: 24px 8px 0 0; font: 12px/1.4 "Plex Mono", ui-monospace, monospace; color: #1c211e; }
+  .timeline li::before { position: absolute; top: 0; left: 0; width: 16px; height: 16px; content: ""; border-radius: 50%; background: #245c43; }
+  .timeline li::after { position: absolute; top: 7px; left: 20px; right: 4px; height: 2px; content: ""; background: #245c43; }
+  .timeline li:last-child::after { display: none; }
+  .timeline span { display: block; color: #245c43; font-family: system-ui, sans-serif; }
+  .plot { display: flex; align-items: flex-end; gap: 3px; height: 150px; padding: 16px 20px; border: 1px solid rgba(28,33,30,.12); border-radius: 16px; background: #fff; }
+  .plot i { flex: 1; background: #245c43; border-radius: 1px; }
+  .plot i:nth-child(even) { background: #7a7f77; }
+  .plot-cap { margin: 8px 0 0; color: #545b55; font-size: 13px; }
+
+  /* Step 1: spacing on a 4px grid, groups read as groups */
+  .s1 header { padding: 12px 72px; }
+  .s1 .nav { margin-top: 12px; }
+  .s1 main { padding-top: 48px; }
+  .s1 h1 { margin-bottom: 16px; }
+  .s1 h2 { margin: 48px 0 12px; }
+  .s1 .details { gap: 8px 24px; padding: 20px; }
+  .s1 .log { padding: 20px; }
+  .s1 th, .s1 td { padding: 12px 16px; }
+  .s1 .badge { padding: 4px 12px; }
+  .s1 .btn { min-height: 44px; padding: 10px 20px; }
+
+  /* Step 2: warm paper, graphite ink, one accent, weights 400 to 600, the log as a dark typed panel */
+  .s2 body { background-color: #f6f5f1; color: #1c211e; }
+  .s2 header { border-bottom-color: rgba(28,33,30,.12); }
+  .s2 .brand { font-weight: 600; letter-spacing: 0; }
+  .s2 .nav a { font-weight: 500; }
+  .s2 .nav a.cur { background: #eceae3; color: #1c211e; font-weight: 500; }
+  .s2 h1 { font-weight: 500; letter-spacing: -0.01em; }
+  .s2 h2 { font-weight: 500; letter-spacing: 0; }
+  .s2 .lede, .s2 .state-text { color: #545b55; }
+  .s2 .details, .s2 .files { border-color: rgba(28,33,30,.12); }
+  .s2 .details dt { color: #545b55; font-weight: 400; }
+  .s2 .details dd, .s2 td.size { font-family: "Plex Mono", ui-monospace, monospace; font-size: 14px; }
+  .s2 .log { background: #161a17; border-color: #161a17; color: #e4e2d9; font-family: "Plex Mono", ui-monospace, monospace; font-size: 13px; line-height: 1.7; }
+  .s2 th, .s2 td { border-top-color: rgba(28,33,30,.07); }
+  .s2 thead th { background: #eceae3; font-weight: 500; }
+  .s2 .tag { font-family: "Plex Mono", ui-monospace, monospace; font-size: 13px; }
+
+  /* Step 3: details. Nested radii, a square badge with a dot, the hash becomes the tag */
+  .s3 .badge { border-color: rgba(36,92,67,.3); border-radius: 6px; font-weight: 600; }
+  .s3 .badge .dot { width: 8px; margin-right: 8px; }
+  .s3 .details, .s3 .files, .s3 .log { border-radius: 12px; }
+  .s3 .btn { border-radius: 8px; font-weight: 500; }
+  .s3 .tag { max-width: 168px; padding: 2px 8px; border-color: rgba(28,33,30,.12); border-radius: 6px; background: #f6f5f1; white-space: nowrap; word-break: normal; }
+  .s3 .tag .algo { max-width: 64px; margin-right: 8px; }
+
+  /* Step 4: the two moments arrive */
+  .moments { max-height: 0; overflow: hidden; }
+  .s4 .moments { gap: 24px; max-height: 220px; margin-top: 24px; }
+</style>
+</head>
+<body>
+<div class="screen">
+  <header>
+    <div class="brand">ReproLab</div>
+    <div class="nav"><a>Home</a><a>Run</a><a class="cur">Results</a><a>How it works</a><a>Documentation</a><a>Limitations</a></div>
+  </header>
+  <main>
+    <div data-gap>
+      <h1>Run results</h1>
+      <p class="lede">State, engine log, output files and manifest of a run started on this computer.</p>
+    </div>
+    <div data-gap>
+      <h2>State</h2>
+      <p><span class="badge" data-radius><span class="dot"></span>Succeeded</span></p>
+      <p class="state-text">The engine finished and wrote its expected files. This is not a statement that the result is scientifically valid.</p>
+    </div>
+    <div class="moments" data-gap>
+      <div class="timeline" data-in="4">
+        <strong>Engine steps</strong>
+        <ol>
+          <li>model is syntactically correct<span>Done</span></li><li>data loaded<span>Done</span></li><li>model compiled<span>Done</span></li><li>model is initialized<span>Done</span></li><li>updates took<span>Done</span></li><li>Node statistics<span>Done</span></li><li>CODA files written<span>Done</span></li>
+        </ol>
+      </div>
+    </div>
+    <div data-gap>
+      <h2>Details</h2>
+      <dl class="details" data-radius>
+        <dt>Engine version</dt><dd>3.2.3 rev 1012</dd>
+        <dt>Runtime</dt><dd>0.066 s</dd>
+        <dt>Chains</dt><dd>2</dd>
+        <dt>Samples</dt><dd>10000</dd>
+      </dl>
+    </div>
+    <div data-gap>
+      <h2>Engine log</h2>
+<pre class="log">OpenBUGS version 3.2.3 rev 1012
+model is syntactically correct
+data loaded
+model compiled
+model is initialized
+10000 updates took 0 s
+Node statistics
+CODA files written</pre>
+    </div>
+    <div data-gap>
+      <h2>Output files</h2>
+      <div class="files">
+        <table>
+          <thead><tr><th>File</th><th>Size</th><th>SHA-256</th><th>Download</th></tr></thead>
+          <tbody>
+            <tr><th>coda_CODAchain1.txt</th><td class="size">126.8 KiB</td><td><span class="tag"><span class="algo">sha256</span>61cf508305c691626bdda15f5a48502691c2491d8a1871b10464957886749220</span></td><td>Download</td></tr>
+            <tr><th>coda_CODAchain2.txt</th><td class="size">126.9 KiB</td><td><span class="tag"><span class="algo">sha256</span>f7d470b24412c7b453ebcd6bf138b5993eaca73d2f4d4bfbb729130c1d1fc68d</span></td><td>Download</td></tr>
+            <tr><th>log.txt</th><td class="size">413 bytes</td><td><span class="tag"><span class="algo">sha256</span>9bb2038eb2149a45e687104c7c848fd0ffe60504cfa5cb1157185ed9aa1a9b22</span></td><td>Download</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:20px"><span class="btn" data-radius>Download manifest.json</span></p>
+    </div>
+    <div class="plot-wrap" data-in="4">
+      <h2>Summary</h2>
+      <div class="plot"><i style="height:2%"></i><i style="height:3%"></i><i style="height:5%"></i><i style="height:8%"></i><i style="height:12%"></i><i style="height:17%"></i><i style="height:23%"></i><i style="height:31%"></i><i style="height:40%"></i><i style="height:50%"></i><i style="height:61%"></i><i style="height:72%"></i><i style="height:83%"></i><i style="height:92%"></i><i style="height:98%"></i><i style="height:100%"></i><i style="height:96%"></i><i style="height:86%"></i><i style="height:70%"></i><i style="height:50%"></i><i style="height:30%"></i><i style="height:14%"></i><i style="height:5%"></i><i style="height:1%"></i></div>
+      <p class="plot-cap">Plot of exported samples. Not a convergence diagnostic. (Drawing for this video.)</p>
+    </div>
+  </main>
+</div>
+</body>
+</html>
