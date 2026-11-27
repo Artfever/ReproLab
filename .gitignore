@@ -26,4 +26,6 @@ node_modules/
 # Local product (03-local-product)
 local-data/
 vendor/
+# Self-hosted browser libraries (spec 05-ui-redesign) are tracked; the OpenBUGS vendor/ folder is not.
+!apps/local/public/vendor/
 apps/local/node_modules/

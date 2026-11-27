@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "path": "vendor/gsap-3.15.1/gsap.min.js",
+      "lib": "gsap",
+      "version": "3.15.1",
+      "licence": "GreenSock Standard 'no charge' licence (https://gsap.com/standard-license). Not an OSI open-source licence.",
+      "bytes": 73357,
+      "sha256": "3d1bea374ab1b703cc5c4105358eec63c4465efdc573931dc116e34a0a190c1b"
+    },
+    {
+      "path": "vendor/gsap-3.15.1/ScrollTrigger.min.js",
+      "lib": "gsap",
+      "version": "3.15.1",
+      "licence": "GreenSock Standard 'no charge' licence (https://gsap.com/standard-license). Not an OSI open-source licence.",
+      "bytes": 44683,
+      "sha256": "b5bb360661f478f0ff6ffa11500d8ce5e2b6aaf6f7288237cdca3aac9548035a"
+    },
+    {
+      "path": "vendor/animejs-4.5.0/anime.esm.min.js",
+      "lib": "animejs",
+      "version": "4.5.0",
+      "licence": "MIT",
+      "bytes": 118678,
+      "sha256": "a19015a1a92d52025a2fb6703b6d67eadd1cc2aeaf880770e96e04cf6aa07be1"
+    },
+    {
+      "path": "vendor/animejs-4.5.0/LICENSE.md",
+      "lib": "animejs",
+      "version": "4.5.0",
+      "licence": "MIT",
+      "bytes": 1075,
+      "sha256": "3f3e835a9952cfc2a6ca836fb95b3257c981f24fa3ef51249055acb09931897b"
+    },
+    {
+      "path": "vendor/three-0.187.0/three.module.js",
+      "lib": "three",
+      "version": "0.187.0",
+      "licence": "MIT",
+      "bytes": 658900,
+      "sha256": "104f56145899722094556490d787aae0617cc2fc3382f31df02d724ea1aee341"
+    },
+    {
+      "path": "vendor/three-0.187.0/three.core.js",
+      "lib": "three",
+      "version": "0.187.0",
+      "licence": "MIT",
+      "bytes": 1474799,
+      "sha256": "613e370f76638fdef83926642bf256dc9615684922de1ce1f63a8583e5d78578"
+    },
+    {
+      "path": "vendor/three-0.187.0/LICENSE",
+      "lib": "three",
+      "version": "0.187.0",
+      "licence": "MIT",
+      "bytes": 1081,
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "path": "fonts/IBMPlexMono-Regular.woff2",
+      "lib": "@ibm/plex-mono",
+      "version": "2.5.0",
+      "licence": "SIL Open Font License 1.1",
+      "bytes": 49248,
+      "sha256": "ba204497f16b6d334cee9d1e963a831b73e3a56e1d6300a8489d18df7214b350"
+    },
+    {
+      "path": "fonts/IBMPlexMono-Medium.woff2",
+      "lib": "@ibm/plex-mono",
+      "version": "2.5.0",
+      "licence": "SIL Open Font License 1.1",
+      "bytes": 50400,
+      "sha256": "33faf307fa6031fb4062276d7320a6d632de890cbb347576fd80cfa01077bc25"
+    },
+    {
+      "path": "fonts/OFL.txt",
+      "lib": "@ibm/plex-mono",
+      "version": "2.5.0",
+      "licence": "SIL Open Font License 1.1",
+      "bytes": 4456,
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da"
+    },
+    {
+      "path": "vendor/gsap-3.15.1/LICENSE-NOTICE.txt",
+      "lib": "gsap",
+      "version": "3.15.1",
+      "licence": "notice written by ReproLab",
+      "bytes": 359,
+      "sha256": "96f57555faecadc7a446f94b000193ddfb695e6155daae41b70c0bf6f5b0fccf"
+    }
+  ]
+}

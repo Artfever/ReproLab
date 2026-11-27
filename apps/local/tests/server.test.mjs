@@ -47,6 +47,9 @@ before(async () => {
   fs.mkdirSync(pub);
   fs.writeFileSync(path.join(pub, 'index.html'), '<!doctype html><title>t</title>');
   fs.writeFileSync(path.join(pub, 'a.css'), 'body{}');
+  fs.mkdirSync(path.join(pub, 'fonts'));
+  fs.writeFileSync(path.join(pub, 'fonts', 'f.woff2'), Buffer.from('wOF2'));
+  fs.writeFileSync(path.join(pub, 'p.webp'), Buffer.from('RIFF'));
   fs.writeFileSync(path.join(tmp, 'secret.txt'), 'SECRET');
   const runs = createRunManager({ docker: createFakeDocker(), dataDir: path.join(tmp, 'data'), image: 'reprolab-openbugs:test' });
   app = createServer({ publicDir: pub, log: () => {}, runs });
@@ -168,6 +171,16 @@ test('static files are served and every response carries the security headers', 
   }
   const bad = await request({ path: '/', headers: { Host: 'evil.example' } });
   assert.equal(bad.headers['content-security-policy'], "default-src 'self'");
+});
+
+test('self-hosted fonts and images get their own content type with the security headers (spec 05 task 2)', async () => {
+  for (const [p, type] of [['/fonts/f.woff2', 'font/woff2'], ['/p.webp', 'image/webp']]) {
+    const r = await request({ path: p });
+    assert.equal(r.status, 200, p);
+    assert.equal(r.headers['content-type'], type, p);
+    assert.equal(r.headers['content-security-policy'], "default-src 'self'", p);
+    assert.equal(r.headers['x-content-type-options'], 'nosniff', p);
+  }
 });
 
 test('all required routes exist (a handler answers; never 404 or 405 for the documented method)', async () => {

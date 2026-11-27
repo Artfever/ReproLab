@@ -42,6 +42,9 @@ const MIME = {
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
   '.ico': 'image/x-icon',
+  '.webp': 'image/webp',
+  '.woff2': 'font/woff2',
+  '.md': 'text/plain; charset=utf-8',
 };
 
 const HOST_RE = /^(127\.0\.0\.1|localhost|\[::1\]):(\d{1,5})$/i;
