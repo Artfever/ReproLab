@@ -11,6 +11,7 @@
 # Vendored browser libraries and fonts are kept byte for byte so their SHA-256 values in
 # apps/local/public/vendor/manifest.json hold after any checkout (spec 05-ui-redesign, task 2).
 apps/local/public/vendor/** -text
+apps/local/public/fonts/** -text
 apps/web/src/fonts/** binary
 *.woff2 binary
 *.webp binary
