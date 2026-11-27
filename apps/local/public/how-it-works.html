@@ -5,43 +5,88 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>How it works - ReproLab local</title>
   <meta name="description" content="ReproLab local: run the OpenBUGS command-line workflow on your own machine.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
-    <a class="brand" href="/">ReproLab</a>
-    <nav class="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/run.html">Run</a></li>
-        <li><a href="/results.html">Results</a></li>
-        <li><a href="/how-it-works.html" aria-current="page">How it works</a></li>
-        <li><a href="/docs.html">Documentation</a></li>
-        <li><a href="/limitations.html">Limitations</a></li>
-        <li><a href="/privacy.html">Privacy</a></li>
-        <li><a href="/terms.html">Terms</a></li>
-      </ul>
-    </nav>
+    <div class="header-inner">
+      <div class="brand-block">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span>ReproLab <span class="brand-sub">local</span></a>
+        <p class="header-line">Runs on your machine only. Not a hosted service.</p>
+      </div>
+      <nav class="site-nav" aria-label="Main">
+        <details class="nav-menu" open>
+          <summary>Menu</summary>
+          <div class="nav-lists">
+            <ul class="nav-primary">
+              <li><a href="/">Home</a></li>
+              <li><a href="/run.html">Run</a></li>
+              <li><a href="/results.html">Results</a></li>
+              <li><a href="/how-it-works.html" aria-current="page">How it works</a></li>
+              <li><a href="/docs.html">Documentation</a></li>
+            </ul>
+            <ul class="nav-secondary">
+              <li><a href="/limitations.html">Limitations</a></li>
+              <li><a href="/privacy.html">Privacy</a></li>
+              <li><a href="/terms.html">Terms</a></li>
+            </ul>
+          </div>
+        </details>
+      </nav>
+    </div>
   </header>
   <main id="main" tabindex="-1">
-    <h1>How it works</h1>
-    <ol>
-      <li><strong>You supply inputs.</strong> A model, data, optional initial values for up to four chains, and settings such as burn-in and number of samples.</li>
-      <li><strong>ReproLab checks them.</strong> Sizes, ranges and file names are validated on this computer before anything runs.</li>
-      <li><strong>A container runs the engine.</strong> The local server starts the OpenBUGS command-line engine in a container with no network, a read-only filesystem, no extra privileges and limits on memory, processes and time.</li>
-      <li><strong>The engine log decides the state.</strong> The engine can exit normally even for an invalid model, so ReproLab reads the log and the output files to decide between succeeded, engine error and timed out.</li>
-      <li><strong>You get the record.</strong> The log, the engine output files and a run manifest with file hashes and the engine version are kept in a folder on this computer.</li>
-    </ol>
-    <h2>What ReproLab computes</h2>
-    <p>The engine produces every posterior sample. ReproLab may compute labelled summaries, such as a mean and standard deviation, from the exported samples. It does not alter them.</p>
-    <h2>The assistant</h2>
-    <p>An optional assistant can explain documentation and a run's log. It is off unless you configure a language-model endpoint. It answers only from cited passages and declines otherwise. It cannot approve an analysis or interpret results.</p>
+    <div class="page-head">
+      <h1>How it works</h1>
+      <p>Five steps from your files to a record you can check. The figure marks the step you are reading.</p>
+    </div>
+    <div class="pipeline-layout">
+      <ol class="steps" id="steps">
+        <li data-step="0"><strong>You supply inputs.</strong> A model, data, optional initial values for up to four chains, and settings such as burn-in and number of samples.</li>
+        <li data-step="1"><strong>ReproLab checks them.</strong> Sizes, ranges and file names are validated on this computer before anything runs.</li>
+        <li data-step="2"><strong>A container runs the engine.</strong> The local server starts the OpenBUGS command-line engine in a container with no network, a read-only filesystem, no extra privileges and limits on memory, processes and time.</li>
+        <li data-step="3"><strong>The engine log decides the state.</strong> The engine can exit normally even for an invalid model, so ReproLab reads the log and the output files to decide between succeeded, engine error and timed out.</li>
+        <li data-step="4"><strong>You get the record.</strong> The log, the engine output files and a run manifest with file hashes and the engine version are kept in a folder on this computer.</li>
+      </ol>
+      <div class="pipeline-sticky">
+        <figure class="pipeline" id="pipeline" aria-labelledby="pipeline-caption">
+          <svg viewBox="0 0 400 520" role="img" aria-labelledby="pipeline-title pipeline-desc">
+            <title id="pipeline-title">Pipeline from inputs to the run record</title>
+            <desc id="pipeline-desc">Your files go to a validation step on this computer, then into a sealed container with no network where the engine runs. The log decides the state, and the record holds the log, output files with hashes and a manifest.</desc>
+            <path class="wire" d="M200 70 V108 M200 158 V196 M200 320 V358 M200 408 V446"/>
+            <g class="node" data-node="0"><rect x="60" y="20" width="280" height="50" rx="8"/><text x="80" y="42">Your files</text><text class="sub" x="80" y="60">model.txt · data.txt · inits1.txt</text></g>
+            <g class="node" data-node="1"><rect x="60" y="108" width="280" height="50" rx="8"/><text x="80" y="130">Checked on this computer</text><text class="sub" x="80" y="148">sizes · ranges · ASCII only</text></g>
+            <g class="seal"><rect x="40" y="186" width="320" height="144" rx="12"/><text x="56" y="206">container · --network none · --read-only</text></g>
+            <g class="node" data-node="2"><rect x="60" y="216" width="280" height="50" rx="8"/><text x="80" y="238">OpenBUGS 3.2.3, original engine</text><text class="sub" x="80" y="256">user 10001 · 1 CPU · 1 GiB</text></g>
+            <g class="node" data-node="3"><rect x="60" y="272" width="280" height="48" rx="8"/><text x="80" y="292">The log decides the state</text><text class="sub" x="80" y="310">7 marker lines, in order</text></g>
+            <g class="node" data-node="4"><rect x="60" y="358" width="280" height="150" rx="8"/><text x="80" y="382">The record</text><text class="sub" x="80" y="406">log.txt</text><text class="sub" x="80" y="426">coda_CODAchain1.txt  sha256 61cf5083…</text><text class="sub" x="80" y="446">coda_CODAindex.txt   sha256 806af55b…</text><text class="sub" x="80" y="466">manifest.json</text><text class="sub" x="80" y="490">kept in local-data/runs on this computer</text></g>
+          </svg>
+          <figcaption id="pipeline-caption">The hashes shown are from the recorded Coin run in docs/evidence. Each run has its own.</figcaption>
+        </figure>
+      </div>
+    </div>
 
+    <section class="section prose" aria-labelledby="computes-h">
+      <h2 id="computes-h">What ReproLab computes</h2>
+      <p>The engine produces every posterior sample. ReproLab may compute labelled summaries, such as a mean and standard deviation, from the exported samples. It does not alter them.</p>
+    </section>
+    <section class="section prose" aria-labelledby="assistant-h">
+      <h2 id="assistant-h">The assistant</h2>
+      <p>An optional assistant can explain documentation and a run's log. It is off unless you configure a language-model endpoint. It answers only from cited passages and declines otherwise. It cannot approve an analysis or interpret results.</p>
+    </section>
   </main>
   <footer class="site-footer">
-    <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
-    <p>ReproLab code is MIT licensed. The licence covers ReproLab code only, not OpenBUGS.</p>
+    <div class="footer-inner">
+      <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
+      <p>ReproLab code is MIT licensed. The licence covers ReproLab code only, not OpenBUGS.</p>
+    </div>
   </footer>
+  <script src="/vendor/gsap-3.15.1/gsap.min.js" defer></script>
+  <script src="/vendor/gsap-3.15.1/ScrollTrigger.min.js" defer></script>
+  <script type="module" src="/site.js"></script>
+  <script type="module" src="/how-it-works.js"></script>
 </body>
 </html>

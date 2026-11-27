@@ -5,47 +5,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Limitations - ReproLab local</title>
   <meta name="description" content="ReproLab local: run the OpenBUGS command-line workflow on your own machine.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
-    <a class="brand" href="/">ReproLab</a>
-    <nav class="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/run.html">Run</a></li>
-        <li><a href="/results.html">Results</a></li>
-        <li><a href="/how-it-works.html">How it works</a></li>
-        <li><a href="/docs.html">Documentation</a></li>
-        <li><a href="/limitations.html" aria-current="page">Limitations</a></li>
-        <li><a href="/privacy.html">Privacy</a></li>
-        <li><a href="/terms.html">Terms</a></li>
-      </ul>
-    </nav>
+    <div class="header-inner">
+      <div class="brand-block">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span>ReproLab <span class="brand-sub">local</span></a>
+        <p class="header-line">Runs on your machine only. Not a hosted service.</p>
+      </div>
+      <nav class="site-nav" aria-label="Main">
+        <details class="nav-menu" open>
+          <summary>Menu</summary>
+          <div class="nav-lists">
+            <ul class="nav-primary">
+              <li><a href="/">Home</a></li>
+              <li><a href="/run.html">Run</a></li>
+              <li><a href="/results.html">Results</a></li>
+              <li><a href="/how-it-works.html">How it works</a></li>
+              <li><a href="/docs.html">Documentation</a></li>
+            </ul>
+            <ul class="nav-secondary">
+              <li><a href="/limitations.html" aria-current="page">Limitations</a></li>
+              <li><a href="/privacy.html">Privacy</a></li>
+              <li><a href="/terms.html">Terms</a></li>
+            </ul>
+          </div>
+        </details>
+      </nav>
+    </div>
   </header>
-  <main id="main" tabindex="-1">
-    <h1>Limitations</h1>
+  <main id="main" tabindex="-1" class="prose">
+    <div class="page-head">
+      <h1>Limitations</h1>
+      <p>What this tool has not shown, stated before anything else.</p>
+    </div>
     <div class="notice warn">
       <p>A finished run is not a valid scientific finding and not a convergence claim.</p>
     </div>
+
     <h2>Engine</h2>
     <p>ReproLab includes OpenBUGS 3.2.3 as its inference engine and runs it in Docker on your computer. Follow the README to build the local image and test the Coin example or the deliberate syntax error. ReproLab's own code is MIT licensed; OpenBUGS retains its own licence, listed in the repository's third-party notices.</p>
+
     <h2>Isolation</h2>
     <p>Docker Desktop isolation is the only isolation that has been tested. No other sandbox has been tested. Run only inputs you trust enough for that level of isolation.</p>
+
     <h2>Seeds</h2>
     <p>Results from the Seeds example are historical. A pre-declared comparison against published values failed, and it is reported as failed. Do not read a Seeds run here as a reproduction of the published numbers.</p>
+    <div class="scroll-region" tabindex="0" role="region" aria-label="Recorded Seeds comparisons, scrollable">
+      <table>
+        <caption>Recorded Seeds comparisons against the published values, five monitored nodes each. From docs/evidence.</caption>
+        <thead>
+          <tr><th scope="col">Comparison</th><th scope="col">Setting</th><th scope="col">Decided</th><th scope="col">Result</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">seeds-a, pooled</th><td>2 chains pooled, burn-in 1000</td><td><span class="kind-tag">pre-declared</span></td><td><span class="result-fail">fail on all 5 nodes</span></td></tr>
+          <tr><th scope="row">seeds-c, pooled</th><td>Same setting, seed 2. A second check, not the pre-declared one</td><td><span class="kind-tag">same rule</span></td><td><span class="result-fail">fail on all 5 nodes</span></td></tr>
+          <tr><th scope="row">seeds-a, chain 1</th><td>Chain 1 only, burn-in 1000</td><td><span class="kind-tag">post hoc</span></td><td>pass (post hoc)</td></tr>
+          <tr><th scope="row">seeds-a, chain 2</th><td>Chain 2 only, burn-in 1000</td><td><span class="kind-tag">post hoc</span></td><td><span class="result-fail">fail (post hoc)</span></td></tr>
+          <tr><th scope="row">seeds-longburn, pooled</th><td>2 chains pooled, burn-in 20000</td><td><span class="kind-tag">post hoc</span></td><td>pass (post hoc)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="hint">A post hoc comparison was chosen after the first comparison failed. A post hoc pass is not an independent confirmation. ReproLab does not claim to know why the pre-declared comparison failed.</p>
+
     <h2>Scope</h2>
     <ul>
       <li>One run at a time, small inputs only, a time limit of at most 300 seconds.</li>
       <li>The OpenBUGS command-line workflow only. The language is not translated or repaired.</li>
       <li>The assistant, when enabled, can be wrong. Check its citations.</li>
     </ul>
-
   </main>
   <footer class="site-footer">
-    <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
-    <p>ReproLab-authored code is MIT licensed. OpenBUGS is the included third-party engine and keeps its own licence.</p>
+    <div class="footer-inner">
+      <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
+      <p>ReproLab-authored code is MIT licensed. OpenBUGS is the included third-party engine and keeps its own licence.</p>
+    </div>
   </footer>
+  <script src="/vendor/gsap-3.15.1/gsap.min.js" defer></script>
+  <script type="module" src="/site.js"></script>
 </body>
 </html>

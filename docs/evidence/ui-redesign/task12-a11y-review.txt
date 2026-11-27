@@ -1,0 +1,256 @@
+PASS server is up
+--- home ---
+PASS home: html lang, title, viewport meta | lang=en title=Home - ReproLab local
+PASS home: exactly one h1, no skipped heading levels | h1=1 skips=0
+PASS home: landmarks banner, labelled nav, main, contentinfo | banner=1 navs=["Main"] main=1 footer=1
+PASS home: skip link is first focusable and its target exists
+PASS home: every form control has an accessible name
+PASS home: every link, button and region has an accessible name
+PASS home: no duplicate ids; every aria reference resolves |  
+PASS home: tables have captions; no images without alt; no vague link text
+PASS home: computed text contrast meets WCAG AA (24 distinct colour pairs)
+INFO home: lowest contrast ratio 5.93
+INFO home: tab order (15): A:Skip to main c > A:ReproLab local > A:Home > A:Run > A:Results > A:How it works > A:Documentation > A:Limitations > A:Privacy > A:Terms > A:Go to Run > A:How it works > replay-log > A:Limitations > A:Privacy
+PASS home: Tab order follows DOM order and DOM order follows reading order
+PASS home: every focused element shows a focus ring (outline >= 2px)
+PASS home: no focus on an invisible element
+INFO home: elements with motion: normal=2, reduced=0
+PASS home: with prefers-reduced-motion: reduce no element has a transition, animation or smooth scroll
+PASS home: no horizontal page scroll at 1280px | scrollWidth=1265 clientWidth=1265 wide=
+INFO screenshot local-home-1280.png (1280x2094)
+PASS home: no horizontal page scroll at 390px | scrollWidth=390 clientWidth=390 wide=UL right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422
+INFO home @390: controls under 24x24 CSS px: none
+INFO screenshot local-home-390.png (390x4247)
+PASS home: no horizontal page scroll at 320px | scrollWidth=320 clientWidth=320 wide=UL right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352
+INFO home @320: controls under 24x24 CSS px: none
+INFO screenshot local-home-320.png (320x4445)
+--- run ---
+PASS run: html lang, title, viewport meta | lang=en title=Run - ReproLab local
+PASS run: exactly one h1, no skipped heading levels | h1=1 skips=0
+PASS run: landmarks banner, labelled nav, main, contentinfo | banner=1 navs=["Main"] main=1 footer=1
+PASS run: skip link is first focusable and its target exists
+PASS run: every form control has an accessible name
+PASS run: every link, button and region has an accessible name
+PASS run: no duplicate ids; every aria reference resolves |  
+PASS run: tables have captions; no images without alt; no vague link text
+PASS run: computed text contrast meets WCAG AA (24 distinct colour pairs)
+INFO run: lowest contrast ratio 5.81
+INFO run: tab order (25): A:Skip to main c > A:ReproLab local > A:Home > A:Run > A:Results > A:How it works > A:Documentation > A:Limitations > A:Privacy > A:Terms > A:Documentation > engine-select > demo > model > data > chains > inits-1 > inits-2 > monitors > burnIn > samples > thin > seed > timeoutS > submit
+PASS run: Tab order follows DOM order and DOM order follows reading order
+PASS run: every focused element shows a focus ring (outline >= 2px)
+PASS run: no focus on an invisible element
+INFO run: elements with motion: normal=19, reduced=0
+PASS run: with prefers-reduced-motion: reduce no element has a transition, animation or smooth scroll
+PASS run: no horizontal page scroll at 1280px | scrollWidth=1265 clientWidth=1265 wide=
+INFO screenshot local-run-1280.png (1280x2799)
+PASS run: no horizontal page scroll at 390px | scrollWidth=390 clientWidth=390 wide=UL right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422
+INFO run @390: controls under 24x24 CSS px: none
+INFO screenshot local-run-390.png (390x4396)
+PASS run: no horizontal page scroll at 320px | scrollWidth=320 clientWidth=320 wide=UL right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352
+INFO run @320: controls under 24x24 CSS px: none
+INFO screenshot local-run-320.png (320x4617)
+--- how-it-works ---
+PASS how-it-works: html lang, title, viewport meta | lang=en title=How it works - ReproLab local
+PASS how-it-works: exactly one h1, no skipped heading levels | h1=1 skips=0
+PASS how-it-works: landmarks banner, labelled nav, main, contentinfo | banner=1 navs=["Main"] main=1 footer=1
+PASS how-it-works: skip link is first focusable and its target exists
+PASS how-it-works: every form control has an accessible name
+PASS how-it-works: every link, button and region has an accessible name
+PASS how-it-works: no duplicate ids; every aria reference resolves |  
+PASS how-it-works: tables have captions; no images without alt; no vague link text
+PASS how-it-works: computed text contrast meets WCAG AA (14 distinct colour pairs)
+INFO how-it-works: lowest contrast ratio 6.41
+INFO how-it-works: tab order (10): A:Skip to main c > A:ReproLab local > A:Home > A:Run > A:Results > A:How it works > A:Documentation > A:Limitations > A:Privacy > A:Terms
+PASS how-it-works: Tab order follows DOM order and DOM order follows reading order
+PASS how-it-works: every focused element shows a focus ring (outline >= 2px)
+PASS how-it-works: no focus on an invisible element
+INFO how-it-works: elements with motion: normal=5, reduced=0
+PASS how-it-works: with prefers-reduced-motion: reduce no element has a transition, animation or smooth scroll
+PASS how-it-works: no horizontal page scroll at 1280px | scrollWidth=1265 clientWidth=1265 wide=
+INFO screenshot local-how-it-works-1280.png (1280x1578)
+PASS how-it-works: no horizontal page scroll at 390px | scrollWidth=390 clientWidth=390 wide=UL right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422
+INFO how-it-works @390: controls under 24x24 CSS px: none
+INFO screenshot local-how-it-works-390.png (390x2315)
+PASS how-it-works: no horizontal page scroll at 320px | scrollWidth=320 clientWidth=320 wide=UL right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352
+INFO how-it-works @320: controls under 24x24 CSS px: none
+INFO screenshot local-how-it-works-320.png (320x2477)
+--- docs ---
+PASS docs: html lang, title, viewport meta | lang=en title=Documentation - ReproLab local
+PASS docs: exactly one h1, no skipped heading levels | h1=1 skips=0
+PASS docs: landmarks banner, labelled nav, main, contentinfo | banner=1 navs=["Main"] main=1 footer=1
+PASS docs: skip link is first focusable and its target exists
+PASS docs: every form control has an accessible name
+PASS docs: every link, button and region has an accessible name
+PASS docs: no duplicate ids; every aria reference resolves |  
+PASS docs: tables have captions; no images without alt; no vague link text
+PASS docs: computed text contrast meets WCAG AA (19 distinct colour pairs)
+INFO docs: lowest contrast ratio 6.41
+INFO docs: tab order (15): A:Skip to main c > A:ReproLab local > A:Home > A:Run > A:Results > A:How it works > A:Documentation > A:Limitations > A:Privacy > A:Terms > BUTTON:Copy > BUTTON:Copy > A:Limitations > A:Privacy > A:Terms
+PASS docs: Tab order follows DOM order and DOM order follows reading order
+PASS docs: every focused element shows a focus ring (outline >= 2px)
+PASS docs: no focus on an invisible element
+INFO docs: elements with motion: normal=2, reduced=0
+PASS docs: with prefers-reduced-motion: reduce no element has a transition, animation or smooth scroll
+PASS docs: no horizontal page scroll at 1280px | scrollWidth=1265 clientWidth=1265 wide=
+INFO screenshot local-docs-1280.png (1280x1750)
+PASS docs: no horizontal page scroll at 390px | scrollWidth=390 clientWidth=390 wide=UL right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422
+INFO docs @390: controls under 24x24 CSS px: none
+INFO screenshot local-docs-390.png (390x2240)
+PASS docs: no horizontal page scroll at 320px | scrollWidth=320 clientWidth=320 wide=UL right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352
+INFO docs @320: controls under 24x24 CSS px: none
+INFO screenshot local-docs-320.png (320x2362)
+--- limitations ---
+PASS limitations: html lang, title, viewport meta | lang=en title=Limitations - ReproLab local
+PASS limitations: exactly one h1, no skipped heading levels | h1=1 skips=0
+PASS limitations: landmarks banner, labelled nav, main, contentinfo | banner=1 navs=["Main"] main=1 footer=1
+PASS limitations: skip link is first focusable and its target exists
+PASS limitations: every form control has an accessible name
+PASS limitations: every link, button and region has an accessible name
+PASS limitations: no duplicate ids; every aria reference resolves |  
+PASS limitations: tables have captions; no images without alt; no vague link text
+PASS limitations: computed text contrast meets WCAG AA (17 distinct colour pairs)
+INFO limitations: lowest contrast ratio 6.29
+INFO limitations: tab order (11): A:Skip to main c > A:ReproLab local > A:Home > A:Run > A:Results > A:How it works > A:Documentation > A:Limitations > A:Privacy > A:Terms > DIV:Recorded Seeds
+PASS limitations: Tab order follows DOM order and DOM order follows reading order
+PASS limitations: every focused element shows a focus ring (outline >= 2px)
+PASS limitations: no focus on an invisible element
+INFO limitations: elements with motion: normal=0, reduced=0
+PASS limitations: with prefers-reduced-motion: reduce no element has a transition, animation or smooth scroll
+PASS limitations: no horizontal page scroll at 1280px | scrollWidth=1265 clientWidth=1265 wide=
+INFO screenshot local-limitations-1280.png (1280x1665)
+PASS limitations: no horizontal page scroll at 390px | scrollWidth=390 clientWidth=390 wide=UL right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422
+INFO limitations @390: controls under 24x24 CSS px: none
+INFO screenshot local-limitations-390.png (390x2513)
+PASS limitations: no horizontal page scroll at 320px | scrollWidth=320 clientWidth=320 wide=UL right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352
+INFO limitations @320: controls under 24x24 CSS px: none
+INFO screenshot local-limitations-320.png (320x2710)
+--- privacy ---
+PASS privacy: html lang, title, viewport meta | lang=en title=Privacy - ReproLab local
+PASS privacy: exactly one h1, no skipped heading levels | h1=1 skips=0
+PASS privacy: landmarks banner, labelled nav, main, contentinfo | banner=1 navs=["Main"] main=1 footer=1
+PASS privacy: skip link is first focusable and its target exists
+PASS privacy: every form control has an accessible name
+PASS privacy: every link, button and region has an accessible name
+PASS privacy: no duplicate ids; every aria reference resolves |  
+PASS privacy: tables have captions; no images without alt; no vague link text
+PASS privacy: computed text contrast meets WCAG AA (12 distinct colour pairs)
+INFO privacy: lowest contrast ratio 5.81
+INFO privacy: tab order (10): A:Skip to main c > A:ReproLab local > A:Home > A:Run > A:Results > A:How it works > A:Documentation > A:Limitations > A:Privacy > A:Terms
+PASS privacy: Tab order follows DOM order and DOM order follows reading order
+PASS privacy: every focused element shows a focus ring (outline >= 2px)
+PASS privacy: no focus on an invisible element
+INFO privacy: elements with motion: normal=0, reduced=0
+PASS privacy: with prefers-reduced-motion: reduce no element has a transition, animation or smooth scroll
+PASS privacy: no horizontal page scroll at 1280px | scrollWidth=1265 clientWidth=1265 wide=
+INFO screenshot local-privacy-1280.png (1280x1307)
+PASS privacy: no horizontal page scroll at 390px | scrollWidth=390 clientWidth=390 wide=UL right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422
+INFO privacy @390: controls under 24x24 CSS px: none
+INFO screenshot local-privacy-390.png (390x1631)
+PASS privacy: no horizontal page scroll at 320px | scrollWidth=320 clientWidth=320 wide=UL right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352
+INFO privacy @320: controls under 24x24 CSS px: none
+INFO screenshot local-privacy-320.png (320x1815)
+--- terms ---
+PASS terms: html lang, title, viewport meta | lang=en title=Terms - ReproLab local
+PASS terms: exactly one h1, no skipped heading levels | h1=1 skips=0
+PASS terms: landmarks banner, labelled nav, main, contentinfo | banner=1 navs=["Main"] main=1 footer=1
+PASS terms: skip link is first focusable and its target exists
+PASS terms: every form control has an accessible name
+PASS terms: every link, button and region has an accessible name
+PASS terms: no duplicate ids; every aria reference resolves |  
+PASS terms: tables have captions; no images without alt; no vague link text
+PASS terms: computed text contrast meets WCAG AA (10 distinct colour pairs)
+INFO terms: lowest contrast ratio 6.41
+INFO terms: tab order (10): A:Skip to main c > A:ReproLab local > A:Home > A:Run > A:Results > A:How it works > A:Documentation > A:Limitations > A:Privacy > A:Terms
+PASS terms: Tab order follows DOM order and DOM order follows reading order
+PASS terms: every focused element shows a focus ring (outline >= 2px)
+PASS terms: no focus on an invisible element
+INFO terms: elements with motion: normal=0, reduced=0
+PASS terms: with prefers-reduced-motion: reduce no element has a transition, animation or smooth scroll
+PASS terms: no horizontal page scroll at 1280px | scrollWidth=1265 clientWidth=1265 wide=
+INFO screenshot local-terms-1280.png (1280x1013)
+PASS terms: no horizontal page scroll at 390px | scrollWidth=390 clientWidth=390 wide=UL right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422
+INFO terms @390: controls under 24x24 CSS px: none
+INFO screenshot local-terms-390.png (390x1167)
+PASS terms: no horizontal page scroll at 320px | scrollWidth=320 clientWidth=320 wide=UL right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352
+INFO terms @320: controls under 24x24 CSS px: none
+INFO screenshot local-terms-320.png (320x1269)
+--- run-problems ---
+PASS run-problems: html lang, title, viewport meta | lang=en title=Run - ReproLab local
+PASS run-problems: exactly one h1, no skipped heading levels | h1=1 skips=0
+PASS run-problems: landmarks banner, labelled nav, main, contentinfo | banner=1 navs=["Main"] main=1 footer=1
+PASS run-problems: skip link is first focusable and its target exists
+PASS run-problems: every form control has an accessible name
+PASS run-problems: every link, button and region has an accessible name
+PASS run-problems: no duplicate ids; every aria reference resolves |  
+PASS run-problems: tables have captions; no images without alt; no vague link text
+PASS run-problems: computed text contrast meets WCAG AA (27 distinct colour pairs)
+INFO run-problems: lowest contrast ratio 5.77
+INFO run-problems: tab order (11): data > chains > inits-1 > inits-2 > monitors > burnIn > samples > thin > seed > timeoutS > submit
+PASS run-problems: Tab order follows DOM order and DOM order follows reading order
+PASS run-problems: every focused element shows a focus ring (outline >= 2px)
+PASS run-problems: no focus on an invisible element
+INFO run-problems: elements with motion: normal=19, reduced=0
+PASS run-problems: with prefers-reduced-motion: reduce no element has a transition, animation or smooth scroll
+PASS run-problems: no horizontal page scroll at 1280px | scrollWidth=1265 clientWidth=1265 wide=
+INFO screenshot local-run-problems-1280.png (1280x3157)
+PASS run-problems: no horizontal page scroll at 390px | scrollWidth=390 clientWidth=390 wide=UL right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422
+INFO run-problems @390: controls under 24x24 CSS px: none
+INFO screenshot local-run-problems-390.png (390x5017)
+PASS run-problems: no horizontal page scroll at 320px | scrollWidth=320 clientWidth=320 wide=UL right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352
+INFO run-problems @320: controls under 24x24 CSS px: none
+INFO screenshot local-run-problems-320.png (320x5383)
+--- results-empty ---
+PASS results-empty: html lang, title, viewport meta | lang=en title=Results - ReproLab local
+PASS results-empty: exactly one h1, no skipped heading levels | h1=1 skips=0
+PASS results-empty: landmarks banner, labelled nav, main, contentinfo | banner=1 navs=["Main"] main=1 footer=1
+PASS results-empty: skip link is first focusable and its target exists
+PASS results-empty: every form control has an accessible name
+PASS results-empty: every link, button and region has an accessible name
+PASS results-empty: no duplicate ids; every aria reference resolves |  
+PASS results-empty: tables have captions; no images without alt; no vague link text
+PASS results-empty: computed text contrast meets WCAG AA (15 distinct colour pairs)
+INFO results-empty: lowest contrast ratio 5.81
+INFO results-empty: tab order (11): A:Skip to main c > A:ReproLab local > A:Home > A:Run > A:Results > A:How it works > A:Documentation > A:Limitations > A:Privacy > A:Terms > A:Start a run
+PASS results-empty: Tab order follows DOM order and DOM order follows reading order
+PASS results-empty: every focused element shows a focus ring (outline >= 2px)
+PASS results-empty: no focus on an invisible element
+INFO results-empty: elements with motion: normal=5, reduced=0
+PASS results-empty: with prefers-reduced-motion: reduce no element has a transition, animation or smooth scroll
+PASS results-empty: no horizontal page scroll at 1280px | scrollWidth=1265 clientWidth=1265 wide=
+INFO screenshot local-results-empty-1280.png (1280x1335)
+PASS results-empty: no horizontal page scroll at 390px | scrollWidth=390 clientWidth=390 wide=UL right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422
+INFO results-empty @390: controls under 24x24 CSS px: none
+INFO screenshot local-results-empty-390.png (390x1610)
+PASS results-empty: no horizontal page scroll at 320px | scrollWidth=320 clientWidth=320 wide=UL right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352
+INFO results-empty @320: controls under 24x24 CSS px: none
+INFO screenshot local-results-empty-320.png (320x1684)
+INFO real coin run finished: runner_error
+--- results ---
+PASS results: html lang, title, viewport meta | lang=en title=Results - ReproLab local
+PASS results: exactly one h1, no skipped heading levels | h1=1 skips=0
+PASS results: landmarks banner, labelled nav, main, contentinfo | banner=1 navs=["Main"] main=1 footer=1
+PASS results: skip link is first focusable and its target exists
+PASS results: every form control has an accessible name
+PASS results: every link, button and region has an accessible name
+PASS results: no duplicate ids; every aria reference resolves |  
+PASS results: tables have captions; no images without alt; no vague link text
+PASS results: computed text contrast meets WCAG AA (27 distinct colour pairs)
+INFO results: lowest contrast ratio 5.77
+INFO results: tab order (15): A:Skip to main c > A:ReproLab local > A:Home > A:Run > A:Results > A:How it works > A:Documentation > A:Limitations > A:Privacy > A:Terms > manifest-link > bundle-output > bundle-metadata > bundle-input > INPUT:
+PASS results: Tab order follows DOM order and DOM order follows reading order
+PASS results: every focused element shows a focus ring (outline >= 2px)
+PASS results: no focus on an invisible element
+INFO results: elements with motion: normal=5, reduced=0
+PASS results: with prefers-reduced-motion: reduce no element has a transition, animation or smooth scroll
+PASS results: no horizontal page scroll at 1280px | scrollWidth=1265 clientWidth=1265 wide=
+INFO screenshot local-results-1280.png (1280x2897)
+PASS results: no horizontal page scroll at 390px | scrollWidth=390 clientWidth=390 wide=UL right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422,LI right=422,A right=422
+INFO results @390: controls under 24x24 CSS px: INPUT# 13x18
+INFO screenshot local-results-390.png (390x4188)
+PASS results: no horizontal page scroll at 320px | scrollWidth=320 clientWidth=320 wide=UL right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352,LI right=352,A right=352
+INFO results @320: controls under 24x24 CSS px: INPUT# 13x18
+INFO screenshot local-results-320.png (320x4515)
+PASS no uncaught script errors on any page
+SUMMARY 162 passed, 0 failed
+
+EXIT=0 (74.1 s) cmd: node scripts/ui-a11y-review.mjs

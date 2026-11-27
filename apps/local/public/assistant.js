@@ -6,6 +6,7 @@ import {
   statusView, checkQuestion, askBody, answerView,
 } from '/assistant-logic.js';
 import { runIdFromSearch } from '/results-logic.js';
+import { settle } from '/motion.js';
 
 const slot = document.getElementById('assistant-slot');
 
@@ -117,6 +118,7 @@ function mount() {
       box.append(ol);
     }
     live.append(box);
+    settle([box]);
   }
 
   function say(text) {
@@ -213,6 +215,7 @@ function mount() {
       recorder.addEventListener('dataavailable', (event) => { if (event.data?.size) audioParts.push(event.data); });
       recorder.addEventListener('error', () => {
         stopTracks();
+        recordButton.removeAttribute('data-recording');
         recordButton.textContent = 'Record a question';
         syncControls();
         voiceHint.textContent = 'The recording could not be read. Check microphone permission and try again.';
@@ -221,11 +224,13 @@ function mount() {
         const audio = new Blob(audioParts, { type: recorder.mimeType || 'audio/webm' });
         audioParts = [];
         recorder = null;
+        recordButton.removeAttribute('data-recording');
         recordButton.textContent = 'Record a question';
         syncControls();
         void submitRecording(audio);
       }, { once: true });
       recorder.start();
+      recordButton.setAttribute('data-recording', 'true');
       recordButton.textContent = 'Stop and transcribe';
       voiceHint.textContent = 'Recording. Choose Stop and transcribe when you finish your question.';
     } catch {

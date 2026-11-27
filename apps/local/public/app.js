@@ -5,6 +5,7 @@ import {
   LIMITS, formatSize, byteLength, validateForm, buildRequest, stateFromDemo, normalizeProblems,
   groupByControl, firstFocusTarget, summaryHeading, resultsUrl, describeHttpFailure, rangeHint,
 } from '/run-logic.js';
+import { countTo } from '/motion.js';
 
 const $ = (id) => document.getElementById(id);
 const state = { model: null, data: null, inits: [null, null, null, null] };
@@ -30,6 +31,57 @@ function showEngine() {
   setBusy(busy);
   clearProblems();
   setStatus('');
+  renderEngineCard();
+  renderRunSheet();
+}
+
+// ---- run sheet beside the form (spec 05-ui-redesign, task 8) ----
+const STATUS_WORD = { ready: ['Ready', 'ok'], setup_required: ['Setup required', 'wait'], planned: ['Planned', 'idle'] };
+
+function renderEngineCard() {
+  const engine = selectedEngine();
+  $('engine-card-name').textContent = engine ? engine.name : 'OpenBUGS';
+  $('engine-card-version').textContent = engine?.version ? `version ${engine.version}` : '';
+  const [word, tone] = engine ? (STATUS_WORD[engine.status] ?? ['Unknown', 'idle']) : ['Not checked', 'idle'];
+  $('engine-card-status').textContent = word;
+  $('engine-card-status').setAttribute('data-tone', tone);
+  $('engine-card-desc').textContent = engine
+    ? [engine.description, engine.status === 'ready' ? '' : engine.setup].filter(Boolean).join(' ')
+    : 'The original engine, run from its command-line interface inside a container.';
+}
+
+function sheetRows() {
+  const engine = selectedEngine();
+  if (engine && engine.id !== 'openbugs') {
+    const c = $('fixture-case');
+    return [['Engine', `${engine.name} ${engine.version ?? ''}`.trim()], ['Fixture', c.options[c.selectedIndex]?.text ?? c.value], ['Inputs', 'Built in, fixed for this fixture']];
+  }
+  const s = currentState();
+  const file = (f) => (f ? `${f.name}, ${formatSize(byteLength(f.text))}` : 'No file chosen');
+  const chains = Math.min(LIMITS.chains.max, Math.max(LIMITS.chains.min, Number(s.chains) || 1));
+  const inits = state.inits.slice(0, chains).filter(Boolean).length;
+  return [
+    ['Model', file(s.model)], ['Data', file(s.data)], ['Initial values', `${inits} of ${chains} chosen`],
+    ['Monitors', s.monitors.trim() || 'none yet'], ['Burn-in', s.burnIn], ['Samples', s.samples],
+    ['Thin', s.thin], ['Seed', s.seed], ['Time limit', `${s.timeoutS} s`],
+  ];
+}
+
+let sheetKey = '';
+function renderRunSheet() {
+  const rows = sheetRows();
+  const key = JSON.stringify(rows);
+  if (key === sheetKey) return;
+  const prev = sheetKey ? new Map(JSON.parse(sheetKey)) : new Map();
+  sheetKey = key;
+  const dl = $('run-sheet');
+  dl.replaceChildren();
+  for (const [k, v] of rows) {
+    dl.append(el('dt', {}, k));
+    const dd = el('dd', {}, v);
+    dl.append(dd);
+    if (prev.size && prev.get(k) !== v && /^\d+$/.test(String(v))) countTo(dd, v);
+  }
 }
 
 async function loadEngines() {
@@ -79,7 +131,7 @@ function describeFile(f) {
   const origin = f.fromDemo ? 'from the demonstration' : 'read from your file';
   return `${f.name}, ${formatSize(byteLength(f.text))}, ${origin}.`;
 }
-function refreshInfo(controlId, f) { $(`info-${controlId}`).textContent = describeFile(f); }
+function refreshInfo(controlId, f) { $(`info-${controlId}`).textContent = describeFile(f); renderRunSheet(); }
 
 function readFile(input, done) {
   const file = input.files && input.files[0];
@@ -291,7 +343,11 @@ function init() {
   $('engine-select').addEventListener('change', showEngine);
   $('fixture-case').addEventListener('change', () => {
     $('parent-field').hidden = $('fixture-case').value !== 'linked';
+    renderRunSheet();
   });
+  $('run-form').addEventListener('input', renderRunSheet);
+  $('run-form').addEventListener('change', renderRunSheet);
+  renderRunSheet();
   loadDemos();
   loadEngines();
 }

@@ -110,6 +110,9 @@ const PAIRS = [
   ['border', 'paper', 1.5], ['border', 'surface', 1.5], ['border', 'band', 1.5],
   ['border-strong', 'paper', 3], ['border-strong', 'surface', 3], ['border-strong', 'band', 3],
   ['primary', 'paper', 3], ['primary', 'surface', 3], ['primary', 'band', 3],
+  // Spec 05-ui-redesign: the dark engine log panel and the warning colour on its tinted surfaces.
+  ['log-text', 'log-bg', 4.5], ['log-muted', 'log-bg', 4.5], ['log-accent', 'log-bg', 4.5], ['log-error', 'log-bg', 4.5],
+  ['muted', 'surface', 4.5], ['warning', 'band', 3], ['error', 'band', 4.5],
 ];
 
 test('every colour token named by the contrast table exists', () => {
@@ -128,7 +131,15 @@ for (const [f, b, min] of PAIRS) {
 test('styles.css has no raw colour outside the token block, no remote url or import', () => {
   const rest = css.replace(/:root\s*\{[\s\S]*?\}/, '');
   assert.doesNotMatch(rest, /#[0-9A-Fa-f]{3,8}\b/, 'colours must come from tokens');
-  assert.doesNotMatch(css, /url\(|@import|@font-face/);
+  assert.doesNotMatch(css, /@import/);
+  // Spec 05-ui-redesign (amendment): @font-face may load only the self-hosted woff2 files in /fonts/.
+  // Every other url() stays banned, so no remote or data resource can be loaded from CSS.
+  const urls = [...css.matchAll(/url\(([^)]*)\)/g)].map((m) => m[1]);
+  for (const u of urls) assert.match(u, /^"\/fonts\/[A-Za-z0-9-]+\.woff2"$/, `url(${u}) is not a self-hosted font`);
+  const faces = css.match(/@font-face\s*\{[^}]*\}/g) ?? [];
+  assert.equal(faces.length, (css.match(/@font-face/g) ?? []).length);
+  for (const f of faces) assert.match(f, /src:\s*url\("\/fonts\//);
+  for (const u of urls) assert.ok(existsSync(path.join(PUBLIC, u.slice(2, -1))), `${u} exists`);
 });
 test('styles.css provides visible focus and a skip link', () => {
   assert.match(css, /:focus-visible\s*\{[^}]*outline:\s*3px/);

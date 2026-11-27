@@ -5,28 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Results - ReproLab local</title>
   <meta name="description" content="ReproLab local: run the OpenBUGS command-line workflow on your own machine.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
-    <a class="brand" href="/">ReproLab</a>
-    <nav class="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/run.html">Run</a></li>
-        <li><a href="/results.html" aria-current="page">Results</a></li>
-        <li><a href="/how-it-works.html">How it works</a></li>
-        <li><a href="/docs.html">Documentation</a></li>
-        <li><a href="/limitations.html">Limitations</a></li>
-        <li><a href="/privacy.html">Privacy</a></li>
-        <li><a href="/terms.html">Terms</a></li>
-      </ul>
-    </nav>
+    <div class="header-inner">
+      <div class="brand-block">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span>ReproLab <span class="brand-sub">local</span></a>
+        <p class="header-line">Runs on your machine only. Not a hosted service.</p>
+      </div>
+      <nav class="site-nav" aria-label="Main">
+        <details class="nav-menu" open>
+          <summary>Menu</summary>
+          <div class="nav-lists">
+            <ul class="nav-primary">
+              <li><a href="/">Home</a></li>
+              <li><a href="/run.html">Run</a></li>
+              <li><a href="/results.html" aria-current="page">Results</a></li>
+              <li><a href="/how-it-works.html">How it works</a></li>
+              <li><a href="/docs.html">Documentation</a></li>
+            </ul>
+            <ul class="nav-secondary">
+              <li><a href="/limitations.html">Limitations</a></li>
+              <li><a href="/privacy.html">Privacy</a></li>
+              <li><a href="/terms.html">Terms</a></li>
+            </ul>
+          </div>
+        </details>
+      </nav>
+    </div>
   </header>
-  <main id="main" tabindex="-1">
-    <h1>Run results</h1>
-    <p>State, engine log, output files and manifest of a run started on this computer.</p>
+  <main id="main" tabindex="-1" data-no-entrance>
+    <div class="page-head">
+      <h1>Run results</h1>
+      <p>State, engine log, output files and manifest of a run started on this computer.</p>
+    </div>
     <div class="notice">
       <p>Every value shown comes from the engine log or the engine output files. Summary numbers, when shown, are computed by ReproLab from the exported samples and are labelled as such.</p>
     </div>
@@ -41,33 +57,45 @@
       <p id="load-problem-text"></p>
     </div>
 
-    <div id="run-view" hidden>
-      <section aria-labelledby="state-heading">
+    <div id="run-view" class="results-grid" hidden>
+      <section aria-labelledby="state-heading" class="results-block">
         <h2 id="state-heading">State</h2>
-        <p><span id="state-badge" class="badge" data-tone="wait">Loading</span></p>
-        <p id="state-text"></p>
+        <div class="state-row">
+          <p><span id="state-badge" class="badge" data-tone="wait">Loading</span></p>
+          <p id="state-text" class="state-text"></p>
+        </div>
         <p id="poll-note" class="file-info" hidden>This page checks for updates every 1.5 seconds until the run finishes.</p>
-        <div id="reason-box" class="notice" hidden>
+        <dl class="run-sheet" id="run-sheet"></dl>
+        <div class="timeline-wrap" id="timeline-wrap" hidden>
+          <div class="timeline-head">
+            <h3 id="timeline-heading">Engine steps</h3>
+            <p id="timeline-note">A step is marked done only when its line appears in the engine log.</p>
+          </div>
+          <ol class="timeline" id="timeline" aria-labelledby="timeline-heading"></ol>
+        </div>
+        <div id="reason-box" class="notice reason-box" hidden>
           <p><strong id="reason-label">Reason</strong></p>
           <p id="reason" class="mono"></p>
           <p id="engine-line-wrap" hidden><strong>First engine error line in the log</strong></p>
           <p id="engine-line" class="mono" hidden></p>
         </div>
+        <p><button type="button" class="button button-secondary" id="cancel-run" hidden>Cancel run</button></p>
+        <p id="cancel-status" role="status"></p>
       </section>
 
-      <section aria-labelledby="details-heading">
+      <section aria-labelledby="details-heading" class="results-block">
         <h2 id="details-heading">Details</h2>
         <dl id="details" class="details"></dl>
       </section>
 
-      <section aria-labelledby="log-heading">
+      <section aria-labelledby="log-heading" class="results-block">
         <h2 id="log-heading">Engine log</h2>
         <p id="log-note" class="notice warn" hidden></p>
         <p id="log-empty" hidden>The engine wrote no log lines yet.</p>
         <pre id="log" class="log" tabindex="0" aria-label="Engine log text, scrollable"></pre>
       </section>
 
-      <section aria-labelledby="files-heading">
+      <section aria-labelledby="files-heading" class="results-block">
         <h2 id="files-heading">Output files</h2>
         <p id="files-empty" hidden>No files are available yet.</p>
         <div id="files-wrap" class="scroll-region" tabindex="0" role="region" aria-label="Output files table, scrollable" hidden>
@@ -84,32 +112,58 @@
             <tbody id="files-body"></tbody>
           </table>
         </div>
+        <p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
       </section>
 
-      <section aria-labelledby="manifest-heading">
+      <section aria-labelledby="manifest-heading" class="results-block">
         <h2 id="manifest-heading">Run manifest</h2>
         <p>The manifest records the settings, engine version, image identity and a SHA-256 checksum of every input and output file. Machine paths are removed.</p>
         <p id="manifest-wait">The manifest is available when the run has finished.</p>
-        <p id="manifest-link-wrap" hidden><a id="manifest-link" class="button" download="manifest.json" href="#">Download manifest.json</a></p>
-        <p id="bundle-links" hidden>
-          <a id="bundle-output" download="reprolab-bundle.json" href="#">Download results bundle</a> ·
-          <a id="bundle-metadata" download="reprolab-bundle.json" href="#">Metadata only</a>
-          <span id="bundle-input-wrap" hidden> · <a id="bundle-input" download="reprolab-bundle.json" href="#">Include local input files</a></span>
-        </p>
+        <div class="download-row">
+          <p id="manifest-link-wrap" hidden><a id="manifest-link" class="button" download="manifest.json" href="#">Download manifest.json</a></p>
+          <p id="bundle-links" hidden>
+            <a id="bundle-output" download="reprolab-bundle.json" href="#">Download results bundle</a> ·
+            <a id="bundle-metadata" download="reprolab-bundle.json" href="#">Metadata only</a>
+            <span id="bundle-input-wrap" hidden> · <a id="bundle-input" download="reprolab-bundle.json" href="#">Include local input files</a></span>
+          </p>
+        </div>
       </section>
 
-      <section aria-labelledby="summary-heading">
+      <section aria-labelledby="summary-heading" class="results-block">
         <h2 id="summary-heading">Summary</h2>
         <p id="summary-none">A summary is computed only for a run that succeeded.</p>
         <p id="summary-unavailable" class="notice" hidden></p>
         <div id="summary-table-wrap" hidden>
           <p id="summary-label"></p>
-          <div class="scroll-region" tabindex="0" role="region" aria-label="Summary table, scrollable">
-            <table>
-              <caption>Summary of the exported samples</caption>
-              <thead id="summary-head"></thead>
-              <tbody id="summary-body"></tbody>
-            </table>
+          <div class="summary-layout">
+            <div class="scroll-region" tabindex="0" role="region" aria-label="Summary table, scrollable">
+              <table>
+                <caption>Summary of the exported samples</caption>
+                <thead id="summary-head"></thead>
+                <tbody id="summary-body"></tbody>
+              </table>
+            </div>
+            <figure class="plot" id="sample-plot" hidden aria-labelledby="sample-plot-caption">
+              <svg id="sample-plot-svg" viewBox="0 0 560 280" role="img" aria-labelledby="sample-plot-title sample-plot-desc"><title id="sample-plot-title">Histogram of exported samples</title><desc id="sample-plot-desc">Drawn when the run's sample files have been read.</desc></svg>
+              <ul class="legend" id="sample-plot-legend"></ul>
+              <figcaption id="sample-plot-caption">Plot of exported samples. Not a convergence diagnostic.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="fixture-results" class="results-block" aria-labelledby="fixture-heading" hidden>
+        <h2 id="fixture-heading">Fixture comparison</h2>
+        <p>The comparison is reported separately from the execution state. It compares this fixture's output with values calculated independently for the same fixed input.</p>
+        <pre id="fixture-values" class="fixture-values"></pre>
+        <img id="slice-preview" width="160" height="120" alt="Output slice from the synthetic volume" hidden>
+        <div id="volume-viewer" class="volume-viewer" hidden>
+          <h3 id="volume-heading">Synthetic fixture volume produced by the NiftyNet demo</h3>
+          <div class="volume-stage" id="volume-stage" aria-hidden="true"></div>
+          <div class="range-field">
+            <label for="volume-slice">Slice</label>
+            <input type="range" id="volume-slice" min="0" max="0" value="0" step="1" aria-describedby="volume-slice-note">
+            <p id="volume-slice-note" class="hint">Drag or use the arrow keys to move through the slices of volume.npy.</p>
           </div>
         </div>
       </section>
@@ -117,18 +171,15 @@
 
     <!-- The assistant panel is built into this slot by assistant.js. -->
     <div id="assistant-slot"></div>
-    <button type="button" class="button button-secondary" id="cancel-run" hidden>Cancel run</button>
-    <p id="cancel-status" role="status"></p>
-    <section id="fixture-results" hidden>
-      <h2>Fixture comparison</h2>
-      <pre id="fixture-values"></pre>
-      <img id="slice-preview" width="160" height="120" alt="Output slice from the synthetic volume" hidden>
-    </section>
   </main>
   <footer class="site-footer">
-    <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
-    <p>ReproLab code is MIT licensed. The licence covers ReproLab code only, not OpenBUGS.</p>
+    <div class="footer-inner">
+      <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
+      <p>ReproLab code is MIT licensed. The licence covers ReproLab code only, not OpenBUGS.</p>
+    </div>
   </footer>
+  <script src="/vendor/gsap-3.15.1/gsap.min.js" defer></script>
+  <script type="module" src="/site.js"></script>
   <script type="module" src="/results.js"></script>
   <script type="module" src="/assistant.js"></script>
 </body>

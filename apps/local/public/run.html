@@ -5,147 +5,191 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Run - ReproLab local</title>
   <meta name="description" content="ReproLab local: run the OpenBUGS command-line workflow on your own machine.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
-    <a class="brand" href="/">ReproLab</a>
-    <nav class="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/run.html" aria-current="page">Run</a></li>
-        <li><a href="/results.html">Results</a></li>
-        <li><a href="/how-it-works.html">How it works</a></li>
-        <li><a href="/docs.html">Documentation</a></li>
-        <li><a href="/limitations.html">Limitations</a></li>
-        <li><a href="/privacy.html">Privacy</a></li>
-        <li><a href="/terms.html">Terms</a></li>
-      </ul>
-    </nav>
+    <div class="header-inner">
+      <div class="brand-block">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span>ReproLab <span class="brand-sub">local</span></a>
+        <p class="header-line">Runs on your machine only. Not a hosted service.</p>
+      </div>
+      <nav class="site-nav" aria-label="Main">
+        <details class="nav-menu" open>
+          <summary>Menu</summary>
+          <div class="nav-lists">
+            <ul class="nav-primary">
+              <li><a href="/">Home</a></li>
+              <li><a href="/run.html" aria-current="page">Run</a></li>
+              <li><a href="/results.html">Results</a></li>
+              <li><a href="/how-it-works.html">How it works</a></li>
+              <li><a href="/docs.html">Documentation</a></li>
+            </ul>
+            <ul class="nav-secondary">
+              <li><a href="/limitations.html">Limitations</a></li>
+              <li><a href="/privacy.html">Privacy</a></li>
+              <li><a href="/terms.html">Terms</a></li>
+            </ul>
+          </div>
+        </details>
+      </nav>
+    </div>
   </header>
   <main id="main" tabindex="-1">
-    <h1>Run an analysis</h1>
-    <p>A run takes a model, data, initial values and a few settings, and executes in a container on this computer with no network access. Files are read in your browser and sent only to the local server.</p>
-    <ul>
-      <li>Docker must be running and the local image must be built. See <a href="/docs.html">Documentation</a>.</li>
-      <li>Only one run executes at a time.</li>
-      <li>A finished run is not a valid scientific finding and not a convergence claim.</li>
-    </ul>
+    <div class="page-head">
+      <h1>Run an analysis</h1>
+      <p>A run takes a model, data, initial values and a few settings, and executes in a container on this computer with no network access. Files are read in your browser and sent only to the local server.</p>
+      <ul class="hint">
+        <li>Docker must be running and the local image must be built. See <a href="/docs.html">Documentation</a>.</li>
+        <li>Only one run executes at a time.</li>
+        <li>A finished run is not a valid scientific finding and not a convergence claim.</li>
+      </ul>
+    </div>
 
     <div id="error-summary" class="notice error-summary" role="group" aria-labelledby="error-summary-title" hidden></div>
 
-    <form id="run-form" novalidate>
-      <div class="field">
-        <label for="engine-select">Analysis engine</label>
-        <select id="engine-select" aria-describedby="engine-note">
-          <option value="openbugs">OpenBUGS</option>
-        </select>
-        <p id="engine-note" class="hint" role="status"></p>
-      </div>
-      <div id="fixture-fields" class="field" hidden>
-        <label for="fixture-case">Fixture</label>
-        <select id="fixture-case">
-          <option value="demo">Demonstration</option>
-          <option value="failure">Deliberate failure</option>
-        </select>
-        <div id="parent-field" class="field" hidden>
-          <label for="parent-run">TopHat2 run ID</label>
-          <input id="parent-run" type="text" maxlength="32" autocomplete="off">
+    <div class="run-layout">
+      <form id="run-form" novalidate>
+        <div class="engine-field">
+          <div class="field">
+            <label for="engine-select">Analysis engine</label>
+            <select id="engine-select" aria-describedby="engine-note">
+              <option value="openbugs">OpenBUGS</option>
+            </select>
+            <p id="engine-note" class="hint" role="status"></p>
+          </div>
+          <div id="fixture-fields" class="field" hidden>
+            <label for="fixture-case">Fixture</label>
+            <select id="fixture-case">
+              <option value="demo">Demonstration</option>
+              <option value="failure">Deliberate failure</option>
+            </select>
+            <div id="parent-field" class="field" hidden>
+              <label for="parent-run">TopHat2 run ID</label>
+              <input id="parent-run" type="text" maxlength="32" autocomplete="off">
+            </div>
+          </div>
         </div>
-      </div>
-      <fieldset>
-        <legend>Start from a demonstration (optional)</legend>
-        <div class="field">
-          <label for="demo">Demonstration</label>
-          <select id="demo" aria-describedby="demo-note">
-            <option value="">None. I will choose my own files.</option>
-          </select>
-          <p id="demo-note" class="file-info">Choosing a demonstration fills in the files and settings below. You can change them.</p>
-        </div>
-      </fieldset>
+        <fieldset>
+          <legend>Start from a demonstration (optional)</legend>
+          <div class="field">
+            <label for="demo">Demonstration</label>
+            <select id="demo" aria-describedby="demo-note">
+              <option value="">None. I will choose my own files.</option>
+            </select>
+            <p id="demo-note" class="file-info">Choosing a demonstration fills in the files and settings below. You can change them.</p>
+          </div>
+        </fieldset>
 
-      <fieldset>
-        <legend>Files (plain ASCII text)</legend>
-        <div class="field">
-          <label for="model">Model file</label>
-          <input type="file" id="model" accept=".txt,text/plain" aria-describedby="hint-model info-model">
-          <p id="hint-model" class="hint">Up to 262144 bytes.</p>
-          <p id="info-model" class="file-info">No file chosen.</p>
-          <p id="err-model" class="field-error error-text" hidden></p>
-        </div>
-        <div class="field">
-          <label for="data">Data file</label>
-          <input type="file" id="data" accept=".txt,text/plain" aria-describedby="hint-data info-data">
-          <p id="hint-data" class="hint">Up to 2097152 bytes.</p>
-          <p id="info-data" class="file-info">No file chosen.</p>
-          <p id="err-data" class="field-error error-text" hidden></p>
-        </div>
-        <div class="field">
-          <label for="chains">Chains</label>
-          <select id="chains" aria-describedby="hint-chains">
-            <option value="1">1</option>
-            <option value="2" selected>2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-          <p id="hint-chains" class="hint"></p>
-          <p id="err-chains" class="field-error error-text" hidden></p>
-        </div>
-        <div id="inits-rows"></div>
-      </fieldset>
+        <fieldset>
+          <legend>Files (plain ASCII text)</legend>
+          <div class="field">
+            <label for="model">Model file</label>
+            <input type="file" id="model" accept=".txt,text/plain" aria-describedby="hint-model info-model">
+            <p id="hint-model" class="hint">Up to 262144 bytes.</p>
+            <p id="info-model" class="file-info">No file chosen.</p>
+            <p id="err-model" class="field-error error-text" hidden></p>
+          </div>
+          <div class="field">
+            <label for="data">Data file</label>
+            <input type="file" id="data" accept=".txt,text/plain" aria-describedby="hint-data info-data">
+            <p id="hint-data" class="hint">Up to 2097152 bytes.</p>
+            <p id="info-data" class="file-info">No file chosen.</p>
+            <p id="err-data" class="field-error error-text" hidden></p>
+          </div>
+          <div class="field">
+            <label for="chains">Chains</label>
+            <select id="chains" aria-describedby="hint-chains">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+            <p id="hint-chains" class="hint"></p>
+            <p id="err-chains" class="field-error error-text" hidden></p>
+          </div>
+          <div id="inits-rows"></div>
+        </fieldset>
 
-      <fieldset>
-        <legend>Monitors and settings</legend>
-        <div class="field">
-          <label for="monitors">Monitors (variables to record)</label>
-          <input type="text" id="monitors" autocomplete="off" spellcheck="false" aria-describedby="hint-monitors">
-          <p id="hint-monitors" class="hint">1 to 25 names separated by commas or spaces, for example <code>p</code>. Each starts with a letter.</p>
-          <p id="err-monitors" class="field-error error-text" hidden></p>
-        </div>
-        <div class="field">
-          <label for="burnIn">Burn-in</label>
-          <input type="text" id="burnIn" inputmode="numeric" autocomplete="off" value="1000" aria-describedby="hint-burnIn">
-          <p id="hint-burnIn" class="hint"></p>
-          <p id="err-burnIn" class="field-error error-text" hidden></p>
-        </div>
-        <div class="field">
-          <label for="samples">Samples</label>
-          <input type="text" id="samples" inputmode="numeric" autocomplete="off" value="10000" aria-describedby="hint-samples">
-          <p id="hint-samples" class="hint"></p>
-          <p id="err-samples" class="field-error error-text" hidden></p>
-        </div>
-        <div class="field">
-          <label for="thin">Thin</label>
-          <input type="text" id="thin" inputmode="numeric" autocomplete="off" value="1" aria-describedby="hint-thin">
-          <p id="hint-thin" class="hint"></p>
-          <p id="err-thin" class="field-error error-text" hidden></p>
-        </div>
-        <div class="field">
-          <label for="seed">Seed</label>
-          <input type="text" id="seed" inputmode="numeric" autocomplete="off" value="1" aria-describedby="hint-seed">
-          <p id="hint-seed" class="hint"></p>
-          <p id="err-seed" class="field-error error-text" hidden></p>
-        </div>
-        <div class="field">
-          <label for="timeoutS">Time limit (seconds)</label>
-          <input type="text" id="timeoutS" inputmode="numeric" autocomplete="off" value="120" aria-describedby="hint-timeoutS">
-          <p id="hint-timeoutS" class="hint"></p>
-          <p id="err-timeoutS" class="field-error error-text" hidden></p>
-        </div>
-      </fieldset>
+        <fieldset>
+          <legend>Monitors and settings</legend>
+          <div class="field">
+            <label for="monitors">Monitors (variables to record)</label>
+            <input type="text" id="monitors" autocomplete="off" spellcheck="false" aria-describedby="hint-monitors">
+            <p id="hint-monitors" class="hint">1 to 25 names separated by commas or spaces, for example <code>p</code>. Each starts with a letter.</p>
+            <p id="err-monitors" class="field-error error-text" hidden></p>
+          </div>
+          <div class="field">
+            <label for="burnIn">Burn-in</label>
+            <input type="text" id="burnIn" inputmode="numeric" autocomplete="off" value="1000" aria-describedby="hint-burnIn">
+            <p id="hint-burnIn" class="hint"></p>
+            <p id="err-burnIn" class="field-error error-text" hidden></p>
+          </div>
+          <div class="field">
+            <label for="samples">Samples</label>
+            <input type="text" id="samples" inputmode="numeric" autocomplete="off" value="10000" aria-describedby="hint-samples">
+            <p id="hint-samples" class="hint"></p>
+            <p id="err-samples" class="field-error error-text" hidden></p>
+          </div>
+          <div class="field">
+            <label for="thin">Thin</label>
+            <input type="text" id="thin" inputmode="numeric" autocomplete="off" value="1" aria-describedby="hint-thin">
+            <p id="hint-thin" class="hint"></p>
+            <p id="err-thin" class="field-error error-text" hidden></p>
+          </div>
+          <div class="field">
+            <label for="seed">Seed</label>
+            <input type="text" id="seed" inputmode="numeric" autocomplete="off" value="1" aria-describedby="hint-seed">
+            <p id="hint-seed" class="hint"></p>
+            <p id="err-seed" class="field-error error-text" hidden></p>
+          </div>
+          <div class="field">
+            <label for="timeoutS">Time limit (seconds)</label>
+            <input type="text" id="timeoutS" inputmode="numeric" autocomplete="off" value="120" aria-describedby="hint-timeoutS">
+            <p id="hint-timeoutS" class="hint"></p>
+            <p id="err-timeoutS" class="field-error error-text" hidden></p>
+          </div>
+        </fieldset>
 
-      <p><button type="submit" id="submit" class="button">Check and run</button></p>
-      <p id="status" class="status" role="status" aria-live="polite"></p>
-    </form>
+        <div class="form-actions">
+          <p><button type="submit" id="submit" class="button">Check and run</button></p>
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <aside class="run-aside" aria-label="Run sheet">
+        <section class="sheet" aria-labelledby="engine-card-name">
+          <div class="engine-card-head">
+            <h2 id="engine-card-name">OpenBUGS</h2>
+            <span class="engine-version" id="engine-card-version">3.2.3</span>
+          </div>
+          <p class="status-word" data-tone="idle" id="engine-card-status">Checking the local image</p>
+          <p class="engine-desc" id="engine-card-desc">The original engine, run from its command-line interface inside a container.</p>
+        </section>
+        <section class="sheet" aria-labelledby="sheet-title">
+          <h2 id="sheet-title">This run</h2>
+          <dl class="sheet-list" id="run-sheet">
+            <dt>Model</dt><dd>No file chosen</dd>
+          </dl>
+          <p class="sheet-note">The container has no network, a read-only filesystem, one CPU, 1 GiB of memory and your time limit.</p>
+        </section>
+      </aside>
+    </div>
 
     <!-- The assistant panel is built into this slot by assistant.js. -->
     <div id="assistant-slot"></div>
   </main>
   <footer class="site-footer">
-    <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
-    <p>ReproLab code is MIT licensed. The licence covers ReproLab code only, not OpenBUGS.</p>
+    <div class="footer-inner">
+      <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
+      <p>ReproLab code is MIT licensed. The licence covers ReproLab code only, not OpenBUGS.</p>
+    </div>
   </footer>
+  <script src="/vendor/gsap-3.15.1/gsap.min.js" defer></script>
+  <script type="module" src="/site.js"></script>
   <script type="module" src="/app.js"></script>
   <script type="module" src="/assistant.js"></script>
 </body>

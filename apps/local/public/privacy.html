@@ -5,28 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacy - ReproLab local</title>
   <meta name="description" content="ReproLab local: run the OpenBUGS command-line workflow on your own machine.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
   <header class="site-header">
-    <a class="brand" href="/">ReproLab</a>
-    <nav class="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/run.html">Run</a></li>
-        <li><a href="/results.html">Results</a></li>
-        <li><a href="/how-it-works.html">How it works</a></li>
-        <li><a href="/docs.html">Documentation</a></li>
-        <li><a href="/limitations.html">Limitations</a></li>
-        <li><a href="/privacy.html" aria-current="page">Privacy</a></li>
-        <li><a href="/terms.html">Terms</a></li>
-      </ul>
-    </nav>
+    <div class="header-inner">
+      <div class="brand-block">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span>ReproLab <span class="brand-sub">local</span></a>
+        <p class="header-line">Runs on your machine only. Not a hosted service.</p>
+      </div>
+      <nav class="site-nav" aria-label="Main">
+        <details class="nav-menu" open>
+          <summary>Menu</summary>
+          <div class="nav-lists">
+            <ul class="nav-primary">
+              <li><a href="/">Home</a></li>
+              <li><a href="/run.html">Run</a></li>
+              <li><a href="/results.html">Results</a></li>
+              <li><a href="/how-it-works.html">How it works</a></li>
+              <li><a href="/docs.html">Documentation</a></li>
+            </ul>
+            <ul class="nav-secondary">
+              <li><a href="/limitations.html">Limitations</a></li>
+              <li><a href="/privacy.html" aria-current="page">Privacy</a></li>
+              <li><a href="/terms.html">Terms</a></li>
+            </ul>
+          </div>
+        </details>
+      </nav>
+    </div>
   </header>
-  <main id="main" tabindex="-1">
-    <h1>Privacy</h1>
-    <p>No data leaves this machine unless you use an optional assistant feature with a remote provider configured in your local <code>.env</code>.</p>
+  <main id="main" tabindex="-1" class="prose">
+    <div class="page-head">
+      <h1>Privacy</h1>
+      <p>No data leaves this machine unless you use an optional assistant feature with a remote provider configured in your local <code>.env</code>.</p>
+    </div>
     <h2>What stays here</h2>
     <p>Models, data, initial values, logs, output files and manifests are stored in a folder on this computer. ReproLab has no account system, no analytics and no telemetry. Pages load no script, style, font or image from another site.</p>
     <h2>What an assistant call contains</h2>
@@ -40,11 +56,14 @@
     <p>Voice input is optional and disabled without a Groq API key. When you choose to record and transcribe a question, the browser asks for microphone access and sends that recording to Groq's Whisper transcription API. ReproLab does not save the audio. The returned transcript is shown in the question box; it is sent to your configured chat provider only if you choose Ask. You can type a question without using a microphone.</p>
     <h2>Deleting data</h2>
     <p>Delete the run folders under the local data directory, or use the reset script described in the README.</p>
-
   </main>
   <footer class="site-footer">
-    <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
-    <p>ReproLab code is MIT licensed. The licence covers ReproLab code only, not OpenBUGS.</p>
+    <div class="footer-inner">
+      <p>ReproLab is an open-source local tool. It runs OpenBUGS in a container on this computer. A finished run is not a valid scientific finding.</p>
+      <p>ReproLab code is MIT licensed. The licence covers ReproLab code only, not OpenBUGS.</p>
+    </div>
   </footer>
+  <script src="/vendor/gsap-3.15.1/gsap.min.js" defer></script>
+  <script type="module" src="/site.js"></script>
 </body>
 </html>

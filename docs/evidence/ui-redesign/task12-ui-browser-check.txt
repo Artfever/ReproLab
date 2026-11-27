@@ -1,0 +1,28 @@
+PASS server is up
+PASS chrome target found
+PASS demo picker populated from GET /api/demos | options=4
+PASS range hints rendered
+PASS one initial-values file input per chain (default 2)
+PASS chains selector changes inits inputs
+INFO tab order: A:Skip to main > A:ReproLab loc > A:Home > A:Run > A:Results > A:How it works > A:Documentatio > A:Limitations > A:Privacy > A:Terms > A:Documentatio > engine-select > demo > model > data > chains > inits-1 > inits-2 > monitors > burnIn > samples > thin > seed > timeoutS > submit
+PASS keyboard Tab reaches every control in page order, ending at the submit button
+PASS FileReader shows file name and size before submit | model.txt, 45 bytes, read from your file.
+INFO {"summaryHidden":false,"summaryTitle":"There are 3 problems to fix before this can run","focus":"data","burnErr":"Burn-in must be from 0 to 50000, but it is -1.","burnHidden":false,"burnInvalid":"true","burnDesc":"hint-burnIn err-burnIn","dataErr":"The data must be plain ASCII text. Remove accented, non-English or other special characters.","status":"There are 3 problems to fix before this can run.","live":"polite","links":3}
+PASS error summary shown with count
+PASS focus moves to the first problem field (data, page order of problems: data first) | data
+PASS problem text appears next to its field and field is aria-invalid
+PASS non-ASCII message shown next to the data field
+PASS status region (aria-live polite) announces the problems
+PASS summary has one link per problem | 3
+PASS summary link moves focus to its field
+PASS choosing the coin demo loads files and settings without file selection
+PASS demo file info shows names and sizes
+PASS valid submit hands off to results.html?id=<id> | http://127.0.0.1:8791/results.html?id=stand-in-run-id
+PASS POST /api/runs was intercepted exactly once; no real container run | 1
+PASS POST /api/validate was called before the run request | 1
+INFO seeds option: {"disabled":true,"text":"Seeds (your own upstream copy) (not available)","note":"Seeds (your own upstream copy): Seeds is not included. Download the OpenBUGS tarball yourself, then run scripts/extract-seeds.ps1 (or .sh) with its path to place the four Seeds files in local-data/upstream/. (missing: Seedsmodel.txt, Seedsdata.txt, Seedsinits1.txt, Seedsinits2.txt)"}
+PASS Seeds entry present; if not available it is disabled and the note explains how to create it
+PASS no uncaught script errors
+SUMMARY 22 passed, 0 failed
+
+EXIT=0 (4.3 s) cmd: node scripts/ui-browser-check.mjs
