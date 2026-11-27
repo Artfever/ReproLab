@@ -66,7 +66,7 @@ export async function mountSpecimen({ stage, figure, record }) {
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(28, 5 / 4, 0.1, 100);
-  camera.position.set(1.9, 4.9, 4.1);
+  camera.position.set(2.7, 6.6, 5.7);
   camera.lookAt(0, 0.2, 0.15);
 
   scene.add(new THREE.HemisphereLight(0xffffff, new THREE.Color(token('--color-band')), 1.25));
@@ -131,7 +131,7 @@ export async function mountSpecimen({ stage, figure, record }) {
     const w = Math.max(1, Math.round(r.width)); const h = Math.max(1, Math.round(r.height));
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
-    camera.fov = camera.aspect < 1 ? 36 : 28;
+    camera.fov = camera.aspect < 1 ? 34 : 30;
     camera.updateProjectionMatrix();
   }
   const draw = () => renderer.render(scene, camera);

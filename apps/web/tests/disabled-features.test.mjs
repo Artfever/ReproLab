@@ -20,13 +20,15 @@ test('no API route, route handler, middleware or server action exists', () => {
   assert.equal(existsSync(path.join(WEB_ROOT, 'middleware.ts')), false);
   assert.equal(src.some((f) => /[\\/]route\.(ts|js)$/.test(f)), false);
 });
-test('only error.tsx is a client component', () => {
-  const clients = src.filter((f) => /^\s*['"]use client['"]/.test(readFileSync(f, 'utf8'))).map((f) => path.basename(f));
-  assert.deepEqual(clients, ['error.tsx']);
+test('client components are only error.tsx and the motion components (spec 05-ui-redesign, Requirement 7.3)', () => {
+  const clients = src.filter((f) => /^\s*['"]use client['"]/.test(readFileSync(f, 'utf8'))).map((f) => path.relative(WEB_ROOT, f).split(path.sep).join('/'));
+  for (const c of clients) assert.ok(c === 'src/app/error.tsx' || /^src\/components\/motion\/[A-Za-z]+\.tsx$/.test(c), c);
+  assert.ok(clients.includes('src/app/error.tsx'));
 });
 test('package.json has only the allowed dependencies and no publish-style script', () => {
   const pkg = JSON.parse(readFileSync(path.join(WEB_ROOT, 'package.json'), 'utf8'));
-  const allowed = ['next', 'react', 'react-dom', 'typescript', '@types/node', '@types/react', '@types/react-dom', 'eslint', 'eslint-config-next'];
+  // Spec 05-ui-redesign amendment (2026-11-27): gsap, three and animejs at exact pins, plus three's types.
+  const allowed = ['next', 'react', 'react-dom', 'typescript', '@types/node', '@types/react', '@types/react-dom', 'eslint', 'eslint-config-next', 'gsap', 'three', '@types/three', 'animejs'];
   const all = [...Object.keys(pkg.dependencies ?? {}), ...Object.keys(pkg.devDependencies ?? {})];
   assert.deepEqual(all.filter((d) => !allowed.includes(d)), []);
   for (const v of Object.values({ ...pkg.dependencies, ...pkg.devDependencies })) assert.match(v, /^\d/, 'versions are pinned exactly');

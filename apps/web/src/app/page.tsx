@@ -3,6 +3,7 @@ import { PageShell } from '../components/shell';
 import { CTA_TEXT, HOME_FIRST, NOT_DONE } from '../lib/copy';
 import { loadSampleRun } from '../lib/sample-run';
 import { EmptyState } from '../components/shell';
+import { Specimen } from '../components/motion/Specimen';
 
 export const metadata: Metadata = { title: 'Home | ReproLab' };
 
@@ -10,10 +11,16 @@ export default function HomePage() {
   const loaded = loadSampleRun();
   return (
     <PageShell current="/">
-      <h1>Re-run an old analysis with its original engine</h1>
-      <p className="lead">{HOME_FIRST}</p>
-      <p>Who it is for: researchers who have an old analysis written for an older statistics engine and want to see it executed by that same engine, with the real log and the real output files, instead of a re-implementation.</p>
-      <p><a className="cta" href="/sample-run">{CTA_TEXT}</a></p>
+      <div className="hero">
+        <div>
+          <span className="eyebrow">ReproLab · a recorded OpenBUGS 3.2.3 sample</span>
+          <h1>Re-run an old analysis with its original engine</h1>
+          <p className="lead">{HOME_FIRST}</p>
+          <p>Who it is for: researchers who have an old analysis written for an older statistics engine and want to see it executed by that same engine, with the real log and the real output files, instead of a re-implementation.</p>
+          <p><a className="cta" href="/sample-run">{CTA_TEXT}</a></p>
+        </div>
+        {loaded.ok ? <Specimen imageId={loaded.data.engine.image_id} engine={`${loaded.data.engine.name} ${loaded.data.engine.version}`} /> : null}
+      </div>
       {loaded.ok ? (
         <>
           <section aria-labelledby="did">

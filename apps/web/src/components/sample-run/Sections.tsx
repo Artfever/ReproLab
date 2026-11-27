@@ -3,6 +3,8 @@ import { NODE_ORDER } from '../../lib/sample-run';
 import { fmtInt, fmtNum, fmtSeconds, fmtTol } from '../../lib/format.mjs';
 import { PRE_DECLARED_STATEMENT } from '../../lib/copy';
 import { DataTable, Hash, ProgramOutput, StatusText } from '../data';
+import { ComparisonChart } from './ComparisonChart';
+import { DrawIn } from '../motion/DrawIn';
 
 const COMP_COLS = [
   { key: 'node', label: 'Node' },
@@ -57,6 +59,16 @@ export function SampleRunSections({ d }: { d: SampleRun }) {
             ? 'Pre-declared comparison: seeds-a, 2 chains pooled, 1,000 burn-in'
             : 'Second failed comparison (not the pre-declared one): seeds-c, same setting, seed 2'} />
         ))}
+      </section>
+
+      <section id="comparison-chart" aria-labelledby="comparison-chart-h">
+        <h2 id="comparison-chart-h">How far the pre-declared means landed</h2>
+        <p>Each node from the table above, on its own scale. The band is the tolerance fixed before the run; the line is the published mean; the dot is the mean ReproLab recorded for seeds-a. Every dot lies outside its band.</p>
+        {pre[0] ? (
+          <DrawIn>
+            <ComparisonChart c={pre[0]} title="Pre-declared comparison for seeds-a: ReproLab mean against the published mean and its tolerance, per node" />
+          </DrawIn>
+        ) : null}
       </section>
 
       <section id="post-hoc" aria-labelledby="post-hoc-h">
