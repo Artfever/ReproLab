@@ -1,0 +1,144 @@
+
+> reprolab-web@0.1.0 check
+> npm run lint && npm run typecheck && npm run build && npm run test
+
+
+> reprolab-web@0.1.0 lint
+> eslint .
+
+
+> reprolab-web@0.1.0 typecheck
+> tsc --noEmit
+
+
+> reprolab-web@0.1.0 build
+> node scripts/validate-sample-data.mjs && next build
+
+sample data OK
+[1m[38;2;173;127;168m▲ Next.js 16.4.6[39m[22m (Turbopack)
+[32m[1m✓[22m[39m Running next.config.mjs took 40ms
+
+[37m[1m [22m[39m Creating an optimized production build ...
+[32m[1m✓[22m[39m Compiled successfully in 922ms
+[37m[1m [22m[39m Running TypeScript ...
+[37m[1m [22m[39m Finished TypeScript in 4.7s ...
+[37m[1m [22m[39m Collecting page data using 5 workers ...
+[37m[1m [22m[39m Generating static pages using 5 workers (0/4) ...
+[37m[1m [22m[39m Generating static pages using 5 workers (1/4) 
+[37m[1m [22m[39m Generating static pages using 5 workers (2/4) 
+[37m[1m [22m[39m Generating static pages using 5 workers (3/4) 
+[32m[1m✓[22m[39m Generating static pages using 5 workers (4/4) in 1815ms
+[37m[1m [22m[39m Finalizing page optimization ...
+
+[4mRoute (app)[24m
+┌ ○ /
+├ ○ /_not-found
+└ ○ /sample-run
+
+
+○  (Static)  prerendered as static content
+
+
+> reprolab-web@0.1.0 test
+> node --test "tests/**/*.test.mjs"
+
+✔ all tokens named in the contrast table exist in globals.css (4.2523ms)
+✔ contrast ink on paper >= 4.5 (1.0207ms)
+✔ contrast ink on surface >= 4.5 (1.3278ms)
+✔ contrast ink on band >= 4.5 (0.395ms)
+✔ contrast muted on paper >= 4.5 (0.4647ms)
+✔ contrast muted on band >= 4.5 (0.5008ms)
+✔ contrast primary on paper >= 4.5 (0.542ms)
+✔ contrast primary on surface >= 4.5 (0.4898ms)
+✔ contrast primary on band >= 4.5 (0.5891ms)
+✔ contrast surface on primary >= 4.5 (3.4667ms)
+✔ contrast accent on paper >= 4.5 (0.3162ms)
+✔ contrast accent on surface >= 4.5 (0.2234ms)
+✔ contrast success on paper >= 4.5 (0.1605ms)
+✔ contrast success on surface >= 4.5 (0.1751ms)
+✔ contrast warning on paper >= 4.5 (0.1437ms)
+✔ contrast warning on surface >= 4.5 (0.1522ms)
+✔ contrast error on paper >= 4.5 (0.1641ms)
+✔ contrast error on surface >= 4.5 (0.1719ms)
+✔ contrast error on band >= 4.5 (0.1194ms)
+✔ contrast border-strong on paper >= 3 (0.1185ms)
+✔ contrast border-strong on surface >= 3 (0.1155ms)
+✔ contrast border-strong on band >= 3 (0.1192ms)
+✔ contrast primary on paper >= 3 (0.1146ms)
+✔ contrast primary on surface >= 3 (0.9633ms)
+✔ contrast primary on band >= 3 (0.2042ms)
+✔ known failing accent value stays rejected (0.6099ms)
+✔ css has no external url() or @import (0.6925ms)
+✔ viewport allows zoom (2.1521ms)
+✔ site source has no forbidden pattern (no forms, fetch, subprocess, docker, secrets, inline styles) (141.8108ms)
+✔ no API route, route handler, middleware or server action exists (1.1409ms)
+✔ only error.tsx is a client component (62.5043ms)
+✔ package.json has only the allowed dependencies and no publish-style script (1.5583ms)
+✔ guard catches child_process (0.3877ms)
+✔ guard catches fetch-call (0.2755ms)
+✔ guard catches form-control (0.2436ms)
+✔ guard catches server-action (0.2996ms)
+✔ guard catches docker-or-engine (0.4799ms)
+✔ guard catches secret-like (0.5108ms)
+✔ guard catches inline-style-attr (0.2664ms)
+✔ guard catches dangerous-html (0.1852ms)
+✔ guard ignores harmless text (0.3396ms)
+✔ committed sample-run.json equals what the generator produces from the evidence (no drift) (326.9824ms)
+✔ committed sample-run.json passes the schema (7.095ms)
+✔ pre-declared comparison is recorded as failing on all five nodes; post hoc ones are labelled (3.773ms)
+✔ every claim has existing, non-empty evidence files (48.427ms)
+✔ input hashes are the same in every successful run (9.1689ms)
+✔ schema rejects: missing schema_version (4.5245ms)
+✔ schema rejects: bad hash (uppercase) (12.4091ms)
+✔ schema rejects: bad run status (3.9292ms)
+✔ schema rejects: run order changed (7.3767ms)
+✔ schema rejects: comparison row removed (4.3984ms)
+✔ schema rejects: pre-declared made to pass (4.1042ms)
+✔ schema rejects: pre-declared reclassified (6.0891ms)
+✔ schema rejects: NaN-like runtime (4.5349ms)
+✔ schema rejects: claim without evidence (3.7136ms)
+✔ schema rejects: limitation cites unknown claim (3.809ms)
+✔ schema rejects: image marked pushed (6.9632ms)
+✔ schema rejects non-objects (0.473ms)
+✔ out/ has the folder-plus-html shape this test depends on (3.5005ms)
+✔ /sample-run serves sample-run.html (status 200, not the 404 page) (160.1768ms)
+✔ /sample-run/ with a trailing slash also serves the page (28.9582ms)
+✔ an unknown path still returns status 404 with the not-found page (26.6924ms)
+(node:85060) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///<repo>/apps/web/src/lib/copy.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to \\?\<repo-or-home>\apps\web\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ home: structure (lang, one h1, one main, skip link first, banner, nav) (3.9608ms)
+✔ home: no forms, buttons, inputs, inline styles, external scripts or style attributes (1.2274ms)
+✔ home: forbidden claims are absent (1.2535ms)
+✔ sample: structure (lang, one h1, one main, skip link first, banner, nav) (5.5177ms)
+✔ sample: no forms, buttons, inputs, inline styles, external scripts or style attributes (1.39ms)
+✔ sample: forbidden claims are absent (0.5948ms)
+✔ notFound: structure (lang, one h1, one main, skip link first, banner, nav) (0.5315ms)
+✔ notFound: no forms, buttons, inputs, inline styles, external scripts or style attributes (0.4175ms)
+✔ notFound: forbidden claims are absent (0.4154ms)
+✔ navigation lists exactly Home and Sample run, and every internal link resolves (19.0248ms)
+✔ current page link has aria-current (1.023ms)
+✔ external links use only the two allowed hosts and rel noopener noreferrer (11.6199ms)
+✔ home: first-viewport sentence, one call to action, sections, no Run controls (1.7607ms)
+✔ sample-run: section order and the pre-declared failure comes first (2.3028ms)
+✔ sample-run: comparison tables are labelled pre_declared or post hoc, and numbers match the data (5.7749ms)
+✔ sample-run: every input and output hash, runtime and byte count shown equals the data (95.9559ms)
+✔ sample-run: invalid-model failures state exit code 0 and the post hoc caveats are present (0.3802ms)
+✔ every data-claim id on a page exists in the claims data (0.8498ms)
+✔ no run of 12 consecutive words is copied from the upstream text corpus (75.9194ms)
+✔ 404 page has an h1 and links home (0.5254ms)
+✔ table has a min-width in rem so narrow screens scroll the labelled region instead of crushing columns (6.6321ms)
+✔ table is wrapped in a horizontally scrolling region (1.4665ms)
+✔ th and td wrap only at word boundaries (break-word, never "anywhere") (0.9049ms)
+✔ hash cells keep their own break rule so 64-hex strings do not widen the table (0.6992ms)
+ℹ tests 86
+ℹ suites 0
+ℹ pass 86
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1130.6557
+
+EXIT=0 (34.8 s) cmd: npm.cmd run check

@@ -22,6 +22,8 @@ Research basis (read, not fetched): `adapter.py` (limits, `classify`, manifest k
 
 ## Local UI visual language
 
+> **Superseded 2026-11-27 by `.kiro/specs/05-ui-redesign/`.** The paragraph below is kept as the record of the spec 03 look. Spec 05 keeps every functional, copy and accessibility rule of this spec. It replaces only the visual language and allows self-hosted GSAP, anime.js, three.js and IBM Plex Mono (amending Requirement 16.1's "no new runtime dependency" for `apps/web` and Requirement 15.7's spirit is kept: nothing loads from another origin).
+
 Use a restrained, light interface for a research tool: warm neutral page background, white content surfaces, dark readable text, and one muted green action color. Keep navigation, cards, form groups, result metadata and assistant output visually consistent through the shared `public/styles.css`. Avoid decorative animation, remote fonts and imagery. Use a two-column arrangement for file inputs and a three-column arrangement for numeric settings on wide screens; collapse to one column on narrow screens. Preserve visible keyboard focus, skip navigation, readable status/error distinctions, and reduced-motion support. The contrast regression test covers text/action colors and checks decorative separator borders separately from control borders.
 
 ## Assistant provider pipelines
